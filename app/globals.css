@@ -47,6 +47,26 @@
   overflow-wrap: anywhere;
 }
 
+/* The reasoning dialog is a direct child of the positioned chat page.
+   Anchor it there explicitly: fixed positioning may still use the iPad viewport. */
+.chat-room-wrapper > .modal-overlay[aria-label="思考过程"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.chat-room-wrapper .chat-reasoning-sheet {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.chat-room-wrapper .chat-reasoning-sheet-body {
+  min-width: 0;
+  max-width: 100%;
+}
+
 @theme {
   /* 间距 (4px 基准) */
   --spacing-0_5: 2px;  --spacing-1: 4px;   --spacing-1_5: 6px;
