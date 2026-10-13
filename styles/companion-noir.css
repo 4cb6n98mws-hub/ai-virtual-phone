@@ -215,13 +215,14 @@
   background: #201c25;
 }
 
-/* Keep vector function badges instead of replacing distinct apps with identical cats. */
+/* Function-first icons: graphite tiles, silver glyphs, a small cat-paw accent. */
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin),
 .desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) {
-  overflow: visible;
-  border: none;
-  background: none;
-  box-shadow: none;
+  overflow: hidden;
+  border: 1px solid #776b78;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #56515d 0%, #302c37 28%, #1c1921 68%, #322732 100%);
+  box-shadow: inset 0 1px 1px #ffffff55, inset 0 -2px 3px #00000088, 0 4px 8px #00000055;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -231,29 +232,41 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 0;
-  background: url("/images/y2k-cat-app-base.svg") center / contain no-repeat;
-  opacity: 1;
+  border-radius: inherit;
+  background: linear-gradient(160deg, #ffffff22, transparent 48%);
   mix-blend-mode: normal;
+  opacity: 1;
   pointer-events: none;
+  z-index: 0;
 }
 
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin)::after,
 .desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::after {
-  content: none;
+  content: "";
+  position: absolute;
+  inset: auto 4px 4px auto;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  background: url("/images/y2k-paw-accent.svg") center / contain no-repeat;
+  mask: none;
+  -webkit-mask: none;
+  mix-blend-mode: normal;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin) > .icon-glyph,
 .desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) > .icon-glyph {
-  position: absolute;
-  right: -2px;
-  bottom: -1px;
-  width: 23px;
-  height: 23px;
-  padding: 4px;
-  color: #ffd5e9 !important;
-  background: #483044;
-  border: 1px solid #bb87a6;
-  border-radius: 7px;
-  z-index: 2;
+  position: relative;
+  inset: auto;
+  width: 31px;
+  height: 31px;
+  padding: 0;
+  color: #eee6f0 !important;
+  background: none;
+  border: none;
+  border-radius: 0;
+  filter: drop-shadow(0 1px 0 #ffffff44) drop-shadow(0 2px 2px #00000099);
+  z-index: 1;
 }
