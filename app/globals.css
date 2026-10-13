@@ -90,7 +90,7 @@
 /* A photographic desk around the phone on tablets and wider screens. */
 @media (min-width: 501px) {
   body:has(.desk-stage) {
-    background: #2b1d14;
+    background: #100e13;
   }
 
   .app-root.desk-stage,
@@ -103,8 +103,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: linear-gradient(#17100a12, #17100a26), url("/images/companion-desk-v1.webp") center / cover no-repeat;
-    background-color: #2b1d14;
+    background: linear-gradient(#0c081012, #0c081026), url("/images/companion-desk-noir-v2.webp") center / cover no-repeat;
+    background-color: #100e13;
   }
 
   .desk-stage > .phone-shell-wrap {
@@ -117,6 +117,6 @@
   }
 
   .desk-stage .phone-case {
-    box-shadow: 12px 24px 48px #100a06a6, 0 4px 12px #100a0666, inset 0 1.5px 0 #ffffff80;
+    box-shadow: 12px 24px 48px #070509a6, 0 4px 12px #07050966, inset 0 1.5px 0 #ffffff80;
   }
 }
