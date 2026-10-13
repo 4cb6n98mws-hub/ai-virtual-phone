@@ -3,7 +3,7 @@ export function personalAccessGate(
   request: Request,
   env: Record<string, string | undefined>,
 ): Response | null {
-  const enabled = env.VERCEL === "1" || env.PERSONAL_ACCESS_ENABLED === "true";
+  const enabled = env.NODE_ENV === "production" || env.VERCEL === "1" || env.NETLIFY === "true" || env.PERSONAL_ACCESS_ENABLED === "true";
   if (!enabled) return null;
 
   const username = env.PERSONAL_ACCESS_USERNAME;
