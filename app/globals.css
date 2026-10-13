@@ -25,6 +25,7 @@
 @import "../styles/interview-magazine.css";
 @import "../styles/cocreate.css";
 @import "../styles/qa.css";
+@import "../styles/companion-noir.css";
 
 /* Let inset size overlays to their containing block (the phone frame on iPad).
    Viewport units stretch a frame-contained fixed overlay across the whole tablet. */

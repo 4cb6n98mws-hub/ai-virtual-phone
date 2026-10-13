@@ -1,0 +1,157 @@
+/* Personal black-and-pink theme, scoped to the virtual phone. */
+.desk-stage .phone-shell-wrap {
+  --phone-screen-radius: 0px;
+  --phone-frame-radius: 0px;
+  --phone-case-radius: 0px;
+  --c-header-bg: #151519;
+  --c-page-body-bg: #111115;
+  --c-card: #202026;
+  --c-card-border: #36343d;
+  --c-polaroid: #1c1c22;
+  --c-polaroid-back: #17171d;
+  --c-panel: #1a1a20;
+  --c-panel-border: #38343e;
+  --c-text-title: #f3edf1;
+  --c-text: #bbb1bc;
+  --c-icon-active: #ee91b8;
+  --c-action-blue: #a94370;
+  --c-icon: #a99eac;
+  --c-input: #24232b;
+  --c-input-border: #48404c;
+  --c-bubble-self: #442739;
+  --c-bubble-other: #24232b;
+  --c-overlay: #00000099;
+  --c-success: #85d5ac;
+  --c-desktop-icon: #eee7ed;
+  --c-desktop-icon-bg: #d789ad;
+  --c-desktop-icon-box: #222129;
+  --c-home-label: #d9ceda;
+  --c-home-text: #f3edf1;
+  --c-home-sub: #bcb1be;
+  --c-home-card: #202026;
+  --c-home-glass: #1b1a22eb;
+  --c-home-border: #4b3b48;
+  --c-home-pink: #ee91b8;
+  --c-icon-blue: #b99ebc;
+  --c-icon-green: #b99ebc;
+  --c-icon-violet: #c8a7c5;
+  --c-icon-amber: #b99ebc;
+  --c-icon-rose: #ee91b8;
+  --c-icon-coral: #d8a0b8;
+  --c-icon-teal: #b99ebc;
+  --c-icon-slate: #b99ebc;
+  --c-icon-lilac: #c8a7c5;
+  --ui-radius: 8px;
+  --ui-radius-card: 10px;
+  --dock-radius: 12px;
+  --dock-border: 1px solid #4b3b48;
+  color-scheme: dark;
+  accent-color: #ee91b8;
+}
+
+.desk-stage .phone-case,
+.desk-stage .phone-frame,
+.desk-stage .phone-shell {
+  border-radius: 0;
+}
+
+.desk-stage .phone-case {
+  background: linear-gradient(135deg, #56515b, #242329 45%, #4b424c);
+  border: 1px solid #746371;
+}
+
+.desk-stage .phone-shell,
+.desk-stage .splash-phone-screen {
+  background: #111115;
+  color: var(--c-text-title);
+}
+
+/* The default home wallpaper is otherwise an inline white background. */
+.desk-stage .phone-shell > .phone-wallpaper {
+  background: radial-gradient(ellipse at 95% 0%, #432336 0%, transparent 52%), #111115 !important;
+  filter: none !important;
+}
+
+.desk-stage .icon-glyph-box,
+.desk-stage .dock-glyph-box {
+  border-radius: 10px;
+  border: 1px solid #51404e;
+  background: #222129;
+  box-shadow: none;
+}
+
+.desk-stage .dock {
+  box-shadow: none;
+}
+
+.desk-stage .phone-shell .page-header,
+.desk-stage .phone-shell .chat-input-bar {
+  background: #151519ed;
+  color: var(--c-text-title);
+}
+
+.desk-stage .phone-shell .page-header {
+  border-bottom: 1px solid #342b36;
+}
+
+.desk-stage .phone-shell .chat-input-bar {
+  border-top: 1px solid #342b36;
+}
+
+.desk-stage .phone-shell .chat-room-layer {
+  background: var(--c-page-body-bg);
+}
+
+.desk-stage .phone-shell .chat-bubble-role-user:not(.chat-bubble-html-preview):not(.chat-bubble-media) {
+  background: var(--c-bubble-self);
+  color: #fff1f7;
+  border: 1px solid #85506e;
+  border-radius: 9px;
+}
+
+.desk-stage .phone-shell .chat-bubble-role-assistant:not(.chat-bubble-html-preview):not(.chat-bubble-media) {
+  background: var(--c-bubble-other);
+  color: var(--c-text-title);
+  border: 1px solid #413846;
+  border-radius: 9px;
+}
+
+.desk-stage .phone-shell .modal-sheet {
+  border-radius: 12px 12px 0 0;
+  border-top: 1px solid #654457;
+}
+
+/* Legacy utility colors in the built-in pages do not use theme variables. */
+.desk-stage .phone-shell .text-black,
+.desk-stage .phone-shell .text-gray-800,
+.desk-stage .phone-shell .text-gray-700 {
+  color: var(--c-text-title) !important;
+}
+
+.desk-stage .phone-shell .text-gray-500,
+.desk-stage .phone-shell .text-gray-600 {
+  color: var(--c-text) !important;
+}
+
+.desk-stage .phone-shell .bg-white,
+.desk-stage .phone-shell .bg-gray-50,
+.desk-stage .phone-shell .bg-gray-100 {
+  background-color: var(--c-card) !important;
+}
+
+.desk-stage .phone-shell input,
+.desk-stage .phone-shell textarea,
+.desk-stage .phone-shell select {
+  color: var(--c-text-title);
+  caret-color: var(--c-icon-active);
+}
+
+.desk-stage .phone-shell input::placeholder,
+.desk-stage .phone-shell textarea::placeholder {
+  color: #a99eac;
+}
+
+.desk-stage .phone-shell :focus-visible {
+  outline: 2px solid #ee91b8;
+  outline-offset: 2px;
+}
