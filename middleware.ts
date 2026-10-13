@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { ACCOUNT_GATE_COOKIE, ACCOUNT_SESSION_COOKIE } from "./lib/account-cookie-constants";
 import { verifyAccountGateCookieValue } from "./lib/account-gate-cookie";
 import { isSelfHostedModeEnabled } from "./lib/self-hosting";
+import { personalAccessGate } from "./lib/server/personal-access";
 
 const PUBLIC_ROUTE_PREFIXES = [
   "/verify",
@@ -56,6 +57,13 @@ function rewriteToHome(request: NextRequest): NextResponse {
 }
 
 export async function middleware(request: NextRequest) {
+  const accessResponse = personalAccessGate(request, {
+    VERCEL: process.env.VERCEL,
+    PERSONAL_ACCESS_ENABLED: process.env.PERSONAL_ACCESS_ENABLED,
+    PERSONAL_ACCESS_USERNAME: process.env.PERSONAL_ACCESS_USERNAME,
+    PERSONAL_ACCESS_PASSWORD: process.env.PERSONAL_ACCESS_PASSWORD,
+  });
+  if (accessResponse) return accessResponse;
   const { pathname } = request.nextUrl;
 
   if (isSelfHostedModeEnabled()) {
@@ -87,7 +95,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|.*\\.(?:avif|bin|css|gif|glb|gltf|hdr|ico|jpeg|jpg|js|json|map|mjs|mp3|ogg|otf|png|svg|ttf|txt|wasm|wav|webmanifest|webp|woff|woff2)$).*)",
-  ],
+  matcher: ["/:path*"],
 };
