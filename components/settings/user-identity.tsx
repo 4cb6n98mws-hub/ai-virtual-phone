@@ -206,15 +206,15 @@ export function UserIdentitySettings() {
             )}
 
             {editingId && (
-                <div className="modal-overlay modal-overlay-bottom">
-                    <div className="modal-sheet" data-ui="modal-sheet">
+                <div className="modal-overlay modal-overlay-bottom" style={{ position: "absolute", width: "100%", height: "100%" }} role="dialog" aria-modal="true" aria-label={isNewIdentity ? "添加身份" : "编辑身份"}>
+                    <div className="modal-sheet" data-ui="modal-sheet" style={{ minWidth: 0, maxWidth: "100%", maxHeight: "90%" }}>
                         <div className="modal-header" data-ui="modal-header">
                             <button onClick={() => { if (isNewIdentity && editingId) removeIdentity(editingId); setIsNewIdentity(false); setEditingId(null); }} className="modal-header-btn modal-header-btn-muted"><X size={18} /></button>
                             <span className="modal-header-title">{isNewIdentity ? "添加身份" : "编辑身份"}</span>
                             <button onClick={() => { setIsNewIdentity(false); setEditingId(null); }} className="modal-header-btn modal-header-btn-action"><Check size={18} /></button>
                         </div>
 
-                        <div className="modal-body hide-scrollbar flex flex-col gap-4 pb-10" data-ui="modal-body">
+                        <div className="modal-body hide-scrollbar flex flex-col gap-4 pb-10" data-ui="modal-body" style={{ minWidth: 0, minHeight: 0 }}>
                             {(() => {
                                 const identity = identities.find(c => c.id === editingId);
                                 if (!identity) return null;
