@@ -282,15 +282,15 @@ export function ApiSettings() {
             )}
 
             {editingId && (
-                <div className="modal-overlay modal-overlay-bottom">
-                    <div className="modal-sheet" data-ui="modal-sheet">
+                <div className="modal-overlay modal-overlay-bottom" style={{ position: "absolute", width: "100%", height: "100%" }}>
+                    <div className="modal-sheet" data-ui="modal-sheet" style={{ minWidth: 0 }}>
                         <div className="modal-header" data-ui="modal-header">
                             <button onClick={() => { if (isNewConfig && editingId) removeConfig(editingId); setIsNewConfig(false); setEditingId(null); }} className="modal-header-btn modal-header-btn-muted"><X size={18} /></button>
                             <span className="modal-header-title">{isNewConfig ? "添加配置" : "编辑配置"}</span>
                             <button onClick={() => { setIsNewConfig(false); setEditingId(null); }} className="modal-header-btn modal-header-btn-action"><Check size={18} /></button>
                         </div>
 
-                        <div className="modal-body hide-scrollbar flex flex-col gap-4 pb-10" data-ui="modal-body">
+                        <div className="modal-body hide-scrollbar flex flex-col gap-4 pb-10" data-ui="modal-body" style={{ minWidth: 0, minHeight: 0 }}>
                             {(() => {
                                 const config = configs.find(c => c.id === editingId);
                                 if (!config) return null;
