@@ -739,8 +739,8 @@ export function MemoryBankPage({ view, selectedCharId, onSelectChar, onNotice }:
                     const contentLength = memoryEditor.content.trim().length;
                     const overLimit = contentLength > MANUAL_MEMORY_CONTENT_LIMIT;
                     return (
-                        <div className="modal-overlay modal-overlay-bottom" data-ui="modal" onClick={() => savingMemory ? undefined : setMemoryEditor(null)}>
-                            <div className="modal-sheet mem-edit-sheet" data-ui="modal-sheet" onClick={event => event.stopPropagation()}>
+                        <div className="modal-overlay modal-overlay-bottom" data-ui="modal" style={{ position: "absolute", width: "100%", height: "100%" }} onClick={() => savingMemory ? undefined : setMemoryEditor(null)}>
+                            <div className="modal-sheet mem-edit-sheet" data-ui="modal-sheet" style={{ minWidth: 0, maxHeight: "85%" }} onClick={event => event.stopPropagation()}>
                                 <div className="modal-header" data-ui="modal-header">
                                     <button
                                         className="modal-header-btn modal-header-btn-muted"
@@ -758,9 +758,10 @@ export function MemoryBankPage({ view, selectedCharId, onSelectChar, onNotice }:
                                         <Check size={18} />
                                     </button>
                                 </div>
-                                <div className="modal-body mem-edit-body" data-ui="modal-body">
+                                <div className="modal-body mem-edit-body" data-ui="modal-body" style={{ minWidth: 0, minHeight: 0 }}>
                                     <textarea
                                         className="ui-textarea mem-edit-textarea"
+                                        style={{ width: "100%", maxWidth: "100%", boxSizing: "border-box" }}
                                         value={memoryEditor.content}
                                         placeholder={placeholder}
                                         disabled={savingMemory}
