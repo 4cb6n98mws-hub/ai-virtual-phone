@@ -8,6 +8,7 @@ import { CloudBackupScheduler } from "@/components/cloud-backup-scheduler";
 import { RealityBridgeScheduler } from "@/components/reality-bridge-scheduler";
 import { MediaMaintenanceScheduler } from "@/components/media-maintenance-scheduler";
 import { DesktopShell } from "./desktop-shell";
+import { DeskStage } from "./desk-stage";
 import { OfflinePushRevampAnnouncement } from "./offline-push-revamp-announcement";
 import { SplashAnimation } from "./splash-animation";
 import { MusicProvider } from "@/lib/music-context";
@@ -151,7 +152,7 @@ async function warmBuiltinFonts(shouldStop: () => boolean): Promise<void> {
 
 function SplashScreen({ ready = false, onEnter }: { ready?: boolean; onEnter?: () => void }) {
   return (
-    <main className="app-root splash-root">
+    <DeskStage splash>
       <section
         className="phone-shell-wrap splash-shell-wrap"
         aria-label={TEXT.loading}
@@ -173,7 +174,7 @@ function SplashScreen({ ready = false, onEnter }: { ready?: boolean; onEnter?: (
           </div>
         </div>
       </section>
-    </main>
+    </DeskStage>
   );
 }
 
@@ -311,7 +312,7 @@ export function MainApp() {
       {!splashDismissed ? (
         <SplashScreen ready={hydrated} onEnter={() => setSplashDismissed(true)} />
       ) : (
-        <main className="app-root">
+        <DeskStage>
           <MusicProvider>
             <DesktopShell
               initialThemeProfile={preparedDesktopTheme?.profile}
@@ -322,7 +323,7 @@ export function MainApp() {
             <RealityBridgeScheduler />
             <MediaMaintenanceScheduler />
           </MusicProvider>
-        </main>
+        </DeskStage>
       )}
     </AccountGate>
   );

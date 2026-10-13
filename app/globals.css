@@ -85,3 +85,37 @@
   --font-size-lg: 17px;  --font-size-xl: 20px;
   --font-size-2xl: 24px; --font-size-3xl: 30px;
 }
+
+/* A photographic desk around the phone on tablets and wider screens. */
+@media (min-width: 501px) {
+  body:has(.desk-stage) {
+    background: #2b1d14;
+  }
+
+  .app-root.desk-stage,
+  .app-root.splash-root.desk-stage {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(#17100a12, #17100a26), url("/images/companion-desk-v1.webp") center / cover no-repeat;
+    background-color: #2b1d14;
+  }
+
+  .desk-stage > .phone-shell-wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%) scale(var(--desk-phone-scale, 1));
+    transform-origin: center;
+  }
+
+  .desk-stage .phone-case {
+    box-shadow: 12px 24px 48px #100a06a6, 0 4px 12px #100a0666, inset 0 1.5px 0 #ffffff80;
+  }
+}
