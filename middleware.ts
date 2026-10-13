@@ -57,7 +57,7 @@ function rewriteToHome(request: NextRequest): NextResponse {
 }
 
 export async function middleware(request: NextRequest) {
-  const accessResponse = personalAccessGate(request, {
+  const accessResponse = await personalAccessGate(request, {
     NODE_ENV: process.env.NODE_ENV,
     NETLIFY: process.env.NETLIFY,
     VERCEL: process.env.VERCEL,
