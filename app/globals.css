@@ -108,12 +108,25 @@
   }
 
   .desk-stage > .phone-shell-wrap {
+    --desk-side-space: 140px;
     position: absolute;
     left: 50%;
     top: 50%;
     margin: 0;
     transform: translate(-50%, -50%) scale(var(--desk-phone-scale, 1));
     transform-origin: center;
+  }
+
+  .desk-stage > .phone-shell-wrap::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    right: -66px;
+    width: 90px;
+    height: 180px;
+    z-index: 50;
+    background: url("/images/y2k-cat-charm-v1.webp") center / contain no-repeat;
+    pointer-events: none;
   }
 
   .desk-stage .phone-case {

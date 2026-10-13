@@ -11,7 +11,8 @@ export function DeskStage({ children, splash = false }: { children: ReactNode; s
     const phone = stage?.querySelector<HTMLElement>(":scope > .phone-shell-wrap");
     if (!stage || !phone) return;
     const fit = () => {
-      const scale = Math.min(1, Math.max(1, stage.clientWidth - 64) / Math.max(1, phone.offsetWidth), Math.max(1, stage.clientHeight - 64) / Math.max(1, phone.offsetHeight));
+      const sideSpace = Number.parseFloat(getComputedStyle(phone).getPropertyValue("--desk-side-space")) || 0;
+      const scale = Math.min(1, Math.max(1, stage.clientWidth - 64) / Math.max(1, phone.offsetWidth + sideSpace), Math.max(1, stage.clientHeight - 64) / Math.max(1, phone.offsetHeight));
       stage.style.setProperty("--desk-phone-scale", String(scale));
     };
     fit();
