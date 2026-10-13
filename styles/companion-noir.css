@@ -155,3 +155,105 @@
   outline: 2px solid #ee91b8;
   outline-offset: 2px;
 }
+
+/* Session themes may override inherited colors; keep navigation legible locally. */
+.desk-stage .phone-shell .chat-room-main-pane.page-header,
+.desk-stage .phone-shell .chat-room-main-pane.chat-input-bar {
+  --c-text-title: #f3edf1;
+  --c-text: #d5c6d3;
+  --c-icon: #d5c6d3;
+  --c-icon-active: #efa3c5;
+  color: #f3edf1 !important;
+  background: #19171fed !important;
+}
+
+.desk-stage .phone-shell .page-header .page-title,
+.desk-stage .phone-shell .page-header .page-back-btn {
+  color: #f3edf1 !important;
+}
+
+.desk-stage .phone-shell .chat-input-actions button {
+  color: #efa3c5 !important;
+}
+
+.desk-stage .phone-shell .chat-input-bar .chat-input-textarea {
+  background: #2b2631 !important;
+  color: #fff2fa !important;
+  border: 1px solid #82657b !important;
+}
+
+.desk-stage .phone-shell .chat-input-bar .chat-input-textarea::placeholder {
+  color: #cbbbc9 !important;
+}
+
+/* Lighter paper inside the dark archive keeps its printed ink readable. */
+.desk-stage .phone-shell .char-paper-grid,
+.desk-stage .phone-shell .char-paper-a4,
+.desk-stage .phone-shell .char-paper-scrap,
+.desk-stage .phone-shell .char-paper-torn {
+  --c-text-title: #29232b;
+  --c-text: #49404a;
+  --c-input-border: #746674;
+  background-color: #c9bec7;
+  color: #29232b;
+  border-color: #978895;
+}
+
+.desk-stage .phone-shell .char-paper-grid { background-color: #d5c9d2; }
+.desk-stage .phone-shell .char-paper-a4 { background-color: #bfb3bd; }
+.desk-stage .phone-shell .char-paper-torn {
+  background-image: linear-gradient(#8f808e55 1px, transparent 1px);
+}
+.desk-stage .phone-shell .char-handwriting { color: #714263; }
+.desk-stage .phone-shell .char-handwriting.red-ink { color: #853c59; }
+.desk-stage .phone-shell .char-archive-view {
+  --c-text-title: #f3edf1;
+  --c-text: #d2c3d0;
+  --c-icon: #c6afc3;
+  --c-panel: #2a252e;
+  --c-input: #342c39;
+  background: #201c25;
+}
+
+/* Keep vector function badges instead of replacing distinct apps with identical cats. */
+.desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin),
+.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) {
+  overflow: visible;
+  border: none;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin)::before,
+.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  background: url("/images/y2k-cat-app-base.svg") center / contain no-repeat;
+  opacity: 1;
+  mix-blend-mode: normal;
+  pointer-events: none;
+}
+
+.desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin)::after,
+.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::after {
+  content: none;
+}
+
+.desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin) > .icon-glyph,
+.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) > .icon-glyph {
+  position: absolute;
+  right: -2px;
+  bottom: -1px;
+  width: 23px;
+  height: 23px;
+  padding: 4px;
+  color: #ffd5e9 !important;
+  background: #483044;
+  border: 1px solid #bb87a6;
+  border-radius: 7px;
+  z-index: 2;
+}
