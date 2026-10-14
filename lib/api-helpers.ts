@@ -90,20 +90,29 @@ export function isNativeGoogleApi(config: ApiConfig): boolean {
     return config.provider === "Google";
 }
 
-/** Translate the legacy preset limit for OpenAI reasoning model families.
- * Keep max_tokens for older GPT models and non-OpenAI models such as DeepSeek.
- */
-export function normalizeOpenAICompletionLimit(
+/** Adapt legacy settings to the parameters accepted by OpenAI chat models. */
+export function normalizeOpenAIChatParameters(
     body: Record<string, unknown>,
     model: string,
 ): Record<string, unknown> {
     const modelName = model.trim().replace(/^openai\//i, "");
+    const next = { ...body };
     if (/^(?:gpt-(?:[5-9]|[1-9]\d+)(?:[.-]|$)|o[1-9]\d*(?:-|$))/i.test(modelName)
-        && body.max_tokens !== undefined) {
-        const { max_tokens, ...rest } = body;
-        return { ...rest, max_completion_tokens: body.max_completion_tokens ?? max_tokens };
+        && next.max_tokens !== undefined) {
+        next.max_completion_tokens ??= next.max_tokens;
+        delete next.max_tokens;
     }
-    return body;
+    const isGpt6 = /^gpt-6(?:[.-]|$)/i.test(modelName);
+    const requiresReasoning = /^gpt-(?:6\.1-sol|6-astra)(?:-|$)/i.test(modelName);
+    if (isGpt6 && (requiresReasoning || next.reasoning_effort !== "none")) {
+        // Reasoning GPT-6 requests must use the model's default sampling.
+        for (const key of ["temperature", "top_p", "top_logprobs", "logprobs"]) delete next[key];
+    }
+    if (isGpt6) {
+        // These legacy preset controls are not portable to GPT-6 requests.
+        for (const key of ["frequency_penalty", "presence_penalty", "top_k", "top_a", "min_p", "repetition_penalty"]) delete next[key];
+    }
+    return next;
 }
 
 /**
@@ -164,7 +173,7 @@ export async function simpleLLMCall(
         } else {
             // OpenAI-compatible (all others including proxies/relays/custom)
             fetchUrl = buildChatCompletionsUrl(baseUrl);
-            body = JSON.stringify(normalizeOpenAICompletionLimit({
+            body = JSON.stringify(normalizeOpenAIChatParameters({
                 model: config.defaultModel,
                 messages,
                 temperature,
