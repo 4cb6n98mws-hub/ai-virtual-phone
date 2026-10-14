@@ -4,6 +4,7 @@ import {
     buildChatCompletionsUrl,
     buildRequestHeaders,
     determineBaseUrl,
+    normalizeOpenAICompletionLimit,
     isNativeAnthropicApi,
     isNativeGoogleApi,
     stripHallucinatedTimestamps,
@@ -543,7 +544,7 @@ function buildOpenAICompatibleRequest(
     return {
         url: buildChatCompletionsUrl(baseUrl),
         headers: buildRequestHeaders(config, baseUrl),
-        body,
+        body: normalizeOpenAICompletionLimit(body, config.defaultModel),
         providerKind: "openai-compatible",
         messagesForLog: messages.map(messageForLog),
     };
