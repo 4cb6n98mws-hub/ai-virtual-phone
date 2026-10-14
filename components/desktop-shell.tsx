@@ -30,6 +30,7 @@ import { VnApp } from "@/components/vn/vn-app";
 import ReadingApp from "@/components/reading/reading-app";
 import MapApp from "@/components/map/map-app";
 import { DwellingApp } from "@/components/dwelling/dwelling-app";
+import { SharedDrawerApp } from "@/components/shared-drawer/shared-drawer-app";
 import { MascotFloat } from "@/components/mascot/mascot-float";
 import { MascotPreviewHost } from "@/components/mascot/mascot-preview-host";
 import { useMusicControlsOptional } from "@/lib/music-context";
@@ -4077,6 +4078,30 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
     if (activeApp === "dwelling") {
       // DwellingApp is rendered separately (kept alive) — see below
       return null;
+    }
+
+    if (activeApp === "shared_drawer") {
+      return (
+        <SharedDrawerApp
+          onClose={() => setActiveApp(null)}
+          onOpenSource={(source) => {
+            if (source === "cinema") {
+              openApp(toCustomAppIconId("k-lantern-cinema"));
+              return;
+            }
+            const sourceApp: Partial<Record<typeof source, IconId>> = {
+              dwelling: "dwelling",
+              calendar: "calendar",
+              diary: "diary",
+              shopping: "shopping",
+              music: "music",
+              game: "game",
+            };
+            const iconId = sourceApp[source];
+            if (iconId) openApp(iconId);
+          }}
+        />
+      );
     }
 
     if (activeApp === "checkphone") {

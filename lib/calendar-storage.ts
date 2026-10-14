@@ -14,6 +14,8 @@ import {
   timeToMinutes,
 } from "./calendar-utils";
 import { kvGet, kvSet, registerKvMigration } from "./kv-db";
+import { recordCompanionActivity } from "./shared-drawer-storage";
+import { loadCharacters } from "./character-storage";
 
 const STORAGE_KEY = "ai_phone_calendar_plans_v1";
 const CALENDAR_CONFIG_KEY = "ai_phone_calendar_config_v1";
@@ -196,7 +198,21 @@ export function upsertCalendarScheduleItem(
   };
   const nextItems = existingItems.filter(entry => entry.id !== normalized.id);
   nextItems.push(normalized);
-  return replaceCalendarWeekItems(ownerType, ownerId, weekStart, nextItems);
+  const saved = replaceCalendarWeekItems(ownerType, ownerId, weekStart, nextItems);
+  if (ownerType === "character" && normalized.source === "manual") {
+    const character = loadCharacters().find((entry) => entry.id === ownerId);
+    recordCompanionActivity({
+      sourceApp: "calendar",
+      kind: "calendar_plan",
+      label: `在日历里记下「${normalized.title}」`,
+      detail: `${normalized.date} ${normalized.startTime}-${normalized.endTime}${normalized.location ? ` · ${normalized.location}` : ""}`,
+      characterId: ownerId,
+      characterName: character?.name,
+      importance: "meaningful",
+      sourceEventId: normalized.id,
+    });
+  }
+  return saved;
 }
 
 export function deleteCalendarScheduleItem(

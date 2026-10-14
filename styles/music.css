@@ -4986,3 +4986,104 @@
     font-size: calc(9px*var(--app-text-scale,1));
     color: color-mix(in srgb, var(--c-music-text) 55%, transparent);
 }
+
+/* ═══════════════════════════════════════════════════════
+   Long Island Hi-Fi Room · 70s–90s American stereo finish
+   仅改变音乐 App 本体；桌面悬浮球和聊天小窗继续使用各自配色。
+   ═══════════════════════════════════════════════════════ */
+.music-app,
+.music-player {
+    --c-music-bg: #17120e;
+    --c-music-bg-mint: rgba(155, 102, 55, 0.13);
+    --c-music-bg-cream: rgba(232, 189, 104, 0.1);
+    --c-music-bg-lime: rgba(77, 108, 83, 0.1);
+    --c-music-bg-mint-dim: rgba(181, 126, 73, 0.07);
+    --c-music-bg-center: rgba(26, 20, 15, 0.9);
+    --c-music-bg-glow: rgba(255, 178, 78, 0.13);
+    --c-music-bg-mist: rgba(90, 113, 90, 0.1);
+    --c-music-surface: rgba(247, 226, 184, 0.075);
+    --c-music-surface-solid: rgba(236, 201, 139, 0.17);
+    --c-music-panel: rgba(31, 24, 18, 0.97);
+    --c-music-glass-dim: rgba(237, 204, 146, 0.095);
+    --c-music-text: #f4ead7;
+    --c-music-accent: #c9b795;
+    --c-music-accent-dim: rgba(178, 126, 73, 0.2);
+    --c-music-primary: #dc723f;
+    --c-music-primary-dim: rgba(220, 114, 63, 0.17);
+    --c-music-glowtext: #ffe3a7;
+    --c-music-gold: rgba(230, 180, 83, 0.48);
+    --c-music-liked: #e5744a;
+}
+
+.music-app {
+    background-image:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px),
+        radial-gradient(circle at 13% 5%, var(--c-music-bg-mint), transparent 45%),
+        radial-gradient(circle at 87% 90%, var(--c-music-bg-lime), transparent 52%),
+        linear-gradient(145deg, #1d1610, #100d0b 58%, #18130f);
+}
+
+.music-app .music-header-title::before {
+    content: "STEREO · HI-FIDELITY";
+    display: block;
+    margin-bottom: 1px;
+    color: #d7a85b;
+    font: 700 7px/1.1 "JetBrains Mono", ui-monospace, monospace;
+    letter-spacing: .18em;
+}
+
+.music-app .music-song,
+.music-app .music-playlist-card,
+.music-app .music-mine-event-card,
+.music-app .music-section {
+    border-color: rgba(226, 184, 112, .15);
+}
+
+.music-app .music-song,
+.music-app .music-mine-event-card {
+    border-radius: 7px;
+    background: linear-gradient(135deg, rgba(92, 60, 36, .13), rgba(244, 223, 182, .035));
+}
+
+.music-app .music-bottom-dock,
+.music-app .music-tabbar,
+.music-app .music-now-bar {
+    background: rgba(26, 19, 14, .78);
+    border-color: rgba(226, 184, 112, .13);
+    backdrop-filter: blur(22px) saturate(125%);
+    -webkit-backdrop-filter: blur(22px) saturate(125%);
+}
+
+.music-app .music-tabbar-item[data-active],
+.music-app .music-wave-bar {
+    color: #efb760;
+}
+
+.music-app .music-fab-add {
+    background: rgba(83, 53, 32, .88);
+    border-color: rgba(232, 190, 116, .27);
+    box-shadow: 0 8px 22px rgba(0,0,0,.34), inset 0 1px rgba(255,230,183,.14);
+}
+
+.music-app .music-now-bar-cover {
+    border-color: rgba(230, 180, 83, .32);
+    box-shadow: 0 0 0 2px rgba(18,13,10,.8), 0 4px 14px rgba(0,0,0,.32);
+}
+
+.music-player {
+    background-image:
+        radial-gradient(circle at 50% 30%, rgba(188, 119, 53, .15), transparent 36%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px),
+        linear-gradient(155deg, #201710, #0e0c0a 70%);
+}
+
+.music-settings-btn-primary,
+.music-settings-btn-primary:active:not(:disabled),
+.music-playlist-play-all {
+    background: linear-gradient(120deg, #c85d34, #dfa24a);
+    box-shadow: 0 6px 18px rgba(183, 93, 43, .26);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .music-app .music-now-bar-cover[data-playing] { animation: none; }
+}

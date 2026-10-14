@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type MouseEvent, type PointerEvent } from "react";
-import { Bot, ChevronLeft, Clock3, NotebookPen, Trash2, WandSparkles, X } from "lucide-react";
+import { Archive, Bot, ChevronLeft, Clock3, NotebookPen, Trash2, WandSparkles, X } from "lucide-react";
 import { DotsThree } from "@phosphor-icons/react";
 
 import { loadCharacters } from "@/lib/character-storage";
@@ -25,6 +25,7 @@ import {
 } from "@/lib/diary-entry-storage";
 import type { DiaryEntry, DiaryEntryBlock, DiaryEntryTimerSettings, DiaryEntryTrigger } from "@/lib/diary-entry-types";
 import { getThemeAssetDataUrl, saveThemeAssetFromBlob } from "@/lib/theme-storage";
+import { addSharedDrawerItem, loadSharedDrawerItems, recordCompanionActivity } from "@/lib/shared-drawer-storage";
 
 const DIARY_USER_FONT_FAMILY = "AIPhoneDiaryEntryUserFont";
 const DIARY_USER_FONT_STYLE_ID = "ai-phone-diary-entry-user-font-face";
@@ -1115,6 +1116,35 @@ function CharacterAvatarGrid({ characters, selectedIds, busyIds, disabled, onTog
 
 function DiaryEntryDetail({ entry, onClose }: { entry: DiaryEntry; onClose: () => void }) {
   const markers = getEntryMarkers(entry);
+  const [kept, setKept] = useState(() => loadSharedDrawerItems().some(item => (
+    item.sourceApp === "diary" && item.sourceEventId === entry.id
+  )));
+
+  function keepInSharedDrawer() {
+    const body = entry.blocks.map(blockPlainText).filter(Boolean).join(" ") || entry.body;
+    addSharedDrawerItem({
+      type: "note",
+      sourceApp: "diary",
+      title: entry.title,
+      subtitle: `${entry.characterName}写下的日记`,
+      note: clipText(body, 1000),
+      createdAt: entry.createdAt,
+      characterIds: [entry.characterId],
+      characterNames: [entry.characterName],
+      sourceEventId: entry.id,
+      metadata: { diaryEntryId: entry.id, mood: entry.mood, tags: entry.tags },
+    });
+    recordCompanionActivity({
+      sourceApp: "diary",
+      kind: "kept_note",
+      label: `把日记《${entry.title}》收进了共同抽屉`,
+      characterId: entry.characterId,
+      characterName: entry.characterName,
+      importance: "meaningful",
+      sourceEventId: `diary:${entry.id}`,
+    });
+    setKept(true);
+  }
   return (
     <div className="nw-modal-backdrop" role="dialog" aria-modal="true" onClick={onClose}>
       <article className="diary-entry-detail-paper" onClick={(event) => event.stopPropagation()}>
@@ -1141,6 +1171,9 @@ function DiaryEntryDetail({ entry, onClose }: { entry: DiaryEntry; onClose: () =
               <DiaryBlockView key={`${block.type}-${index}`} block={block} />
             ))}
           </div>
+          <button type="button" className="diary-entry-keep-btn" onClick={keepInSharedDrawer}>
+            <Archive size={15} />{kept ? "已经收好" : "收进共同抽屉"}
+          </button>
           <footer className="diary-entry-detail-signature">
             <span>{entry.characterName}</span>
             <time>{formatEntryTime(entry.createdAt)}</time>

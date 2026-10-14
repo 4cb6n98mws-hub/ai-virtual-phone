@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { ChevronLeft, Compass, RefreshCw, Trash2, Wand2, X } from "lucide-react";
+import { Armchair, ChevronLeft, Compass, DoorOpen, Lightbulb, PackagePlus, RefreshCw, Trash2, Wand2, X } from "lucide-react";
 import type { Character } from "@/lib/character-types";
 import { loadCharacters } from "@/lib/character-storage";
 import type { DwellingLayout, DwellingRoom, DwellingFurniture, DwellingFurnitureItem } from "@/lib/dwelling-storage";
@@ -21,6 +21,8 @@ import { getDwellingImageAvailability, generateDwellingRoomImage, cancelDwelling
 import { deleteMediaRef, loadMediaObjectUrl } from "@/lib/media-cache-storage";
 import { RoomView, type DwellingRoomImageStatus } from "./room-view";
 import { StoryHtmlRenderer } from "@/components/ui/story-html-renderer";
+import { kvGet, kvSet } from "@/lib/kv-db";
+import { addSharedDrawerItem, recordCompanionActivity } from "@/lib/shared-drawer-storage";
 
 type DwellingAppProps = {
     onClose: () => void;
@@ -70,6 +72,45 @@ function getCharState(charId: string): CharState {
 
 function itemKey(roomId: string, itemId: string) { return `${roomId}_${itemId}`; }
 
+function localDayKey(now = new Date()): string {
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+}
+
+function stableHash(value: string): number {
+    let hash = 2166136261;
+    for (let index = 0; index < value.length; index += 1) {
+        hash ^= value.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+}
+
+function resolveHomeStatus(characterId: string, now: Date): { label: string; detail: string; atHome: boolean } {
+    const hour = now.getHours();
+    const weekday = now.getDay();
+    const roll = stableHash(`${characterId}:${localDayKey(now)}`) % 10;
+    if (hour < 6) return { label: "屋里很安静", detail: "灯已经熄了，应该还在睡。", atHome: true };
+    if (hour < 8) return { label: "已经起床", detail: roll < 4 ? "厨房那边像是刚煮过咖啡。" : "窗帘拉开了一半。", atHome: true };
+    if (hour < 12) {
+        const atHome = weekday === 0 || weekday === 6 || roll < 3;
+        return atHome
+            ? { label: "人在家里", detail: roll % 2 ? "车库里偶尔传来工具声。" : "屋里有人走动。", atHome: true }
+            : { label: "暂时出门", detail: "玄关很安静，晚些时候再来看看。", atHome: false };
+    }
+    if (hour < 17) {
+        const atHome = weekday === 0 || weekday === 6 || roll < 4;
+        return atHome
+            ? { label: "午后在家", detail: roll % 2 ? "客厅留着一点音乐声。" : "像是在处理修到一半的东西。", atHome: true }
+            : { label: "外出中", detail: "门口没有动静，应该还没回来。", atHome: false };
+    }
+    if (hour < 22) return { label: "已经回家", detail: roll < 3 ? "厨房亮着灯。" : roll < 7 ? "客厅里很安静。" : "像是刚结束训练。", atHome: true };
+    return { label: "准备休息", detail: roll % 2 ? "只留了一盏小灯。" : "屋子慢慢安静下来。", atHome: true };
+}
+
+function porchLightKey(characterId: string): string {
+    return `ai_phone_dwelling_porch_light_v1:${characterId}`;
+}
+
 /** mediaRef → object URL（会话级缓存，图不多，不主动 revoke） */
 const roomImageUrls = new Map<string, string>();
 
@@ -97,6 +138,9 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
     const [itemDetail, setItemDetail] = useState<ItemDetail | null>(null);
     const [imageEnabled, setImageEnabled] = useState(true);
     const [imageConfigured, setImageConfigured] = useState(false);
+    const [nowTick, setNowTick] = useState(() => new Date());
+    const [porchLightOn, setPorchLightOn] = useState(false);
+    const [lifeNotice, setLifeNotice] = useState<string | null>(null);
     const activeCharIdRef = useRef<string | null>(null);
     const activeRoomIdxRef = useRef(0);
     // 一键探索可能跑好几分钟，结束时要读最新的可见状态和回调，不能用发起时的闭包
@@ -108,7 +152,17 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
     useEffect(() => {
         setImageEnabled(loadDwellingImageEnabled());
         setImageConfigured(getDwellingImageAvailability().configured);
+        const timer = window.setInterval(() => setNowTick(new Date()), 60_000);
+        return () => window.clearInterval(timer);
     }, []);
+
+    useEffect(() => {
+        if (!activeCharId) {
+            setPorchLightOn(false);
+            return;
+        }
+        setPorchLightOn(kvGet(porchLightKey(activeCharId)) === "1");
+    }, [activeCharId]);
 
     useEffect(() => {
         // 用户可能中途去设置里配置了生图，回到栖所时重新判定
@@ -428,6 +482,71 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
 
     const cs = activeCharId ? getCharState(activeCharId) : null;
     const activeRoom = cs?.layout?.rooms[activeRoomIdx] ?? null;
+    const activeCharacter = characters.find((character) => character.id === activeCharId) ?? null;
+    const homeStatus = activeCharId ? resolveHomeStatus(activeCharId, nowTick) : null;
+
+    function recordDwellingMoment(kind: string, label: string, detail?: string) {
+        if (!activeCharacter) return;
+        recordCompanionActivity({
+            sourceApp: "dwelling",
+            kind,
+            label,
+            detail,
+            characterId: activeCharacter.id,
+            characterName: activeCharacter.name,
+            importance: "routine",
+        });
+    }
+
+    function handleKnock() {
+        if (!activeCharacter || !homeStatus) return;
+        recordDwellingMoment("knock", "在栖所敲了敲门", homeStatus.atHome ? "门内有人，敲门声被听见了" : "角色暂时不在家");
+        setLifeNotice(homeStatus.atHome ? "敲门声留在玄关里了。" : "屋里没人应门，敲门声仍被记在今天。" );
+    }
+
+    function handleSitTogether() {
+        if (!activeCharacter) return;
+        recordDwellingMoment("sofa", "在栖所的沙发上待了一会儿", homeStatus?.atHome ? "两个人共享了一段安静时间" : "用户在安静的屋里等了一会儿");
+        setLifeNotice(homeStatus?.atHome ? "这一小段安静，被算进今天了。" : "沙发空着，屋里替你留了一会儿。" );
+    }
+
+    function handlePorchLight() {
+        if (!activeCharacter) return;
+        const next = !porchLightOn;
+        setPorchLightOn(next);
+        kvSet(porchLightKey(activeCharacter.id), next ? "1" : "0");
+        recordDwellingMoment("porch_light", next ? "替栖所留了一盏玄关灯" : "关掉了栖所的玄关灯");
+        setLifeNotice(next ? "玄关灯亮着，等人回家。" : "玄关灯关好了。" );
+    }
+
+    function handleKeepItem() {
+        if (!activeCharacter || !itemDetail) return;
+        const sourceEventId = `${activeCharacter.id}:${itemDetail.roomId}:${itemDetail.itemId}`;
+        const looksLikePlant = /(?:植物|盆栽|花盆|绿植|枝叶|花束|花瓶|plant|flower|fern|succulent)/i
+            .test(`${itemDetail.itemName} ${itemDetail.itemPreview}`);
+        addSharedDrawerItem({
+            type: looksLikePlant ? "plant" : "found_object",
+            sourceApp: "dwelling",
+            title: itemDetail.itemName,
+            subtitle: `${activeCharacter.name}的${itemDetail.roomName} · ${itemDetail.furnitureLabel}`,
+            note: itemDetail.itemPreview,
+            characterIds: [activeCharacter.id],
+            characterNames: [activeCharacter.name],
+            sourceEventId,
+            metadata: { roomId: itemDetail.roomId, furnitureId: itemDetail.furnitureId, itemId: itemDetail.itemId },
+        });
+        recordCompanionActivity({
+            sourceApp: "dwelling",
+            kind: "kept_object",
+            label: `把「${itemDetail.itemName}」收进了共同抽屉`,
+            detail: `${itemDetail.roomName} · ${itemDetail.furnitureLabel}`,
+            characterId: activeCharacter.id,
+            characterName: activeCharacter.name,
+            importance: "meaningful",
+            sourceEventId: `drawer:${sourceEventId}`,
+        });
+        setLifeNotice("已经收进共同抽屉。" );
+    }
 
     return (
         <div className="dwelling-app" data-haspicker={characters.length > 1 ? "true" : undefined}>
@@ -509,6 +628,21 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
                 </div>
             )}
 
+            {activeCharacter && cs?.layout && homeStatus && (
+                <section className="dwelling-life-strip" aria-label="栖所生活状态">
+                    <div className="dwelling-life-copy">
+                        <span>{activeCharacter.name} · {homeStatus.label}</span>
+                        <p>{homeStatus.detail}</p>
+                    </div>
+                    <div className="dwelling-life-actions">
+                        <button type="button" onClick={handleKnock} title="敲敲门" aria-label="敲敲门"><DoorOpen size={14} /></button>
+                        <button type="button" onClick={handleSitTogether} title="在沙发坐会儿" aria-label="在沙发坐会儿"><Armchair size={14} /></button>
+                        <button type="button" data-active={porchLightOn ? "true" : undefined} onClick={handlePorchLight} title="玄关灯" aria-label="切换玄关灯"><Lightbulb size={14} /></button>
+                    </div>
+                    {lifeNotice ? <button type="button" className="dwelling-life-notice" onClick={() => setLifeNotice(null)}>{lifeNotice}</button> : null}
+                </section>
+            )}
+
             {cs?.batchExploring && (
                 <div className="dw-batch-bar" role="status" aria-live="polite">
                     <span className="dwelling-spinner" style={{ width: 14, height: 14, borderWidth: 2 }} />
@@ -576,6 +710,9 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
                             </button>
                         </div>
                         <div className="dwelling-detail-preview">{itemDetail.itemPreview}</div>
+                        <button type="button" className="dwelling-detail-keep" onClick={handleKeepItem}>
+                            <PackagePlus size={14} />收进共同抽屉
+                        </button>
                         <div className="dwelling-detail-html">
                             <StoryHtmlRenderer
                                 content={itemDetail.html}

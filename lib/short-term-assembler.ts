@@ -30,6 +30,7 @@ import { loadChatOfflineProjectionEntries } from "./chat-offline-storage";
 import { loadCheckPhoneProjectionEntries } from "./checkphone-storage";
 import { formatShoppingPaymentRequestHistory } from "./shopping-payment-request";
 import { loadCustomAppTimelineEntries } from "./custom-app-storage";
+import { loadSharedDrawerProjectionEntries } from "./shared-drawer-storage";
 import {
     canCharacterSeeMomentPost,
     getVisibleMomentCommentsForCharacter,
@@ -52,7 +53,7 @@ function formatPhotoDirectiveForPrompt(msg: ChatMessage): string {
 export type NativeTimelineEntry = {
     id: string;
     sourceApp: "chat" | "moments" | "story" | "vn" | "map" | "game" | "diary" | "xiaohongshu" | "interview_magazine" | "cocreate" | "checkphone" | "custom_app";
-    sourceDetail?: "direct" | "group" | "system" | "story" | "chat_offline" | "game" | "diary_entry" | "notewall" | "xiaohongshu" | "black_market_theater" | "interview_issue" | "interview_shared_issue" | "cocreate_project" | "checkphone" | "custom_app_event"; // chat sub-type: 1:1 vs group chat vs system note
+    sourceDetail?: "direct" | "group" | "system" | "story" | "chat_offline" | "game" | "diary_entry" | "notewall" | "xiaohongshu" | "black_market_theater" | "interview_issue" | "interview_shared_issue" | "cocreate_project" | "checkphone" | "custom_app_event" | "shared_drawer"; // chat sub-type: 1:1 vs group chat vs system note
     authorType?: "user" | "character" | "npc"; // who authored this entry
     postAuthorType?: "user" | "character"; // for moments: who owns the parent post
     sessionId?: string;
@@ -677,6 +678,31 @@ export function loadNativeTimeline(
                 timeAware,
                 timestampOptions,
             }),
+        });
+    }
+
+    // ── Shared drawer / companion-life projections ──
+    // Routine interactions are collapsed into one entry per local calendar day by
+    // shared-drawer-storage. Meaningful events remain individual entries. This
+    // keeps companion awareness without turning every tap into a memory item.
+    const sharedDrawerEntries = loadSharedDrawerProjectionEntries(characterId, {
+        afterTimestamp: options?.afterTimestamp,
+    });
+    for (const drawerEntry of sharedDrawerEntries) {
+        entries.push({
+            id: drawerEntry.id,
+            sourceApp: "custom_app",
+            sourceDetail: "shared_drawer",
+            timestamp: drawerEntry.timestamp,
+            content: formatStoredPromptEventContent(drawerEntry.content, {
+                label: "共同生活",
+                timestamp: drawerEntry.timestamp,
+                timeAware,
+                timestampOptions,
+            }),
+            customAppId: "shared-drawer",
+            customAppName: "共同抽屉",
+            customAppLabel: "共同生活",
         });
     }
 

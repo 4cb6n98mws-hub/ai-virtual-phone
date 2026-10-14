@@ -288,6 +288,7 @@ const PRIMARY_DATA_MODULES: DataModuleDefinition[] = [
           "ai_phone_reality_bridge_data_items_v1",
           "ai_phone_reality_bridge_shortcut_actions_v1",
           "ai_phone_reality_bridge_rule_runs_v1",
+          "ai_phone_shared_drawer_items_v1",
         ],
         prefixes: [
           "music-search-cache:",
@@ -295,6 +296,8 @@ const PRIMARY_DATA_MODULES: DataModuleDefinition[] = [
           "music-playlist-detail-",
           "ai_phone_custom_app_data_v1:",
           "ai_phone_custom_app_timeline_v1:",
+          "ai_phone_shared_drawer_activity_v1:",
+          "ai_phone_shared_drawer_projection_v1:",
         ],
       },
     ],

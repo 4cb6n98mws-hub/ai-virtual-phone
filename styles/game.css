@@ -4544,3 +4544,149 @@
   line-height: 1.45;
   white-space: nowrap;
 }
+
+/* =========================================================
+   Harbor Arcade · modern American arcade skin
+   深色机台、青蓝屏光与琥珀提示色；不改变游戏运行和发布逻辑。
+   ========================================================= */
+.game-hub-root {
+  --gm-bg: #edf6f7;
+  --gm-card-glass: rgba(255, 255, 255, 0.82);
+  --gm-card-solid: #ffffff;
+  --gm-border-light: rgba(255, 255, 255, 0.92);
+  --gm-border-dark: rgba(0, 142, 164, 0.18);
+  --gm-text-main: #10272e;
+  --gm-text-muted: #5f777d;
+  --gm-text-rose: #df4e69;
+  --gm-violet: #008fa6;
+  --gm-violet-deep: #075a69;
+  --gm-pink: #ef5d77;
+  --gm-rose-50: rgba(255, 101, 129, .08);
+  --gm-rose-100: rgba(255, 101, 129, .13);
+  --gm-rose-200: rgba(255, 101, 129, .2);
+  --gm-rose-300: #ff91a4;
+  --gm-rose-400: #ff748d;
+  --gm-rose-500: #ff5d79;
+  --gm-rose-600: #ff8ca0;
+  --gm-radius-sm: 8px;
+  --gm-radius-md: 11px;
+  --gm-radius-lg: 14px;
+  --gm-shadow-glass: 0 10px 26px rgba(30, 92, 103, .08), inset 0 1px rgba(255, 255, 255, .7);
+  --gm-shadow-glass-hover: 0 14px 34px rgba(20, 88, 101, .13), 0 0 18px rgba(0, 157, 180, .08);
+  --gm-shadow-primary: 0 7px 22px rgba(255, 93, 121, .25);
+  --gm-shadow-primary-hover: 0 9px 28px rgba(255, 93, 121, .34);
+  background:
+    linear-gradient(rgba(0, 143, 166, .04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 143, 166, .04) 1px, transparent 1px),
+    radial-gradient(circle at 20% 0%, rgba(42, 189, 213, .13), transparent 36%),
+    radial-gradient(circle at 90% 88%, rgba(239, 93, 119, .1), transparent 38%),
+    var(--gm-bg);
+  background-size: 24px 24px, 24px 24px, auto, auto, auto;
+}
+
+.game-hub-root::before {
+  background-image: linear-gradient(180deg, transparent 0 49%, rgba(0, 124, 145, .028) 50% 51%, transparent 52%);
+  background-size: 100% 5px;
+  opacity: .7;
+}
+
+.game-hub-root::after { opacity: .04; }
+
+.game-hub-header,
+.game-hub-header::before {
+  background: rgba(248, 253, 253, .92);
+  border-color: rgba(0, 143, 166, .12);
+}
+
+.game-hub-header > div span { color: #008fa6; }
+.game-hub-header > div strong { color: var(--gm-text-main); letter-spacing: .04em; }
+.game-hub-header button { color: #145965; background: rgba(255,255,255,.72); border: 1px solid rgba(0,143,166,.12); }
+
+.game-search {
+  border-color: rgba(87, 214, 233, .22);
+  background: rgba(255, 255, 255, .86);
+  box-shadow: 0 8px 22px rgba(31, 94, 104, .08);
+}
+.game-search input::placeholder { color: rgba(61, 100, 108, .56); }
+
+.game-category-row::after,
+.game-bottom-tabs::before,
+.game-studio-tabs::before {
+  background: linear-gradient(90deg, #4bd4eb, #ff657f);
+  box-shadow: 0 0 12px rgba(75, 212, 235, .25);
+}
+
+.game-tabs button.is-active {
+  background: #12313a;
+  color: #f2ffff;
+  box-shadow: 0 8px 18px rgba(18, 76, 88, .16);
+}
+
+.game-post-actions button.is-primary,
+.game-card-actions button.is-primary,
+.game-library-actions button.is-primary,
+.game-studio-actions button.is-primary,
+.game-modal-actions button.is-primary {
+  background: linear-gradient(135deg, #008fa6, #ef5d77);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 9px 20px rgba(0, 143, 166, .18);
+}
+
+.game-post,
+.game-card,
+.game-library-card,
+.game-published-card,
+.game-studio-panel {
+  border-color: rgba(87, 214, 233, .15);
+  border-bottom-color: rgba(255, 101, 127, .1);
+  border-right-color: rgba(87, 214, 233, .1);
+}
+
+.game-post:hover,
+.game-card:hover,
+.game-library-card:hover,
+.game-published-card:hover {
+  background: rgba(255, 255, 255, .96);
+}
+
+.game-post::after,
+.game-card::after,
+.game-library-card::after,
+.game-published-card::after,
+.game-studio-panel::after {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.86);
+}
+
+.game-avatar,
+.game-profile-avatar,
+.game-comment-avatar {
+  background: rgba(49, 189, 209, .12);
+  border-color: rgba(0, 143, 166, .18);
+  color: #08788a;
+  box-shadow: 0 4px 14px rgba(27, 91, 102, .1);
+}
+
+.game-bottom-tabs {
+  border-color: rgba(87, 214, 233, .16);
+  background: rgba(250, 254, 254, .9);
+  box-shadow: 0 -10px 26px rgba(31, 90, 101, .1);
+}
+.game-bottom-tabs button { color: rgba(35, 79, 88, .62); }
+.game-bottom-tabs button.is-active { color: #075a69; }
+
+.game-hub-root input,
+.game-hub-root textarea {
+  caret-color: #5bd9eb;
+}
+
+.game-empty {
+  border-color: rgba(87, 214, 233, .22);
+  background: rgba(255, 255, 255, .58);
+}
+
+.game-toast {
+  background: rgba(255, 255, 255, .94);
+  border: 1px solid rgba(87, 214, 233, .16);
+  color: var(--gm-text-main);
+}

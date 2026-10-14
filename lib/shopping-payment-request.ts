@@ -1,5 +1,6 @@
 import { loadShoppingState, saveShoppingState } from "./shopping-storage";
 import type { ShoppingOrder, ShoppingShippingEvent, ShoppingState } from "./shopping-types";
+import { addSharedDrawerItem, recordCompanionActivity } from "./shared-drawer-storage";
 
 export type ShoppingPaymentStatus =
   | "paid_by_user"
@@ -162,7 +163,6 @@ export function settleShoppingPaymentRequest(input: {
 }): ShoppingOrder | null {
   if (!input.orderId && !input.requestId) return null;
   const state = loadShoppingState();
-  let updatedOrder: ShoppingOrder | null = null;
   const now = new Date();
   const nextOrders = state.orders.map(order => {
     const matches = (input.orderId && order.id === input.orderId)
@@ -181,7 +181,6 @@ export function settleShoppingPaymentRequest(input: {
         characterPaidAt: now.toISOString(),
         shippingTimeline: buildShoppingShippingTimeline(order.id, now, state.settings),
       };
-      updatedOrder = paidOrder;
       return paidOrder;
     }
 
@@ -191,11 +190,43 @@ export function settleShoppingPaymentRequest(input: {
       paymentStatus: "payment_declined",
       paymentDeclinedAt: now.toISOString(),
     };
-    updatedOrder = declinedOrder;
     return declinedOrder;
   });
 
+  const updatedOrder = nextOrders.find(order => (
+    (input.orderId && order.id === input.orderId)
+    || (input.requestId && order.paymentRequestId === input.requestId)
+  )) ?? null;
   if (!updatedOrder) return null;
   saveShoppingState({ ...state, orders: nextOrders });
+  if (input.accepted) {
+    const characterId = input.payerCharacterId || updatedOrder.payerCharacterId || "";
+    const characterName = input.payerCharacterName || updatedOrder.payerCharacterName || "角色";
+    if (characterId) {
+      const itemNames = updatedOrder.items.map(item => item.title).filter(Boolean);
+      addSharedDrawerItem({
+        type: "gift",
+        sourceApp: "shopping",
+        title: updatedOrder.summary || itemNames[0] || "一份代付的东西",
+        subtitle: `${characterName}代付 · ${updatedOrder.totalLabel}`,
+        note: itemNames.length ? itemNames.join("、") : updatedOrder.note,
+        createdAt: updatedOrder.characterPaidAt || updatedOrder.paidAt || now.toISOString(),
+        characterIds: [characterId],
+        characterNames: [characterName],
+        sourceEventId: updatedOrder.id,
+        metadata: { orderId: updatedOrder.id, paymentRequestId: updatedOrder.paymentRequestId },
+      });
+      recordCompanionActivity({
+        sourceApp: "shopping",
+        kind: "shopping_gift",
+        label: `${characterName}替用户支付了「${updatedOrder.summary || itemNames[0] || "一份订单"}」`,
+        detail: updatedOrder.totalLabel,
+        characterId,
+        characterName,
+        importance: "meaningful",
+        sourceEventId: `shopping:${updatedOrder.id}`,
+      });
+    }
+  }
   return updatedOrder;
 }

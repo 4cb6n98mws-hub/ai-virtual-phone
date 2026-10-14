@@ -88,6 +88,7 @@ import type { LLMMessage } from "@/lib/llm-prompt-assembler";
 import { resolveUserIdentity } from "@/lib/settings-storage";
 import { incrementEventCounter } from "@/lib/memory-storage";
 import { maybeRunSummarization } from "@/lib/memory-summarizer";
+import { addSharedDrawerItem } from "@/lib/shared-drawer-storage";
 import { getPwaHostedSafeArea, PWA_DISPLAY_MODE_CHANGED_EVENT } from "@/lib/pwa-display-mode";
 import { IFRAME_ERROR_CAPTURE_SCRIPT } from "@/lib/qa-iframe-error-bridge";
 
@@ -2160,6 +2161,21 @@ export function GameHubApp({ onClose, autoOpenLocalId }: { onClose: () => void; 
         nextState = result.state;
         if (result.entry) {
           recorded += 1;
+          addSharedDrawerItem({
+            type: "game_art",
+            sourceApp: "game",
+            title: `${result.entry.templateTitle} · 游戏留念`,
+            subtitle: `${result.entry.playerName} 与 ${result.entry.characterName}`,
+            note: result.entry.summary,
+            createdAt: result.entry.timestamp,
+            characterIds: [result.entry.characterId],
+            characterNames: [result.entry.characterName],
+            sourceEventId: result.entry.id,
+            metadata: {
+              localGameId: result.entry.localGameId,
+              remoteTemplateId: result.entry.remoteTemplateId,
+            },
+          });
           try {
             incrementEventCounter(characterId);
             maybeRunSummarization(characterId, character.name)

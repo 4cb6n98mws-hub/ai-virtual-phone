@@ -1238,6 +1238,21 @@
   white-space: nowrap;
 }
 
+.diary-entry-keep-btn {
+  width: 100%;
+  min-height: 42px;
+  margin: 18px 0 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(67, 54, 35, .22);
+  background: rgba(255,255,255,.42);
+  color: rgba(52, 39, 29, .82);
+  font: 600 calc(12px*var(--app-text-scale,1))/1.4 var(--app-font-family);
+  letter-spacing: .05em;
+}
+
 .diary-entry-detail-signature span {
   min-width: 0;
   overflow: hidden;

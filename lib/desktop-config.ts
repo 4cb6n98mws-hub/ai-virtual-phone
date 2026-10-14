@@ -11,6 +11,7 @@ export type IconId =
   | "appmarket"
   | "xiaohongshu"
   | "dwelling"
+  | "shared_drawer"
   | "checkphone"
   | "shopping"
   | "calendar"
@@ -63,6 +64,7 @@ export const PAGE_2_DEFAULT: IconId[] = [
   "appmarket",
   "xiaohongshu",
   "dwelling",
+  "shared_drawer",
   "story",
   "vnmode",
   "mapmode"
@@ -93,6 +95,12 @@ export const ICONS: Record<IconId, IconMeta> = {
     id: "dwelling",
     label: "栖所",
     tone: "var(--c-icon-rose)",
+    placeholder: false
+  },
+  shared_drawer: {
+    id: "shared_drawer",
+    label: "共同抽屉",
+    tone: "var(--c-icon-teal)",
     placeholder: false
   },
   shopping: { id: "shopping", label: "\u8D2D\u7269", tone: "var(--c-icon-amber)", placeholder: false },

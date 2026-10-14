@@ -1,19 +1,19 @@
-/* ── Dwelling (栖所) — dark cinematic annotated-stage exploration ── */
+/* ── Dwelling (栖所) — Long Island old-house / brass-and-wood stage ── */
 
 .dwelling-app *::-webkit-scrollbar { display: none; }
 .dwelling-app * { scrollbar-width: none; }
 
 .dwelling-app {
-  --dw-bg: #0a0a0d;
-  --dw-ink: #f0eee8;
-  --dw-dim: rgba(240, 238, 232, 0.45);
-  --dw-faint: rgba(240, 238, 232, 0.3);
-  --dw-ghost: rgba(255, 255, 255, 0.14);
-  --dw-line: rgba(255, 255, 255, 0.22);
-  --dw-line-strong: rgba(255, 255, 255, 0.45);
-  --dw-red: rgba(240, 238, 232, 0.5);
-  --dw-red-soft: rgba(240, 238, 232, 0.3);
-  --dw-panel: rgba(16, 16, 19, 0.78);
+  --dw-bg: #110e0c;
+  --dw-ink: #f3eadc;
+  --dw-dim: rgba(243, 234, 220, 0.62);
+  --dw-faint: rgba(243, 234, 220, 0.4);
+  --dw-ghost: rgba(222, 190, 137, 0.16);
+  --dw-line: rgba(217, 184, 128, 0.3);
+  --dw-line-strong: rgba(228, 199, 148, 0.56);
+  --dw-red: #b78b52;
+  --dw-red-soft: rgba(183, 139, 82, 0.35);
+  --dw-panel: rgba(26, 20, 16, 0.84);
   --dw-serif: "Songti SC", "Noto Serif SC", "Noto Serif CJK SC", "SimSun", Georgia, serif;
   --dw-latin: "Didot", Georgia, "Times New Roman", serif;
 
@@ -37,7 +37,7 @@
   padding-top: var(--page-header-safe-top, 48px);
   column-gap: 10px;
   z-index: 20;
-  background: rgba(10, 10, 13, 0.42);
+  background: rgba(22, 17, 14, 0.72);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   flex-shrink: 0;
@@ -87,7 +87,7 @@
   flex-shrink: 0;
   position: relative;
   z-index: 18;
-  background: rgba(10, 10, 13, 0.42);
+  background: rgba(22, 17, 14, 0.7);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
@@ -190,7 +190,7 @@
   flex-shrink: 0;
   position: relative;
   z-index: 16;
-  background: rgba(10, 10, 13, 0.42);
+  background: rgba(22, 17, 14, 0.7);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
@@ -216,10 +216,10 @@
   overflow-x: auto;
   scrollbar-width: none;
   flex-shrink: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(217, 184, 128, 0.2);
   position: relative;
   z-index: 15;
-  background: rgba(10, 10, 13, 0.42);
+  background: rgba(22, 17, 14, 0.7);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
@@ -285,7 +285,7 @@
   position: relative;
   z-index: 16;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(10, 10, 13, 0.42);
+  background: rgba(22, 17, 14, 0.7);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
@@ -308,6 +308,92 @@
 }
 .dw-batch-cancel:disabled { opacity: 0.4; cursor: default; }
 
+/* ── 栖所 2.0：低消耗生活状态与本地互动 ── */
+.dwelling-life-strip {
+  position: relative;
+  z-index: 17;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(208, 174, 112, .18);
+  background:
+    linear-gradient(90deg, rgba(84, 60, 36, .3), transparent 62%),
+    rgba(15, 14, 15, .84);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+.dwelling-life-copy { min-width: 0; }
+.dwelling-life-copy span {
+  display: block;
+  color: rgba(241, 226, 194, .9);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(11px*var(--app-text-scale,1));
+  letter-spacing: .06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dwelling-life-copy p {
+  margin: 3px 0 0;
+  color: rgba(240, 238, 232, .58);
+  font-family: var(--app-font-family);
+  font-size: calc(9.5px*var(--app-text-scale,1));
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dwelling-life-actions { display: flex; gap: 6px; }
+.dwelling-life-actions button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(221, 196, 150, .24);
+  border-radius: 50%;
+  background: rgba(255,255,255,.045);
+  color: rgba(240, 238, 232, .66);
+}
+.dwelling-life-actions button[data-active="true"] {
+  color: #f2d58d;
+  border-color: rgba(242, 213, 141, .5);
+  background: rgba(199, 145, 62, .16);
+  box-shadow: 0 0 14px rgba(224, 170, 74, .14);
+}
+.dwelling-life-notice {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: calc(100% + 7px);
+  z-index: 30;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid rgba(221, 196, 150, .25);
+  background: rgba(22, 19, 17, .96);
+  color: rgba(241, 226, 194, .9);
+  font: calc(10.5px*var(--app-text-scale,1))/1.5 var(--app-font-family);
+  text-align: center;
+}
+.dwelling-detail-keep {
+  margin: 12px 18px 0;
+  min-height: 38px;
+  width: calc(100% - 36px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(240, 238, 232, .26);
+  background: rgba(255,255,255,.055);
+  color: rgba(240, 238, 232, .84);
+  font: 600 calc(11px*var(--app-text-scale,1))/1.3 var(--app-font-family);
+  letter-spacing: .05em;
+}
+
 /* ══ Stage view（全屏铺底，玻璃栏浮在其上） ══ */
 .dw2-stage {
   position: absolute;
@@ -319,23 +405,25 @@
 .dw2-ambient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(130% 75% at 50% 0%, #141824 0%, #0d0f16 48%, #0a0a0d 100%);
+  background:
+    radial-gradient(100% 58% at 74% 18%, rgba(151, 109, 63, .2), transparent 58%),
+    radial-gradient(130% 75% at 50% 0%, #292119 0%, #17120f 50%, #100d0b 100%);
 }
 .dw2-l1 {
   position: absolute; left: 50%; top: 8%;
   transform: translateX(-50%);
   width: 92%; height: 36%;
-  background: radial-gradient(ellipse, rgba(122, 140, 188, 0.16), transparent 64%);
+  background: radial-gradient(ellipse, rgba(194, 157, 99, 0.16), transparent 64%);
 }
 .dw2-l2 {
   position: absolute; right: -18%; top: 44%;
   width: 82%; height: 40%;
-  background: radial-gradient(circle, rgba(214, 186, 136, 0.1), transparent 60%);
+  background: radial-gradient(circle, rgba(221, 179, 110, 0.13), transparent 60%);
 }
 .dw2-l3 {
   position: absolute; left: -20%; bottom: 6%;
   width: 72%; height: 32%;
-  background: radial-gradient(ellipse, rgba(96, 88, 118, 0.13), transparent 66%);
+  background: radial-gradient(ellipse, rgba(104, 78, 54, 0.18), transparent 66%);
 }
 .dw2-grain {
   position: absolute;
