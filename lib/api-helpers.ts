@@ -90,6 +90,22 @@ export function isNativeGoogleApi(config: ApiConfig): boolean {
     return config.provider === "Google";
 }
 
+/** Translate the legacy preset limit for OpenAI reasoning model families.
+ * Keep max_tokens for older GPT models and non-OpenAI models such as DeepSeek.
+ */
+export function normalizeOpenAICompletionLimit(
+    body: Record<string, unknown>,
+    model: string,
+): Record<string, unknown> {
+    const modelName = model.trim().replace(/^openai\//i, "");
+    if (/^(?:gpt-(?:[5-9]|[1-9]\d+)(?:[.-]|$)|o[1-9]\d*(?:-|$))/i.test(modelName)
+        && body.max_tokens !== undefined) {
+        const { max_tokens, ...rest } = body;
+        return { ...rest, max_completion_tokens: body.max_completion_tokens ?? max_tokens };
+    }
+    return body;
+}
+
 /**
  * Send a simple LLM request (single user message) and return the text response.
  * Used by summarizer, moments-engine, and other non-chat LLM calls.
@@ -148,12 +164,12 @@ export async function simpleLLMCall(
         } else {
             // OpenAI-compatible (all others including proxies/relays/custom)
             fetchUrl = buildChatCompletionsUrl(baseUrl);
-            body = JSON.stringify({
+            body = JSON.stringify(normalizeOpenAICompletionLimit({
                 model: config.defaultModel,
                 messages,
                 temperature,
                 ...(max_tokens ? { max_tokens } : {}),
-            });
+            }, config.defaultModel));
         }
 
         const bodySize = body.length;
