@@ -1810,13 +1810,31 @@
   text-shadow: 0 1px 2px rgba(5, 12, 15, .88) !important;
 }
 
-/* The System Settings group stays parchment and therefore uses dark ink. */
-.desk-stage .phone-shell[data-active-app="theme"] .appearance-main-menu .menu-group,
-.desk-stage .phone-shell[data-active-app="theme"] .appearance-main-menu .menu-group :is(
-  .menu-item, .menu-label, .appearance-menu-item-label, .menu-right, svg
+/* Appearance system controls now use the same leather hardware as every
+ * reference card instead of the leftover parchment settings group. */
+.desk-stage .phone-shell[data-active-app="theme"] .appearance-main-menu .appearance-system-menu {
+  overflow: hidden !important;
+  color: #f6e7ca !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.11), 0 5px 12px rgba(42,24,11,.24) !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .appearance-main-menu .appearance-system-menu .menu-item {
+  color: #f6e7ca !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .appearance-main-menu .appearance-system-menu .menu-item:not(:last-child)::after {
+  background: rgba(190,151,92,.34) !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .appearance-main-menu .appearance-system-menu :is(
+  .menu-label, .appearance-menu-item-label, .menu-right, svg
 ) {
-  color: #172e37 !important;
-  text-shadow: none !important;
+  color: #f7e8ca !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
   opacity: 1 !important;
 }
 
@@ -1836,4 +1854,201 @@
   color: #f5e4c3 !important;
   stroke: currentColor !important;
   opacity: 1 !important;
+}
+
+/* Settings / Tools — remove the isolated light rounded group. */
+.desk-stage .phone-shell[data-active-app="settings"] .settings-tools-menu {
+  overflow: hidden !important;
+  color: #f6e7ca !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.11), 0 5px 12px rgba(42,24,11,.24) !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-tools-menu .settings-tools-menu-item {
+  color: #f6e7ca !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-tools-menu .settings-tools-menu-item:not(:last-child)::after {
+  background: rgba(190,151,92,.34) !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-tools-menu :is(
+  .menu-label, .appearance-menu-item-label, .menu-right, svg
+) {
+  color: #f7e8ca !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-tools-menu .settings-tools-menu-desc {
+  color: #dbc8a7 !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+
+/* Chat detail / three-dot information — one material system, readable copy. */
+.desk-stage .phone-shell[data-active-app="chat"] .companion-chat-info-page,
+.desk-stage .phone-shell[data-active-app="chat"] .companion-chat-info-page > .page-body {
+  color: #f6e7ca !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-info-menu {
+  color: #f6e7ca !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-info-menu .menu-group {
+  overflow: hidden !important;
+  color: #f6e7ca !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.11), 0 5px 12px rgba(42,24,11,.24) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-info-menu .menu-item {
+  color: #f6e7ca !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-info-menu .menu-item:not(:last-child)::after {
+  background: rgba(190,151,92,.34) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-info-menu :is(
+  .menu-label, .menu-right, .menu-right svg
+) {
+  color: #f7e8ca !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-info-menu .menu-desc {
+  color: #dbc8a7 !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-info-menu :is(.menu-label-danger, .text-\[var\(--c-danger\)\]) {
+  color: #ef8b86 !important;
+}
+
+/* Chat profile/home — replace the remaining pale app cards with navy leather. */
+.desk-stage .phone-shell[data-active-app="chat"] .user-profile-page-root,
+.desk-stage .phone-shell[data-active-app="chat"] .user-profile-page-root > .page-body {
+  color: #f6e7ca !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .user-profile-page-root::before {
+  display: none !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-identity :is(div,span,svg) {
+  color: #f7e8ca !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-avatar {
+  color: #17313a !important;
+  border: 1px solid #b78a50 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+  box-shadow: 0 3px 0 #56391f, 0 8px 14px rgba(5,12,15,.34) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-card {
+  color: #f6e7ca !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.11), 0 5px 12px rgba(42,24,11,.24) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-card :is(h1,h2,h3,strong,button,span,svg) {
+  color: #f7e8ca !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-card :is(.opacity-70, .opacity-75, [class*="ts-11"]) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-card button + button,
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-list > :not(:last-child) {
+  border-color: rgba(190,151,92,.34) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-wallet .h-8 {
+  color: #f7e8ca !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-profile-quick button > div {
+  color: #f3dfb7 !important;
+  border: 1px solid rgba(183,138,80,.72) !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+}
+
+/* Appearance status-bar and typography dialogs use the reference hardware too. */
+.desk-stage .phone-shell[data-active-app="theme"] .companion-theme-dialog-overlay {
+  background: rgba(4,10,13,.72) !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-theme-dialog {
+  width: 88% !important;
+  max-width: 330px !important;
+  color: #f6e7ca !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.13), 0 12px 28px rgba(4,8,10,.52) !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-theme-dialog :is(.modal-title, .modal-body span, .modal-body label) {
+  color: #f7e8ca !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-theme-dialog .modal-body p {
+  color: #dbc8a7 !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-theme-dialog .theme-section-page {
+  color: #f6e7ca !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-theme-dialog .modal-footer {
+  gap: 8px !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-theme-dialog .ui-btn {
+  min-height: 38px !important;
+  color: #f7e8ca !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+  box-shadow: 0 2px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-theme-dialog .ui-btn-primary {
+  background: #8d3c40 !important;
+  box-shadow: 0 2px 0 #4f2428 !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-text-dialog .theme-section-page button {
+  color: #f7e8ca !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+  box-shadow: 0 2px 0 #152f29 !important;
 }

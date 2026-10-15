@@ -826,7 +826,7 @@ export function ChatSettingsPanel({
     const displayedSearchMessages = searchMode ? searchResults : searchHistoryMessages;
 
     return (
-        <PageShell title="聊天信息" onBack={onClose} className="absolute inset-0 z-[100]">
+        <PageShell title="聊天信息" onBack={onClose} className="companion-chat-info-page absolute inset-0 z-[100]">
             <div className="page-menu chat-info-menu">
                 {/* Basic Info & Search */}
                 <div className="menu-group">

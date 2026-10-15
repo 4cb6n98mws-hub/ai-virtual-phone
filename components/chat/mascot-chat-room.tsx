@@ -178,7 +178,7 @@ function MascotInfoPanel({
     };
 
     return (
-        <PageShell title="AI助手信息" onBack={onClose} className="absolute inset-0 z-[100]">
+        <PageShell title="AI助手信息" onBack={onClose} className="companion-chat-info-page absolute inset-0 z-[100]">
             <div className="page-menu chat-info-menu">
                 <div className="menu-group">
                     <label className="menu-item">
