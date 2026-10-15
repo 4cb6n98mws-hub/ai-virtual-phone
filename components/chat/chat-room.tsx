@@ -5424,11 +5424,21 @@ export function ChatRoom({ session, onBack, onDeleted }: ChatRoomProps) {
                     <button className="page-back-btn" type="button" onClick={onBack} aria-label="返回">
                         <ChevronLeft size={24} strokeWidth={1.5} />
                     </button>
-                    <span className="page-title" style={{ position: 'relative' }}>
-                        {offlineMode ? "线下 · " : ""}
-                        {session.isGroup
-                            ? `${session.groupName || "群聊"}(${(session.participantIds?.length || 0) + (session.isSpectator ? 0 : 1)})`
-                            : (session.alias || character?.name || `User_${session.contactId.slice(-4)}`)}
+                    {!session.isGroup && (
+                        <span className="chat-vintage-header-avatar" aria-hidden="true">
+                            {character?.avatar ? <img src={character.avatar} alt="" /> : <ChatFallbackAvatar />}
+                        </span>
+                    )}
+                    <span className="page-title chat-vintage-title-stack" style={{ position: 'relative' }}>
+                        <strong>
+                            {offlineMode ? "线下 · " : ""}
+                            {session.isGroup
+                                ? `${session.groupName || "群聊"}(${(session.participantIds?.length || 0) + (session.isSpectator ? 0 : 1)})`
+                                : (session.alias || character?.name || `User_${session.contactId.slice(-4)}`)}
+                        </strong>
+                        <small className="chat-vintage-presence">
+                            <i aria-hidden="true" />{offlineMode ? "同处一室" : "在家 · 刚刚在线"}
+                        </small>
                         {(isGenerating || isOfflineGenerating) && (
                             <span className="chat-typing-indicator">
                                 {offlineMode ? "线下生成中" : "对方正在输入"}<span className="chat-typing-dots"><i/><i/><i/></span>
