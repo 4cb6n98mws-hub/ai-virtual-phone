@@ -277,6 +277,33 @@
   -webkit-backdrop-filter: blur(3px);
 }
 
+/* Material fallback for legacy screens whose component names predate the
+   current design system. :where() keeps this deliberately easy to override
+   by the app-specific sections below. */
+.desk-stage .phone-shell.app-open-shell .phone-app-pane :where(
+  [class*="card"], [class*="panel"], [class*="sheet"], [class*="tile"],
+  [class*="section"], [class*="module"]
+) {
+  border-color: #a18862;
+  border-radius: 5px;
+}
+.desk-stage .phone-shell.app-open-shell .phone-app-pane :where(
+  [class*="header"], [class*="topbar"], [class*="appbar"]
+) {
+  border-color: #9d7545;
+}
+.desk-stage .phone-shell.app-open-shell .phone-app-pane :where(
+  [class*="tab"], [class*="segmented"], [class*="filter-pill"]
+) {
+  border-radius: 4px;
+}
+.desk-stage .phone-shell.app-open-shell .phone-app-pane :where(
+  [class*="bottom-nav"], [class*="bottom-bar"], [class*="toolbar"], [class*="action-bar"]
+) {
+  border-color: #87633d;
+  background-color: #102632;
+}
+
 /* ── Chat and calls: the parchment-and-leather master screen ─────────── */
 .desk-stage .phone-shell[data-active-app="chat"] .chat-app,
 .desk-stage .phone-shell[data-active-app="group_chat"] .chat-app {
