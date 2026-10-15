@@ -533,3 +533,267 @@
     font-size: calc(10px * var(--app-text-scale, 1));
   }
 }
+
+/* ── Legibility + illustrated icon correction ─────────────────────
+ * The first material pass left the original monochrome glyphs visible and
+ * depended on a broad selector for the chat paper.  This pass gives the
+ * desktop real object illustrations and pins the chat surfaces to explicit
+ * component classes so session CSS cannot turn the paper back into leather.
+ */
+
+.desk-stage .phone-shell-wrap {
+  --li-icon-atlas: url("/companion/vintage-app-icons-v2.webp");
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item .icon-glyph-box {
+  isolation: isolate;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item .icon-glyph,
+.desk-stage .phone-shell:not(.app-open-shell) .dock-item .icon-glyph {
+  opacity: 0 !important;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .vintage-app-art {
+  position: absolute;
+  z-index: 4;
+  top: 3px;
+  left: 50%;
+  width: min(68px, calc(100% - 4px));
+  aspect-ratio: 128 / 102;
+  transform: translateX(-50%);
+  background-image: var(--li-icon-atlas);
+  background-repeat: no-repeat;
+  background-size: 600% 500%;
+  filter: drop-shadow(0 2px 1px rgba(24, 12, 5, .44));
+  pointer-events: none;
+}
+
+/* The icon sheet is a strict 6 × 5 grid. */
+.vintage-app-art[data-vintage-icon="chat"] { background-position: 0% 0%; }
+.vintage-app-art[data-vintage-icon="diary"] { background-position: 20% 0%; }
+.vintage-app-art[data-vintage-icon="music"] { background-position: 40% 0%; }
+.vintage-app-art[data-vintage-icon="calendar"] { background-position: 60% 0%; }
+.vintage-app-art[data-vintage-icon="checkphone"] { background-position: 80% 0%; }
+.vintage-app-art[data-vintage-icon="shopping"] { background-position: 100% 0%; }
+
+.vintage-app-art[data-vintage-icon="reading"] { background-position: 0% 25%; }
+.vintage-app-art[data-vintage-icon="interview_magazine"] { background-position: 20% 25%; }
+.vintage-app-art[data-vintage-icon="cocreate"] { background-position: 40% 25%; }
+.vintage-app-art[data-vintage-icon="game"] { background-position: 60% 25%; }
+.vintage-app-art[data-vintage-icon="appmarket"] { background-position: 80% 25%; }
+.vintage-app-art[data-vintage-icon="xiaohongshu"] { background-position: 100% 25%; }
+
+.vintage-app-art[data-vintage-icon="dwelling"] { background-position: 0% 50%; }
+.vintage-app-art[data-vintage-icon="shared_drawer"] { background-position: 20% 50%; }
+.vintage-app-art[data-vintage-icon="story"] { background-position: 40% 50%; }
+.vintage-app-art[data-vintage-icon="vnmode"],
+.vintage-app-art[data-vintage-icon="vnplay"] { background-position: 60% 50%; }
+.vintage-app-art[data-vintage-icon="mapmode"] { background-position: 80% 50%; }
+.vintage-app-art[data-vintage-icon="moments"] { background-position: 100% 50%; }
+
+.vintage-app-art[data-vintage-icon="group_chat"] { background-position: 0% 75%; }
+.vintage-app-art[data-vintage-icon="worldbuilder"] { background-position: 20% 75%; }
+.vintage-app-art[data-vintage-icon="qa"] { background-position: 40% 75%; }
+.vintage-app-art[data-vintage-icon="mixology"] { background-position: 60% 75%; }
+.vintage-app-art[data-vintage-icon="resource_hub"] { background-position: 80% 75%; }
+.vintage-app-art[data-vintage-icon="realitybridge"] { background-position: 100% 75%; }
+
+.vintage-app-art[data-vintage-icon="vnchapters"] { background-position: 100% 25%; }
+.vintage-app-art[data-vintage-icon="resources"] { background-position: 40% 100%; }
+.vintage-app-art[data-vintage-icon="theme"] { background-position: 60% 100%; }
+.vintage-app-art[data-vintage-icon="characters"] { background-position: 80% 100%; }
+.vintage-app-art[data-vintage-icon="settings"] { background-position: 100% 100%; }
+
+.desk-stage .phone-shell:not(.app-open-shell) .dock .vintage-app-art-dock {
+  top: 50%;
+  width: 45px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .5));
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .dock .dock-glyph-box {
+  overflow: visible;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Named cards get the same materials as the approved master, rather than a
+ * positional colour roulette that changed when the user moved an icon. */
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="chat"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="calendar"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="dwelling"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="worldbuilder"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="mixology"] .icon-glyph-box {
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="diary"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="shopping"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="game"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="shared_drawer"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="qa"] .icon-glyph-box {
+  background-position: var(--li-green) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="music"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="reading"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="story"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="cocreate"] .icon-glyph-box {
+  background-position: var(--li-wood) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="checkphone"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="interview_magazine"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="appmarket"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="xiaohongshu"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="mapmode"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="resource_hub"] .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="realitybridge"] .icon-glyph-box {
+  background-position: var(--li-navy) !important;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="chat"] .icon-label,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="calendar"] .icon-label,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="dwelling"] .icon-label,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="worldbuilder"] .icon-label,
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="mixology"] .icon-label {
+  color: #1b3038;
+  text-shadow: 0 1px rgba(255, 255, 255, .55);
+}
+
+/* Widgets on the secondary pages must remain readable over the photographic
+ * desktop.  Only the purpose-built transparent hero widgets stay unframed. */
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-calendar),
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-clock),
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-my-space) {
+  color: #17303a !important;
+  border: 1px solid #4b321e !important;
+  border-radius: 8px !important;
+  background: #ead8b7 !important;
+  box-shadow: 0 4px 0 #3e2818, 0 9px 18px rgba(20, 10, 5, .38) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-calendar) *,
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-clock) *,
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-my-space) * {
+  color: inherit;
+  text-shadow: none;
+}
+
+/* Explicit chat surfaces. */
+.desk-stage .phone-shell .vintage-chat-room {
+  --page-header-content-height: 76px;
+  color: #142b34;
+  background: #0c2630 !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .vintage-chat-paper {
+  left: 6px !important;
+  right: 6px !important;
+  bottom: 112px !important;
+  padding-top: calc(var(--safe-area-top, 48px) + 88px + var(--chat-plugin-header-height, 0px)) !important;
+  padding-inline: 16px !important;
+  border: 1px solid #5f4328 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: 100% 0% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 22px rgba(91, 58, 29, .12) !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .chat-msg-content-wrap {
+  max-width: 78% !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .chat-bubble-role-assistant:not(.chat-bubble-media):not(.chat-bubble-html-preview) {
+  min-width: 46px;
+  color: #132a34 !important;
+  border: 1px solid #b09267 !important;
+  border-radius: 8px 8px 8px 2px !important;
+  background: rgba(247, 235, 211, .96) !important;
+  box-shadow: 0 2px 0 rgba(96, 64, 34, .19), 0 5px 10px rgba(64, 41, 22, .14) !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .chat-bubble-role-user:not(.chat-bubble-media):not(.chat-bubble-html-preview) {
+  min-width: 46px;
+  color: #fff0d0 !important;
+  border: 1px solid #18352d !important;
+  border-radius: 8px 8px 2px 8px !important;
+  background: #244c40 !important;
+  box-shadow: 0 2px 0 #142d27, 0 5px 10px rgba(40, 27, 16, .2) !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .chat-bubble-role-assistant:not(.chat-bubble-media):not(.chat-bubble-html-preview) *,
+.desk-stage .phone-shell .vintage-chat-room .chat-stream-bubble * {
+  color: #132a34 !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .chat-bubble-role-user:not(.chat-bubble-media):not(.chat-bubble-html-preview) * {
+  color: #fff0d0 !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .chat-input-bar {
+  left: 6px !important;
+  right: 6px !important;
+  bottom: 5px !important;
+  min-height: 107px !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: 0% 0% !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .chat-input-textarea {
+  min-height: 43px !important;
+  padding: 10px 12px !important;
+  color: #173039 !important;
+  caret-color: #963f43 !important;
+  border: 1px solid #a8885b !important;
+  background: #f0e1c4 !important;
+  box-shadow: inset 0 2px 5px rgba(65, 41, 21, .18) !important;
+}
+.desk-stage .phone-shell .vintage-chat-room .chat-input-textarea::placeholder {
+  color: #776c59 !important;
+  opacity: 1 !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .chat-input-actions button {
+  color: #f3deb4 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell .vintage-chat-room .chat-input-actions button:disabled {
+  color: #a99573 !important;
+  opacity: .58 !important;
+}
+.desk-stage .phone-shell .vintage-chat-room .chat-input-actions button[aria-label="发送"],
+.desk-stage .phone-shell .vintage-chat-room .chat-input-actions button[aria-label="停止本轮生成"] {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: #f9e9c9 !important;
+  border: 1px solid #d1a76b !important;
+  border-radius: 50% !important;
+  background: #8f3539 !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .18), 0 3px 0 #4f2023 !important;
+}
+
+.desk-stage .phone-shell .vintage-chat-room .page-header {
+  min-height: calc(var(--safe-area-top, 48px) + 78px) !important;
+}
+.desk-stage .phone-shell .vintage-chat-room .page-header-content {
+  min-height: 76px !important;
+}
+.desk-stage .phone-shell .vintage-chat-room .page-back-btn,
+.desk-stage .phone-shell .vintage-chat-room .page-header-right button {
+  color: #f3dfb8 !important;
+}
+
+@media (max-width: 390px) {
+  .desk-stage .phone-shell:not(.app-open-shell) .vintage-app-art {
+    width: min(62px, calc(100% - 3px));
+  }
+  .desk-stage .phone-shell:not(.app-open-shell) .dock .vintage-app-art-dock {
+    width: 42px;
+  }
+}

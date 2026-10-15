@@ -4674,18 +4674,27 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                                       />
                                     ) : null}
                                     {builtinIconId ? (
-                                      <IconGlyph
-                                        id={builtinIconId}
-                                        className={
-                                          builtinIconId === "music"
-                                            ? iconSkinUrl
-                                              ? "icon-glyph icon-glyph-music icon-glyph-hidden"
-                                              : "icon-glyph icon-glyph-music"
-                                            : iconSkinUrl
-                                              ? "icon-glyph icon-glyph-hidden"
-                                              : "icon-glyph"
-                                        }
-                                      />
+                                      <>
+                                        {!iconImageUrl ? (
+                                          <span
+                                            className="vintage-app-art"
+                                            data-vintage-icon={builtinIconId}
+                                            aria-hidden="true"
+                                          />
+                                        ) : null}
+                                        <IconGlyph
+                                          id={builtinIconId}
+                                          className={
+                                            builtinIconId === "music"
+                                              ? iconSkinUrl
+                                                ? "icon-glyph icon-glyph-music icon-glyph-hidden"
+                                                : "icon-glyph icon-glyph-music"
+                                              : iconSkinUrl
+                                                ? "icon-glyph icon-glyph-hidden"
+                                                : "icon-glyph"
+                                          }
+                                        />
+                                      </>
                                     ) : customIconUrl ? null : (
                                       <CustomAppGlyph seed={customApp?.name || icon.label} className="icon-glyph" />
                                     )}
@@ -4816,18 +4825,27 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                             <span className="icon-skin-layer" style={{ backgroundImage: `url("${iconImageUrl}")` }} />
                           ) : null}
                           {builtinIconId ? (
-                            <IconGlyph
-                              id={builtinIconId}
-                              className={
-                                builtinIconId === "music"
-                                  ? iconSkinUrl
-                                    ? "icon-glyph icon-glyph-music icon-glyph-hidden"
-                                    : "icon-glyph icon-glyph-music"
-                                  : iconSkinUrl
-                                    ? "icon-glyph icon-glyph-hidden"
-                                    : "icon-glyph"
-                              }
-                            />
+                            <>
+                              {!iconImageUrl ? (
+                                <span
+                                  className="vintage-app-art vintage-app-art-dock"
+                                  data-vintage-icon={builtinIconId}
+                                  aria-hidden="true"
+                                />
+                              ) : null}
+                              <IconGlyph
+                                id={builtinIconId}
+                                className={
+                                  builtinIconId === "music"
+                                    ? iconSkinUrl
+                                      ? "icon-glyph icon-glyph-music icon-glyph-hidden"
+                                      : "icon-glyph icon-glyph-music"
+                                    : iconSkinUrl
+                                      ? "icon-glyph icon-glyph-hidden"
+                                      : "icon-glyph"
+                                }
+                              />
+                            </>
                           ) : customIconUrl ? null : (
                             <CustomAppGlyph seed={customApp?.name || icon.label} className="icon-glyph" />
                           )}
