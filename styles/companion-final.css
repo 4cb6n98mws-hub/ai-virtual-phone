@@ -534,6 +534,151 @@
   }
 }
 
+/* ── Legibility + hidden-status-bar correction ──────────────────────
+ * Hiding the simulated status bar used to hide only its children while
+ * keeping the 48px safe-area reservation. Collapse that reservation only
+ * for users who explicitly hide the bar. */
+.desk-stage .phone-shell-wrap[data-hide-top-bar="1"] .phone-shell.app-open-shell {
+  --safe-area-top: 0px;
+  --phone-titlebar-safe-top: 0px;
+  --page-header-safe-top: 0px;
+}
+
+.desk-stage .phone-shell-wrap[data-hide-top-bar="1"] .phone-shell.app-open-shell > .phone-status-bar {
+  display: none !important;
+}
+
+/* Every desktop card gets a real name plate, so detailed artwork cannot
+ * swallow short labels such as 共创、冒险、查手机. */
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item .icon-label {
+  left: 4px !important;
+  right: 4px !important;
+  bottom: 4px !important;
+  z-index: 12 !important;
+  min-height: 18px;
+  padding: 3px 2px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #f7e7c7 !important;
+  border-top: 1px solid rgba(221, 177, 105, .34);
+  background: rgba(9, 24, 30, .86);
+  box-shadow: 0 -2px 5px rgba(8, 12, 13, .16);
+  text-shadow: 0 1px 2px #100803, 0 0 4px rgba(12, 7, 3, .72) !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item:is(
+  [data-icon-id="chat"], [data-icon-id="calendar"], [data-icon-id="dwelling"],
+  [data-icon-id="worldbuilder"], [data-icon-id="mixology"]
+) .icon-label {
+  color: #172c34 !important;
+  border-top-color: rgba(87, 67, 43, .3);
+  background: rgba(239, 224, 193, .9);
+  text-shadow: 0 1px rgba(255, 255, 255, .72) !important;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item:is(
+  [data-icon-id="checkphone"], [data-icon-id="mapmode"], [data-icon-id="cocreate"]
+) .icon-label {
+  color: #fff0cf !important;
+  background: rgba(8, 25, 32, .91);
+  text-shadow: 0 1px 2px #100803, 0 0 4px #100803 !important;
+}
+
+/* Chat list: navy leather carries cream text; inputs remain parchment. */
+.desk-stage .phone-shell[data-active-app="chat"] .chat-app {
+  --c-text-title: #f7e8ca;
+  --c-text: #e5d4b5;
+  --c-icon: #c5af86;
+  --c-icon-active: #d39a62;
+}
+
+.desk-stage .phone-shell[data-active-app="chat"] .chat-app:not([data-room-active]) .chat-main-content .page-shell {
+  color: #f4e3c4;
+  background-image:
+    linear-gradient(rgba(6, 20, 27, .08), rgba(6, 20, 27, .2)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+}
+
+.desk-stage .phone-shell[data-active-app="chat"] .chat-app:not([data-room-active]) .page-header-content :is(span, svg),
+.desk-stage .phone-shell[data-active-app="chat"] .chat-app:not([data-room-active]) .ts-28,
+.desk-stage .phone-shell[data-active-app="chat"] .chat-app:not([data-room-active]) .minimal-list-item span {
+  color: #f5e4c5 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(8, 12, 13, .82);
+}
+
+.desk-stage .phone-shell[data-active-app="chat"] .chat-app:not([data-room-active]) .minimal-list-item .ts-12,
+.desk-stage .phone-shell[data-active-app="chat"] .chat-app:not([data-room-active]) .minimal-list-item .ts-13 {
+  color: #d2c09f !important;
+}
+
+.desk-stage .phone-shell[data-active-app="chat"] .chat-search-bar {
+  color: #182b33 !important;
+  border: 1px solid #9a7a50;
+  background: rgba(244, 231, 204, .97) !important;
+  box-shadow: inset 0 2px 5px rgba(69, 43, 22, .15), 0 3px 7px rgba(5, 13, 17, .25);
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-search-bar svg {
+  color: #526064 !important;
+  stroke: currentColor !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-search-input {
+  color: #172a32 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-search-input::placeholder {
+  color: #6d706a !important;
+}
+
+.desk-stage .phone-shell[data-active-app="chat"] .chat-list-tab {
+  color: #24363b !important;
+  border: 1px solid #9a8057 !important;
+  background: #eee0c5 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-list-tab.active {
+  color: #fff0d0 !important;
+  border-color: #31574d !important;
+  background: #416b5c !important;
+}
+
+.desk-stage .phone-shell[data-active-app="chat"] .chat-tab-bar {
+  color: #ead9b8 !important;
+  border-top: 1px solid #9b7343 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 2px rgba(215, 169, 96, .12), 0 -4px 10px rgba(5, 12, 16, .28) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-tab,
+.desk-stage .phone-shell[data-active-app="chat"] .chat-tab span {
+  color: #d8c6a5 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-tab-active,
+.desk-stage .phone-shell[data-active-app="chat"] .chat-tab-active span {
+  color: #efc77f !important;
+}
+
+/* AI assistant uses the same physical chat treatment as character rooms. */
+.desk-stage .phone-shell[data-active-app="chat"] .mascot-chat-session .chat-bubble-role-assistant:not(.chat-bubble-media):not(.chat-bubble-html-preview),
+.desk-stage .phone-shell[data-active-app="chat"] .mascot-chat-session .chat-bubble-role-assistant:not(.chat-bubble-media):not(.chat-bubble-html-preview) * {
+  color: #132a34 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .mascot-chat-session .chat-bubble-role-user:not(.chat-bubble-media):not(.chat-bubble-html-preview),
+.desk-stage .phone-shell[data-active-app="chat"] .mascot-chat-session .chat-bubble-role-user:not(.chat-bubble-media):not(.chat-bubble-html-preview) * {
+  color: #fff0d0 !important;
+}
+
 /* ── Built-in app interiors ────────────────────────────────────────
  * The host shell alone was not enough: many legacy applications paint their
  * own white/glass surfaces after it.  These app-scoped rules keep controls

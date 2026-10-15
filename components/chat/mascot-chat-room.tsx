@@ -887,7 +887,7 @@ export function MascotChatRoom({ onBack, onDeleted }: MascotChatRoomProps) {
     return (
         <div
             ref={wrapperRef}
-            className="mascot-chat-session chat-room-wrapper page-shell inset-0 flex flex-col z-20"
+            className="mascot-chat-session chat-room-wrapper vintage-chat-room page-shell inset-0 flex flex-col z-20"
             style={chatRoomBackgroundStyle}
             {...(backgroundUrl ? { "data-has-bg-image": "" } : {})}
             {...(showInfo ? { "data-settings-open": "" } : {})}
@@ -1013,7 +1013,7 @@ export function MascotChatRoom({ onBack, onDeleted }: MascotChatRoomProps) {
 
             <div
                 ref={scrollRef}
-                className="page-body chat-room-main-pane flex flex-col gap-4 chat-scroll-anchored"
+                className="page-body vintage-chat-paper chat-room-main-pane flex flex-col gap-4 chat-scroll-anchored"
                 onScroll={updateMascotStickToBottom}
                 onPointerDown={() => {
                     if (showEmojiPanel) setShowEmojiPanel(false);
