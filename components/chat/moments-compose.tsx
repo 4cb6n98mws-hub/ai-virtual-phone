@@ -188,9 +188,9 @@ export function MomentsCompose({ onClose, onPublished }: Props) {
     const getCharName = (charId: string) => chars.find(c => c.id === charId)?.name ?? "未知";
 
     return (
-        <div className="modal-overlay" data-ui="modal" role="presentation" onClick={onClose}>
+        <div className="modal-overlay companion-compose-overlay" data-ui="modal" role="presentation" onClick={onClose}>
             <div
-                className="compose-modal"
+                className="compose-modal companion-compose-modal"
                 data-ui="modal-dialog"
                 role="dialog"
                 aria-modal="true"

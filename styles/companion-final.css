@@ -1736,39 +1736,41 @@
   opacity: 1 !important;
 }
 
-/* Resources — archive entries are paper index cards, not dark tool panels. */
-.desk-stage .phone-shell[data-active-app="resources"] .page-menu {
-  color: #172e37 !important;
-  background-color: #ead8b7 !important;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(83, 59, 34, .025) 0 1px, transparent 1px 5px),
-    linear-gradient(145deg, #f0e4cd, #dec9a7) !important;
+/* Resources — the two entry cards now match the navy/brass application cards. */
+.desk-stage .phone-shell[data-active-app="resources"] .resources-main-menu {
+  color: #f6e7ca !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
 }
-.desk-stage .phone-shell[data-active-app="resources"] .page-menu .settings-menu-section-title {
-  color: #85633d !important;
+.desk-stage .phone-shell[data-active-app="resources"] .resources-main-menu .settings-menu-section-title {
+  color: #ead5ad !important;
   opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
 }
-.desk-stage .phone-shell[data-active-app="resources"] .page-menu .card-featured {
-  color: #172e37 !important;
+.desk-stage .phone-shell[data-active-app="resources"] .resources-main-menu .card-featured {
+  color: #f6e7ca !important;
   border: 1px solid #9b7950 !important;
-  background-color: #f0e1c4 !important;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(83, 59, 34, .025) 0 1px, transparent 1px 5px),
-    linear-gradient(145deg, #f4e8d0, #e2ccaa) !important;
-  box-shadow: 0 3px 0 rgba(82, 53, 28, .16), 0 7px 13px rgba(47, 29, 15, .13) !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.11), 0 5px 12px rgba(42,24,11,.24) !important;
 }
-.desk-stage .phone-shell[data-active-app="resources"] .page-menu .card-featured :is(
+.desk-stage .phone-shell[data-active-app="resources"] .resources-main-menu .card-featured :is(
   .card-featured-label, .card-featured-desc, .card-featured-chevron, svg
 ) {
-  color: #172e37 !important;
+  color: #f7e8ca !important;
   opacity: 1 !important;
-  text-shadow: none !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
 }
-.desk-stage .phone-shell[data-active-app="resources"] .page-menu .card-featured-desc {
-  color: #5f594e !important;
+.desk-stage .phone-shell[data-active-app="resources"] .resources-main-menu .card-featured-desc {
+  color: #dbc8a7 !important;
 }
-.desk-stage .phone-shell[data-active-app="resources"] .page-menu .card-featured-chevron {
-  color: #8a6338 !important;
+.desk-stage .phone-shell[data-active-app="resources"] .resources-main-menu .card-featured-chevron {
+  color: #d7b875 !important;
 }
 
 /* Appearance + settings — dark leather cards keep readable cream copy. */
@@ -2051,4 +2053,135 @@
   border-radius: 4px !important;
   background: #244b40 !important;
   box-shadow: 0 2px 0 #152f29 !important;
+}
+
+/* Chat add menu — replace the low-contrast glass popup. */
+.desk-stage .phone-shell[data-active-app="chat"] .companion-chat-plus-menu {
+  overflow: hidden !important;
+  color: #f7e8ca !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.11), 0 9px 22px rgba(4,8,10,.5) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-chat-plus-option {
+  color: #f7e8ca !important;
+  background: transparent !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-chat-plus-option:not(:last-child) {
+  border-bottom: 1px solid rgba(190,151,92,.34) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-chat-plus-option :is(span,svg,path,circle,line) {
+  color: #f7e8ca !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+
+/* Moments composer — navy/brass frame with a parchment writing surface. */
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-overlay {
+  background: rgba(4,10,13,.72) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal {
+  color: #f7e8ca !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.12), 0 12px 28px rgba(4,8,10,.54) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-modal-header {
+  color: #f7e8ca !important;
+  border-bottom: 1px solid rgba(190,151,92,.48) !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal :is(
+  .compose-modal-title, .compose-header-icon, .compose-header-icon svg
+) {
+  color: #f7e8ca !important;
+  stroke: currentColor !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-header-send:disabled {
+  color: #8e826c !important;
+  opacity: .72 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-top-area {
+  margin: 12px;
+  padding: 14px 16px 18px;
+  color: #172e37 !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 4px !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-textarea {
+  color: #172e37 !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 4px !important;
+  background: rgba(245,232,205,.72) !important;
+  box-shadow: inset 0 2px 5px rgba(60,38,20,.14) !important;
+  padding: 8px 10px !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-textarea::placeholder {
+  color: #70695c !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-photo-block {
+  color: #d7b875 !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-nav-list,
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-panel-inline {
+  color: #f7e8ca !important;
+  border-color: rgba(190,151,92,.42) !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-nav-row {
+  border-color: rgba(190,151,92,.34) !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-nav-row:active {
+  background: rgba(41,79,67,.62) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal :is(
+  .compose-nav-label, .compose-nav-icon, .compose-nav-icon-text, .compose-nav-chevron,
+  .compose-contact-name, .chat-contact-name
+) {
+  color: #f7e8ca !important;
+  text-shadow: 0 1px 2px rgba(5,12,15,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-nav-value {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-location-input {
+  color: #172e37 !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 4px !important;
+  background: #efe0c3 !important;
+  padding: 8px 10px !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .companion-compose-modal .compose-inline-btn {
+  color: #f7e8ca !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
 }

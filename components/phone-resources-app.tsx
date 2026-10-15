@@ -104,7 +104,7 @@ export function PhoneResourcesApp({ onClose, onNotice, initialPage }: { onClose:
                 }}
             >
                 {currentPage === "main" && (
-                    <div className="page-menu">
+                    <div className="page-menu resources-main-menu">
                         <div>
                             <h3 className="settings-menu-section-title">Resources</h3>
                             <div style={{ display: "flex", flexDirection: "column", gap: 14, marginTop: 12 }}>
