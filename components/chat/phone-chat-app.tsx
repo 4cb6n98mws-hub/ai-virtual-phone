@@ -17,7 +17,6 @@ import { formatXiaohongshuShareForPrompt, type ChatSharePayload } from "@/lib/ch
 import { CHAT_OPEN_SESSION_EVENT, CHAT_OPEN_ADD_CONTACT_EVENT } from "@/lib/chat-notification-events";
 import { CHAT_SESSIONS_MERGED_EVENT, type ChatSessionsMergedDetail } from "@/lib/chat-session-merge";
 import { getMascotSettingsSnapshot } from "@/lib/mascot-settings";
-import { addSharedDrawerItem, recordCompanionActivity } from "@/lib/shared-drawer-storage";
 
 type TabKey = "messages" | "contacts" | "feeds" | "me";
 
@@ -167,7 +166,7 @@ export const PhoneChatApp = memo(function PhoneChatApp({ onClose, initialSession
     const handleSelectContact = (sess: ChatSession | null) => {
         if (sharePayload && sess) {
             if (sharePayload.type === "music") {
-                const sharedMessage = pushChatMessage({
+                pushChatMessage({
                     sessionId: sess.id,
                     role: "user",
                     content: "",
@@ -178,30 +177,6 @@ export const PhoneChatApp = memo(function PhoneChatApp({ onClose, initialSession
                         label: `${sharePayload.title} - ${sharePayload.artist}`,
                     },
                 });
-                if (!sess.isGroup && sess.contactId) {
-                    const character = loadCharacters().find(item => item.id === sess.contactId);
-                    addSharedDrawerItem({
-                        type: "music",
-                        sourceApp: "music",
-                        title: sharePayload.title,
-                        subtitle: sharePayload.artist || "一起听过的歌",
-                        note: character ? `分享给了 ${character.name}。` : "从音乐里分享出去的一首歌。",
-                        characterIds: [sess.contactId],
-                        characterNames: character ? [character.name] : undefined,
-                        sourceEventId: sharedMessage.id,
-                        metadata: { chatSessionId: sess.id, chatMessageId: sharedMessage.id },
-                    });
-                    recordCompanionActivity({
-                        sourceApp: "music",
-                        kind: "music_share",
-                        label: `分享了歌曲「${sharePayload.title}」`,
-                        detail: sharePayload.artist,
-                        characterId: sess.contactId,
-                        characterName: character?.name,
-                        importance: "meaningful",
-                        sourceEventId: `music:${sharedMessage.id}`,
-                    });
-                }
             } else {
                 const content = formatXiaohongshuShareForPrompt({
                     author: sharePayload.authorName,

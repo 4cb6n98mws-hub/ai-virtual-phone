@@ -964,7 +964,7 @@ function DiaryEntryTimerSettingsPanel({ characters, settings, generatingCharacte
         <header>
           <div>
             <h2>定时写日记</h2>
-            <p>默认一天一次；未选择角色时，会按全部角色处理。</p>
+            <p>默认关闭；开启后每天最多自动写一篇，所选角色之间轮换。</p>
           </div>
           <button type="button" className="diary-icon-btn" onClick={onClose} aria-label="关闭">
             <X size={18} />
@@ -994,6 +994,8 @@ function DiaryEntryTimerSettingsPanel({ characters, settings, generatingCharacte
             />
           </label>
         </div>
+
+        <p className="diary-entry-timer-hint">省量保护：所有角色合计每天最多自动调用一次；手动写日记不受影响。</p>
 
         <section className="diary-entry-character-section">
           <div className="diary-entry-section-title">

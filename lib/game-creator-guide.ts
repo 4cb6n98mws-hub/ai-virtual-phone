@@ -162,7 +162,8 @@ body {
 8. 所有按钮、输入、状态提示都要能在手机竖屏里使用。
 9. 如果需要保存进度，使用 \`AiPhoneGame.saveGame()\` 和 \`AiPhoneGame.loadGame()\`。
 10. 如果需要把游戏结果写回小手机记忆，使用 \`AiPhoneGame.recordGameEvent()\`，但只在游戏结束时调用一次。
-11. 小手机宿主会在左上角固定保留一个悬浮返回按钮。它不占页面布局高度，游戏画面会铺满 iframe；不要把关键 UI 贴在左上角安全区内。如需让返回按钮融入游戏风格，可以用 \`AiPhoneGame.setTitleBar()\` 修改按钮样式。
+11. 如果要让用户把酒档案、战绩卡或作品收进共同抽屉，只能在明确的收藏按钮中调用 \`AiPhoneGame.saveKeepsake()\`，不要自动收藏。
+12. 小手机宿主会在左上角固定保留一个悬浮返回按钮。它不占页面布局高度，游戏画面会铺满 iframe；不要把关键 UI 贴在左上角安全区内。如需让返回按钮融入游戏风格，可以用 \`AiPhoneGame.setTitleBar()\` 修改按钮样式。
 
 ## 宿主 API
 
@@ -269,6 +270,24 @@ await AiPhoneGame.recordGameEvent({
 - 多个角色都需要记住同一件事时，把所有角色 ID 放进 \`characterIds\`。
 - 只在游戏结束时写入一次；不要在章节中途、回合中途、动画帧、倒计时或普通按钮点击时写入。
 - 这条记录会进入对应角色的近期游戏记忆，后续可能被小手机整理进长期记忆。
+
+### 手动收藏到共同抽屉
+
+只有用户明确点击“收进共同抽屉”时才调用。\`content\` 可以直接传完整的酒档案对象，宿主会把它保存为可展开的本地条目；不要在页面加载或游戏结束时自动调用。
+
+\`\`\`js
+await AiPhoneGame.saveKeepsake({
+  id: cocktail.id,
+  kind: "cocktail_archive",
+  title: cocktail.name,
+  subtitle: \`\${cocktail.base} · \${cocktail.mood}\`,
+  content: cocktail,
+  characterIds: [characterId],
+  metadata: { recipeVersion: 1 }
+});
+\`\`\`
+
+这项操作不调用角色 API。相同游戏和相同 \`id\` 再次收藏时会更新原条目，不会堆出重复副本。
 
 ### 保存和读取存档
 

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-labelledby="title desc">
+  <title id="title">夜局五子棋</title>
+  <desc id="desc">深蓝夜色中的木质棋盘、黑白棋子和一盏暖灯</desc>
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08121a"/>
+      <stop offset=".58" stop-color="#142934"/>
+      <stop offset="1" stop-color="#091116"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d6a365"/>
+      <stop offset=".5" stop-color="#bd8246"/>
+      <stop offset="1" stop-color="#8d562f"/>
+    </linearGradient>
+    <radialGradient id="lamp">
+      <stop offset="0" stop-color="#f6cf8c" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#f6cf8c" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="800" height="480" rx="34" fill="url(#night)"/>
+  <circle cx="676" cy="62" r="182" fill="url(#lamp)"/>
+  <path d="M676 0v74" stroke="#d9ac64" stroke-width="5"/><path d="M625 80h102l-22 56h-58z" fill="#d6a056"/>
+  <g transform="translate(170 54) rotate(-3 230 185)" filter="url(#shadow)">
+    <rect width="460" height="370" rx="24" fill="url(#wood)" stroke="#f0c784" stroke-opacity=".35" stroke-width="3"/>
+    <g stroke="#51321f" stroke-opacity=".72" stroke-width="2">
+      <path d="M36 36h388M36 66h388M36 96h388M36 126h388M36 156h388M36 186h388M36 216h388M36 246h388M36 276h388M36 306h388M36 336h388"/>
+      <path d="M36 36v300M66 36v300M96 36v300M126 36v300M156 36v300M186 36v300M216 36v300M246 36v300M276 36v300M306 36v300M336 36v300M366 36v300M396 36v300M424 36v300"/>
+    </g>
+    <g fill="#171b1e" stroke="#536069" stroke-width="2">
+      <circle cx="156" cy="126" r="13"/><circle cx="216" cy="156" r="13"/><circle cx="276" cy="186" r="13"/><circle cx="306" cy="216" r="13"/><circle cx="336" cy="246" r="13"/>
+    </g>
+    <g fill="#f2eee4" stroke="#c8c1b4" stroke-width="2">
+      <circle cx="186" cy="126" r="13"/><circle cx="216" cy="186" r="13"/><circle cx="246" cy="216" r="13"/><circle cx="306" cy="246" r="13"/>
+    </g>
+  </g>
+  <text x="50" y="75" fill="#7bc8ba" font-family="ui-monospace,monospace" font-size="18" letter-spacing="5">NIGHT TABLE</text>
+  <text x="50" y="120" fill="#f4eee2" font-family="Georgia,serif" font-size="42">夜局五子棋</text>
+  <text x="54" y="151" fill="#9dafb5" font-family="sans-serif" font-size="17">LOCAL MATCH · NO API WHILE PLAYING</text>
+</svg>

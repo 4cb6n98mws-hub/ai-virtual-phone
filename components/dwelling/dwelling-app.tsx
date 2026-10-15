@@ -606,14 +606,16 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
 
             {cs?.layout && (
                 <div className="dwelling-room-tabs">
-                    {cs.layout.rooms.map((room, idx) => (
-                        <button key={room.id} className="dwelling-room-tab"
-                            data-active={activeRoomIdx === idx ? "true" : undefined}
-                            onClick={() => { setActiveRoomIdx(idx); setItemDetail(null); }}>
-                            {room.name}
-                            {room.en && <span className="dw-tab-en">{room.en}</span>}
-                        </button>
-                    ))}
+                    <div className="dwelling-room-list">
+                        {cs.layout.rooms.map((room, idx) => (
+                            <button key={room.id} className="dwelling-room-tab"
+                                data-active={activeRoomIdx === idx ? "true" : undefined}
+                                onClick={() => { setActiveRoomIdx(idx); setItemDetail(null); }}>
+                                {room.name}
+                                {room.en && <span className="dw-tab-en">{room.en}</span>}
+                            </button>
+                        ))}
+                    </div>
                     <div className="dw-tabs-actions">
                         <button className="dw-tab-action" onClick={() => requestExploreAll(activeCharId!)} disabled={cs.isGenerating || cs.batchExploring} title="一键探索全部物品" aria-label="一键探索全部物品">
                             <Compass size={13} />

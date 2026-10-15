@@ -9,6 +9,7 @@ import {
   saveDiaryEntryTimerSettings,
 } from "./diary-entry-storage";
 import type { DiaryEntryTimerSettings } from "./diary-entry-types";
+import { hasRoleApiRunToday, markRoleApiRunToday } from "./role-api-budget";
 
 const CHECK_INTERVAL_MS = 60_000;
 
@@ -71,7 +72,18 @@ export async function runDiaryEntryTimerCheck(): Promise<void> {
   if (typeof window === "undefined" || running) return;
 
   const settings = loadDiaryEntryTimerSettings();
-  const dueTargets = getDueTargets(settings);
+  if (hasRoleApiRunToday("diary-entry-timer", "all")) return;
+  const dueTargets = getDueTargets(settings)
+    .sort((a, b) => {
+      const aTime = settings.lastRunAtByCharacter[a.id]
+        ? new Date(settings.lastRunAtByCharacter[a.id]).getTime()
+        : 0;
+      const bTime = settings.lastRunAtByCharacter[b.id]
+        ? new Date(settings.lastRunAtByCharacter[b.id]).getTime()
+        : 0;
+      return aTime - bTime;
+    })
+    .slice(0, 1);
   if (dueTargets.length === 0) return;
 
   running = true;
@@ -82,6 +94,7 @@ export async function runDiaryEntryTimerCheck(): Promise<void> {
   const failedNames: string[] = [];
 
   try {
+    markRoleApiRunToday("diary-entry-timer", "all");
     for (const character of dueTargets) {
       try {
         const draft = await generateDiaryEntryForCharacter(character.id, loadDiaryEntries(), "timer");

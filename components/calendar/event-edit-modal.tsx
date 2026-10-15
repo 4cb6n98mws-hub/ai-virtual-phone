@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronLeft, Trash2 } from "lucide-react";
+import { Archive, Check, ChevronLeft, Trash2 } from "lucide-react";
 import { Input } from "../ui/form";
 import type { CalendarColorKey } from "@/lib/calendar-types";
 import { CALENDAR_COLOR_KEYS } from "@/lib/calendar-utils";
@@ -40,12 +40,14 @@ export function CalendarEventEditModal({
   onChange,
   onSave,
   onDelete,
+  onCollect,
   onClose,
 }: {
   draft: CalendarEventDraft;
   onChange: (next: CalendarEventDraft) => void;
   onSave: () => void;
   onDelete: () => void;
+  onCollect?: () => void;
   onClose: () => void;
 }) {
   return (
@@ -180,10 +182,18 @@ export function CalendarEventEditModal({
           </div>
 
           {draft.id ? (
-            <button type="button" className="ui-btn ui-btn-outline calendar-delete-btn" onClick={onDelete}>
-              <Trash2 size={16} />
-              删除该事项
-            </button>
+            <div className="calendar-event-archive-actions">
+              {onCollect ? (
+                <button type="button" className="ui-btn ui-btn-outline calendar-collect-btn" onClick={onCollect}>
+                  <Archive size={16} />
+                  收进共同抽屉
+                </button>
+              ) : null}
+              <button type="button" className="ui-btn ui-btn-outline calendar-delete-btn" onClick={onDelete}>
+                <Trash2 size={16} />
+                删除该事项
+              </button>
+            </div>
           ) : null}
         </div>
       </div>

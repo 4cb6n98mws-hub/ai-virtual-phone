@@ -50,6 +50,10 @@ export async function resolve(specifier, context, next) {
 }
 
 export async function load(url, context, next) {
+  if (url.endsWith(".json")) {
+    const json = JSON.parse(readFileSync(fileURLToPath(url), "utf8"));
+    return { format: "module", shortCircuit: true, source: "export default " + JSON.stringify(json) + ";" };
+  }
   if (!url.endsWith(".ts") && !url.endsWith(".tsx")) return next(url, context);
   const out = ts.transpileModule(readFileSync(fileURLToPath(url), "utf8"), {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, jsx: ts.JsxEmit.Preserve },

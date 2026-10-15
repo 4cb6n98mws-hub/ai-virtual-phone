@@ -2,12 +2,11 @@ export const DEFAULT_CHECKPHONE_BILINGUAL_PROMPT =
   "This rule only applies to non-Chinese output; Chinese text should be output normally. For readable phone-check text, including titles, bodies, notes, comments, messages, inner thoughts, feelings, status text, Moments, posts, and feed bodies, non-Chinese content must use: complete original text|complete Simplified Chinese translation. For non-Chinese Moments/post/feed body text, keep the original and Chinese translation in the same field; do not put the Chinese translation in a separate paragraph or line without \"|\". Use \"|\" only as the whole-text bilingual separator; use colons, commas, or line breaks inside the text.";
 
 export const DEFAULT_XIAOHONGSHU_BILINGUAL_PROMPT = [
-  "【小红书双语输出规则（仅非中文角色使用，中文角色忽略此规则）】",
-  "- 只对小红书角色生成内容生效，包括帖子标题、正文、评论、回复、图片描述、视频描述、私信正文等自然语言内容。",
+  "【小红书中文呈现规则】",
+  "- 小红书界面中的帖子标题、正文、评论、回复、图片描述、视频描述、私信正文等自然语言内容统一使用自然的简体中文呈现。",
+  "- 这是中文界面的本地化呈现，不代表人物改变母语、国籍或生活地点；人物的生活方式、地点、货币、品牌和社交习惯仍以角色设定及当地现实为准。",
+  "- 外国人名、地名、品牌名和少量必要口头语可以保留原文；不要因此把整段正文写成英文，也不要机械追加中英双语。",
   "- 不要改动结构标签、块标题或字段名，例如 #评论1、#角色回复、[标题]、[正文]、[内容]、[图片描述]、[视频描述]。",
-  "- 如果某个字段内容使用非中文语言，字段值必须写成“完整原文|对应的简体中文译文”。",
-  "- 如果内容本来就是中文，正常输出中文，不要添加 |译文。",
-  "- 竖线 | 只作为完整原文和完整译文之间的分隔符，不要在原文或译文内部滥用。",
 ].join("\n");
 
 export const DEFAULT_CHAT_BILINGUAL_PROMPT = [

@@ -14,10 +14,13 @@ import {
   type XiaohongshuUserPostInput,
   type XiaohongshuUserProfile,
 } from "./xiaohongshu-types";
+import { DEFAULT_XIAOHONGSHU_BILINGUAL_PROMPT } from "./bilingual-prompt-defaults";
 
 const XHS_STATE_KEY = "ai_phone_xiaohongshu_state_v1";
 const LEGACY_DEFAULT_NICKNAME = "我";
 const LEGACY_DEFAULT_GENDER = "未设置";
+const XHS_NOTE_LIMIT = 240;
+const XHS_NOTIFICATION_LIMIT = 300;
 
 registerKvMigration(XHS_STATE_KEY);
 
@@ -153,10 +156,15 @@ export function normalizeXiaohongshuSettings(raw: unknown): XiaohongshuSettings 
     : [];
   const probability = numberOr(record.sendToCharacterProbability, DEFAULT_XIAOHONGSHU_SETTINGS.sendToCharacterProbability);
   const npcFeedPrompt = cleanMultiline(record.npcFeedPrompt, 8000);
+  const bilingualPrompt = cleanMultiline(record.bilingualTranslationPrompt, 8000);
+  const usesLegacyBilingualPrompt = bilingualPrompt.includes("完整原文|对应的简体中文译文")
+    || bilingualPrompt.includes("仅非中文角色使用");
   return {
     bilingualTranslationEnabled: record.bilingualTranslationEnabled !== false,
     collapseBilingualTranslation: record.collapseBilingualTranslation !== false,
-    bilingualTranslationPrompt: cleanMultiline(record.bilingualTranslationPrompt, 8000) || DEFAULT_XIAOHONGSHU_SETTINGS.bilingualTranslationPrompt,
+    bilingualTranslationPrompt: !bilingualPrompt || usesLegacyBilingualPrompt
+      ? DEFAULT_XIAOHONGSHU_BILINGUAL_PROMPT
+      : bilingualPrompt,
     npcIdentityGuardPrompt: cleanMultiline(record.npcIdentityGuardPrompt, 8000) || DEFAULT_XIAOHONGSHU_SETTINGS.npcIdentityGuardPrompt,
     npcFeedPrompt: npcFeedPrompt && npcFeedPrompt.includes("#附近笔记") ? npcFeedPrompt : DEFAULT_XIAOHONGSHU_SETTINGS.npcFeedPrompt,
     npcUserPostReactionPrompt: cleanMultiline(record.npcUserPostReactionPrompt, 8000) || DEFAULT_XIAOHONGSHU_SETTINGS.npcUserPostReactionPrompt,
@@ -381,7 +389,24 @@ export function loadXiaohongshuState(): XiaohongshuState {
 }
 
 export function saveXiaohongshuState(state: XiaohongshuState): XiaohongshuState {
-  const next = { ...state, updatedAt: new Date().toISOString() };
+  const prioritizedNotes = [
+    ...state.notes.filter(note => note.source === "user"),
+    ...state.notes.filter(note => note.source !== "user"),
+  ];
+  const retainedIds = new Set(prioritizedNotes.slice(0, XHS_NOTE_LIMIT).map(note => note.id));
+  const notes = state.notes.filter(note => retainedIds.has(note.id));
+  const next = {
+    ...state,
+    notes,
+    notifications: state.notifications.slice(0, XHS_NOTIFICATION_LIMIT),
+    feedHiddenNoteIds: state.feedHiddenNoteIds.filter(id => retainedIds.has(id)),
+    userInteractions: {
+      likedNoteIds: state.userInteractions.likedNoteIds.filter(id => retainedIds.has(id)),
+      savedNoteIds: state.userInteractions.savedNoteIds.filter(id => retainedIds.has(id)),
+      commentedNoteIds: state.userInteractions.commentedNoteIds.filter(id => retainedIds.has(id)),
+    },
+    updatedAt: new Date().toISOString(),
+  };
   kvSet(XHS_STATE_KEY, JSON.stringify(next));
   return next;
 }

@@ -88,7 +88,7 @@ import type { LLMMessage } from "@/lib/llm-prompt-assembler";
 import { resolveUserIdentity } from "@/lib/settings-storage";
 import { incrementEventCounter } from "@/lib/memory-storage";
 import { maybeRunSummarization } from "@/lib/memory-summarizer";
-import { addSharedDrawerItem } from "@/lib/shared-drawer-storage";
+import { addSharedDrawerItem, recordCompanionActivity } from "@/lib/shared-drawer-storage";
 import { getPwaHostedSafeArea, PWA_DISPLAY_MODE_CHANGED_EVENT } from "@/lib/pwa-display-mode";
 import { IFRAME_ERROR_CAPTURE_SCRIPT } from "@/lib/qa-iframe-error-bridge";
 
@@ -513,6 +513,7 @@ ${body}
     callLLM: function(payload){ return request('callLLM', payload || {}); },
     callGlobalLLM: function(payload){ return request('callGlobalLLM', payload || {}); },
     recordGameEvent: function(payload){ return request('recordGameEvent', payload || {}); },
+    saveKeepsake: function(payload){ return request('saveKeepsake', payload || {}); },
     saveGame: function(data){ return request('saveGame', { data: data }); },
     loadGame: function(){ return request('loadGame'); },
     setTitleBar: function(options){ return request('setTitleBar', options || {}); },
@@ -2161,21 +2162,6 @@ export function GameHubApp({ onClose, autoOpenLocalId }: { onClose: () => void; 
         nextState = result.state;
         if (result.entry) {
           recorded += 1;
-          addSharedDrawerItem({
-            type: "game_art",
-            sourceApp: "game",
-            title: `${result.entry.templateTitle} · 游戏留念`,
-            subtitle: `${result.entry.playerName} 与 ${result.entry.characterName}`,
-            note: result.entry.summary,
-            createdAt: result.entry.timestamp,
-            characterIds: [result.entry.characterId],
-            characterNames: [result.entry.characterName],
-            sourceEventId: result.entry.id,
-            metadata: {
-              localGameId: result.entry.localGameId,
-              remoteTemplateId: result.entry.remoteTemplateId,
-            },
-          });
           try {
             incrementEventCounter(characterId);
             maybeRunSummarization(characterId, character.name)
@@ -2187,6 +2173,59 @@ export function GameHubApp({ onClose, autoOpenLocalId }: { onClose: () => void; 
       }
       if (nextState) setState(nextState);
       return { ok: true, recorded };
+    }
+
+    if (action === "saveKeepsake") {
+      if (isPreviewGame(runtimeGame.localId)) return { ok: true, preview: true };
+      const record = payload && typeof payload === "object" ? payload as Record<string, unknown> : {};
+      const title = String(record.title ?? "").trim().slice(0, 160);
+      if (!title) throw new Error("saveKeepsake 需要 title。");
+      const rawCharacterIds = Array.isArray(record.characterIds)
+        ? record.characterIds
+        : typeof record.characterId === "string"
+          ? [record.characterId]
+          : assignments.flatMap(item => item.characterIds);
+      const characterIds = [...new Set(rawCharacterIds.map(id => String(id || "").trim()).filter(id => characterById.has(id)))];
+      const characterNames = characterIds.map(id => characterById.get(id)?.name || "").filter(Boolean);
+      const noteSource = typeof record.note === "string"
+        ? record.note
+        : typeof record.content === "string"
+          ? record.content
+          : record.content && typeof record.content === "object"
+            ? JSON.stringify(record.content, null, 2)
+            : "";
+      const sourceId = String(record.id ?? `${runtimeGame.localId}:${Date.now()}`).trim().slice(0, 160);
+      const item = addSharedDrawerItem({
+        type: "game_art",
+        sourceApp: "game",
+        title,
+        subtitle: String(record.subtitle ?? template.title).trim().slice(0, 240),
+        note: noteSource,
+        characterIds,
+        characterNames,
+        sourceEventId: `${runtimeGame.localId}:${sourceId}`,
+        metadata: {
+          localGameId: runtimeGame.localId,
+          remoteTemplateId: runtimeGame.remoteTemplateId,
+          keepsakeKind: String(record.kind ?? "game_keepsake").slice(0, 80),
+          ...(record.metadata && typeof record.metadata === "object" && !Array.isArray(record.metadata)
+            ? record.metadata as Record<string, unknown>
+            : {}),
+        },
+      });
+      characterIds.forEach((characterId, index) => {
+        recordCompanionActivity({
+          sourceApp: "game",
+          kind: "kept_game_art",
+          label: `把「${title}」收进了共同抽屉`,
+          detail: String(record.subtitle ?? template.title).trim().slice(0, 240),
+          characterId,
+          characterName: characterNames[index],
+          importance: "meaningful",
+          sourceEventId: `game-keepsake:${item.sourceEventId}`,
+        });
+      });
+      return { ok: true, itemId: item.id };
     }
 
     if (action === "saveGame") {

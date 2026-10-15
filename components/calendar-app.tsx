@@ -47,6 +47,7 @@ import {
 import { CalendarMonthPage } from "./calendar/month-page";
 import { CalendarDetailPage } from "./calendar/detail-page";
 import { CalendarEventEditModal, type CalendarEventDraft } from "./calendar/event-edit-modal";
+import { addSharedDrawerItem, recordCompanionActivity } from "@/lib/shared-drawer-storage";
 
 type OwnerOption = {
   key: string;
@@ -362,6 +363,48 @@ export function PhoneCalendarApp({
     setEditingItem(null);
     refreshPlans();
     onNotice?.("日程已删除");
+  };
+
+  const handleCollectItem = () => {
+    if (!selectedOwner || !editingItem?.id) return;
+    const characterIds = selectedOwner.ownerType === "character" ? [selectedOwner.ownerId] : [];
+    const characterNames = selectedOwner.ownerType === "character" ? [selectedOwner.name] : [];
+    const sourceEventId = `${selectedOwner.ownerType}:${selectedOwner.ownerId}:${editingItem.id}`;
+    const dateLabel = `${editingItem.date} ${editingItem.startTime}–${editingItem.endTime}`;
+    addSharedDrawerItem({
+      type: "note",
+      sourceApp: "calendar",
+      title: editingItem.title,
+      subtitle: [dateLabel, editingItem.location].filter(Boolean).join(" · "),
+      note: selectedOwner.ownerType === "character"
+        ? `${selectedOwner.name}日历里值得一起记住的一项安排。`
+        : "从日历里挑出并保存的一项安排。",
+      characterIds,
+      characterNames,
+      sourceEventId,
+      metadata: {
+        calendarItemId: editingItem.id,
+        ownerType: selectedOwner.ownerType,
+        ownerId: selectedOwner.ownerId,
+        date: editingItem.date,
+        startTime: editingItem.startTime,
+        endTime: editingItem.endTime,
+        location: editingItem.location,
+      },
+    });
+    if (selectedOwner.ownerType === "character") {
+      recordCompanionActivity({
+        sourceApp: "calendar",
+        kind: "kept_calendar_event",
+        label: `把日程「${editingItem.title}」收进了共同抽屉`,
+        detail: dateLabel,
+        characterId: selectedOwner.ownerId,
+        characterName: selectedOwner.name,
+        importance: "meaningful",
+        sourceEventId: `calendar:${sourceEventId}`,
+      });
+    }
+    onNotice?.("已经收进共同抽屉");
   };
 
   const handleGenerate = async () => {
@@ -719,6 +762,7 @@ export function PhoneCalendarApp({
           onChange={next => setEditingItem(prev => (prev ? { ...prev, ...next } : next))}
           onSave={handleSaveDraft}
           onDelete={handleDeleteItem}
+          onCollect={handleCollectItem}
           onClose={() => setEditingItem(null)}
         />
       )}
