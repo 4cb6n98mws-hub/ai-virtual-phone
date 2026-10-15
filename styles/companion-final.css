@@ -534,6 +534,384 @@
   }
 }
 
+/* ── Built-in app interiors ────────────────────────────────────────
+ * The host shell alone was not enough: many legacy applications paint their
+ * own white/glass surfaces after it.  These app-scoped rules keep controls
+ * interactive and data untouched while carrying the approved material system
+ * through the actual working views.
+ */
+
+/* Shared hardware: square brass controls and legible tab strips. */
+.desk-stage .phone-shell.app-open-shell :is(
+  .diary-icon-btn, .calendar-icon-btn, .calendar-pill-btn,
+  .shared-drawer-back, .reading-shelf-back, .reading-shelf-action-btn,
+  .music-header-action, .app-market-icon-btn, .interview-icon-btn,
+  .game-icon-btn, .qa-circle-btn, .cocreate-back-button,
+  .dwelling-header .dw-back
+) {
+  color: #f3dfb7 !important;
+  border: 1px solid #9c7647 !important;
+  border-radius: 4px !important;
+  background: #17333d !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 2px 0 #55391f !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.desk-stage .phone-shell.app-open-shell :is(
+  .calendar-fab, .diary-entry-write-btn, .shared-drawer-candidate button,
+  .reading-shelf-action-primary, .app-market-primary,
+  .interview-primary-btn, .game-primary-btn, .cocreate-primary-button,
+  .qa-send-btn, .dwelling-generate-btn
+) {
+  color: #f8e8c8 !important;
+  border: 1px solid #d0a16a !important;
+  border-radius: 4px !important;
+  background: #793b3d !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.12), 0 3px 0 #472326 !important;
+}
+
+.desk-stage .phone-shell.app-open-shell :is(
+  .note-wall-tabbar, .music-tabbar, .music-tabs, .music-mine-tabs,
+  .music-mine-subtabs, .calendar-float-bar, .app-market-tabbar,
+  .game-bottom-nav, .game-bottom-tabs, .game-tabs, .game-studio-tabs,
+  .xhs-detail-bottom-bar, .interview-bottom-bar
+) {
+  color: #f2dfbc !important;
+  border-color: #87613a !important;
+  border-radius: 0 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.07), 0 -4px 12px rgba(34,20,10,.23) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Diary: stitched field notebooks on a paper work surface. */
+.desk-stage .phone-shell[data-active-app="diary"] :is(.diary-app, .diary-entry-app) {
+  color: #172d35 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] :is(.diary-feature-card, .diary-entry-card, .note-card) {
+  color: #172d35 !important;
+  border: 1px solid #9b7c54 !important;
+  border-radius: 4px !important;
+  background: #f0e2c5 !important;
+  box-shadow: 0 3px 0 rgba(77,49,25,.2), 0 7px 13px rgba(57,35,17,.14) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] :is(.diary-book, .diary-font-panel, .diary-entry-settings) {
+  color: #f2e2c4 !important;
+  border: 1px solid #89643a !important;
+  border-radius: 5px !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-green) !important;
+  box-shadow: 0 5px 12px rgba(22,13,7,.28) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-detail-paper {
+  color: #172d35 !important;
+  border: 1px solid #99784f !important;
+  background: #f3e6cb !important;
+  box-shadow: 0 18px 44px rgba(21,16,10,.34) !important;
+}
+
+/* Calendar: a cream desk calendar with stamped date controls. */
+.desk-stage .phone-shell[data-active-app="calendar"] .calendar-app-shell {
+  --c-calendar-glass: #eadabd;
+  --c-calendar-glass-edge: #9b7b50;
+  --c-calendar-glass-hi: rgba(255,255,255,.5);
+  color: #172d35 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="calendar"] :is(.calendar-month-header, .calendar-edit-modal, .calendar-days-modal, .calendar-confirm-dialog) {
+  color: #172d35 !important;
+  border-color: #9c7b50 !important;
+  border-radius: 5px !important;
+  background: #efe1c4 !important;
+  box-shadow: 0 7px 18px rgba(53,34,18,.18) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.desk-stage .phone-shell[data-active-app="calendar"] :is(.calendar-month-cell[data-today="true"], .calendar-month-cell[data-selected="true"]) {
+  color: #fff0d0 !important;
+  background: #74383a !important;
+}
+
+/* Shared drawer: catalogue rows stay compact until opened. */
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-app {
+  color: #172d35 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] :is(.shared-drawer-card, .shared-drawer-today, .shared-drawer-candidates) {
+  color: #172d35 !important;
+  border: 1px solid #95754d !important;
+  border-radius: 3px !important;
+  background: #efe1c5 !important;
+  box-shadow: 0 3px 0 rgba(82,53,27,.17), 0 6px 12px rgba(47,29,15,.12) !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-detail {
+  color: #172d35 !important;
+  border-top: 4px solid #2d5144 !important;
+  background: #f0e2c6 !important;
+}
+
+/* Reading: quiet publisher's edition, high contrast for long copy. */
+.desk-stage .phone-shell[data-active-app="reading"] :is(.reading-app-surface, .reading-shelf-body, .reading-scroll-content, .reading-page-surface) {
+  color: #182d35 !important;
+  background-color: #efe3ca !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-shelf-header,
+.desk-stage .phone-shell[data-active-app="reading"] .reading-header-top {
+  color: #f3e2c1 !important;
+  border-color: #946d3f !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] :is(.reading-list-item, .reading-settings-group, .reading-debug-card) {
+  color: #182d35 !important;
+  border: 1px solid #9b7d56 !important;
+  border-radius: 4px !important;
+  background: #f2e4c9 !important;
+  box-shadow: 0 4px 10px rgba(51,33,18,.13) !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-shelf-footer,
+.desk-stage .phone-shell[data-active-app="reading"] .reading-footer {
+  color: #f2dfbc !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+
+/* Music: record cabinet, not translucent white cards. */
+.desk-stage .phone-shell[data-active-app="music"] .music-app {
+  --c-music-surface: rgba(234,216,183,.13);
+  --c-music-surface-solid: #29483d;
+  --c-music-panel: #10262f;
+  --c-music-text: #f3e3c5;
+  --c-music-accent: #d0ad70;
+  --c-music-primary: #a85642;
+  --c-music-liked: #c75b61;
+  color: #f3e3c5 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-wood) !important;
+}
+.desk-stage .phone-shell[data-active-app="music"] :is(
+  .music-chart-card, .music-daily-card, .music-week-card, .music-rail-card,
+  .music-playlist-card, .music-mine-cover-card, .music-mine-ep-row,
+  .music-mine-event-card, .music-mine-pl-row, .music-queue-item
+) {
+  color: #f3e3c5 !important;
+  border: 1px solid #83613b !important;
+  border-radius: 4px !important;
+  background: #29483d !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.07), 0 5px 12px rgba(0,0,0,.27) !important;
+}
+.desk-stage .phone-shell[data-active-app="music"] :is(.music-now-bar, .music-player-header, .music-playlist-detail-header) {
+  color: #f3e3c5 !important;
+  border-color: #987144 !important;
+  background: #102832 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* App market: old hardware catalogue while preserving every installer flow. */
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-app {
+  --am-text: #172d35;
+  --am-text-soft: #615d51;
+  --am-text-faint: #756d5d;
+  --am-accent: #793b3d;
+  --am-accent-deep: #602d30;
+  --am-grad: linear-gradient(145deg,#843f42,#57292c);
+  --am-tint: rgba(121,59,61,.09);
+  --am-tint-strong: rgba(121,59,61,.16);
+  --am-hairline: rgba(87,63,35,.22);
+  color: #172d35 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] :is(.app-market-tabbar, .app-market-tabs) {
+  border-color: #98764e !important;
+  border-radius: 4px !important;
+  background: #d8c49f !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.32) !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] :is(.am-list-row, .app-market-sheet, .app-market-detail-sheet, .app-market-guide-sheet) {
+  color: #172d35 !important;
+  border: 1px solid #9b7b52 !important;
+  border-radius: 4px !important;
+  background: #f0e2c6 !important;
+  box-shadow: 0 5px 12px rgba(51,32,17,.14) !important;
+}
+
+/* Check-phone: the inner phone becomes a field notebook instead of a stark
+ * white iOS mockup. Individual social brands keep their navigation logic. */
+.desk-stage .phone-shell[data-active-app="checkphone"] .cp-app-wrapper {
+  --cp-ink-primary: #f3e4c7;
+  --cp-ink-secondary: #c4b79f;
+  --cp-ink-tertiary: #998e7b;
+  color: #f3e4c7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] :is(.cp-app-searchbar, .cp-card, [class^="cp-"][class*="-card"], [class*=" cp-"][class*="-card"]) {
+  color: #f1e2c5 !important;
+  border-color: #80603b !important;
+  border-radius: 4px !important;
+  background: #29483d !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.06), 0 4px 10px rgba(0,0,0,.26) !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] :is([class^="cp-"][class*="appbar"], [class^="cp-"][class*="topbar"]) {
+  color: #f3e3c5 !important;
+  border-color: #916c41 !important;
+  background: #102a34 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] :is(.cp-app-label, .cp-app-btn, .cp-app-btn *) {
+  color: #f3e4c7 !important;
+  opacity: 1 !important;
+}
+
+/* Social scrapbook. */
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] .xhs-app {
+  color: #172d35 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] :is(
+  .xhs-note-card, .xhs-detail-sheet, .xhs-form-sheet, .xhs-publish-sheet,
+  .xhs-profile-edit-sheet, .xhs-settings-sheet, .xhs-message-detail-card,
+  .xhs-message-panel-card
+) {
+  color: #172d35 !important;
+  border: 1px solid #9d7e56 !important;
+  border-radius: 4px !important;
+  background: #efe1c5 !important;
+  box-shadow: 0 5px 11px rgba(52,33,17,.14) !important;
+}
+
+/* Game cabinet, co-create studio and assistant: dark instrument cases with
+ * cream copy. Avoid descendant-wide color forcing so code and status states
+ * can still communicate their meaning. */
+.desk-stage .phone-shell[data-active-app="game"] :is(
+  .game-discover-card, .game-detail-card, .game-modal-card,
+  .game-runtime-card, .game-recent-card, .game-collection-item,
+  .game-studio-list-card, .game-profile-panel
+),
+.desk-stage .phone-shell[data-active-app="cocreate"] :is(
+  .cocreate-work-card, .cocreate-chapter-card, .cocreate-cast-card,
+  .cocreate-dossier-card, .cocreate-notebook-card, .cocreate-memory-card,
+  .cocreate-partner-card, .cocreate-index-panel, .cocreate-reader-panel,
+  .cocreate-write-panel, .cocreate-character-panel
+),
+.desk-stage .phone-shell[data-active-app="qa"] :is(
+  .qa-file-card, .qa-commit-card, .qa-tool-row, .qa-sheet,
+  .qa-preview-sheet, .qa-drawer-item, .qa-log-item
+) {
+  color: #f1e2c5 !important;
+  border: 1px solid #7e5d39 !important;
+  border-radius: 4px !important;
+  background: #29483d !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.06), 0 5px 12px rgba(0,0,0,.27) !important;
+}
+.desk-stage .phone-shell[data-active-app="cocreate"] :is(.cocreate-topbar, .cocreate-tabs),
+.desk-stage .phone-shell[data-active-app="qa"] :is(.qa-header, .qa-composer),
+.desk-stage .phone-shell[data-active-app="game"] :is(.game-hub-header, .game-detail-bottom-bar) {
+  color: #f3e3c5 !important;
+  border-color: #916a3f !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="qa"] {
+  --qa-bg-canvas: #102831;
+  --qa-bg-sidebar: #17353a;
+  --qa-bg-surface: #29483d;
+  --qa-bg-raised: #345849;
+  --qa-bg-overlay: #17313a;
+  --qa-bg-code: #0c2028;
+  --qa-text-primary: #f3e4c7;
+  --qa-text-secondary: #c8baa0;
+  --qa-text-tertiary: #9f927d;
+  --qa-accent: #d2aa6c;
+  --qa-accent-hover: #e1c384;
+  --qa-accent-subtle: rgba(210,170,108,.14);
+}
+
+/* Dwelling: keep real room imagery, replace the floating glass furniture UI. */
+.desk-stage .phone-shell[data-active-app="dwelling"] .dwelling-header,
+.desk-stage .phone-shell[data-active-app="dwelling"] :is(.dwelling-char-picker, .dwelling-room-tabs, .dwelling-loading-bar) {
+  color: #f2e2c4 !important;
+  border-color: #8c653b !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.desk-stage .phone-shell[data-active-app="dwelling"] :is(.dw-fur-card, .dw2-dock-item, .dwelling-detail-card, .dw2-sheet) {
+  color: #f2e2c4 !important;
+  border: 1px solid #80603b !important;
+  border-radius: 4px !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-green) !important;
+  box-shadow: 0 5px 12px rgba(0,0,0,.29) !important;
+}
+
+/* Interview / presence: midnight editorial edition. */
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-header {
+  color: #f3e3c5 !important;
+  border-bottom: 1px solid #977044 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] :is(.interview-glass-panel, .interview-glass-input, .interview-drawer) {
+  color: #f2e2c4 !important;
+  border: 1px solid #7d5c39 !important;
+  border-radius: 4px !important;
+  background: rgba(30,66,57,.96) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.06), 0 6px 14px rgba(0,0,0,.28) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Final contrast fence for material cards. */
+.desk-stage .phone-shell.app-open-shell :is(
+  .diary-entry-card, .diary-feature-card, .note-card,
+  .calendar-edit-modal, .calendar-confirm-dialog,
+  .shared-drawer-card, .shared-drawer-detail,
+  .reading-list-item, .reading-settings-group,
+  .am-list-row, .app-market-sheet,
+  .xhs-note-card, .xhs-detail-sheet
+) :is(h1,h2,h3,h4,strong,label,p,span,small) {
+  text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desk-stage .phone-shell.app-open-shell * {
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ── Legibility + illustrated icon correction ─────────────────────
  * The first material pass left the original monochrome glyphs visible and
  * depended on a broad selector for the chat paper.  This pass gives the
