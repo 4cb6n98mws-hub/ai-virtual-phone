@@ -2833,6 +2833,7 @@ export function GameHubApp({ onClose, autoOpenLocalId }: { onClose: () => void; 
       <header className="game-hub-header">
         <button
           type="button"
+          className="companion-app-back"
           aria-label={selectedTemplate ? "返回上一页" : creatorPageOpen ? "返回创作工坊" : "返回桌面"}
           onClick={selectedTemplate ? closeTemplateDetails : creatorPageOpen ? closeCreatorPage : onClose}
         >
@@ -3576,14 +3577,14 @@ export function GameHubApp({ onClose, autoOpenLocalId }: { onClose: () => void; 
           <section className={`game-runtime-card game-runtime-card--${runtimeStage}`}>
             {runtimeStage === "permission" ? (
               <div className="game-runtime-permission-top">
-                <button type="button" aria-label="返回" onClick={closeRuntime}>
+                <button type="button" className="companion-app-back" aria-label="返回" onClick={closeRuntime}>
                   <ChevronLeft size={22} strokeWidth={2.5} />
                 </button>
               </div>
             ) : (
               <button
                 type="button"
-                className="game-runtime-floating-back"
+                className="game-runtime-floating-back companion-app-back"
                 aria-label="返回"
                 onClick={closeRuntime}
                 style={runtimeBackButtonStyle}

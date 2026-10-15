@@ -2185,3 +2185,97 @@
   border-radius: 4px !important;
   background: #294f43 !important;
 }
+
+/* Canonical application back control.
+ * Every built-in application except Xiaohongshu uses the same quiet key seen
+ * in the approved settings header: an unboxed cream chevron with a consistent
+ * 40px touch target.  Keep this final so legacy per-app glass/pill/card rules
+ * cannot repaint the back control. */
+.desk-stage .phone-shell.app-open-shell:not([data-active-app="xiaohongshu"]) :is(
+  .companion-app-back,
+  .story-header-left > .story-top-btn:first-child,
+  .interview-header > button:first-child,
+  .game-hub-header > button:first-child,
+  .game-runtime-permission-top > button:first-child,
+  .game-runtime-floating-back,
+  .cp-shopping-header > button[aria-label^="返回"]:first-child,
+  .cp-shopping-detail > header > button[aria-label^="返回"]:first-child,
+  .cp-shopping-order-detail > header > button[aria-label^="返回"]:first-child,
+  .cp-black-market-header > button[aria-label^="返回"]:first-child
+) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  color: #f5e4c3 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: 0 1px 2px rgba(5, 12, 15, .7) !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+}
+
+.desk-stage .phone-shell.app-open-shell:not([data-active-app="xiaohongshu"]) :is(
+  .companion-app-back,
+  .story-header-left > .story-top-btn:first-child,
+  .interview-header > button:first-child,
+  .game-hub-header > button:first-child,
+  .game-runtime-permission-top > button:first-child,
+  .game-runtime-floating-back,
+  .cp-shopping-header > button[aria-label^="返回"]:first-child,
+  .cp-shopping-detail > header > button[aria-label^="返回"]:first-child,
+  .cp-shopping-order-detail > header > button[aria-label^="返回"]:first-child,
+  .cp-black-market-header > button[aria-label^="返回"]:first-child
+) :is(svg, path, polyline, line) {
+  color: inherit !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+
+.desk-stage .phone-shell.app-open-shell:not([data-active-app="xiaohongshu"]) .companion-app-back > svg,
+.desk-stage .phone-shell.app-open-shell:not([data-active-app="xiaohongshu"]) :is(
+  .story-header-left > .story-top-btn:first-child,
+  .interview-header > button:first-child,
+  .game-hub-header > button:first-child,
+  .game-runtime-permission-top > button:first-child,
+  .game-runtime-floating-back,
+  .cp-shopping-header > button[aria-label^="返回"]:first-child,
+  .cp-shopping-detail > header > button[aria-label^="返回"]:first-child,
+  .cp-shopping-order-detail > header > button[aria-label^="返回"]:first-child,
+  .cp-black-market-header > button[aria-label^="返回"]:first-child
+) > svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.desk-stage .phone-shell.app-open-shell:not([data-active-app="xiaohongshu"]) :is(
+  .companion-app-back,
+  .story-header-left > .story-top-btn:first-child,
+  .interview-header > button:first-child,
+  .game-hub-header > button:first-child,
+  .game-runtime-permission-top > button:first-child,
+  .game-runtime-floating-back,
+  .cp-shopping-header > button[aria-label^="返回"]:first-child,
+  .cp-shopping-detail > header > button[aria-label^="返回"]:first-child,
+  .cp-shopping-order-detail > header > button[aria-label^="返回"]:first-child,
+  .cp-black-market-header > button[aria-label^="返回"]:first-child
+):active {
+  color: #fff1d5 !important;
+  background: rgba(245, 228, 195, .08) !important;
+  transform: translateX(-1px) scale(.96) !important;
+}

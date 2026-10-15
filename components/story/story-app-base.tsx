@@ -872,7 +872,7 @@ export function StoryApp({ onClose }: StoryAppProps) {
             <div className="story-header-safe-area" />
             <div className="story-header-content">
               <div className="story-header-left">
-                <button className="story-top-btn" onClick={onClose} aria-label="关闭剧情模式">
+                <button className="story-top-btn companion-app-back" onClick={onClose} aria-label="关闭剧情模式">
                   <SolidBackIcon size={16} />
                 </button>
               </div>
@@ -1022,7 +1022,7 @@ export function StoryApp({ onClose }: StoryAppProps) {
           <div className="story-header-safe-area" />
           <div className="story-header-content">
             <div className="story-header-left">
-              <button className="story-top-btn" onClick={onClose} aria-label="关闭剧情模式">
+              <button className="story-top-btn companion-app-back" onClick={onClose} aria-label="关闭剧情模式">
                 <SolidBackIcon size={16} />
               </button>
             </div>

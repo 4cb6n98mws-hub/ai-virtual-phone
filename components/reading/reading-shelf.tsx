@@ -361,7 +361,7 @@ export function ReadingShelf({ onOpenBook, onClose, appearance, backgroundUrl, o
         <div className="reading-app-surface absolute inset-0 z-[100] flex flex-col">
             <header className="reading-shelf-header">
                 <div className="reading-shelf-appbar">
-                    <button className="reading-shelf-back" type="button" onClick={onClose} aria-label="返回">
+                    <button className="reading-shelf-back companion-app-back" type="button" onClick={onClose} aria-label="返回">
                         <ChevronLeft size={22} strokeWidth={2.5} />
                     </button>
                     <div className="reading-shelf-actions">

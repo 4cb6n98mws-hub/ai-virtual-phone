@@ -33,7 +33,7 @@ export function DiaryApp({ onClose, onNotice }: DiaryAppProps) {
   return (
     <section className="diary-app">
       <header className="diary-app-header">
-        <button type="button" className="diary-icon-btn" onClick={onClose} aria-label="返回桌面">
+        <button type="button" className="diary-icon-btn companion-app-back" onClick={onClose} aria-label="返回桌面">
           <ChevronLeft size={20} />
         </button>
         <div>

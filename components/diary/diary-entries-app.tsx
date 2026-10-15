@@ -602,7 +602,7 @@ export function DiaryEntriesApp({ onBack, onNotice }: DiaryEntriesAppProps) {
       <header className="diary-app-header diary-entry-header">
         <button
           type="button"
-          className="diary-icon-btn"
+          className="diary-icon-btn companion-app-back"
           onClick={() => (activeBook ? setActiveCharacterId(null) : onBack())}
           aria-label="返回"
         >

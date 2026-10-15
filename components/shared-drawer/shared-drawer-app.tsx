@@ -138,7 +138,7 @@ export function SharedDrawerApp({ onClose, onOpenSource }: SharedDrawerAppProps)
   return (
     <section className="shared-drawer-app">
       <header className="shared-drawer-header">
-        <button type="button" className="shared-drawer-back" onClick={onClose} aria-label="返回桌面">
+        <button type="button" className="shared-drawer-back companion-app-back" onClick={onClose} aria-label="返回桌面">
           <ChevronLeft size={20} />
         </button>
         <div className="shared-drawer-title">

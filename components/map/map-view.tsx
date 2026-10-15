@@ -1374,7 +1374,7 @@ export default function MapView({ world, save, onSaveUpdate, onBack }: Props) {
         display: "flex", justifyContent: "space-between", alignItems: "center",
         flexShrink: 0,
       }}>
-        <button onClick={() => setShowArchiveConfirm(true)} style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", color: "var(--c-adv-text-dim)", cursor: "pointer" }}>
+        <button className="companion-app-back" onClick={() => setShowArchiveConfirm(true)} aria-label="返回" style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", color: "var(--c-adv-text-dim)", cursor: "pointer" }}>
           <ArrowLeft size={20} />
         </button>
 

@@ -271,7 +271,7 @@ export default function WorldBuilder() {
               <h1>正在搭建筑境</h1>
               <p>场景出现后会自动进入。</p>
             </div>
-            <button className="wb-initial-back" type="button" onClick={handleInitialBootBack}>
+            <button className="wb-initial-back companion-app-back" type="button" onClick={handleInitialBootBack} aria-label="返回">
               返回小手机
             </button>
           </div>

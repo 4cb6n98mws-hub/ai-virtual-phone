@@ -290,7 +290,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
   return (
     <div style={S.root}>
       <div style={S.header}>
-        <button onClick={mode === "list" ? onClose : () => setMode("list")} style={S.btn}>
+        <button className="companion-app-back" onClick={mode === "list" ? onClose : () => setMode("list")} style={S.btn} aria-label="返回">
           <ArrowLeft size={20} />
         </button>
         <span style={{ fontSize: "calc(13px*var(--app-text-scale,1))", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>

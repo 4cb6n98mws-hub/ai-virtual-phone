@@ -958,7 +958,7 @@ export function NoteWallApp({ onBack, onNotice }: NoteWallAppProps) {
   return (
     <section className={`note-wall-app ${noteDrag ? "is-note-dragging" : ""}`}>
       <header className="note-wall-header">
-        <button type="button" className="page-back-btn" onClick={onBack} aria-label="返回">
+        <button type="button" className="page-back-btn companion-app-back" onClick={onBack} aria-label="返回">
           <ChevronLeft size={24} strokeWidth={1.5} />
         </button>
         <div className="note-wall-title">

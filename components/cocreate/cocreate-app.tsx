@@ -1718,7 +1718,7 @@ export function CoCreateApp({ onClose, onNotice }: CoCreateAppProps) {
         <div className="cocreate-head-left">
           <button
             type="button"
-            className="cocreate-back-button"
+            className="cocreate-back-button companion-app-back"
             onClick={handleBack}
             aria-label={view === "library" ? "返回桌面" : view === "chapterReader" ? "返回章节列表" : "返回作品库"}
           >

@@ -352,7 +352,7 @@ export function VnChapters({ characterId, onClose, onSelect, vnTheme }: VnChapte
 
       {/* ── Top Bar ── */}
       <div className="vnc-topbar">
-        <button className="vnc-btn" onClick={onClose}>
+        <button className="vnc-btn companion-app-back" onClick={onClose} aria-label="返回">
           <ArrowLeft size={20} />
         </button>
         <div className="vnc-header-center">

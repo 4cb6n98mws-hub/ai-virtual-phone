@@ -183,7 +183,7 @@ export function ChatMessageList({ onCloseApp, activeSession, onSelectSession, on
             <PageShell
                 leftAction={
                     <div className="flex items-center min-w-max">
-                        <button className="page-back-btn shrink-0 mr-2" type="button" onClick={onCloseApp} aria-label="返回">
+                        <button className="page-back-btn companion-app-back shrink-0 mr-2" type="button" onClick={onCloseApp} aria-label="返回">
                             <ChevronLeft size={24} strokeWidth={1.5} />
                         </button>
                         <div className="flex items-center gap-[10px]">

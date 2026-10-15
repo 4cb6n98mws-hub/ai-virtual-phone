@@ -720,7 +720,7 @@ export function MixologyGame({ sessionId, onBack, onToast }: GameProps) {
         return (
             <div className="mix-game">
                 <div className="mix-game-header">
-                    <button type="button" className="mix-icon-btn" onClick={onBack} aria-label="返回"><ChevronLeft size={20} /></button>
+                    <button type="button" className="mix-icon-btn companion-app-back" onClick={onBack} aria-label="返回"><ChevronLeft size={20} /></button>
                     <div className="mix-game-title">对局不存在</div>
                     <span style={{ width: 32 }} />
                 </div>
@@ -1048,7 +1048,7 @@ export function MixologyGame({ sessionId, onBack, onToast }: GameProps) {
             {assets.garnishCss ? <style>{scopeMixCss(assets.garnishCss)}</style> : null}
             <div className="mix-game-bg" style={bgStyle} />
             <div className="mix-game-header">
-                <button type="button" className="mix-icon-btn" onClick={onBack} aria-label="返回"><ChevronLeft size={20} /></button>
+                <button type="button" className="mix-icon-btn companion-app-back" onClick={onBack} aria-label="返回"><ChevronLeft size={20} /></button>
                 <div className="mix-game-title">{session.charName}</div>
                 {slotGroups.header.map(({ material, layout }) => (
                     <button

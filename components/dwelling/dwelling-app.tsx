@@ -551,7 +551,7 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
     return (
         <div className="dwelling-app" data-haspicker={characters.length > 1 ? "true" : undefined}>
             <div className="dwelling-header">
-                <button className="dw-back" onClick={onClose}><ChevronLeft size={18} /></button>
+                <button className="dw-back companion-app-back" onClick={onClose} aria-label="返回桌面"><ChevronLeft size={18} /></button>
                 <h1>栖 所<span className="dw-title-en">DWELLING</span></h1>
             </div>
 

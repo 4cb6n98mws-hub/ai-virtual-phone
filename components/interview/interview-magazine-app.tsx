@@ -852,7 +852,7 @@ function HomeScreen({
   return (
     <>
       <header className="interview-header">
-        <button className="interview-icon-btn" onClick={onClose} aria-label="返回桌面">
+        <button className="interview-icon-btn companion-app-back" onClick={onClose} aria-label="返回桌面">
           <ChevronLeft size={20} />
         </button>
         <SmallCaps className="text-white/70 tracking-widest">The Interview</SmallCaps>
@@ -1081,7 +1081,7 @@ function SetupScreen({
   return (
     <>
       <header className="interview-header">
-        <button className="interview-icon-btn" onClick={onBack}>
+        <button className="interview-icon-btn companion-app-back" onClick={onBack} aria-label="返回">
           <ChevronLeft size={20} />
         </button>
         <div className="text-center">
@@ -1265,7 +1265,7 @@ function InterviewScreen({
   return (
     <>
       <header className="interview-header backdrop-blur-md bg-black/20">
-        <button className="interview-icon-btn" onClick={onAbort}>
+        <button className="interview-icon-btn companion-app-back" onClick={onAbort} aria-label="返回">
           <X size={20} />
         </button>
         <div className="flex flex-col items-center">
@@ -1460,7 +1460,7 @@ function ArticleScreen({
   return (
     <div className="absolute inset-0 bg-[#0a0a0a] z-40 overflow-hidden flex flex-col">
       <header className="interview-header bg-black/50 backdrop-blur-md absolute top-0 left-0 right-0 z-10">
-        <button className="w-10 h-10 flex items-center justify-center text-white/60 hover:text-white transition-colors" onClick={onBack}>
+        <button className="companion-app-back w-10 h-10 flex items-center justify-center text-white/60 hover:text-white transition-colors" onClick={onBack} aria-label="返回">
           <ChevronLeft size={22} />
         </button>
         <SmallCaps className="text-white/40 tracking-widest">ISSUE NO.{String(issue.issueNumber).padStart(2, "0")}</SmallCaps>
