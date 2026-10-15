@@ -1,0 +1,849 @@
+/*
+ * Long Island companion skin — whole-phone application layer.
+ * The visual source of truth is the final home/chat/cinema concept trio:
+ * worn navy leather, warm paper, bottle green, tobacco brown and brass.
+ * Controls remain HTML; these rules never bake interactive text into images.
+ */
+
+.desk-stage .phone-shell-wrap {
+  --retro-navy-950: #0b1820;
+  --retro-navy-900: #102632;
+  --retro-navy-800: #183441;
+  --retro-green-800: #29483d;
+  --retro-green-700: #3b5f50;
+  --retro-oxblood-800: #5b292a;
+  --retro-oxblood-700: #743638;
+  --retro-tobacco-800: #5f3c2d;
+  --retro-tobacco-700: #78513a;
+  --retro-paper-100: #f2e8d4;
+  --retro-paper-200: #e6d7bb;
+  --retro-paper-300: #d5c09a;
+  --retro-ink: #17252c;
+  --retro-muted: #756b5b;
+  --retro-brass: #b58a4d;
+  --retro-brass-light: #dfc084;
+  --retro-stitch: #c79252;
+  --retro-shadow: rgba(26, 15, 8, .38);
+}
+
+/* ── Desktop composition ─────────────────────────────────────────────── */
+.desk-stage .phone-shell:not(.app-open-shell) {
+  --home-grid-top-offset: 48px;
+  --home-row-gap-y: 8px;
+  --home-grid-bottom-trim: 0px;
+  --home-dock-lift: 4px;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .phone-status-bar {
+  color: #f7ead0;
+  text-shadow: 0 2px 3px rgba(20, 11, 5, .72);
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .status-island {
+  visibility: hidden;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-grid {
+  --slot-size: clamp(70px, calc((100vw - 76px) / 4), 76px);
+  --slot-gap-x: 10px;
+  --slot-gap-y: 8px;
+  --slot-icon-width: min(74px, var(--slot-size));
+  --slot-icon-height: 86px;
+  --slot-row-step: 94px;
+  margin-top: 0;
+  grid-template-rows: repeat(6, minmax(86px, 1fr));
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item {
+  position: relative;
+  min-height: 86px;
+  gap: 0;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item .icon-glyph-box {
+  width: var(--slot-icon-width);
+  height: var(--slot-icon-height);
+  clip-path: polygon(0 0, 88% 0, 100% 12%, 100% 100%, 0 100%);
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph-box::before {
+  inset: 7px 8px auto;
+  height: 56px;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item .icon-label {
+  position: absolute;
+  z-index: 5;
+  left: 5px;
+  right: 5px;
+  bottom: 7px;
+  width: auto;
+  color: #f7ead0;
+  font-size: calc(10.5px*var(--app-text-scale,1));
+  line-height: 1.05;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .widget-label { display: none; }
+
+.desk-stage .phone-shell:not(.app-open-shell) .wg-large-time {
+  justify-content: flex-end;
+  padding: 0 0 4px 26px;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .wg-lt-date {
+  border-bottom: 1px solid rgba(246,226,187,.7);
+  padding-bottom: 3px;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .wg-lt-time {
+  margin-top: 2px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(84px*var(--app-text-scale,1));
+  line-height: .9;
+  text-shadow: 0 3px 0 rgba(44,28,17,.35), 0 6px 16px rgba(17,9,4,.42);
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-pill {
+  padding: 2px 20px;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-bubble,
+.desk-stage .phone-shell:not(.app-open-shell)[data-widget-effect="glass"] .wg-mood-bubble {
+  width: 100%;
+  min-height: 62px;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 7px 14px 7px 8px;
+  color: var(--retro-ink);
+  border: 2px solid #382519;
+  border-radius: 5px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.18), transparent 24%),
+    repeating-linear-gradient(0deg, rgba(89,65,36,.035) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #eadbbd, #cbb58c);
+  box-shadow:
+    inset 0 0 0 3px rgba(105,72,39,.12),
+    0 4px 0 #3e2a1c,
+    0 7px 14px rgba(23,13,7,.4);
+  font-size: calc(19px*var(--app-text-scale,1));
+  letter-spacing: .02em;
+}
+
+.wg-mood-presence-photo {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 3px solid #e9d5aa;
+  border-radius: 3px;
+  color: #f2e5c9;
+  background: var(--retro-navy-800);
+  box-shadow: 0 0 0 1px #4c3422, 0 2px 4px rgba(0,0,0,.34);
+  transform: rotate(-2deg);
+}
+.wg-mood-presence-photo img { width: 100%; height: 100%; object-fit: cover; }
+.wg-mood-presence-line {
+  flex: 1 1 auto;
+  height: 1px;
+  min-width: 18px;
+  background: linear-gradient(90deg, var(--retro-oxblood-700), transparent);
+}
+.wg-mood-presence-paw {
+  color: #a65055;
+  font-size: 13px;
+  text-shadow: 7px -4px 0 #a65055, 4px -10px 0 #a65055, -2px -8px 0 #a65055;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .dock {
+  width: calc(100% - 22px);
+  min-height: 78px;
+  margin-top: 5px;
+  border: 2px solid #3c2a1e;
+  border-radius: 5px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #142a36, #091823);
+  box-shadow:
+    inset 0 0 0 3px rgba(190,139,75,.19),
+    inset 0 1px rgba(255,255,255,.08),
+    0 5px 0 rgba(47,29,18,.72),
+    0 10px 18px rgba(16,8,4,.44);
+}
+
+/* ── Shared application frame ────────────────────────────────────────── */
+.desk-stage .phone-shell.app-open-shell {
+  --c-header-bg: var(--retro-navy-950);
+  --c-page-body-bg: var(--retro-paper-100);
+  --c-card: #eadfc9;
+  --c-card-border: #a68d68;
+  --c-panel: var(--retro-paper-200);
+  --c-panel-border: #a48a64;
+  --c-text-title: #152630;
+  --c-text: #46504b;
+  --c-icon: #c8ad78;
+  --c-icon-active: #d5b16c;
+  --c-input: #f4ead7;
+  --c-input-border: #9a805c;
+  color-scheme: light;
+  background: var(--retro-paper-100);
+}
+
+.desk-stage .phone-shell.app-open-shell .phone-wallpaper { opacity: 0; }
+
+.desk-stage .phone-shell.app-open-shell .phone-app-pane {
+  color: var(--retro-ink);
+  background:
+    radial-gradient(circle at 85% 12%, rgba(132,66,52,.08), transparent 31%),
+    repeating-linear-gradient(0deg, rgba(80,58,34,.025) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, var(--retro-paper-100), #dfcfb2);
+}
+
+.desk-stage .phone-shell.app-open-shell .page-header {
+  min-height: 62px;
+  color: #f4e5c7 !important;
+  border-bottom: 2px solid #a47b43;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #183541, #0b1d27) !important;
+  box-shadow: inset 0 -3px rgba(6,14,18,.48), 0 4px 10px rgba(31,18,9,.24);
+}
+
+.desk-stage .phone-shell.app-open-shell .page-header::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 1px;
+  border-top: 1px dashed rgba(211,157,89,.46);
+  pointer-events: none;
+}
+
+.desk-stage .phone-shell.app-open-shell .page-header .page-title,
+.desk-stage .phone-shell.app-open-shell .page-header .page-back-btn {
+  color: #f4e5c7 !important;
+  font-family: Georgia, "Noto Serif SC", serif;
+}
+
+.desk-stage .phone-shell.app-open-shell .page-body,
+.desk-stage .phone-shell.app-open-shell .modal-sheet,
+.desk-stage .phone-shell.app-open-shell .modal-dialog {
+  color: var(--retro-ink);
+  background-color: var(--retro-paper-100);
+  background-image: repeating-linear-gradient(0deg, rgba(76,55,33,.026) 0 1px, transparent 1px 5px);
+}
+
+.desk-stage .phone-shell.app-open-shell :is(.app-card, .menu-card, .ui-card) {
+  border: 1px solid #a9906b;
+  border-radius: 6px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.42), transparent 42%),
+    repeating-linear-gradient(0deg, rgba(78,56,31,.028) 0 1px, transparent 1px 4px),
+    #eadfc9;
+  box-shadow: 0 4px 10px rgba(55,35,20,.15), inset 0 1px rgba(255,255,255,.55);
+}
+
+.desk-stage .phone-shell.app-open-shell :is(input, textarea, select, .ui-input) {
+  color: #17252c !important;
+  caret-color: var(--retro-oxblood-700) !important;
+  border: 1px solid #967c58 !important;
+  border-radius: 5px !important;
+  background: rgba(248,239,221,.9) !important;
+  box-shadow: inset 0 2px 5px rgba(71,48,27,.11) !important;
+}
+.desk-stage .phone-shell.app-open-shell :is(input, textarea)::placeholder {
+  color: #837765 !important;
+  opacity: 1;
+}
+
+.desk-stage .phone-shell.app-open-shell :is(.ui-primary-btn, .primary-button, button[data-variant="primary"]) {
+  color: #f8ead0;
+  border: 1px solid #351f1a;
+  border-radius: 5px;
+  background: linear-gradient(145deg, var(--retro-oxblood-700), #4a2527);
+  box-shadow: inset 0 1px rgba(255,255,255,.14), 0 3px 0 #311a18;
+}
+
+.desk-stage .phone-shell.app-open-shell .modal-overlay {
+  background: rgba(8,16,20,.66);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* ── Chat and calls: the parchment-and-leather master screen ─────────── */
+.desk-stage .phone-shell[data-active-app="chat"] .chat-app,
+.desk-stage .phone-shell[data-active-app="group_chat"] .chat-app {
+  background:
+    linear-gradient(rgba(244,234,214,.9), rgba(224,207,175,.94)),
+    url("/companion/long-island-home.webp") center / cover;
+}
+
+.desk-stage .phone-shell .chat-room-main-pane:not(.page-header):not(.chat-input-bar) {
+  color: var(--retro-ink);
+  background:
+    radial-gradient(circle at 92% 93%, rgba(40,78,89,.10), transparent 25%),
+    repeating-linear-gradient(0deg, rgba(82,60,36,.03) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #f0e4ce, #dfceb0) !important;
+}
+
+.desk-stage .phone-shell .chat-room-main-pane.page-header,
+.desk-stage .phone-shell .chat-input-bar {
+  color: #f4e5c7 !important;
+  border-color: #997044 !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #173240, #0a1b25) !important;
+  box-shadow: inset 0 0 0 2px rgba(180,126,67,.12);
+}
+
+.desk-stage .phone-shell .chat-bubble-role-assistant:not(.chat-bubble-html-preview):not(.chat-bubble-media) {
+  color: #172a34;
+  border: 1px solid #b39a73;
+  border-radius: 7px 7px 7px 2px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.38), transparent 40%),
+    repeating-linear-gradient(0deg, rgba(77,56,33,.028) 0 1px, transparent 1px 4px),
+    #eee2ca;
+  box-shadow: 0 4px 9px rgba(54,34,19,.17), inset 0 1px rgba(255,255,255,.58);
+}
+
+.desk-stage .phone-shell .chat-bubble-role-user:not(.chat-bubble-html-preview):not(.chat-bubble-media) {
+  color: #f5ead5;
+  border: 1px solid #254438;
+  border-radius: 7px 7px 2px 7px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #365b4c, #244137);
+  box-shadow: 0 4px 0 #173027, 0 7px 12px rgba(45,29,17,.18), inset 0 1px rgba(255,255,255,.08);
+}
+
+.desk-stage .phone-shell .chat-input-bar .chat-input-textarea {
+  color: #eee0c6 !important;
+  border: 1px solid #9a7143 !important;
+  background: #1c302f !important;
+}
+
+.desk-stage .phone-shell :is(.call-overlay, .call-mini-window, .group-call-stage) {
+  background: radial-gradient(circle at 50% 18%, #29434a, #0b1820 68%);
+}
+
+/* ── Paper-ledger applications ───────────────────────────────────────── */
+.desk-stage .phone-shell :is(.diary-app, .diary-entry-app, .calendar-app, .reading-app, .shared-drawer-app) {
+  color: var(--retro-ink);
+  background:
+    repeating-linear-gradient(0deg, rgba(84,61,36,.025) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #f2e8d5, #dfceb0) !important;
+}
+
+.desk-stage .phone-shell :is(.diary-app-header, .calendar-apple-topbar, .shared-drawer-header) {
+  color: #f2e2c4 !important;
+  border-bottom: 2px solid var(--retro-brass);
+  background: linear-gradient(145deg, #183440, #0b1c26) !important;
+}
+
+.desk-stage .phone-shell :is(.diary-entry-card, .calendar-event-card, .shared-drawer-card, .shared-drawer-candidate) {
+  color: var(--retro-ink);
+  border: 1px solid #a88f68 !important;
+  border-radius: 5px !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.38), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(73,53,32,.025) 0 1px, transparent 1px 4px),
+    #eadfc9 !important;
+  box-shadow: 0 4px 9px rgba(53,34,20,.15), inset 0 1px rgba(255,255,255,.5) !important;
+}
+
+/* ── Music: record cabinet ───────────────────────────────────────────── */
+.desk-stage .phone-shell[data-active-app="music"] .music-app {
+  color: #f2e5cd;
+  background:
+    radial-gradient(circle at 78% 14%, rgba(145,72,52,.28), transparent 34%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #182d35, #161918 58%, #39261f) !important;
+}
+.desk-stage .phone-shell[data-active-app="music"] :is(.music-card, .music-playlist-card, .music-player-panel) {
+  border: 1px solid #8f6940 !important;
+  border-radius: 5px !important;
+  background: linear-gradient(145deg, rgba(96,60,39,.88), rgba(30,39,38,.94)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 5px 12px rgba(0,0,0,.28) !important;
+}
+
+/* ── Phone inspection: restrained field notebook ────────────────────── */
+.desk-stage .phone-shell[data-active-app="checkphone"] .cp-app-wrapper,
+.desk-stage .phone-shell .cp-page-override {
+  color: #e9ddc7;
+  background:
+    linear-gradient(rgba(8,20,27,.84), rgba(8,20,27,.92)),
+    url("/companion/long-island-home.webp") center / cover !important;
+}
+.desk-stage .phone-shell .cp-app-btn,
+.desk-stage .phone-shell .cp-card {
+  border: 1px solid #806343 !important;
+  border-radius: 5px !important;
+  background: linear-gradient(145deg, #29483d, #172c29) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 4px 9px rgba(0,0,0,.34) !important;
+}
+
+/* ── Shopping: vintage mail-order catalogue ─────────────────────────── */
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.shopping-app, .cp-black-market-app) {
+  color: var(--retro-ink);
+  background: repeating-linear-gradient(0deg, rgba(79,57,34,.028) 0 1px, transparent 1px 5px), #eadfc9 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.shopping-card, .cp-black-market-card, .product-card) {
+  border: 1px solid #846744 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(145deg, #f0e4cd, #d9c49e) !important;
+  box-shadow: 0 4px 8px rgba(55,34,18,.18) !important;
+}
+
+/* ── Interview / presence: editorial evening edition ────────────────── */
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-app {
+  color: #eee0c4;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(141,58,52,.24), transparent 34%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.016) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #17303b, #0a1820 62%, #2d2220) !important;
+}
+.desk-stage .phone-shell .interview-glass-panel,
+.desk-stage .phone-shell .interview-glass-input {
+  color: #f1e3c8 !important;
+  border: 1px solid #80613f !important;
+  border-radius: 5px !important;
+  background: linear-gradient(145deg, rgba(47,74,74,.92), rgba(19,38,43,.94)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.07), 0 5px 12px rgba(0,0,0,.27) !important;
+}
+
+/* ── Dwelling: actual room, wood and labelled objects ───────────────── */
+.desk-stage .phone-shell[data-active-app="dwelling"] .dwelling-app {
+  color: #efe2ca;
+  background:
+    linear-gradient(rgba(15,24,25,.52), rgba(12,21,22,.72)),
+    url("/companion/long-island-home.webp") center / cover !important;
+}
+.desk-stage .phone-shell :is(.dw-room-card, .dw-fur-card, .dw2-dock-item, .dw-confirm-card) {
+  border: 1px solid #8c6840 !important;
+  border-radius: 5px !important;
+  background: linear-gradient(145deg, rgba(42,73,62,.94), rgba(24,43,38,.96)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 5px 12px rgba(0,0,0,.3) !important;
+}
+
+/* ── Lifestyle feed: American scrapbook, Chinese copy ───────────────── */
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] .xhs-app {
+  color: var(--retro-ink);
+  background: repeating-linear-gradient(0deg, rgba(75,54,31,.025) 0 1px, transparent 1px 5px), #efe5d2 !important;
+}
+.desk-stage .phone-shell .xhs-appbar,
+.desk-stage .phone-shell .cp-xhs-appbar {
+  color: #f4e5c8 !important;
+  border-bottom: 2px solid #a97b45 !important;
+  background: linear-gradient(145deg, #6f3436, #482327) !important;
+}
+.desk-stage .phone-shell :is(.xhs-note-card, .cp-xhs-note-detail, .xhs-comment-composer, .cp-xhs-panel) {
+  border-color: #ad936e !important;
+  border-radius: 5px !important;
+  background: #eee2cb !important;
+  box-shadow: 0 4px 9px rgba(54,34,18,.14) !important;
+}
+
+/* ── Workshop / story / games: wood table and durable instrument cards ─ */
+.desk-stage .phone-shell :is(.cocreate-app, .qa-app-shell, .mixology-app, .game-hub-root, .story-app, .vn-app, .map-app) {
+  color: #efe2c8;
+  background:
+    radial-gradient(circle at 80% 8%, rgba(132,58,49,.21), transparent 30%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.016) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #17303a, #0c1b21 58%, #35251e) !important;
+}
+.desk-stage .phone-shell :is(.cocreate-card, .qa-card, .mix-card, .game-card, .story-card, .vn-card, .map-card) {
+  color: #f0e2c8 !important;
+  border: 1px solid #81613e !important;
+  border-radius: 5px !important;
+  background: linear-gradient(145deg, rgba(50,80,70,.92), rgba(24,43,39,.95)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.07), 0 5px 12px rgba(0,0,0,.27) !important;
+}
+
+/* ── Utility apps: navy leather instrument case ─────────────────────── */
+.desk-stage .phone-shell :is(.app-market-app, .reality-bridge-app, .char-app, .settings-main-menu, .appearance-main-menu, .theme-section-page) {
+  color: var(--retro-ink);
+  background:
+    repeating-linear-gradient(0deg, rgba(78,56,32,.024) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #f0e5d1, #ddc9a7) !important;
+}
+.desk-stage .phone-shell :is(.app-market-header, .rb-header) {
+  color: #f2e2c4 !important;
+  border-bottom: 2px solid #a47b43 !important;
+  background: linear-gradient(145deg, #183440, #0b1c26) !important;
+}
+.desk-stage .phone-shell :is(.app-market-card, .app-market-sheet, .rb-card, .char-card, .page-menu > button) {
+  border: 1px solid #a18862 !important;
+  border-radius: 5px !important;
+  background: #e9dcc3 !important;
+  box-shadow: 0 4px 9px rgba(52,33,18,.14) !important;
+}
+
+/* High-contrast guardrails for the user's low-vision use case. */
+.desk-stage .phone-shell.app-open-shell :is(.text-gray-400, .text-gray-500, .text-gray-600) {
+  color: #655e52 !important;
+}
+.desk-stage .phone-shell.app-open-shell :is(button, input, textarea, select):focus-visible {
+  outline: 2px solid #c58b52 !important;
+  outline-offset: 2px;
+}
+
+@media (max-width: 390px) {
+  .desk-stage .phone-shell:not(.app-open-shell) .icon-grid {
+    --slot-size: 68px;
+    --slot-gap-x: 8px;
+    --slot-icon-width: 66px;
+    --slot-icon-height: 80px;
+    --slot-row-step: 88px;
+  }
+  .desk-stage .phone-shell:not(.app-open-shell) .wg-lt-time {
+    font-size: calc(76px*var(--app-text-scale,1));
+  }
+}
+
+/* ── Boot: the same private Long Island instrument, never a white flash ── */
+.desk-stage .splash-phone-screen,
+.desk-stage .splash-animation-stage {
+  color: #f2e4c9;
+  background:
+    linear-gradient(rgba(7,17,22,.70), rgba(7,17,22,.88)),
+    url("/companion/long-island-home.webp") center / cover no-repeat !important;
+}
+.desk-stage .splash-animation-stage::before {
+  opacity: .3;
+  background-image:
+    linear-gradient(rgba(221,188,126,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(221,188,126,.055) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.desk-stage .splash-animation-stage::after {
+  background: radial-gradient(circle at center, transparent 28%, rgba(2,9,12,.58) 100%);
+}
+.desk-stage .splash-boot-aura { background: rgba(190,135,70,.13); }
+.desk-stage .splash-boot-ring {
+  border: 1px solid rgba(217,183,119,.56);
+  border-radius: 5px;
+  color: #e4c07f;
+  background: linear-gradient(145deg, rgba(47,78,68,.72), rgba(11,29,38,.86));
+  box-shadow: inset 0 0 0 3px rgba(207,158,91,.12), 0 7px 24px rgba(0,0,0,.34);
+}
+.desk-stage .splash-boot-brand {
+  color: #f1dfbd;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: .28em;
+}
+.desk-stage .splash-boot-rule i { background: rgba(211,170,100,.35); }
+.desk-stage .splash-boot-rule i:nth-child(2) { background: #8e3f3d; }
+.desk-stage .splash-boot-status,
+.desk-stage .splash-boot-corner { color: rgba(230,207,166,.72); }
+.desk-stage .splash-enter-button {
+  color: #ecd7ae;
+  border-color: rgba(210,169,102,.52);
+  border-radius: 5px;
+  background: linear-gradient(145deg, rgba(36,68,59,.92), rgba(13,34,42,.94));
+}
+
+/* ── System chrome used by every built-in application ─────────────── */
+.desk-stage .phone-shell.app-open-shell .phone-status-bar {
+  color: #f2e4c9;
+  background: var(--retro-navy-950);
+}
+.desk-stage .phone-shell.app-open-shell .status-island {
+  background: #050809;
+  border: 1px solid rgba(220,179,107,.14);
+}
+.desk-stage .phone-shell.app-open-shell :is(.text-black, .text-gray-800, .text-gray-700) {
+  color: var(--retro-ink) !important;
+}
+.desk-stage .phone-shell.app-open-shell :is(.bg-white, .bg-gray-50, .bg-gray-100) {
+  color: var(--retro-ink) !important;
+  background-color: #eadfc9 !important;
+}
+.desk-stage .phone-shell.app-open-shell :is(.modal-dialog, .modal-sheet, [data-ui="modal-dialog"]) {
+  border: 1px solid #8d704b !important;
+  border-radius: 7px !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(75,53,31,.028) 0 1px, transparent 1px 5px),
+    #eee3cf !important;
+  box-shadow: 0 18px 48px rgba(13,18,18,.42), inset 0 1px rgba(255,255,255,.54) !important;
+}
+.desk-stage .phone-shell.app-open-shell :is(.modal-header, [data-ui="modal-header"]) {
+  color: #f2e4c9 !important;
+  border-bottom: 1px solid #9a7447 !important;
+  background: linear-gradient(145deg, #193541, #0b1e28) !important;
+}
+.desk-stage .phone-shell.app-open-shell :is(.ui-btn-primary, .modal-header-btn-action) {
+  color: #f7ead1 !important;
+  border-color: #432522 !important;
+  background: linear-gradient(145deg, #713638, #4b2528) !important;
+}
+
+/* Every built-in app receives the material system even if it has its own
+   legacy theme. Individual sections below give each app a separate identity. */
+.desk-stage .phone-shell.app-open-shell[data-active-app] .phone-app-pane {
+  --li-paper: #efe4cf;
+  --li-paper-deep: #decaa7;
+  --li-ink: #172830;
+  --li-brass: #b58a4d;
+  --li-leather: #122b36;
+  --li-green: #2d5043;
+  --li-red: #743638;
+}
+
+/* Diary and note wall: stitched field journal. */
+.desk-stage .phone-shell[data-active-app="diary"] :is(.diary-app, .diary-entry-app, .note-wall-app) {
+  color: var(--li-ink) !important;
+  background:
+    linear-gradient(90deg, rgba(110,61,44,.12) 0 4px, transparent 4px),
+    repeating-linear-gradient(0deg, transparent 0 25px, rgba(83,97,91,.13) 25px 26px),
+    linear-gradient(145deg, #f3e9d6, #dfcfb2) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] :is(.diary-app-header, .note-wall-header) {
+  color: #f3e4c6 !important;
+  border-bottom: 2px solid #ad844d;
+  background: linear-gradient(145deg, #244638, #102a31) !important;
+  box-shadow: 0 4px 10px rgba(45,28,17,.22);
+}
+.desk-stage .phone-shell[data-active-app="diary"] :is(.diary-card, .diary-entry-card, .note-wall-note, .note-wall-card) {
+  border: 1px solid #aa9069 !important;
+  border-radius: 3px !important;
+  background: #eee1c8 !important;
+  box-shadow: 0 4px 9px rgba(52,33,17,.16), inset 0 1px rgba(255,255,255,.52) !important;
+}
+
+/* Calendar: a cream desk calendar with oxblood date stamps. */
+.desk-stage .phone-shell[data-active-app="calendar"] .calendar-app-shell {
+  --c-calendar-bg: #eee3cd;
+  --c-calendar-surface: #dfcfb2;
+  --c-calendar-surface-2: #ceb995;
+  --c-calendar-sheet: #f3ead8;
+  --c-calendar-ink: #1a2b31;
+  --c-calendar-sub: #716858;
+  --c-calendar-faint: #9c8e77;
+  --c-calendar-today: #7a3738;
+  --c-calendar-sel-bg: #294a3f;
+  --c-calendar-sel-fg: #f5e8cf;
+  --c-calendar-hair: rgba(77,58,35,.18);
+  --c-calendar-glass: rgba(240,226,199,.88);
+  --c-calendar-glass-edge: rgba(120,88,48,.35);
+  background:
+    repeating-linear-gradient(0deg, rgba(81,59,34,.026) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #f0e6d2, #dcc8a6) !important;
+}
+.desk-stage .phone-shell[data-active-app="calendar"] .calendar-apple-topbar {
+  color: #f2e3c6 !important;
+  background: linear-gradient(145deg, #173440, #0b1d27) !important;
+  border-bottom: 2px solid #a67a43;
+}
+.desk-stage .phone-shell[data-active-app="calendar"] :is(.calendar-icon-btn, .calendar-pill-btn, .calendar-fab) {
+  border-color: #8c704d !important;
+  border-radius: 5px !important;
+  box-shadow: 0 3px 7px rgba(57,35,18,.17), inset 0 1px rgba(255,255,255,.38) !important;
+}
+
+/* Reading: restrained publisher's edition; texture recedes behind long copy. */
+.desk-stage .phone-shell[data-active-app="reading"] .phone-app-pane > div {
+  color: #172830 !important;
+  background:
+    linear-gradient(rgba(246,238,222,.92), rgba(232,218,193,.96)),
+    repeating-linear-gradient(0deg, rgba(73,54,34,.022) 0 1px, transparent 1px 5px) !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] :is(.reading-card, .reading-book-card, .reading-panel, .reading-shelf-card) {
+  border: 1px solid #a58a64 !important;
+  border-radius: 4px !important;
+  background: #eee2cc !important;
+  box-shadow: 0 4px 9px rgba(53,34,19,.14) !important;
+}
+
+/* Shopping and black market: mail-order catalogue / after-hours ledger. */
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-module {
+  color: #172830 !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(78,56,32,.028) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #f0e5d0, #dcc8a5) !important;
+  font-family: Georgia, "Noto Serif SC", serif !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.cp-shopping-header, .cp-shopping-appbar, .cp-shopping-topbar) {
+  color: #f2e4c9 !important;
+  border-bottom: 2px solid #a67a43 !important;
+  background: linear-gradient(145deg, #183541, #0b1d27) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.cp-shopping-card, .cp-shopping-product-card, .cp-shopping-panel, .cp-shopping-translation-sheet) {
+  color: #172830 !important;
+  border: 1px solid #9d815b !important;
+  border-radius: 4px !important;
+  background: #eee1c8 !important;
+  box-shadow: 0 4px 9px rgba(52,33,17,.15) !important;
+}
+
+/* Social scrapbook: Chinese copy, American-life editorial cards. */
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] :is(.xhs-note-card, .xhs-waterfall-item, .xhs-profile-edit-sheet, .xhs-publish-sheet, .xhs-confirm-sheet) {
+  color: #172830 !important;
+  border: 1px solid #a68d68 !important;
+  border-radius: 4px !important;
+  background: #efe3cc !important;
+  box-shadow: 0 5px 10px rgba(52,33,18,.16) !important;
+}
+
+/* Story mode: an old paperback, not a generic dark dashboard. */
+.desk-stage .phone-shell[data-active-app="story"] .story-app-shell {
+  --c-story-bg-top: #f2e8d4;
+  --c-story-bg-mid: #eadcc2;
+  --c-story-bg-bottom: #dfcaaa;
+  --c-story-text: #25343a;
+  --c-story-text-light: #6d685c;
+  --c-story-heading: #172830;
+  --c-story-sub: #7d725f;
+  --c-story-accent: #72413a;
+  --c-story-accent-light: rgba(114,65,58,.16);
+  --c-story-bubble-bg: #f2e7d2;
+  --c-story-bubble-user: #d8c29c;
+  --c-story-btn-bg: rgba(45,78,66,.12);
+  --c-story-btn-border: rgba(67,76,60,.28);
+  --c-story-panel: rgba(239,226,202,.92);
+  --c-story-input-bar: #152f39;
+  --c-story-input-border: #8f6b40;
+  --c-story-placeholder: #aa9a80;
+  background:
+    repeating-linear-gradient(0deg, rgba(75,54,32,.025) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #f1e7d2, #dfcaaa) !important;
+}
+.desk-stage .phone-shell[data-active-app="story"] :is(.story-header, .story-input-bar) {
+  color: #f3e5c8 !important;
+  background: linear-gradient(145deg, #173440, #0b1d27) !important;
+  border-color: #9f7746 !important;
+  border-radius: 0 !important;
+}
+
+/* Visual novel and map modes keep cinematic imagery, with navy/brass controls. */
+.desk-stage .phone-shell[data-active-app="vnmode"] :is(.vns-shell, .vnc-shell),
+.desk-stage .phone-shell[data-active-app="mapmode"] .phone-app-pane > div {
+  color: #efe2c8 !important;
+  background:
+    radial-gradient(circle at 80% 10%, rgba(128,61,49,.22), transparent 34%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #17313b, #0a1921 62%, #33231d) !important;
+}
+.desk-stage .phone-shell[data-active-app="vnmode"] :is(.vns-topbar, .vnc-topbar, .vn-topbar) {
+  border-bottom: 1px solid #987144 !important;
+  background: rgba(11,29,38,.92) !important;
+}
+.desk-stage .phone-shell[data-active-app="vnmode"] :is(.vns-strip, .vns-prompt-card, .vnc-label, .vn-dialogue-inner) {
+  border-color: #866640 !important;
+  border-radius: 5px !important;
+  background: rgba(20,43,48,.91) !important;
+  box-shadow: 0 6px 15px rgba(0,0,0,.26), inset 0 1px rgba(255,255,255,.06) !important;
+}
+
+/* Game cabinet: sturdy boxed games with tobacco and bottle-green cloth. */
+.desk-stage .phone-shell[data-active-app="game"] .game-hub-root {
+  --gm-bg: #10232b;
+  --gm-panel: #203d36;
+  --gm-card: #29483d;
+  --gm-text-main: #f1e3c7;
+  --gm-text-soft: #c9bda7;
+  --gm-accent: #c49350;
+  color: #f1e3c7 !important;
+  background:
+    radial-gradient(circle at 82% 10%, rgba(124,55,47,.25), transparent 32%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.016) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #17333d, #0b1c24 62%, #34231c) !important;
+}
+.desk-stage .phone-shell[data-active-app="game"] :is(.game-hub-header, .game-post, .game-card, .game-library-card, .game-published-card, .game-studio-panel) {
+  color: #f1e3c7 !important;
+  border-color: #80603d !important;
+  border-radius: 5px !important;
+  background: linear-gradient(145deg, rgba(49,83,70,.94), rgba(24,43,39,.96)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.07), 0 6px 14px rgba(0,0,0,.28) !important;
+}
+
+/* Mixology: keep the bar dark, shift violet to amber/brass. */
+.desk-stage .phone-shell[data-active-app="mixology"] .mixology-app {
+  --mix-bg: #0e1718;
+  --mix-panel: #182a29;
+  --mix-panel-2: #243a34;
+  --mix-line: rgba(212,170,101,.18);
+  --mix-violet: #ba7d60;
+  --mix-gold: #d2a55d;
+  --mix-text: #f2e4ca;
+  --mix-dim: rgba(242,228,202,.65);
+  --mix-faint: rgba(242,228,202,.38);
+  background:
+    radial-gradient(circle at 50% -5%, rgba(177,105,62,.2), transparent 36%),
+    linear-gradient(155deg, #18302f, #091516 70%) !important;
+}
+
+/* Utility shelves: market, settings, resources, characters and world tools. */
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-app {
+  --am-bg: #eadfc9;
+  --am-surface: #f1e6d2;
+  --am-text: #172830;
+  --am-text-soft: #6f675a;
+  --am-text-faint: #8c816e;
+  --am-accent: #73383a;
+  --am-accent-deep: #54282b;
+  --am-grad: linear-gradient(145deg, #73383a, #4d2729);
+  --am-tint: rgba(115,56,58,.09);
+  --am-tint-strong: rgba(115,56,58,.16);
+  --am-hairline: rgba(82,61,36,.18);
+  background: linear-gradient(145deg, #f0e5d0, #dcc8a6) !important;
+}
+.desk-stage .phone-shell[data-active-app="realitybridge"] .reality-bridge-app-shell {
+  --rb-bg: #eadfc9;
+  --rb-card: #f0e5d1;
+  --rb-ink: #172830;
+  --rb-sub: #746c5e;
+  --rb-line: rgba(87,64,38,.2);
+  --rb-inset: #deccb0;
+  --rb-acc: #73383a;
+  --rb-acc-soft: rgba(115,56,58,.13);
+  --rb-acc-text: #73383a;
+  --rb-glass: rgba(238,224,198,.9);
+  --rb-shadow: 0 4px 10px rgba(52,33,18,.14);
+  background: linear-gradient(145deg, #efe4cf, #dcc8a6) !important;
+}
+.desk-stage .phone-shell[data-active-app="worldbuilder"] :is(.wb-layout, .wb-bottom-bar, .wb-property-panel),
+.desk-stage .phone-shell[data-active-app="resource_hub"] :is(.resource-hub-app, .resource-hub-shell),
+.desk-stage .phone-shell[data-active-app="qa"] .qa-app-shell {
+  color: #f0e2c8 !important;
+  border-color: #876741 !important;
+  background: linear-gradient(145deg, rgba(25,55,62,.97), rgba(9,25,31,.98)) !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] .char-app {
+  background:
+    radial-gradient(circle at 86% 8%, rgba(121,57,49,.12), transparent 28%),
+    repeating-linear-gradient(0deg, rgba(76,55,33,.025) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #efe4cf, #dbc6a4) !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] :is(.settings-main-menu, .page-menu),
+.desk-stage .phone-shell[data-active-app="theme"] :is(.appearance-main-menu, .theme-section-page, .page-menu),
+.desk-stage .phone-shell[data-active-app="resources"] :is(.page-menu, .resource-page) {
+  color: #172830 !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(77,55,32,.024) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, #f0e5d1, #dcc8a7) !important;
+}
+
+/* Presence/interview pages: midnight editorial issue with readable cream copy. */
+.desk-stage .phone-shell[data-active-app="interview_magazine"] :is(.interview-card, .interview-issue-card, .interview-panel) {
+  color: #f1e3c8 !important;
+  border: 1px solid #80613f !important;
+  border-radius: 4px !important;
+  background: linear-gradient(145deg, rgba(48,78,68,.92), rgba(20,41,44,.96)) !important;
+  box-shadow: 0 6px 14px rgba(0,0,0,.27), inset 0 1px rgba(255,255,255,.06) !important;
+}
+
+/* Custom apps run in an isolated document. The host still supplies a coherent
+   navy/leather frame; their own package must carry the matching inner skin. */
+.desk-stage .phone-shell[data-active-app^="custom_app:"] .custom-app-runner {
+  border: 2px solid #765634;
+  background: #0c1c24 !important;
+  box-shadow: inset 0 0 0 3px rgba(204,154,87,.12);
+}
