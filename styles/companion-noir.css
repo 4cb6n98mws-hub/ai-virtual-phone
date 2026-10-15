@@ -70,16 +70,18 @@
   color: var(--c-text-title);
 }
 
-/* Home screen: layered painted metal, paper grain and a faint coastal glow. */
+/* Home screen: the agreed Long Island desk — a fixed, lightweight local asset. */
 .desk-stage .phone-shell > .phone-wallpaper {
   background:
-    linear-gradient(90deg, rgba(239,225,197,.025) 1px, transparent 1px),
-    linear-gradient(rgba(239,225,197,.02) 1px, transparent 1px),
-    radial-gradient(circle at 88% 6%, rgba(151,73,67,.24), transparent 37%),
-    radial-gradient(circle at 12% 78%, rgba(60,104,92,.18), transparent 45%),
-    linear-gradient(155deg, #152328 0%, #10191d 54%, #181a1b 100%) !important;
-  background-size: 22px 22px, 22px 22px, auto, auto, auto !important;
+    linear-gradient(180deg, rgba(13,18,20,.04) 0%, rgba(13,18,20,.16) 48%, rgba(8,12,13,.34) 100%),
+    url("/companion/long-island-home.webp") center / cover no-repeat !important;
   filter: none !important;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell)::before {
+  background:
+    linear-gradient(180deg, rgba(9,12,13,.03) 0%, rgba(9,12,13,.02) 34%, rgba(7,10,11,.18) 100%),
+    repeating-linear-gradient(90deg, transparent 0 3px, rgba(255,244,218,.008) 3px 4px);
 }
 
 .desk-stage .phone-shell .page-header,
@@ -232,51 +234,43 @@
   background: #172226;
 }
 
-/* Enamel-and-metal home icons: dimensional, varied, still restrained. */
+/* Home desktop: aged paper, bottle-green cloth, worn leather and brass. */
 .desk-stage .icon-glyph-box,
-.desk-stage .dock-glyph-box { border-radius: 9px; }
+.desk-stage .dock-glyph-box { border-radius: 5px; }
 
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin),
 .desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) {
   position: relative;
   overflow: hidden;
-  border: 1px solid #68716d;
-  border-radius: 9px;
+  border: 1px solid #4e3d2c;
+  border-radius: 5px;
   background:
-    radial-gradient(circle at 18% 16%, rgba(255,255,255,.18), transparent 24%),
-    linear-gradient(145deg, #526165 0%, #273538 33%, #172226 70%, #3c3030 100%);
+    repeating-linear-gradient(92deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #ebe0c8, #c7b38e);
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.32),
-    inset 0 -3px 5px rgba(0,0,0,.46),
-    0 5px 10px rgba(3,9,10,.42);
+    inset 0 1px rgba(255,255,255,.42),
+    inset 0 -2px 3px rgba(65,42,23,.25),
+    0 3px 6px rgba(23,14,8,.42);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-}
-
-.desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin)::before,
-.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::before {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  border: 1px solid rgba(231,220,198,.12);
-  border-radius: 6px;
-  pointer-events: none;
-  z-index: 0;
 }
 
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin)::after,
 .desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::after {
   content: "";
   position: absolute;
-  right: 5px;
-  bottom: 5px;
-  width: 5px;
-  height: 5px;
+  left: 4px;
+  top: 4px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: #b8635b;
-  box-shadow: 0 0 0 1px #301d1c, inset 0 1px rgba(255,255,255,.35);
+  background: radial-gradient(circle at 35% 30%, #ead095 0 18%, #9f7440 42%, #47301d 100%);
+  box-shadow:
+    calc(var(--slot-icon-width, 62px) - 12px) 0 #9f7440,
+    0 calc(var(--slot-icon-height, 62px) - 12px) #8d6538,
+    calc(var(--slot-icon-width, 62px) - 12px) calc(var(--slot-icon-height, 62px) - 12px) #8d6538;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin) > .icon-glyph,
@@ -286,17 +280,181 @@
   width: 30px;
   height: 30px;
   padding: 0;
-  color: #eee6d6 !important;
+  color: #f4e6c9 !important;
   background: none;
   border: none;
   border-radius: 0;
-  filter: drop-shadow(0 1px rgba(255,255,255,.24)) drop-shadow(0 2px 2px rgba(0,0,0,.62));
+  filter: drop-shadow(0 1px rgba(255,255,255,.18)) drop-shadow(0 2px 2px rgba(0,0,0,.58));
   z-index: 1;
 }
 
+.desk-stage .icon-grid .icon-item:nth-child(5n+2) .icon-glyph-box:not(.icon-glyph-box-skin) {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px), linear-gradient(145deg, #40594c, #263c35);
+}
+.desk-stage .icon-grid .icon-item:nth-child(5n+3) .icon-glyph-box:not(.icon-glyph-box-skin) {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 4px), linear-gradient(145deg, #714434, #422a24);
+}
+.desk-stage .icon-grid .icon-item:nth-child(5n+4) .icon-glyph-box:not(.icon-glyph-box-skin) {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 4px), linear-gradient(145deg, #173047, #101f31);
+}
+.desk-stage .icon-grid .icon-item:nth-child(5n+5) .icon-glyph-box:not(.icon-glyph-box-skin) {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 4px), linear-gradient(145deg, #7a3931, #47251f);
+}
+
+/* Twelve painted icons from the chosen mockup. Unknown/custom apps keep their glyph. */
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph-box::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  z-index: 2;
+  background-image: url("/companion/retro-app-icons.webp");
+  background-size: 400% 300%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 1px 1px rgba(20,12,6,.34));
+}
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph { opacity: 0; }
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph-box {
+  border: 1px solid #4e3d2c;
+  border-radius: 5px;
+  background: repeating-linear-gradient(92deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px), linear-gradient(145deg, #40594c, #263c35);
+  box-shadow: inset 0 1px rgba(255,255,255,.24), inset 0 -2px 3px rgba(27,17,10,.34), 0 3px 6px rgba(23,14,8,.42);
+}
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-skin-layer { display: none; }
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph-box::after {
+  content: "";
+  position: absolute;
+  inset: 4px auto auto 4px;
+  width: 4px;
+  height: 4px;
+  padding: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ead095 0 18%, #9f7440 42%, #47301d 100%);
+  -webkit-mask: none;
+  mask: none;
+  box-shadow:
+    calc(var(--slot-icon-width, 62px) - 12px) 0 #9f7440,
+    0 calc(var(--slot-icon-height, 62px) - 12px) #8d6538,
+    calc(var(--slot-icon-width, 62px) - 12px) calc(var(--slot-icon-height, 62px) - 12px) #8d6538;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.desk-stage .icon-item[data-icon-label="心意手作工坊"] .icon-glyph-box::before { background-position: 0 0; }
+.desk-stage .icon-item[data-icon-label="互动衣橱"] .icon-glyph-box::before { background-position: 33.333% 0; }
+.desk-stage .icon-item[data-icon-label="灯塔电影院"] .icon-glyph-box::before { background-position: 66.666% 0; }
+.desk-stage .icon-item[data-icon-id="shared_drawer"] .icon-glyph-box::before { background-position: 100% 0; }
+.desk-stage .icon-item[data-icon-id="chat"] .icon-glyph-box::before { background-position: 0 50%; }
+.desk-stage .icon-item[data-icon-id="diary"] .icon-glyph-box::before { background-position: 33.333% 50%; }
+.desk-stage .icon-item[data-icon-id="music"] .icon-glyph-box::before { background-position: 66.666% 50%; }
+.desk-stage .icon-item[data-icon-id="calendar"] .icon-glyph-box::before { background-position: 100% 50%; }
+.desk-stage .icon-item[data-icon-id="checkphone"] .icon-glyph-box::before { background-position: 0 100%; }
+.desk-stage .icon-item[data-icon-id="shopping"] .icon-glyph-box::before { background-position: 33.333% 100%; }
+.desk-stage .icon-item[data-icon-id="reading"] .icon-glyph-box::before { background-position: 66.666% 100%; }
+.desk-stage .icon-item[data-icon-id="interview_magazine"] .icon-glyph-box::before { background-position: 100% 100%; }
+
+.desk-stage .icon-label {
+  color: #f5ead2;
+  font-family: Georgia, "Noto Serif SC", serif;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-shadow: 0 1px 2px #140d08, 0 0 5px rgba(15,9,5,.75);
+}
+
+.desk-stage .wg-large-time {
+  align-items: flex-start;
+  padding-left: 28px;
+  filter: drop-shadow(0 2px 2px rgba(19,10,5,.7));
+}
+.desk-stage .wg-lt-date {
+  color: #f4e5c8;
+  font-family: Georgia, "Noto Serif SC", serif;
+  font-size: calc(17px*var(--app-text-scale,1));
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+.desk-stage .wg-lt-time {
+  color: #f7e8c9;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(91px*var(--app-text-scale,1));
+  font-weight: 800;
+  letter-spacing: -.035em;
+}
+
+.desk-stage .wg-mood-bubble,
+.desk-stage .phone-shell[data-widget-effect="glass"] .wg-mood-bubble {
+  color: #1c2b29;
+  background:
+    repeating-linear-gradient(0deg, rgba(83,61,36,.03) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, rgba(239,226,198,.96), rgba(204,184,145,.96));
+  border: 1px solid #614631;
+  border-radius: 4px;
+  box-shadow: inset 0 1px rgba(255,255,255,.5), 0 3px 9px rgba(29,17,9,.4);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  font-family: Georgia, "Noto Serif SC", serif;
+  font-weight: 700;
+}
+.desk-stage .wg-mood-bubble::before,
+.desk-stage .wg-mood-bubble::after { display: none; }
+
 .desk-stage .dock {
-  border-color: #5c5656;
-  background: rgba(16,25,29,.78);
-  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 9px 24px rgba(2,7,8,.2);
-  backdrop-filter: blur(14px);
+  min-height: 82px;
+  border: 1px solid #715338;
+  border-radius: 5px;
+  background:
+    linear-gradient(90deg, transparent 12px, rgba(205,170,110,.32) 12px 13px, transparent 13px calc(100% - 13px), rgba(205,170,110,.32) calc(100% - 13px) calc(100% - 12px), transparent calc(100% - 12px)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, rgba(17,31,42,.97), rgba(8,19,28,.97));
+  box-shadow: inset 0 0 0 3px rgba(176,134,78,.16), inset 0 1px rgba(255,255,255,.08), 0 8px 18px rgba(17,9,5,.42);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::after { display: none; }
+.desk-stage .dock .icon-label { display: none; }
+.desk-stage .dock .icon-glyph {
+  color: #f1dfbd !important;
+  width: 31px !important;
+  height: 31px !important;
+}
+
+.desk-stage .page-controls .dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(226,205,168,.38);
+  border: 1px solid rgba(75,48,28,.5);
+}
+.desk-stage .page-controls .dot.active {
+  background: #d8b777;
+  box-shadow: 0 0 0 1px #3d2b20, 0 1px 3px rgba(0,0,0,.45);
 }

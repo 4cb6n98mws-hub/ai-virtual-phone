@@ -4655,6 +4655,8 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                                 <button
                                   key={iconId}
                                   data-flip-id={`icon:${iconId}`}
+                                  data-icon-id={iconId}
+                                  data-icon-label={icon.label}
                                   className={itemClass}
                                   style={{ gridRow: pos.row, gridColumn: pos.col }}
                                   onClick={() => { if (!editMode) openApp(iconId); }}
@@ -4795,6 +4797,8 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                         key={iconId}
                         type="button"
                         data-flip-id={`icon:${iconId}`}
+                        data-icon-id={iconId}
+                        data-icon-label={icon.label}
                         className={isDragging ? "dock-item dragging" : "dock-item"}
                         onClick={() => { if (!editMode) openApp(iconId); }}
                         onPointerDown={(e) => handleItemPointerDown(e, "icon", iconId, DOCK_PAGE_KEY)}
