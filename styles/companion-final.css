@@ -417,7 +417,7 @@
 .desk-stage .phone-shell.app-open-shell .page-header,
 .desk-stage .phone-shell.app-open-shell :is(
   .diary-app-header, .calendar-apple-topbar, .shared-drawer-header,
-  .app-market-header, .rb-header, .xhs-appbar, .cp-xhs-appbar,
+  .app-market-header, .rb-header,
   .story-header, .game-hub-header, .qa-header, .cocreate-header,
   .music-header, .reading-header, .settings-header
 ) {
@@ -432,7 +432,7 @@
 .desk-stage .phone-shell.app-open-shell :is(
   .page-body, .modal-sheet, .modal-dialog, .diary-app, .diary-entry-app,
   .calendar-app-shell, .reading-app, .shared-drawer-app, .shopping-app,
-  .xhs-app, .char-app, .settings-main-menu, .appearance-main-menu,
+  .char-app, .settings-main-menu, .appearance-main-menu,
   .theme-section-page, .resource-page, .app-market-app, .reality-bridge-app-shell
 ) {
   color: #182b33;
@@ -444,7 +444,7 @@
 .desk-stage .phone-shell.app-open-shell :is(
   .app-card, .menu-card, .ui-card, .diary-entry-card, .calendar-event-card,
   .shared-drawer-card, .shared-drawer-candidate, .reading-card, .reading-book-card,
-  .shopping-card, .product-card, .xhs-note-card, .app-market-card, .rb-card,
+  .shopping-card, .product-card, .app-market-card, .rb-card,
   .char-card, .page-menu > button
 ) {
   color: #162a33 !important;
@@ -720,7 +720,7 @@
   .note-wall-tabbar, .music-tabbar, .music-tabs, .music-mine-tabs,
   .music-mine-subtabs, .calendar-float-bar, .app-market-tabbar,
   .game-bottom-nav, .game-bottom-tabs, .game-tabs, .game-studio-tabs,
-  .xhs-detail-bottom-bar, .interview-bottom-bar
+  .interview-bottom-bar
 ) {
   color: #f2dfbc !important;
   border-color: #87613a !important;
@@ -932,26 +932,6 @@
   opacity: 1 !important;
 }
 
-/* Social scrapbook. */
-.desk-stage .phone-shell[data-active-app="xiaohongshu"] .xhs-app {
-  color: #172d35 !important;
-  background-color: #ead8b7 !important;
-  background-image: var(--li-atlas) !important;
-  background-size: 200% 200% !important;
-  background-position: var(--li-paper) !important;
-}
-.desk-stage .phone-shell[data-active-app="xiaohongshu"] :is(
-  .xhs-note-card, .xhs-detail-sheet, .xhs-form-sheet, .xhs-publish-sheet,
-  .xhs-profile-edit-sheet, .xhs-settings-sheet, .xhs-message-detail-card,
-  .xhs-message-panel-card
-) {
-  color: #172d35 !important;
-  border: 1px solid #9d7e56 !important;
-  border-radius: 4px !important;
-  background: #efe1c5 !important;
-  box-shadow: 0 5px 11px rgba(52,33,17,.14) !important;
-}
-
 /* Game cabinet, co-create studio and assistant: dark instrument cases with
  * cream copy. Avoid descendant-wide color forcing so code and status states
  * can still communicate their meaning. */
@@ -1045,8 +1025,7 @@
   .calendar-edit-modal, .calendar-confirm-dialog,
   .shared-drawer-card, .shared-drawer-detail,
   .reading-list-item, .reading-settings-group,
-  .am-list-row, .app-market-sheet,
-  .xhs-note-card, .xhs-detail-sheet
+  .am-list-row, .app-market-sheet
 ) :is(h1,h2,h3,h4,strong,label,p,span,small) {
   text-shadow: none;
 }
@@ -1319,4 +1298,440 @@
   .desk-stage .phone-shell:not(.app-open-shell) .dock .vintage-app-art-dock {
     width: 42px;
   }
+}
+
+/* ── October 16 visual QA pass ─────────────────────────────────────
+ * Page-specific rules below deliberately sit after the general material
+ * system. They fix legacy screens that still carry inline colours or layout
+ * assumptions from their former modern themes. */
+
+/* Adventure is sometimes the only icon on the final grid row. That row can
+ * stretch, so anchor its nameplate to the artwork instead of the grid cell. */
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item[data-icon-id="mapmode"] .icon-label {
+  top: calc(var(--slot-icon-height) - 23px) !important;
+  bottom: auto !important;
+}
+
+/* Shopping — vintage mail-order catalogue. */
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-module {
+  color: #172e37 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+  font-family: Georgia, "Noto Serif SC", serif !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-header {
+  color: #f5e4c3 !important;
+  border-bottom: 1px solid #a47b48 !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.11), 0 4px 10px rgba(42,24,11,.24) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-header :is(strong, span, svg) {
+  color: #f5e4c3 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-header button,
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.cp-shopping-detail, .cp-shopping-order-detail) header button {
+  color: #f5e4c3 !important;
+  border: 1px solid #b88b51 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.1), 0 2px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-body {
+  color: #172e37 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-search-form,
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-header > div[style*="border-radius: 20px"] {
+  color: #172e37 !important;
+  border: 1px solid #9d7b50 !important;
+  border-radius: 4px !important;
+  background: #f1e3c6 !important;
+  box-shadow: inset 0 2px 5px rgba(72,46,24,.14) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-search-form input,
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-header input {
+  color: #172e37 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-search-form button,
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-body button[role="tab"] {
+  color: #183039 !important;
+  border: 1px solid #9c7b51 !important;
+  border-radius: 4px !important;
+  background: #eadabd !important;
+  box-shadow: 0 2px 0 rgba(76,49,26,.16) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-search-form button:not(:disabled),
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-body button[role="tab"][aria-selected="true"] {
+  color: #f8e8c8 !important;
+  border-color: #a36c55 !important;
+  background: #8f3f42 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.cp-shopping-status, .cp-empty-copy, .cp-shopping-hint) {
+  color: #665d50 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-empty-copy p {
+  color: #23343a !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-product-card {
+  color: #172e37 !important;
+  border: 1px solid #9a7950 !important;
+  border-radius: 4px !important;
+  background: #f0e1c4 !important;
+  box-shadow: 0 4px 0 rgba(77,49,25,.14), 0 8px 14px rgba(46,28,14,.12) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-product-preview {
+  border: 1px solid #b79b72 !important;
+  border-radius: 3px !important;
+  background: #ddcba9 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-product-card :is(strong, span, div) {
+  color: #172e37 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-bottom-nav {
+  color: #f4e2c1 !important;
+  border-top: 1px solid #a77b45 !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: 0 -5px 12px rgba(39,22,10,.24) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-bottom-nav button {
+  color: #c8b995 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-bottom-nav button[style*="#ff6b00"] {
+  color: #f8e8c8 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-bottom-nav button > div {
+  color: inherit !important;
+  border: 1px solid transparent !important;
+  border-radius: 3px !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-bottom-nav button[style*="#ff6b00"] > div {
+  border-color: #bd8d52 !important;
+  background: #8d3c40 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] .cp-shopping-refresh-btn {
+  color: #f8e8c8 !important;
+  border: 1px solid #c4995c !important;
+  border-radius: 50% !important;
+  background: #8d3c40 !important;
+  box-shadow: 0 4px 0 #4f2428, 0 9px 18px rgba(44,25,13,.25) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.cp-shopping-detail, .cp-shopping-order-detail) {
+  color: #172e37 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.cp-shopping-detail, .cp-shopping-order-detail) > header {
+  color: #f5e4c3 !important;
+  border-bottom: 1px solid #a47b48 !important;
+  background: #102a34 !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] :is(.cp-shopping-detail, .cp-shopping-order-detail) > header strong {
+  color: #f5e4c3 !important;
+}
+
+/* Reading — cream typography on leather, count fixed to the shelf foot. */
+.desk-stage .phone-shell[data-active-app="reading"] .reading-app-surface {
+  position: absolute !important;
+  color: #172e37 !important;
+  background: #ead8b7 !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-shelf-header {
+  color: #f6e6c6 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] :is(.reading-shelf-title, .reading-shelf-subtitle) {
+  color: #f6e6c6 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(17,8,3,.72) !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] :is(.reading-shelf-back, .reading-shelf-action-btn) {
+  color: #f5e4c3 !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.1), 0 2px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-shelf-action-primary {
+  color: #f8e8c8 !important;
+  background: #8d3c40 !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-shelf-body {
+  color: #172e37 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+  padding-bottom: 14px;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-search-bar {
+  color: #172e37 !important;
+  border: 1px solid #9d7b50 !important;
+  border-radius: 4px !important;
+  background: #f1e3c6 !important;
+  box-shadow: inset 0 2px 5px rgba(72,46,24,.14) !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-search-input {
+  color: #172e37 !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-shelf-body > .text-center {
+  color: #716858 !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-shelf-footer {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 46px;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: 0 !important;
+  color: #f4e2c0 !important;
+  border-top: 1px solid #a77b45 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: 0 -4px 10px rgba(39,22,10,.2) !important;
+}
+
+/* Presence — an old editorial issue, not black-on-black glass. */
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-app {
+  color: #1b3038 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-glass-bg {
+  opacity: 0 !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-header {
+  color: #f5e4c3 !important;
+  border-bottom: 1px solid #a47b48 !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213,163,91,.11), 0 4px 10px rgba(42,24,11,.24) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-header * {
+  color: #f5e4c3 !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-scroll {
+  color: #1b3038 !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-scroll :is(.text-white, [class*="text-white/"]) {
+  color: #4f4d45 !important;
+  text-shadow: none !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-scroll h1.text-white {
+  color: #172e37 !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-scroll [class*="bg-white/"] {
+  background: rgba(55,70,65,.25) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-glass-panel {
+  color: #f5e4c3 !important;
+  border: 1px solid #9a7345 !important;
+  border-radius: 4px !important;
+  background: #285044 !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.07), 0 5px 0 #173229, 0 10px 16px rgba(45,27,13,.18) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-glass-panel :is(h1,h2,h3,p,span,small,strong,em,svg,[class*="text-white/"]) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content > .absolute button {
+  color: #f7e7c7 !important;
+  border: 1px solid #c49a5e !important;
+  border-radius: 50% !important;
+  background: #8d3c40 !important;
+  box-shadow: 0 4px 0 #4f2428 !important;
+}
+
+/* App market — every installer option remains legible on the catalogue. */
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-app {
+  color: #172e37 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-header {
+  color: #f5e4c3 !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-header :is(strong, span, svg) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-icon-btn {
+  color: #f5e4c3 !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.1), 0 2px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-tabbar {
+  border: 0 !important;
+  background: #d7c29b !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-tabs {
+  border: 1px solid #9d7b50 !important;
+  border-radius: 4px !important;
+  background: #eadabd !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-tab {
+  color: #5d5a51 !important;
+  border-radius: 3px !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-tab[data-active="true"] {
+  color: #f8e8c8 !important;
+  background: #294f43 !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-body {
+  color: #172e37 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .am-create-action {
+  color: #172e37 !important;
+  border: 1px solid #9b7950 !important;
+  border-radius: 4px !important;
+  background: #f0e1c4 !important;
+  box-shadow: 0 4px 0 rgba(77,49,25,.14), 0 8px 14px rgba(46,28,14,.12) !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .am-create-action :is(strong, em) {
+  color: #172e37 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .am-create-action-icon {
+  color: #f5e4c3 !important;
+  border: 1px solid #a27b49 !important;
+  border-radius: 3px !important;
+  background: #294f43 !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .am-guide-btn {
+  color: #f8e8c8 !important;
+  border: 1px solid #b6834e !important;
+  border-radius: 4px !important;
+  background: #8d3c40 !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] :is(.app-market-empty, .app-market-empty p, .app-market-section-head h2, .app-market-section-head span) {
+  color: #544f45 !important;
+  opacity: 1 !important;
+}
+
+/* Xiaohongshu is intentionally exempt from the companion material theme. */
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] .xhs-app {
+  color: #333 !important;
+  background: #f5f5f5 !important;
+}
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] .xhs-app::before,
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] :is(.xhs-appbar, .cp-xhs-appbar, .cp-xhs-body, .cp-xhs-tabbar, .xhs-detail-bottom-bar) {
+  color: #333 !important;
+  border-color: rgba(0,0,0,.05) !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] .cp-xhs-header-title {
+  color: #999 !important;
+}
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] .cp-xhs-header-title.is-active,
+.desk-stage .phone-shell[data-active-app="xiaohongshu"] .cp-xhs-tab.is-active {
+  color: #333 !important;
+}
+
+/* Shared drawer — parchment catalogue with readable compact labels. */
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-app,
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-main {
+  color: #172e37 !important;
+  background-color: #ead8b7 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-paper) !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-header {
+  color: #f5e4c3 !important;
+  border-bottom: 1px solid #a47b48 !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-header :is(span,h1,svg,button) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-back {
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-intro :is(h2,p) {
+  color: #263940 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-kicker {
+  color: #8d3c40 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-filters {
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-filters button {
+  color: #263940 !important;
+  border: 1px solid #9b7950 !important;
+  background: #e5d3b3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-filters button[data-active="true"] {
+  color: #f8e8c8 !important;
+  border-color: #23473c !important;
+  background: #294f43 !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-empty,
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-empty :is(strong,p,svg) {
+  color: #5d594f !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="shared_drawer"] :is(.shared-drawer-card, .shared-drawer-today, .shared-drawer-candidates) {
+  color: #172e37 !important;
+  border-color: #9b7950 !important;
+  background: #f0e1c4 !important;
+}
+
+/* Story — all header controls use the same navy/green/brass hardware. */
+.desk-stage .phone-shell[data-active-app="story"] .story-top-btn {
+  color: #f5e4c3 !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.1), 0 2px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="story"] .story-header-center {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
 }

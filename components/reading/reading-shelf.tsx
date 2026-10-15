@@ -483,9 +483,10 @@ export function ReadingShelf({ onOpenBook, onClose, appearance, backgroundUrl, o
                     </div>
                 )}
 
-                <div className="reading-shelf-footer">
-                    共 {books.length} 本书籍
-                </div>
+            </div>
+
+            <div className="reading-shelf-footer">
+                共 {books.length} 本书籍
             </div>
 
             {showAppearanceDialog && (
