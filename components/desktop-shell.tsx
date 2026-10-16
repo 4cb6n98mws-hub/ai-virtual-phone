@@ -4872,7 +4872,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                     <button className="ui-bare-btn text-[var(--c-icon)]" onClick={() => setShowWidgetPicker(false)}>✕</button>
                   </div>
 
-                  <div className="px-4 py-3 flex gap-2 w-full">
+                  <div className="widget-picker-tabs px-4 py-3 flex gap-2 w-full">
                     {[
                       { id: "standard", label: "全局套件" },
                       { id: "freestyle", label: "自由艺术" },
@@ -4880,7 +4880,8 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                       <button
                         key={tab.id}
                         onClick={() => setWidgetPickerTab(tab.id as "standard" | "freestyle")}
-                        className={`flex-1 flex justify-center py-1.5 rounded-full text-[calc(13px*var(--app-text-scale,1))] font-medium transition-colors ${widgetPickerTab === tab.id ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600'}`}
+                        className="widget-picker-tab flex-1 flex justify-center py-1.5 text-[calc(13px*var(--app-text-scale,1))] font-medium transition-colors"
+                        data-active={widgetPickerTab === tab.id ? "true" : "false"}
                       >
                         {tab.label}
                       </button>

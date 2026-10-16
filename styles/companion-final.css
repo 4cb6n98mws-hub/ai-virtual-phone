@@ -3070,7 +3070,14 @@
 .desk-stage .phone-shell[data-active-app="diary"] .diary-entry-header-actions .note-wall-menu-btn {
   border-color: #a67a43 !important;
   border-radius: 4px !important;
-  background: #244b40 !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.13)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 1px rgba(226,188,119,.1), 0 2px 0 #172b35 !important;
 }
 .desk-stage .phone-shell[data-active-app="diary"] .diary-entry-empty {
   min-height: 68% !important;
@@ -4119,6 +4126,184 @@
   box-shadow: inset 0 0 0 2px rgba(226,188,119,.09), 0 3px 0 #173229, 0 8px 18px rgba(3,9,12,.4) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESKTOP WIDGET + SETTINGS SURFACE CORRECTION
+   The home widget catalogue and several real widgets were still painted by
+   the legacy glass/paper engine.  Make every built-in widget a navy/brass
+   object while leaving user-authored freestyle widgets and photo content
+   intact.  The cloud deployment page and Diary header keys share the same
+   physical material so no parchment or green fallback leaks through.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Built-in desktop widgets, including their catalogue previews. */
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle) {
+  overflow: hidden !important;
+  color: #f5e4c3 !important;
+  border: 1px solid #a67a43 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.13)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(226,188,119,.1),
+    0 3px 0 #172b35,
+    0 8px 15px rgba(3,9,12,.3) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]) > div {
+  color: #f5e4c3 !important;
+  border-radius: 3px !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.12)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]) > div::before,
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]) > div::after {
+  content: none !important;
+  display: none !important;
+}
+
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-calendar),
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-clock),
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-my-space) {
+  color: #f5e4c3 !important;
+  border-color: #a67a43 !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.13)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-calendar) *,
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:has(.wg-clock) * {
+  color: inherit;
+  text-shadow: 0 1px 2px rgba(3,9,12,.82);
+}
+.desk-stage .phone-shell:not(.app-open-shell) .wg-calendar-header-glass {
+  border: 1px solid rgba(226,188,119,.52) !important;
+  border-radius: 3px !important;
+  background: rgba(226,188,119,.16) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .wg-clock-line {
+  background: rgba(226,188,119,.58) !important;
+}
+
+/* Widget chooser: replace the flat green sheet and pale chips with the same
+ * navy material.  Active/inactive tabs remain clearly distinguishable. */
+.desk-stage .phone-shell:not(.app-open-shell) .widget-picker-sheet {
+  color: #f5e4c3 !important;
+  border: 1px solid #a67a43 !important;
+  border-bottom: 0 !important;
+  border-radius: 6px 6px 0 0 !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.14)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 2px rgba(226,188,119,.1), 0 -10px 24px rgba(3,9,12,.45) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .widget-picker-sheet .wm-header,
+.desk-stage .phone-shell:not(.app-open-shell) .widget-picker-sheet .wm-header :is(span, svg, button),
+.desk-stage .phone-shell:not(.app-open-shell) .widget-picker-sheet .wm-cat-name {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.9) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .widget-picker-tabs {
+  border-block: 1px solid rgba(166,122,67,.5);
+  background: rgba(4,18,24,.34) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .widget-picker-tab {
+  color: #dbc8a7 !important;
+  border: 1px solid #85633c !important;
+  border-radius: 4px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 1px rgba(226,188,119,.08), 0 2px 0 #172b35 !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .widget-picker-tab[data-active="true"] {
+  color: #fff0cf !important;
+  border-color: #c99a59 !important;
+  background-color: #294f43 !important;
+  background-position: var(--li-green) !important;
+}
+
+/* Settings > Cloud services: the legacy page-menu parchment extended beyond
+ * the framed card.  Paint the full available canvas navy and constrain the
+ * deployment panel to that canvas. */
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell .cloud-services-page {
+  flex: 1 1 auto !important;
+  min-height: 100% !important;
+  padding: 14px 12px 24px !important;
+  overflow-x: hidden !important;
+  color: #f5e4c3 !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.13)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell .cloud-services-panel {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  border: 1px solid #a67a43 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.12)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 2px rgba(226,188,119,.1), 0 5px 0 #172b35 !important;
+}
+
+/* Diary header tools: both Aa and the overflow key use navy denim, never the
+ * green fallback. */
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-header-actions .note-wall-menu-btn,
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-header-actions .diary-font-upload-btn {
+  color: #f7e7c7 !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.12)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 1px rgba(226,188,119,.1), 0 2px 0 #172b35 !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-header-actions .note-wall-menu-btn :is(svg, span) {
+  color: #f7e7c7 !important;
+  fill: currentColor;
+  opacity: 1 !important;
 }
 
 /* Empty states and information cards — exact Waiting-card material. */

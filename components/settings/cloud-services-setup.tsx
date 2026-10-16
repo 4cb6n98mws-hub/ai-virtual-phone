@@ -33,8 +33,8 @@ const SUPABASE_TOKENS_URL = "https://supabase.com/dashboard/account/tokens";
 /** 设置页「云服务部署」独立条目的整页形态。 */
 export function CloudServicesPage() {
     return (
-        <div className="page-menu">
-            <div className="menu-group" style={{ padding: "18px 16px" }}>
+        <div className="page-menu cloud-services-page">
+            <div className="menu-group cloud-services-panel" style={{ padding: "18px 16px" }}>
                 <CloudServicesSetup />
             </div>
         </div>
