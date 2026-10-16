@@ -119,6 +119,25 @@ type GameLibraryCollection = {
   updatedAt?: string;
   games: GameInstalledItem[];
 };
+
+function GameCoverArtwork({ template, compact = false }: { template?: GameTemplate; compact?: boolean }) {
+  if (template?.id === "builtin_game_night_gomoku") {
+    return (
+      <span className={`night-gomoku-cover-art ${compact ? "is-compact" : ""}`} aria-label="夜局五子棋棋盘封面">
+        <span className="night-gomoku-cover-board" aria-hidden="true">
+          <i className="is-black" style={{ left: "28%", top: "28%" }} />
+          <i className="is-white" style={{ left: "43%", top: "43%" }} />
+          <i className="is-black" style={{ left: "58%", top: "58%" }} />
+          <i className="is-white" style={{ left: "73%", top: "43%" }} />
+          <i className="is-black" style={{ left: "43%", top: "73%" }} />
+        </span>
+        {!compact ? <b>夜局五子棋</b> : null}
+      </span>
+    );
+  }
+  if (template?.coverImage) return <img src={template.coverImage} alt="" />;
+  return <ImageIcon className="game-discover-placeholder-icon" size={compact ? 18 : 28} aria-hidden="true" />;
+}
 type GameCommentNode = GameComment & { replies: GameCommentNode[] };
 type GameCommentDisplayItem = {
   comment: GameComment;
@@ -2261,7 +2280,7 @@ export function GameHubApp({ onClose, autoOpenLocalId }: { onClose: () => void; 
         onClick={() => openInstalledGameDetails(item)}
       >
         <div className={`${compact ? "game-collection-mini-cover" : "game-recent-cover"} ${hasCover ? "has-image" : ""}`}>
-          {hasCover ? <img src={template.coverImage} alt="" /> : <ImageIcon size={compact ? 18 : 24} />}
+          <GameCoverArtwork template={template} compact />
         </div>
         <div>
           <strong>{template.title}</strong>
@@ -2404,11 +2423,7 @@ export function GameHubApp({ onClose, autoOpenLocalId }: { onClose: () => void; 
       <article key={template.id} className="game-discover-card">
         <button type="button" className="game-discover-main" onClick={() => openTemplateDetails(template)}>
           <div className={`game-discover-cover game-discover-cover--${index % 4} ${hasCover ? "has-image" : ""}`}>
-            {hasCover ? (
-              <img src={template.coverImage} alt="" />
-            ) : (
-              <ImageIcon className="game-discover-placeholder-icon" size={28} aria-hidden="true" />
-            )}
+            <GameCoverArtwork template={template} />
             {displayTags[0] ? <span>{displayTags[0]}</span> : null}
           </div>
           <div className="game-discover-body">
@@ -2682,7 +2697,7 @@ export function GameHubApp({ onClose, autoOpenLocalId }: { onClose: () => void; 
           </div>
           {gameDisplayDescription(template) ? <p className="game-modal-note">{gameDisplayDescription(template)}</p> : null}
           <div className={`game-modal-cover ${template.coverImage ? "has-image" : ""}`}>
-            {template.coverImage ? <img src={template.coverImage} alt="" /> : <ImageIcon size={28} />}
+            <GameCoverArtwork template={template} />
           </div>
           {displayTags.length > 0 ? (
             <div className="game-modal-tags">
