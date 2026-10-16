@@ -269,7 +269,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
   };
 
   const S: Record<string, React.CSSProperties> = {
-    root: { position: "absolute", inset: 0, background: "#0a0a0f", display: "flex", flexDirection: "column", fontFamily: "'PingFang SC', system-ui, sans-serif", color: "#e0dcd5", overflow: "hidden" },
+    root: { position: "absolute", inset: 0, background: "#102a34", display: "flex", flexDirection: "column", fontFamily: "'PingFang SC', system-ui, sans-serif", color: "#f5e4c3", overflow: "hidden" },
     header: {
       height: "var(--page-header-content-height, 42px)",
       marginTop: "var(--page-header-safe-top, 48px)",
@@ -279,21 +279,21 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
       alignItems: "center",
       flexShrink: 0,
     },
-    btn: { width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", color: "rgba(255,255,255,0.5)", cursor: "pointer" },
+    btn: { width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", background: "#17343d", border: "1px solid #8d673e", borderRadius: 4, color: "#f5e4c3", cursor: "pointer" },
     body: { flex: 1, overflow: "auto", padding: "0 20px 20px" },
-    card: { padding: "14px 16px", borderRadius: 10, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", marginBottom: 10 },
-    label: { fontSize: "calc(12px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.4)", marginBottom: 6 },
-    input: { width: "100%", minHeight: 100, padding: 12, borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)", color: "#e0dcd5", fontSize: "calc(14px*var(--app-text-scale,1))", fontFamily: "inherit", lineHeight: 1.6, resize: "vertical" as const, outline: "none", boxSizing: "border-box" as const },
-    primaryBtn: { width: "100%", padding: "14px 0", borderRadius: 10, border: "none", background: "rgba(200,160,100,0.2)", color: "#e8d0a0", fontSize: "calc(15px*var(--app-text-scale,1))", fontWeight: 500, letterSpacing: "0.1em", cursor: "pointer", fontFamily: "inherit" },
+    card: { padding: "14px 16px", borderRadius: 4, background: "#17343d", border: "1px solid #8d673e", marginBottom: 10 },
+    label: { fontSize: "calc(12px*var(--app-text-scale,1))", color: "#dbc8a7", marginBottom: 6 },
+    input: { width: "100%", minHeight: 100, padding: 12, borderRadius: 4, border: "1px solid #a78250", background: "#ead8b7", color: "#23363b", fontSize: "calc(14px*var(--app-text-scale,1))", fontFamily: "inherit", lineHeight: 1.6, resize: "vertical" as const, outline: "none", boxSizing: "border-box" as const },
+    primaryBtn: { width: "100%", padding: "14px 0", borderRadius: 4, border: "1px solid #b78a50", background: "#294f43", color: "#fff0cf", fontSize: "calc(15px*var(--app-text-scale,1))", fontWeight: 600, letterSpacing: "0.1em", cursor: "pointer", fontFamily: "inherit" },
   };
 
   return (
-    <div style={S.root}>
+    <div className="adventure-lobby" style={S.root}>
       <div style={S.header}>
         <button className="companion-app-back" onClick={mode === "list" ? onClose : () => setMode("list")} style={S.btn} aria-label="返回">
           <ArrowLeft size={20} />
         </button>
-        <span style={{ fontSize: "calc(13px*var(--app-text-scale,1))", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>
+        <span style={{ fontSize: "calc(13px*var(--app-text-scale,1))", letterSpacing: "0.2em", color: "#f5e4c3", fontFamily: "monospace" }}>
           {mode === "list" ? "MAP ADVENTURES" : mode === "create" ? "NEW WORLD" : "DM PROMPTS"}
         </span>
         {mode === "list" ? (
@@ -314,7 +314,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
         {/* ── World List ── */}
         {mode === "list" && (
           worlds.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "80px 0", color: "rgba(255,255,255,0.2)" }}>
+            <div style={{ textAlign: "center", padding: "80px 0", color: "#dbc8a7" }}>
               <div style={{ fontSize: "calc(32px*var(--app-text-scale,1))", marginBottom: 12 }}>🗺</div>
               <div style={{ fontSize: "calc(13px*var(--app-text-scale,1))" }}>还没有冒险世界</div>
               <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", marginTop: 4 }}>点击右下角 + 创建一个</div>
@@ -327,9 +327,9 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                 {w.status === "failed" && <span style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "rgba(255,100,80,0.7)", marginLeft: 8, fontWeight: 400 }}>生成失败</span>}
               </div>
               {w.status === "failed" && w.statusMessage && (
-                <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,100,80,0.5)", marginBottom: 6, lineHeight: 1.4 }}>{w.statusMessage.slice(0, 100)}</div>
+                <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,130,110,0.9)", marginBottom: 6, lineHeight: 1.4 }}>{w.statusMessage.slice(0, 100)}</div>
               )}
-              {!w.status && <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.35)", marginBottom: 10 }}>{w.skeleton.world.lore.slice(0, 60)}...</div>}
+              {!w.status && <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#dbc8a7", marginBottom: 10 }}>{w.skeleton.world.lore.slice(0, 60)}...</div>}
               <div style={{ display: "flex", gap: 8 }}>
                 {!w.status && (
                   <button onClick={() => handleEnterWorld(w)} style={{ flex: 1, padding: "8px 0", borderRadius: 6, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.06)", color: "#e0dcd5", fontSize: "calc(12px*var(--app-text-scale,1))", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 4, fontFamily: "inherit" }}>
@@ -337,7 +337,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                   </button>
                 )}
                 {w.status === "generating" && (
-                  <div style={{ flex: 1, padding: "8px 0", textAlign: "center", fontSize: "calc(11px*var(--app-text-scale,1))", color: "rgba(255,200,100,0.4)", fontFamily: "monospace", letterSpacing: "0.1em" }}>
+                  <div style={{ flex: 1, padding: "8px 0", textAlign: "center", fontSize: "calc(11px*var(--app-text-scale,1))", color: "#e5c681", fontFamily: "monospace", letterSpacing: "0.1em" }}>
                     世界正在生成中...
                   </div>
                 )}
@@ -375,14 +375,14 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
           }}>
             {/* ── Tome header ornament ── */}
             <div style={{ textAlign: "center", marginBottom: 16 }}>
-              <div style={{ fontSize: "calc(9px*var(--app-text-scale,1))", letterSpacing: "0.4em", color: "rgba(200,160,100,0.3)", fontFamily: "monospace" }}>
+              <div style={{ fontSize: "calc(9px*var(--app-text-scale,1))", letterSpacing: "0.4em", color: "#c6b596", fontFamily: "monospace" }}>
                 ── 世界创造之书 ──
               </div>
             </div>
 
             {/* ── World description ── */}
             <div style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "rgba(200,160,100,0.5)", marginBottom: 6, letterSpacing: "0.08em" }}>
+              <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#dbc8a7", marginBottom: 6, letterSpacing: "0.08em" }}>
                 世界描述
               </div>
               <textarea value={description} onChange={e => setDescription(e.target.value)}
@@ -406,7 +406,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
               { label: "难度", value: difficulty, setter: setDifficulty, tags: ["轻松冒险", "适中", "硬核生存", "地狱难度"] },
             ] as const).map(section => (
               <div key={section.label} style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "rgba(200,160,100,0.5)", marginBottom: 7, letterSpacing: "0.08em" }}>
+                <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#dbc8a7", marginBottom: 7, letterSpacing: "0.08em" }}>
                   {section.label}
                 </div>
                 <div style={{
@@ -426,7 +426,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                             background: active
                               ? "linear-gradient(135deg, rgba(200,160,100,0.18), rgba(200,160,100,0.08))"
                               : "rgba(0,0,0,0.3)",
-                            color: active ? "#e8d0a0" : "rgba(255,255,255,0.35)",
+                            color: active ? "#fff0cf" : "#dbc8a7",
                             fontSize: "calc(11px*var(--app-text-scale,1))", cursor: "pointer", fontFamily: "inherit",
                             boxShadow: active ? "0 0 8px rgba(200,160,100,0.1), inset 0 1px 0 rgba(255,255,255,0.05)" : "none",
                             transition: "all 0.2s ease",
@@ -461,7 +461,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
               ] as const).map(s => (
                 <div key={s.label} style={{ flex: 1 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "rgba(200,160,100,0.5)", letterSpacing: "0.08em" }}>{s.label}</span>
+                    <span style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#dbc8a7", letterSpacing: "0.08em" }}>{s.label}</span>
                     <span style={{ fontSize: "calc(13px*var(--app-text-scale,1))", color: "#e8d0a0", fontWeight: 600, fontFamily: "monospace" }}>{s.value}</span>
                   </div>
                   <input type="range" className="adv-slider"
@@ -477,11 +477,11 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
 
             {/* ── Character selection ── */}
             <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "rgba(200,160,100,0.5)", marginBottom: 7, letterSpacing: "0.08em" }}>
+              <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#dbc8a7", marginBottom: 7, letterSpacing: "0.08em" }}>
                 同行角色（可不选）
               </div>
               {characters.length === 0 ? (
-                <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.15)", textAlign: "center", padding: "12px 0" }}>
+                <div style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#c6b596", textAlign: "center", padding: "12px 0" }}>
                   还没有角色，可以先创建
                 </div>
               ) : (
@@ -513,7 +513,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                           )}
                         </div>
                         <div style={{
-                          fontSize: "calc(10px*var(--app-text-scale,1))", color: active ? "#e8d0a0" : "rgba(255,255,255,0.35)",
+                          fontSize: "calc(10px*var(--app-text-scale,1))", color: active ? "#fff0cf" : "#dbc8a7",
                           textAlign: "center", lineHeight: 1.2,
                           overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
                           width: "100%",
@@ -559,7 +559,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
 
             {/* ── Tome footer ornament ── */}
             <div style={{ textAlign: "center", marginTop: 12 }}>
-              <div style={{ fontSize: "calc(8px*var(--app-text-scale,1))", letterSpacing: "0.5em", color: "rgba(200,160,100,0.15)", fontFamily: "monospace" }}>
+              <div style={{ fontSize: "calc(8px*var(--app-text-scale,1))", letterSpacing: "0.5em", color: "#c6b596", fontFamily: "monospace" }}>
                 ─ ✧ ─
               </div>
             </div>
@@ -573,11 +573,11 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
               <div style={{ ...S.label }}>运行参数</div>
 
               <div style={{ padding: "2px 0 12px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.3)", marginBottom: 8, letterSpacing: "0.1em" }}>DM 上下文截断（Token）</div>
+                <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#dbc8a7", marginBottom: 8, letterSpacing: "0.1em" }}>DM 上下文截断（Token）</div>
                 <div style={{ display: "flex", gap: 16 }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-                      <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.3)" }}>日志</span>
+                      <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#dbc8a7" }}>日志</span>
                       <span style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#e8d0a0", fontFamily: "monospace" }}>{dmTokenConfig.journalTokenBudget}</span>
                     </div>
                     <input type="range" className="adv-slider" min={1000} max={100000} step={500}
@@ -587,7 +587,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-                      <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.3)" }}>对话</span>
+                      <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#dbc8a7" }}>对话</span>
                       <span style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#e8d0a0", fontFamily: "monospace" }}>{dmTokenConfig.dialogueTokenBudget}</span>
                     </div>
                     <input type="range" className="adv-slider" min={1000} max={100000} step={500}
@@ -601,7 +601,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
               <div style={{ padding: "12px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
                 <div style={{ ...S.label }}>冒险自动总结</div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 6 }}>
-                  <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>自动总结并传入全局记忆间隔</span>
+                  <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#dbc8a7", letterSpacing: "0.1em" }}>自动总结并传入全局记忆间隔</span>
                   <span style={{ fontSize: "calc(11px*var(--app-text-scale,1))", color: "#e8d0a0", fontFamily: "monospace" }}>
                     {summaryConfig.interval === 0 ? "关闭" : `每 ${summaryConfig.interval} 条`}
                   </span>
@@ -617,8 +617,8 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                   style={{ width: "100%" }}
                 />
                 <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
-                  <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.25)" }}>关闭</span>
-                  <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.25)" }}>100 条</span>
+                  <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#c6b596" }}>关闭</span>
+                  <span style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#c6b596" }}>100 条</span>
                 </div>
               </div>
 
@@ -626,8 +626,8 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                 <div style={{ ...S.label }}>双语翻译</div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: adventureConfig.bilingualTranslationEnabled ? 10 : 0 }}>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>角色双语翻译</div>
-                    <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.3)", marginTop: 3 }}>只作用于角色发言，不影响 DM / NPC / 选项 / 日志</div>
+                    <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#dbc8a7", letterSpacing: "0.1em" }}>角色双语翻译</div>
+                    <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#c6b596", marginTop: 3 }}>只作用于角色发言，不影响 DM / NPC / 选项 / 日志</div>
                   </div>
                   <Toggle
                     checked={adventureConfig.bilingualTranslationEnabled}
@@ -637,8 +637,8 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                 {adventureConfig.bilingualTranslationEnabled && (
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
                     <div style={{ minWidth: 0 }}>
-                      <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>折叠中文译文</div>
-                      <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.3)", marginTop: 3 }}>关闭后默认展开中文</div>
+                      <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#dbc8a7", letterSpacing: "0.1em" }}>折叠中文译文</div>
+                      <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#c6b596", marginTop: 3 }}>关闭后默认展开中文</div>
                     </div>
                     <Toggle
                       checked={adventureConfig.collapseBilingualTranslation === true}
@@ -703,7 +703,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                     </button>
                     {isOpen && (
                       <div style={{ padding: "0 10px 10px" }}>
-                        <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.26)", lineHeight: 1.6, padding: "8px 10px", borderRadius: 8, background: "rgba(255,255,255,0.025)", marginBottom: 8 }}>
+                        <div style={{ fontSize: "calc(10px*var(--app-text-scale,1))", color: "#dbc8a7", lineHeight: 1.6, padding: "8px 10px", borderRadius: 4, background: "#102a34", marginBottom: 8 }}>
                           {section.helper}
                         </div>
                         <textarea
@@ -718,7 +718,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
                             fontFamily: "monospace",
                           }}
                         />
-                        <div style={{ fontSize: "calc(9px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.15)", textAlign: "center", marginTop: 6 }}>
+                        <div style={{ fontSize: "calc(9px*var(--app-text-scale,1))", color: "#c6b596", textAlign: "center", marginTop: 6 }}>
                           当前显示的即为实际使用的提示词，可直接修改
                         </div>
                       </div>
@@ -741,7 +741,7 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
               </button>
               <button onClick={resetCurrentPrompt} style={{
                 flexShrink: 0, padding: "14px 20px", borderRadius: 10, border: "1px solid rgba(255,255,255,0.1)",
-                background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: "calc(12px*var(--app-text-scale,1))",
+                background: "#17343d", color: "#dbc8a7", fontSize: "calc(12px*var(--app-text-scale,1))",
                 cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
               }}>
                 重置当前提示词
@@ -785,9 +785,9 @@ export default function MapLobby({ onClose, onStartGame }: Props) {
         <div onClick={() => setDeleteConfirmId(null)} style={{ position: "absolute", inset: 0, zIndex: 50, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
           <div onClick={e => e.stopPropagation()} style={{ background: "rgba(15,12,18,0.98)", borderRadius: 12, border: "1px solid rgba(255,100,80,0.15)", padding: 20, maxWidth: 280, width: "100%", textAlign: "center" }}>
             <div style={{ fontSize: "calc(14px*var(--app-text-scale,1))", fontWeight: 600, marginBottom: 8 }}>确认删除？</div>
-            <div style={{ fontSize: "calc(12px*var(--app-text-scale,1))", color: "rgba(255,255,255,0.4)", marginBottom: 16 }}>这个世界的所有数据和存档将被永久删除</div>
+            <div style={{ fontSize: "calc(12px*var(--app-text-scale,1))", color: "#dbc8a7", marginBottom: 16 }}>这个世界的所有数据和存档将被永久删除</div>
             <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={() => setDeleteConfirmId(null)} style={{ flex: 1, padding: "10px 0", borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)", background: "transparent", color: "rgba(255,255,255,0.5)", fontSize: "calc(13px*var(--app-text-scale,1))", cursor: "pointer", fontFamily: "inherit" }}>
+              <button onClick={() => setDeleteConfirmId(null)} style={{ flex: 1, padding: "10px 0", borderRadius: 4, border: "1px solid #8d673e", background: "#17343d", color: "#f5e4c3", fontSize: "calc(13px*var(--app-text-scale,1))", cursor: "pointer", fontFamily: "inherit" }}>
                 取消
               </button>
               <button onClick={() => handleDelete(deleteConfirmId)} style={{ flex: 1, padding: "10px 0", borderRadius: 8, border: "none", background: "rgba(255,80,60,0.2)", color: "rgba(255,100,80,0.9)", fontSize: "calc(13px*var(--app-text-scale,1))", cursor: "pointer", fontFamily: "inherit" }}>

@@ -280,7 +280,7 @@ export function PhoneThemeApp({
   const title = section === "menu" ? "\u5916\u89C2" : SECTION_TITLES[section];
 
   return (
-    <PageShell title={title} onBack={handleBack}>
+    <PageShell className="theme-page-shell" title={title} onBack={handleBack}>
         {section === "menu" ? (
           <div className="page-menu appearance-main-menu">
             {/* Section 1: 外观定制 — 2x2 card grid */}

@@ -1071,7 +1071,7 @@ function CharListView({
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
         }
-        className="[&_.page-body]:pb-0"
+        className="characters-page-shell [&_.page-body]:pb-0"
         rightAction={
           <div className="flex items-center gap-2">
             {isEditing && (

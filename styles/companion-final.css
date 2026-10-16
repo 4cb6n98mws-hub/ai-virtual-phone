@@ -3332,3 +3332,386 @@
   background: #17343d !important;
   box-shadow: 0 4px 0 rgba(63, 39, 22, .72) !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPLETE NON-XHS INTERACTION AUDIT
+   Settings, appearance, characters, story, VN, adventure, mixology and
+   World Builder.  Deliberately excludes data-active-app="xiaohongshu".
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --companion-material-atlas: url("/companion/vintage-material-atlas.webp");
+}
+
+/* Settings: every nested configuration page shares one readable material set. */
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell .page-body {
+  color: #f5e4c3 !important;
+  background-color: #102a34 !important;
+  background-image: linear-gradient(rgba(7, 24, 31, .26), rgba(7, 24, 31, .26)), var(--companion-material-atlas) !important;
+  background-size: cover !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(h1, h2, h3, h4, strong, .ui-section-title) {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .88) !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(
+  .ui-config-card, .ui-group-card, .ui-toggle-row, .ui-empty, .ui-empty-compact,
+  .g-card, .g-section, .ui-collapsible, .ui-entry-card, .binding-choice-card,
+  .binding-aux-select, .binding-detail-card, .settings-account-card
+) {
+  color: #f5e4c3 !important;
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background: rgba(19, 50, 59, .96) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.05), 0 3px 0 rgba(66, 41, 24, .62) !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is([class*="text-black"], [class*="text-gray-"]) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(p, label, small, .ui-hint, .ui-empty, .ui-empty-compact) {
+  color: #dbc8a7 !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), textarea, select) {
+  color: #23363b !important;
+  border: 1px solid #a78250 !important;
+  border-radius: 4px !important;
+  background: #ead8b7 !important;
+  box-shadow: inset 0 2px 4px rgba(72, 46, 24, .15) !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(input, textarea)::placeholder {
+  color: #6d6252 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell button[class*="bg-white"],
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell button[class*="bg-black"] {
+  color: #fff0cf !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+  box-shadow: 0 2px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell [class*="absolute"][class*="bg-white"]:not(.ui-toggle-knob) {
+  color: #f5e4c3 !important;
+  border: 1px solid #8d673e !important;
+  background: #17343d !important;
+}
+
+/* Appearance and the DIY editor: retain previews, replace the surrounding glass. */
+.desk-stage .phone-shell[data-active-app="theme"] .theme-page-shell .page-body,
+.desk-stage .phone-shell[data-active-app="theme"] .theme-page-shell .theme-section-page {
+  color: #f5e4c3 !important;
+  background-color: #102a34 !important;
+  background-image: linear-gradient(rgba(7, 24, 31, .26), rgba(7, 24, 31, .26)), var(--companion-material-atlas) !important;
+  background-size: cover !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .theme-page-shell :is(h2, h3, h4, label, .wm-catalog-title, .wp-slider-row label, .wp-slider-value) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .theme-page-shell :is(.g-card, .wp-sliders, .wm-cat-item) {
+  color: #f5e4c3 !important;
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  box-shadow: 0 3px 0 rgba(66, 41, 24, .62) !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .theme-page-shell .wm-cat-name {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .theme-page-shell .wp-card {
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .theme-page-shell .wp-card-active {
+  border-color: #e5c681 !important;
+  box-shadow: 0 0 0 2px rgba(229,198,129,.22) !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-diy-widget-editor {
+  color: #f5e4c3 !important;
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background: #102a34 !important;
+  box-shadow: 0 5px 0 rgba(66, 41, 24, .68) !important;
+  backdrop-filter: none !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-diy-widget-editor > div:first-of-type,
+.desk-stage .phone-shell[data-active-app="theme"] .companion-diy-widget-editor [class*="bg-white/"]:not(.blueprint-bg) {
+  color: #f5e4c3 !important;
+  border-color: #6f5637 !important;
+  background: #17343d !important;
+  backdrop-filter: none !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-diy-widget-editor :is([class*="text-black"], [class*="text-gray-"]) {
+  color: #dbc8a7 !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] .companion-diy-widget-editor button[class*="bg-black"] {
+  color: #fff0cf !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+}
+
+/* Character archive: keep photographs/paper props; unify navigation and sheets. */
+.desk-stage .phone-shell[data-active-app="characters"] .characters-page-shell .page-header,
+.desk-stage .phone-shell[data-active-app="characters"] .page-header,
+.desk-stage .phone-shell[data-active-app="characters"] .characters-page-shell .char-bottom-bar,
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-bottom-pill, .wt-strip) {
+  color: #f5e4c3 !important;
+  border-color: #8d673e !important;
+  background-color: #102a34 !important;
+  background-image: linear-gradient(rgba(7,24,31,.25), rgba(7,24,31,.25)), var(--companion-material-atlas) !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] .characters-page-shell .page-header :is(strong, button),
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-tab, .wt-tab-new, .wt-bottom-pill-btn) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-tab-active, .wt-bottom-pill-active) {
+  color: #fff0cf !important;
+  border-color: #b78a50 !important;
+  background: #294f43 !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-paper, .char-timezone-sheet, .char-punched-hole-note, .wt-link-hint) {
+  color: #f5e4c3 !important;
+  border: 1px solid #9f7645 !important;
+  border-radius: 4px !important;
+  background-color: #17343d !important;
+  background-image: linear-gradient(rgba(7,24,31,.14), rgba(7,24,31,.14)), var(--companion-material-atlas) !important;
+  box-shadow: 0 8px 28px rgba(3,9,12,.72) !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-paper-kicker, .wt-paper-label, .wt-relation-row, .wt-relation-text, .wt-link-hint, .wt-link-hint strong, .char-punched-hole-note h3, .char-punched-hole-note p) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-paper-hint, .wt-relation-dash, .char-timezone-more, .char-timezone-empty, .char-empty-sub) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-paper-input, .wt-paper-textarea, .char-timezone-search) {
+  color: #23363b !important;
+  border: 1px solid #a78250 !important;
+  background: #ead8b7 !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-relation-item, .char-timezone-option) {
+  color: #f5e4c3 !important;
+  border-color: #6f5637 !important;
+  background: #102a34 !important;
+}
+.desk-stage .phone-shell[data-active-app="characters"] :is(.wt-btn, .char-timezone-sheet button, .char-punched-hole-btn) {
+  color: #fff0cf !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+}
+
+/* Story: one variable set controls body, drawer, bubbles, editor and empty states. */
+.desk-stage .phone-shell[data-active-app="story"] .story-app-shell {
+  --c-story-bg-top: #102a34;
+  --c-story-bg-mid: #102a34;
+  --c-story-bg-bottom: #0d252e;
+  --c-story-text: #f5e4c3;
+  --c-story-text-light: #dbc8a7;
+  --c-story-heading: #fff0cf;
+  --c-story-sub: #dbc8a7;
+  --c-story-placeholder: #776c59;
+  --c-story-panel: #17343d;
+  --c-story-panel-active: #294f43;
+  --c-story-bubble-bg: #17343d;
+  --c-story-meta-bg: #102a34;
+  --c-story-input-bar: #102a34;
+  --c-story-input-bar-focus: #17343d;
+  --c-story-input-inner: #ead8b7;
+  --c-story-input-inner-focus: #f0dfbd;
+  --c-story-drawer-top: #17343d;
+  --c-story-drawer-bottom: #102a34;
+  --c-story-css-box-bg: #0d252e;
+  --c-story-border: #8d673e;
+  --c-story-accent: #e5c681;
+  --c-story-accent-light: #9f7645;
+  --c-story-send-color: #315746;
+  --c-story-code-bg: #0b2028;
+  --c-story-code-color: #f5e4c3;
+  --c-story-quote: #dbc8a7;
+  --c-story-quote-bg: #0d252e;
+  --c-story-table-header-bg: #294f43;
+  background-image: linear-gradient(rgba(7,24,31,.25), rgba(7,24,31,.25)), var(--companion-material-atlas) !important;
+  background-size: cover !important;
+}
+.desk-stage .phone-shell[data-active-app="story"] :is(.story-header, .story-drawer, .story-input-bar, .story-bubble, .story-empty-panel, .story-load-more-btn, .story-tool-btn) {
+  border-color: #8d673e !important;
+  box-shadow: 0 3px 0 rgba(66,41,24,.56) !important;
+}
+.desk-stage .phone-shell[data-active-app="story"] :is(.story-header-center, .story-character-name, .story-drawer-eyebrow, .story-empty-desc, .story-load-more-btn, .story-meta) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="story"] .story-composer textarea {
+  color: #23363b !important;
+}
+.desk-stage .phone-shell[data-active-app="story"] .story-composer textarea::placeholder {
+  color: #6d6252 !important;
+  opacity: 1 !important;
+}
+
+/* VN selection/settings. Scene artwork remains untouched. */
+.desk-stage .phone-shell:is([data-active-app="vnmode"], [data-active-app="vnplay"], [data-active-app="vnchapters"]) .vns-shell {
+  --vn-ui-bg: #102a34 !important;
+  --vn-ui-panel: #17343d !important;
+  --vn-ui-border: #8d673e !important;
+  --vn-ui-text: #f5e4c3 !important;
+  --vn-ui-text-bright: #fff0cf !important;
+  --vn-ui-text-dim: #dbc8a7 !important;
+  --vn-ui-accent: #e5c681 !important;
+  --vn-ui-accent-dim: #b78a50 !important;
+  --vn-ui-accent-bg: #294f43 !important;
+  background-color: #102a34 !important;
+  background-image: linear-gradient(rgba(7,24,31,.24), rgba(7,24,31,.24)), var(--companion-material-atlas) !important;
+  background-size: cover !important;
+}
+.desk-stage .phone-shell:is([data-active-app="vnmode"], [data-active-app="vnplay"], [data-active-app="vnchapters"]) :is(.vns-topbar, .vns-prompt-card, .vns-asset-entry) {
+  border-color: #8d673e !important;
+  background: rgba(19,50,59,.96) !important;
+}
+.desk-stage .phone-shell:is([data-active-app="vnmode"], [data-active-app="vnplay"], [data-active-app="vnchapters"]) :is(.vns-title, .vns-strip-name, .vns-asset-entry-title, .vns-prompt-title) {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.9) !important;
+}
+.desk-stage .phone-shell:is([data-active-app="vnmode"], [data-active-app="vnplay"], [data-active-app="vnchapters"]) :is(.vns-strip-sub, .vns-asset-entry-desc, .vns-prompt-helper, .vns-empty) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell:is([data-active-app="vnmode"], [data-active-app="vnplay"], [data-active-app="vnchapters"]) :is(.vns-enter, .vns-asset-entry-btn, .vns-settings-action-primary) {
+  color: #fff0cf !important;
+  border-color: #b78a50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+}
+
+/* Adventure lobby/player: make muted narrative and all auxiliary controls legible. */
+.desk-stage .phone-shell[data-active-app="mapmode"] :is(.adventure-lobby, .adventure-shell) {
+  --c-adv-bg: #102a34 !important;
+  --c-adv-stream-bg: rgba(13,37,46,.94) !important;
+  --c-adv-bar-bg: #102a34 !important;
+  --c-adv-bar-border: #8d673e !important;
+  --c-adv-panel-bg: rgba(19,50,59,.98) !important;
+  --c-adv-text: #f5e4c3 !important;
+  --c-adv-text-dim: #dbc8a7 !important;
+  --c-adv-text-muted: #c6b596 !important;
+  --c-adv-accent: #e5c681 !important;
+  --c-adv-accent-dim: #9f7645 !important;
+  --c-adv-icon: #dbc8a7 !important;
+  --c-adv-icon-active: #fff0cf !important;
+  --c-adv-narration: #dbc8a7 !important;
+  --c-adv-system: #c6b596 !important;
+  --c-adv-body: #f5e4c3 !important;
+  --c-adv-character-name: #fff0cf !important;
+  --c-adv-choice-border: #8d673e !important;
+  --c-adv-choice-bg: #17343d !important;
+  --c-adv-input-border: #a78250 !important;
+  --c-adv-input-bg: #ead8b7 !important;
+  background-color: #102a34 !important;
+  background-image: linear-gradient(rgba(7,24,31,.24), rgba(7,24,31,.24)), var(--companion-material-atlas) !important;
+  background-size: cover !important;
+}
+.desk-stage .phone-shell[data-active-app="mapmode"] .adventure-lobby :is(textarea, input[type="text"])::placeholder {
+  color: #6d6252 !important;
+  opacity: 1 !important;
+}
+
+/* Mixology: replace violet/glass accents and faint labels with the shared brass set. */
+.desk-stage .phone-shell[data-active-app="mixology"] .mixology-app {
+  --mix-bg: #102a34;
+  --mix-panel: #17343d;
+  --mix-panel-2: #294f43;
+  --mix-line: #8d673e;
+  --mix-violet: #e5c681;
+  --mix-gold: #fff0cf;
+  --mix-text: #f5e4c3;
+  --mix-dim: #dbc8a7;
+  --mix-faint: #c6b596;
+  --mix-prose: #f5e4c3;
+  --mix-prose-rgb: 245, 228, 195;
+  --mix-speech: #fff0cf;
+  --mix-emphasis: #e5c681;
+  background-image: linear-gradient(rgba(7,24,31,.24), rgba(7,24,31,.24)), var(--companion-material-atlas) !important;
+  background-size: cover !important;
+}
+.desk-stage .phone-shell[data-active-app="mixology"] :is(.mix-header, .mix-topbar, .mix-nav, .mix-sheet) {
+  color: #f5e4c3 !important;
+  border-color: #8d673e !important;
+  background-color: #102a34 !important;
+  background-image: linear-gradient(rgba(7,24,31,.18), rgba(7,24,31,.18)), var(--companion-material-atlas) !important;
+}
+.desk-stage .phone-shell[data-active-app="mixology"] :is(.mix-chip, .mix-card, .mix-item, .mix-dialogue) {
+  color: #f5e4c3 !important;
+  border-color: #8d673e !important;
+  background: #17343d !important;
+}
+.desk-stage .phone-shell[data-active-app="mixology"] :is(.mix-chip[data-active="true"], .mix-nav-btn[data-active="true"], .mix-scope-toggle button[data-active="true"]) {
+  color: #fff0cf !important;
+  background: #294f43 !important;
+}
+.desk-stage .phone-shell[data-active-app="mixology"] :is(.mix-input, .mix-textarea) {
+  color: #23363b !important;
+  border-color: #a78250 !important;
+  background: #ead8b7 !important;
+}
+
+/* World Builder lives outside the phone shell, so it needs its own late override. */
+.wb-layout {
+  color: #f5e4c3 !important;
+  background-color: #102a34 !important;
+}
+.wb-layout :is(.wb-topbar, .wb-bottom-bar, .wb-palette, .wb-float-panel, .wb-modal) {
+  color: #f5e4c3 !important;
+  border-color: #8d673e !important;
+  border-radius: 4px !important;
+  background-color: rgba(16,42,52,.97) !important;
+  background-image: linear-gradient(rgba(7,24,31,.22), rgba(7,24,31,.22)), var(--companion-material-atlas) !important;
+  background-size: cover !important;
+  backdrop-filter: none !important;
+}
+.wb-layout :is(
+  .wb-topbar-btn, .wb-tabs button, .wb-categories button, .wb-model-item,
+  .wb-gen-tabs button, .wb-gen-input button, .wb-upload-btn, .wb-rotate-btn,
+  .wb-array-toggle, .wb-array-apply, .wb-modal-btn, .wb-modal-tabs button,
+  .wb-modal-cat, .wb-scene-btn
+) {
+  color: #dbc8a7 !important;
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  opacity: 1 !important;
+}
+.wb-layout :is(
+  .wb-tabs button.active, .wb-categories button.active, .wb-gen-tabs button.active,
+  .wb-modal-tabs button.active, .wb-modal-cat.active, .wb-modal-primary,
+  .wb-array-axis .active, .wb-scene-btn-primary
+) {
+  color: #fff0cf !important;
+  border-color: #b78a50 !important;
+  background: #294f43 !important;
+}
+.wb-layout :is(.wb-palette-header h2, .wb-float-header, .wb-modal-header, .wb-scene-name, .wb-model-name) {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.9) !important;
+}
+.wb-layout :is(.wb-loading, .wb-gen-progress, .wb-float-label, .wb-modal-label, .wb-modal-progress, .wb-modal-hint, .wb-setting-row, .wb-scene-meta, .wb-avatar-card-brief) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.wb-layout :is(.wb-gen-input input[type="text"], .wb-spacing-input, .wb-modal-input) {
+  color: #23363b !important;
+  border: 1px solid #a78250 !important;
+  border-radius: 4px !important;
+  background: #ead8b7 !important;
+}
+.wb-layout :is(input, textarea)::placeholder {
+  color: #6d6252 !important;
+  opacity: 1 !important;
+}
