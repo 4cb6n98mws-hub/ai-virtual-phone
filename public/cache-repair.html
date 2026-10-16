@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#101a22" />
+  <title>正在修复小手机缓存</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; margin: 0; }
+    body {
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      color: #f4e4bf;
+      background: #101a22;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+    main {
+      width: min(100%, 360px);
+      padding: 28px 24px;
+      border: 1px solid #9b7444;
+      border-radius: 16px;
+      background: #182b38;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+      text-align: center;
+    }
+    h1 { margin: 0 0 12px; font-size: 20px; }
+    p { margin: 0; color: #e5d7bb; font-size: 14px; line-height: 1.75; }
+    .error { color: #ffb3ac; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>正在更新小手机</h1>
+    <p id="status">只清理旧页面缓存，不会删除聊天、角色或设置。</p>
+  </main>
+  <script>
+    (async function repair() {
+      var status = document.getElementById("status");
+      try {
+        if ("serviceWorker" in navigator) {
+          var registrations = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(registrations.map(function (registration) {
+            return registration.unregister();
+          }));
+        }
+        if ("caches" in window) {
+          var keys = await caches.keys();
+          await Promise.all(keys.filter(function (key) {
+            return key.indexOf("ai-phone-pwa-") === 0;
+          }).map(function (key) {
+            return caches.delete(key);
+          }));
+        }
+        status.textContent = "缓存已更新，正在重新进入……";
+        window.setTimeout(function () {
+          window.location.replace("/?cache_repaired=1");
+        }, 350);
+      } catch (error) {
+        status.className = "error";
+        status.textContent = "自动修复没有完成，请关闭这个页面后再试一次。";
+      }
+    })();
+  </script>
+</body>
+</html>

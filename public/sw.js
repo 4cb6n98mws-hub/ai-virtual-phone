@@ -1,4 +1,4 @@
-const CACHE_VERSION = "ai-phone-pwa-v13";
+const CACHE_VERSION = "ai-phone-pwa-v14";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -38,7 +38,10 @@ function isCacheableRequest(request) {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return false;
   if (url.pathname.startsWith("/api/")) return false;
-  if (url.pathname.startsWith("/_next/static/")) return true;
+  // Next.js build files are content-addressed and already carry immutable HTTP
+  // caching headers. Keeping a second copy in the service worker can mix an
+  // old app shell with a newly deployed chunk set on iOS standalone PWAs.
+  if (url.pathname.startsWith("/_next/static/")) return false;
   return ["font", "image", "script", "style", "worker"].includes(request.destination);
 }
 
