@@ -10,6 +10,7 @@ import { ContentDialog } from "@/components/ui/modal";
 import { getMascotState, activateMascot, subscribeMascot } from "@/lib/mascot-state";
 import { getMascotSettingsSnapshot, resolveMascotImageRef, subscribeMascotSettings } from "@/lib/mascot-settings";
 import { loadDIYTemplates } from "@/lib/widget-storage";
+import { loadCharacters } from "@/lib/character-storage";
 import { DIYWidgetRenderer } from "@/components/widgets/diy-widget-renderer";
 
 const DEFAULT_WHITE_IMAGE =
@@ -1898,8 +1899,14 @@ function CoupleChatWidget({ config, widgetId, onConfigChange, preview }: any) {
 //   Mood Pill Widget (4x1)
 // ----------------------------------------------------
 function MoodPillWidget({ config, widgetId, onConfigChange, preview }: any) {
-  const defaultText = ".*I ENJOY LIFE NOW ☁ 63°.*";
-  const text = typeof config?.text === "string" ? config.text : defaultText;
+  const [character, setCharacter] = useState<ReturnType<typeof loadCharacters>[number] | null>(null);
+  useEffect(() => {
+    if (!preview) setCharacter(loadCharacters()[0] ?? null);
+  }, [preview]);
+  const legacyDefaultText = ".*I ENJOY LIFE NOW ☁ 63°.*";
+  const defaultText = `${character?.name?.trim() || "同伴"} · 在家`;
+  const configuredText = typeof config?.text === "string" ? config.text.trim() : "";
+  const text = configuredText && configuredText !== legacyDefaultText ? configuredText : defaultText;
   
   const [showEdit, setShowEdit] = useState(false);
   const [editText, setEditText] = useState(text);
@@ -1920,7 +1927,12 @@ function MoodPillWidget({ config, widgetId, onConfigChange, preview }: any) {
     <>
       <div className="wg-mood-pill">
         <div className="wg-mood-bubble" onClick={handlePillClick}>
+          <span className="wg-mood-presence-photo" aria-hidden>
+            {character?.avatar ? <img src={character.avatar} alt="" /> : <span>{(character?.name || "S").slice(0, 1)}</span>}
+          </span>
           <span>{text}</span>
+          <span className="wg-mood-presence-line" aria-hidden />
+          <span className="wg-mood-presence-paw" aria-hidden>●</span>
         </div>
       </div>
       {showEdit && createPortal(

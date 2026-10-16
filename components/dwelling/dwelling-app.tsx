@@ -551,7 +551,7 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
     return (
         <div className="dwelling-app" data-haspicker={characters.length > 1 ? "true" : undefined}>
             <div className="dwelling-header">
-                <button className="dw-back" onClick={onClose}><ChevronLeft size={18} /></button>
+                <button className="dw-back companion-app-back" onClick={onClose} aria-label="返回桌面"><ChevronLeft size={18} /></button>
                 <h1>栖 所<span className="dw-title-en">DWELLING</span></h1>
             </div>
 
@@ -606,14 +606,16 @@ export function DwellingApp({ onClose, visible, onIdle }: DwellingAppProps) {
 
             {cs?.layout && (
                 <div className="dwelling-room-tabs">
-                    {cs.layout.rooms.map((room, idx) => (
-                        <button key={room.id} className="dwelling-room-tab"
-                            data-active={activeRoomIdx === idx ? "true" : undefined}
-                            onClick={() => { setActiveRoomIdx(idx); setItemDetail(null); }}>
-                            {room.name}
-                            {room.en && <span className="dw-tab-en">{room.en}</span>}
-                        </button>
-                    ))}
+                    <div className="dwelling-room-list">
+                        {cs.layout.rooms.map((room, idx) => (
+                            <button key={room.id} className="dwelling-room-tab"
+                                data-active={activeRoomIdx === idx ? "true" : undefined}
+                                onClick={() => { setActiveRoomIdx(idx); setItemDetail(null); }}>
+                                {room.name}
+                                {room.en && <span className="dw-tab-en">{room.en}</span>}
+                            </button>
+                        ))}
+                    </div>
                     <div className="dw-tabs-actions">
                         <button className="dw-tab-action" onClick={() => requestExploreAll(activeCharId!)} disabled={cs.isGenerating || cs.batchExploring} title="一键探索全部物品" aria-label="一键探索全部物品">
                             <Compass size={13} />

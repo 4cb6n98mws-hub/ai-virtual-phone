@@ -1065,7 +1065,7 @@ export function AppMarketApp({ onClose, onOpenCustomApp, onInstallToDesktop, onN
   return (
     <div className="app-market-app">
       <header className="app-market-header">
-        <button type="button" className="app-market-icon-btn" onClick={onClose} aria-label="返回桌面">
+        <button type="button" className="app-market-icon-btn companion-app-back" onClick={onClose} aria-label="返回桌面">
           <ChevronLeft size={25} />
         </button>
         <div className="app-market-title">

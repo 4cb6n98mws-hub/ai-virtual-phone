@@ -136,7 +136,7 @@ export function CalendarMonthPage({
     });
   };
 
-  const [titleYear, titleMonth] = titleYm.split("-").map(Number);
+  const [, titleMonth] = titleYm.split("-").map(Number);
 
   return (
     <div className="calendar-page calendar-page-month">
@@ -182,9 +182,8 @@ export function CalendarMonthPage({
       {/* 顶部玻璃悬浮层：周几及以上区域，日历内容从下方透出 */}
       <div className="calendar-month-header" ref={headerRef}>
         <div className="calendar-apple-topbar">
-          <button type="button" className="calendar-pill-btn calendar-back-btn" onClick={onClose} aria-label="返回桌面">
+          <button type="button" className="calendar-pill-btn calendar-back-btn companion-app-back" onClick={onClose} aria-label="返回桌面">
             <ChevronLeft size={19} />
-            {titleYear}年
           </button>
           <span className="calendar-topbar-space" />
           <button type="button" className="calendar-icon-btn" onClick={onOpenTheme} aria-label="主题与自定义">

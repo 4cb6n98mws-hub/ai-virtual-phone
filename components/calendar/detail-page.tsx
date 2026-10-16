@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { Columns2, Settings2 } from "lucide-react";
+import { ChevronLeft, Columns2, Settings2 } from "lucide-react";
 import type { CalendarScheduleItem } from "@/lib/calendar-types";
 import type { MenstrualDayState } from "@/lib/menstrual-storage";
 import { formatIsoDate, parseIsoDate, timeToMinutes } from "@/lib/calendar-utils";
@@ -312,14 +312,11 @@ export function CalendarDetailPage({
     applySelection(todayIso, { fromStrip: true });
   };
 
-  const selectedDate = parseIsoDate(selectedIso);
-  const backLabel = `${selectedDate.getMonth() + 1}月`;
-
   return (
     <div className="calendar-page calendar-page-detail">
       <div className="calendar-apple-topbar">
-        <button type="button" className="calendar-pill-btn calendar-back-btn" onClick={onBack}>
-          <span aria-hidden="true">‹</span> {backLabel}
+        <button type="button" className="calendar-pill-btn calendar-back-btn companion-app-back" onClick={onBack} aria-label="返回">
+          <ChevronLeft size={19} />
         </button>
         <span className="calendar-topbar-space" />
         <button type="button" className="calendar-icon-btn" onClick={onOpenDaysPicker} aria-label="每页天数">

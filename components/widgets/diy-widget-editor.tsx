@@ -107,7 +107,7 @@ export function DIYWidgetEditor({ template, onSave, onClose }: DIYWidgetEditorPr
   const [rows, cols] = WIDGET_SIZE_CELLS[size];
 
   return (
-    <div className="flex flex-col bg-white/40 backdrop-blur-3xl rounded-[32px] border border-white/60 shadow-[0_30px_60px_rgba(0,0,0,0.12)] overflow-hidden flex-shrink-0 animate-in fade-in slide-in-from-top-6 duration-500">
+    <div className="companion-diy-widget-editor flex flex-col bg-white/40 backdrop-blur-3xl rounded-[32px] border border-white/60 shadow-[0_30px_60px_rgba(0,0,0,0.12)] overflow-hidden flex-shrink-0 animate-in fade-in slide-in-from-top-6 duration-500">
       <style>{`
         .diy-range-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; margin: -19px 0; background: transparent; border-radius: 4px; outline: none; cursor: pointer; touch-action: none; -webkit-tap-highlight-color: transparent; }
         .diy-range-slider::-webkit-slider-runnable-track { height: 6px; border-radius: 4px; background: rgba(0,0,0,0.1); }

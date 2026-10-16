@@ -183,7 +183,7 @@ export function ChatMessageList({ onCloseApp, activeSession, onSelectSession, on
             <PageShell
                 leftAction={
                     <div className="flex items-center min-w-max">
-                        <button className="page-back-btn shrink-0 mr-2" type="button" onClick={onCloseApp} aria-label="返回">
+                        <button className="page-back-btn companion-app-back shrink-0 mr-2" type="button" onClick={onCloseApp} aria-label="返回">
                             <ChevronLeft size={24} strokeWidth={1.5} />
                         </button>
                         <div className="flex items-center gap-[10px]">
@@ -216,7 +216,7 @@ export function ChatMessageList({ onCloseApp, activeSession, onSelectSession, on
 
                         {/* Dropout '+' Menu */}
                         {showPlusMenu && (
-                            <div className="g-dropdown absolute top-[40px] right-0 py-2 px-0 w-[140px] z-[100]">
+                            <div className="g-dropdown companion-chat-plus-menu absolute top-[40px] right-0 py-2 px-0 w-[140px] z-[100]">
                                 <MenuOption
                                     icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>}
                                     label="发起聊天"
@@ -666,7 +666,7 @@ function MenuOption({ icon, label, onClick }: { icon: React.ReactNode, label: st
     return (
         <div
             onClick={onClick}
-            className="menu-option-border flex items-center gap-3 px-4 py-3 ts-14 text-[var(--c-text)] cursor-pointer"
+            className="companion-chat-plus-option menu-option-border flex items-center gap-3 px-4 py-3 ts-14 text-[var(--c-text)] cursor-pointer"
         >
             <span className="flex items-center text-[var(--c-text)]">{icon}</span>
             <span>{label}</span>

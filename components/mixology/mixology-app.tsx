@@ -599,7 +599,7 @@ export function MixologyApp({ onClose }: { onClose: () => void }) {
     return (
         <div className="mixology-app">
             <div className="mix-header">
-                <button type="button" className="mix-icon-btn" onClick={onClose} aria-label="关闭"><ChevronLeft size={20} /></button>
+                <button type="button" className="mix-icon-btn companion-app-back" onClick={onClose} aria-label="返回桌面"><ChevronLeft size={20} /></button>
                 <div className="mix-header-title">独家<em>特调</em></div>
                 {tab === "cabinet" ? (
                     <>

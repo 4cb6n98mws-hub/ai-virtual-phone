@@ -1023,6 +1023,7 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
     const handleOpen = () => openProduct(item);
     return (
       <div
+        className="cp-shopping-product-card"
         role="button"
         tabIndex={0}
         onClick={handleOpen}
@@ -1073,7 +1074,7 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
         >
           <Heart size={15} fill={isSaved ? "white" : "none"} />
         </button>
-        <div style={{ width: "100%", height: compact ? "92px" : "120px", background: "#f5f5f5", borderRadius: "12px", marginBottom: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: compact ? "30px" : "34px" }}>
+        <div className="cp-shopping-product-preview" style={{ width: "100%", height: compact ? "92px" : "120px", background: "#f5f5f5", borderRadius: "12px", marginBottom: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: compact ? "30px" : "34px" }}>
           {item.previewIcon}
         </div>
         <strong style={{ fontSize: "calc(13px*var(--app-text-scale,1))", color: "#222", fontWeight: 600, marginBottom: "4px", display: "block", width: "100%", minWidth: 0 }}>
@@ -1116,11 +1117,11 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
 
   return (
     <div className="cp-shopping-module" style={{ background: "#f8f9fa", fontFamily: "sans-serif" }}>
-      <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "var(--page-header-content-height, 42px)", marginTop: "var(--page-header-safe-top, 48px)", padding: "1px 24px" }}>
+      <header className="cp-shopping-header" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "var(--page-header-content-height, 42px)", marginTop: "var(--page-header-safe-top, 48px)", padding: "1px 24px" }}>
         {!selectedProduct && !activeOrder && selectedTab === "home" ? (
           <>
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              <button type="button" aria-label="返回" onClick={backAction} style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid #eaeaea", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#333" }}>
+              <button type="button" className="companion-app-back" aria-label="返回" onClick={backAction} style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid #eaeaea", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#333" }}>
                 <ChevronLeft size={22} strokeWidth={2.5} />
               </button>
               <div style={{ display: "flex", flexDirection: "column" }}>
@@ -1139,7 +1140,7 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
           </>
         ) : (
           <>
-            <button type="button" aria-label="返回" onClick={backAction} style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid #eaeaea", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#333" }}>
+            <button type="button" className="companion-app-back" aria-label="返回" onClick={backAction} style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid #eaeaea", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#333" }}>
               <ChevronLeft size={22} strokeWidth={2.5} />
             </button>
             <div style={{ flex: 1, minWidth: 0, marginLeft: "12px", display: "flex", alignItems: "center", background: "#fff", borderRadius: "20px", padding: "0 14px", height: "40px", color: "#999", fontSize: "calc(13px*var(--app-text-scale,1))", gap: "10px", boxShadow: "0 3px 12px rgba(0,0,0,0.018)" }}>
@@ -1197,7 +1198,7 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
           <>
             {selectedTab === "home" ? (
               <div style={{ padding: "0 24px", marginTop: "-4px", marginBottom: "16px" }}>
-                <form onSubmit={handleSearch} style={{ display: "flex", alignItems: "center", background: "#fff", borderRadius: "22px", padding: "0 8px 0 14px", minHeight: "40px", color: "#999", fontSize: "calc(13px*var(--app-text-scale,1))", gap: "8px", boxShadow: "0 3px 12px rgba(0,0,0,0.018)" }}>
+                <form className="cp-shopping-search-form" onSubmit={handleSearch} style={{ display: "flex", alignItems: "center", background: "#fff", borderRadius: "22px", padding: "0 8px 0 14px", minHeight: "40px", color: "#999", fontSize: "calc(13px*var(--app-text-scale,1))", gap: "8px", boxShadow: "0 3px 12px rgba(0,0,0,0.018)" }}>
                   <Search size={17} />
                   <input
                     aria-label="搜索商品"
@@ -1484,7 +1485,7 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
               )}
             </div>
 
-            <nav style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "#fff", display: "flex", justifyContent: "space-around", padding: "12px 0 calc(12px + env(safe-area-inset-bottom, 0px))", borderTop: "1px solid #eaeaea", zIndex: 10 }}>
+            <nav className="cp-shopping-bottom-nav" style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "#fff", display: "flex", justifyContent: "space-around", padding: "12px 0 calc(12px + env(safe-area-inset-bottom, 0px))", borderTop: "1px solid #eaeaea", zIndex: 10 }}>
               {SHOPPING_TABS.map(tab => {
                 const Icon = tab.icon;
                 const active = selectedTab === tab.id;
@@ -1509,6 +1510,7 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
 
             {selectedTab === "home" ? (
               <button
+                className="cp-shopping-refresh-btn"
                 type="button"
                 aria-label="刷新首页推荐"
                 onClick={() => setConfirmRefreshOpen(true)}
@@ -1538,9 +1540,9 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
         )}
 
         {selectedProduct && (
-          <div style={{ position: "absolute", inset: 0, zIndex: 20, background: "#fff", display: "flex", flexDirection: "column", overflowY: "auto" }}>
+          <div className="cp-shopping-detail" style={{ position: "absolute", inset: 0, zIndex: 20, background: "#fff", display: "flex", flexDirection: "column", overflowY: "auto" }}>
             <header style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", height: "var(--page-header-content-height, 42px)", marginTop: "var(--page-header-safe-top, 48px)", padding: "1px 24px", background: "#fff" }}>
-              <button type="button" aria-label="返回" onClick={backAction} style={{ background: "#fff", width: "34px", height: "34px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#333", border: "1px solid #eee", boxShadow: "0 2px 10px rgba(0,0,0,0.05)" }}>
+              <button type="button" className="companion-app-back" aria-label="返回" onClick={backAction} style={{ background: "#fff", width: "34px", height: "34px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#333", border: "1px solid #eee", boxShadow: "0 2px 10px rgba(0,0,0,0.05)" }}>
                 <ChevronLeft size={20} />
               </button>
               <strong style={{ position: "absolute", left: "50%", bottom: "20px", transform: "translateX(-50%)", fontSize: "calc(16px*var(--app-text-scale,1))", color: "#222", fontWeight: 600 }}>Product Details</strong>
@@ -1605,9 +1607,9 @@ export function ShoppingApp({ onClose, visible = true, onIdle, onBusyChange }: S
         )}
 
         {activeOrder && (
-          <div style={{ position: "absolute", inset: 0, zIndex: 20, background: "#f8f9fa", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+          <div className="cp-shopping-order-detail" style={{ position: "absolute", inset: 0, zIndex: 20, background: "#f8f9fa", display: "flex", flexDirection: "column", overflow: "hidden" }}>
             <header style={{ flex: "0 0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--page-header-safe-top, 48px) 24px 16px", background: "#fff", borderBottom: "1px solid #f0f0f0", zIndex: 1 }}>
-              <button type="button" aria-label="返回" onClick={backAction} style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid #eaeaea", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#333" }}>
+              <button type="button" className="companion-app-back" aria-label="返回" onClick={backAction} style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid #eaeaea", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#333" }}>
                 <ChevronLeft size={20} strokeWidth={2.5} />
               </button>
               <strong style={{ fontSize: "calc(16px*var(--app-text-scale,1))", color: "#222" }}>Order Details</strong>

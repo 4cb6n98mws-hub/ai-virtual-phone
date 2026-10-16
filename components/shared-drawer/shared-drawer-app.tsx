@@ -9,7 +9,6 @@ import {
   Flower2,
   Gamepad2,
   Gift,
-  Music2,
   PackageOpen,
   Pin,
   Stamp,
@@ -20,17 +19,19 @@ import {
 
 import { loadCharacters } from "@/lib/character-storage";
 import {
+  collectLanternCinemaTicket,
   formatSharedDrawerDate,
+  loadLanternCinemaCollectibles,
   loadCompanionActivities,
   loadSharedDrawerItems,
   removeSharedDrawerItem,
   SHARED_DRAWER_UPDATED_EVENT,
-  syncLanternCinemaTicketsToSharedDrawer,
   toggleSharedDrawerItemPinned,
   type SharedDrawerItem,
   type SharedDrawerSourceApp,
   type SharedDrawerItemType,
   type CompanionActivity,
+  type LanternCinemaCollectible,
 } from "@/lib/shared-drawer-storage";
 
 type SharedDrawerAppProps = {
@@ -45,7 +46,6 @@ const FILTERS: Array<{ id: FilterId; label: string }> = [
   { id: "cinema_ticket", label: "票根" },
   { id: "note", label: "便笺" },
   { id: "gift", label: "礼物" },
-  { id: "music", label: "音乐" },
   { id: "game_art", label: "作品" },
   { id: "plant", label: "植物" },
   { id: "stamp", label: "邮票" },
@@ -69,7 +69,6 @@ function ItemIcon({ type }: { type: SharedDrawerItemType }) {
   if (type === "cinema_missed") return <Film size={20} strokeWidth={1.55} />;
   if (type === "note") return <StickyNote size={20} strokeWidth={1.55} />;
   if (type === "gift") return <Gift size={20} strokeWidth={1.55} />;
-  if (type === "music") return <Music2 size={20} strokeWidth={1.55} />;
   if (type === "game_art") return <Gamepad2 size={20} strokeWidth={1.55} />;
   if (type === "plant") return <Flower2 size={20} strokeWidth={1.55} />;
   if (type === "stamp") return <Stamp size={20} strokeWidth={1.55} />;
@@ -97,17 +96,18 @@ function loadTodayActivities(): CompanionActivity[] {
 }
 
 export function SharedDrawerApp({ onClose, onOpenSource }: SharedDrawerAppProps) {
-  const [items, setItems] = useState<SharedDrawerItem[]>(() => loadSharedDrawerItems());
+  const [items, setItems] = useState<SharedDrawerItem[]>(() => loadSharedDrawerItems().filter((item) => item.type !== "music"));
+  const [cinemaCollectibles, setCinemaCollectibles] = useState<LanternCinemaCollectible[]>(() => loadLanternCinemaCollectibles());
   const [todayActivities, setTodayActivities] = useState<CompanionActivity[]>(() => loadTodayActivities());
   const [filter, setFilter] = useState<FilterId>("all");
   const [selected, setSelected] = useState<SharedDrawerItem | null>(null);
 
   useEffect(() => {
     const refresh = () => {
-      setItems(loadSharedDrawerItems());
+      setItems(loadSharedDrawerItems().filter((item) => item.type !== "music"));
+      setCinemaCollectibles(loadLanternCinemaCollectibles());
       setTodayActivities(loadTodayActivities());
     };
-    syncLanternCinemaTicketsToSharedDrawer();
     refresh();
     window.addEventListener(SHARED_DRAWER_UPDATED_EVENT, refresh);
     return () => window.removeEventListener(SHARED_DRAWER_UPDATED_EVENT, refresh);
@@ -126,14 +126,19 @@ export function SharedDrawerApp({ onClose, onOpenSource }: SharedDrawerAppProps)
   }
 
   function handleDelete(item: SharedDrawerItem) {
+    if (!window.confirm(`确定把「${item.title}」移出共同抽屉吗？原应用里的内容不会被删除。`)) return;
     removeSharedDrawerItem(item.id);
     if (selected?.id === item.id) setSelected(null);
+  }
+
+  function handleCollectCinema(ticket: LanternCinemaCollectible) {
+    collectLanternCinemaTicket(ticket);
   }
 
   return (
     <section className="shared-drawer-app">
       <header className="shared-drawer-header">
-        <button type="button" className="shared-drawer-back" onClick={onClose} aria-label="返回桌面">
+        <button type="button" className="shared-drawer-back companion-app-back" onClick={onClose} aria-label="返回桌面">
           <ChevronLeft size={20} />
         </button>
         <div className="shared-drawer-title">
@@ -187,7 +192,7 @@ export function SharedDrawerApp({ onClose, onOpenSource }: SharedDrawerAppProps)
           <section className="shared-drawer-empty">
             <PackageOpen size={34} strokeWidth={1.25} />
             <strong>这一格还是空的</strong>
-            <p>完成观影、留下便笺或收到重要物件后，它会自动来到这里。</p>
+            <p>从手记、日历、影院或游戏里手动挑一件值得留下的东西吧。</p>
           </section>
         ) : (
           <section className="shared-drawer-grid">
@@ -196,10 +201,7 @@ export function SharedDrawerApp({ onClose, onOpenSource }: SharedDrawerAppProps)
                 <button type="button" className="shared-drawer-card-main" onClick={() => setSelected(item)}>
                   <span className="shared-drawer-card-icon"><ItemIcon type={item.type} /></span>
                   <span className="shared-drawer-card-copy">
-                    <span className="shared-drawer-card-meta">{TYPE_LABELS[item.type]} · {sourceLabel(item)}</span>
                     <strong>{item.title}</strong>
-                    {item.subtitle ? <em>{item.subtitle}</em> : null}
-                    <small>{formatSharedDrawerDate(item.createdAt)}</small>
                   </span>
                   {item.pinned ? <Pin className="shared-drawer-pin" size={14} fill="currentColor" /> : null}
                 </button>
@@ -207,6 +209,24 @@ export function SharedDrawerApp({ onClose, onOpenSource }: SharedDrawerAppProps)
             ))}
           </section>
         )}
+
+        {cinemaCollectibles.length > 0 ? (
+          <section className="shared-drawer-candidates" aria-label="可收藏的票根">
+            <div className="shared-drawer-section-heading">
+              <span><Ticket size={13} /> 可收录票根</span>
+              <small>只有真正散场的影片会出现</small>
+            </div>
+            {cinemaCollectibles.map((ticket) => (
+              <div className="shared-drawer-candidate" key={ticket.id}>
+                <div>
+                  <strong>{ticket.title}</strong>
+                  <span>{ticket.subtitle || formatSharedDrawerDate(ticket.createdAt)}</span>
+                </div>
+                <button type="button" onClick={() => handleCollectCinema(ticket)}>收进抽屉</button>
+              </div>
+            ))}
+          </section>
+        ) : null}
       </main>
 
       {selected ? (

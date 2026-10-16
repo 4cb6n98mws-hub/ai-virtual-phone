@@ -4655,6 +4655,8 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                                 <button
                                   key={iconId}
                                   data-flip-id={`icon:${iconId}`}
+                                  data-icon-id={iconId}
+                                  data-icon-label={icon.label}
                                   className={itemClass}
                                   style={{ gridRow: pos.row, gridColumn: pos.col }}
                                   onClick={() => { if (!editMode) openApp(iconId); }}
@@ -4672,18 +4674,27 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                                       />
                                     ) : null}
                                     {builtinIconId ? (
-                                      <IconGlyph
-                                        id={builtinIconId}
-                                        className={
-                                          builtinIconId === "music"
-                                            ? iconSkinUrl
-                                              ? "icon-glyph icon-glyph-music icon-glyph-hidden"
-                                              : "icon-glyph icon-glyph-music"
-                                            : iconSkinUrl
-                                              ? "icon-glyph icon-glyph-hidden"
-                                              : "icon-glyph"
-                                        }
-                                      />
+                                      <>
+                                        {!iconImageUrl ? (
+                                          <span
+                                            className="vintage-app-art"
+                                            data-vintage-icon={builtinIconId}
+                                            aria-hidden="true"
+                                          />
+                                        ) : null}
+                                        <IconGlyph
+                                          id={builtinIconId}
+                                          className={
+                                            builtinIconId === "music"
+                                              ? iconSkinUrl
+                                                ? "icon-glyph icon-glyph-music icon-glyph-hidden"
+                                                : "icon-glyph icon-glyph-music"
+                                              : iconSkinUrl
+                                                ? "icon-glyph icon-glyph-hidden"
+                                                : "icon-glyph"
+                                          }
+                                        />
+                                      </>
                                     ) : customIconUrl ? null : (
                                       <CustomAppGlyph seed={customApp?.name || icon.label} className="icon-glyph" />
                                     )}
@@ -4795,6 +4806,8 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                         key={iconId}
                         type="button"
                         data-flip-id={`icon:${iconId}`}
+                        data-icon-id={iconId}
+                        data-icon-label={icon.label}
                         className={isDragging ? "dock-item dragging" : "dock-item"}
                         onClick={() => { if (!editMode) openApp(iconId); }}
                         onPointerDown={(e) => handleItemPointerDown(e, "icon", iconId, DOCK_PAGE_KEY)}
@@ -4812,18 +4825,27 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                             <span className="icon-skin-layer" style={{ backgroundImage: `url("${iconImageUrl}")` }} />
                           ) : null}
                           {builtinIconId ? (
-                            <IconGlyph
-                              id={builtinIconId}
-                              className={
-                                builtinIconId === "music"
-                                  ? iconSkinUrl
-                                    ? "icon-glyph icon-glyph-music icon-glyph-hidden"
-                                    : "icon-glyph icon-glyph-music"
-                                  : iconSkinUrl
-                                    ? "icon-glyph icon-glyph-hidden"
-                                    : "icon-glyph"
-                              }
-                            />
+                            <>
+                              {!iconImageUrl ? (
+                                <span
+                                  className="vintage-app-art vintage-app-art-dock"
+                                  data-vintage-icon={builtinIconId}
+                                  aria-hidden="true"
+                                />
+                              ) : null}
+                              <IconGlyph
+                                id={builtinIconId}
+                                className={
+                                  builtinIconId === "music"
+                                    ? iconSkinUrl
+                                      ? "icon-glyph icon-glyph-music icon-glyph-hidden"
+                                      : "icon-glyph icon-glyph-music"
+                                    : iconSkinUrl
+                                      ? "icon-glyph icon-glyph-hidden"
+                                      : "icon-glyph"
+                                }
+                              />
+                            </>
                           ) : customIconUrl ? null : (
                             <CustomAppGlyph seed={customApp?.name || icon.label} className="icon-glyph" />
                           )}
@@ -4850,7 +4872,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                     <button className="ui-bare-btn text-[var(--c-icon)]" onClick={() => setShowWidgetPicker(false)}>✕</button>
                   </div>
 
-                  <div className="px-4 py-3 flex gap-2 w-full">
+                  <div className="widget-picker-tabs px-4 py-3 flex gap-2 w-full">
                     {[
                       { id: "standard", label: "全局套件" },
                       { id: "freestyle", label: "自由艺术" },
@@ -4858,7 +4880,8 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:#121110;color:rgb
                       <button
                         key={tab.id}
                         onClick={() => setWidgetPickerTab(tab.id as "standard" | "freestyle")}
-                        className={`flex-1 flex justify-center py-1.5 rounded-full text-[calc(13px*var(--app-text-scale,1))] font-medium transition-colors ${widgetPickerTab === tab.id ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600'}`}
+                        className="widget-picker-tab flex-1 flex justify-center py-1.5 text-[calc(13px*var(--app-text-scale,1))] font-medium transition-colors"
+                        data-active={widgetPickerTab === tab.id ? "true" : "false"}
                       >
                         {tab.label}
                       </button>

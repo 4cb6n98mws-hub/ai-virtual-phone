@@ -19,6 +19,7 @@ export type SharedDrawerItemType =
   | "cinema_missed"
   | "note"
   | "game_art"
+  /** @deprecated 音乐不再与共同抽屉联动，仅保留旧数据兼容。 */
   | "music"
   | "gift"
   | "plant"
@@ -30,6 +31,7 @@ export type SharedDrawerSourceApp =
   | "calendar"
   | "diary"
   | "shopping"
+  /** @deprecated 音乐不再与共同抽屉联动，仅保留旧数据兼容。 */
   | "music"
   | "game"
   | "cinema"
@@ -86,6 +88,14 @@ type AddDrawerItemInput = Omit<SharedDrawerItem, "id" | "createdAt"> & {
 
 function cleanText(value: unknown, maxLength: number): string {
   return String(value ?? "").replace(/\r\n?/g, "\n").replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
+function cleanMultiline(value: unknown, maxLength: number): string {
+  return String(value ?? "")
+    .replace(/\r\n?/g, "\n")
+    .replace(/[\t ]+/g, " ")
+    .replace(/\n{4,}/g, "\n\n\n")
+    .trim()
+    .slice(0, maxLength);
 }
 function createId(prefix: string): string {
   const suffix = typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
@@ -213,7 +223,7 @@ export function addSharedDrawerItem(input: AddDrawerItemInput): SharedDrawerItem
     sourceApp: input.sourceApp,
     title: cleanText(input.title, 160) || "未命名收藏",
     subtitle: cleanText(input.subtitle, 240) || undefined,
-    note: cleanText(input.note, 1200) || undefined,
+    note: cleanMultiline(input.note, 8000) || undefined,
     createdAt,
     characterIds: [...new Set(input.characterIds.map((id) => cleanText(id, 160)).filter(Boolean))],
     characterNames: input.characterNames?.map((name) => cleanText(name, 80)).filter(Boolean),
@@ -322,17 +332,34 @@ export function formatSharedDrawerDate(value: string): string {
   }).format(date);
 }
 
+export type LanternCinemaCollectible = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  note?: string;
+  createdAt: string;
+  characterIds: string[];
+  characterNames: string[];
+  metadata: Record<string, unknown>;
+};
+
 /**
- * Pull finished Lantern screenings into the shared archive without asking the
- * model or duplicating missed invitations. The custom app remains the source of
- * truth; sourceEventId makes repeated syncs idempotent.
+ * Finished screenings are offered as manual keepsakes. Opening the drawer must
+ * never write a ticket; missed, expired and aborted screenings stay excluded.
  */
-export function syncLanternCinemaTicketsToSharedDrawer(): number {
-  if (typeof window === "undefined") return 0;
+export function loadLanternCinemaCollectibles(): LanternCinemaCollectible[] {
+  if (typeof window === "undefined") return [];
   const rows = readCustomAppCollection("k-lantern-cinema", "screenings");
-  let imported = 0;
+  const archivedIds = new Set(
+    loadSharedDrawerItems()
+      .filter((entry) => entry.sourceApp === "cinema" && entry.sourceEventId)
+      .map((entry) => entry.sourceEventId as string),
+  );
+  const collectibles: LanternCinemaCollectible[] = [];
   for (const row of rows) {
     if (row.status !== "finished" || !row.id || !row.film || typeof row.film !== "object") continue;
+    const screeningId = cleanText(row.id, 180);
+    if (!screeningId || archivedIds.has(screeningId)) continue;
     const film = row.film as Record<string, unknown>;
     const companions = Array.isArray(row.companions)
       ? row.companions.filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === "object")
@@ -343,40 +370,59 @@ export function syncLanternCinemaTicketsToSharedDrawer(): number {
     const startAt = typeof row.startAt === "number" || typeof row.startAt === "string"
       ? normalizeIso(row.startAt)
       : new Date().toISOString();
-    addSharedDrawerItem({
-      type: "cinema_ticket",
-      sourceApp: "cinema",
+    const reviews = row.reviews && typeof row.reviews === "object"
+      ? Object.values(row.reviews as Record<string, unknown>)
+        .filter((value): value is Record<string, unknown> => Boolean(value) && typeof value === "object")
+        .map((value) => cleanText(value.text, 500))
+        .filter(Boolean)
+      : [];
+    collectibles.push({
+      id: screeningId,
       title,
       subtitle: [en, seats.length ? `座位 ${seats.join(" / ")}` : ""].filter(Boolean).join(" · "),
       note: companions.length
-        ? `与 ${companions.map((item) => cleanText(item.name, 80)).filter(Boolean).join("、")} 完成了这场观影。`
+        ? [`与 ${companions.map((item) => cleanText(item.name, 80)).filter(Boolean).join("、")} 完成了这场观影。`, ...reviews].join("\n\n")
         : "一个人的电影夜，也被好好收了起来。",
       createdAt: startAt,
       characterIds: companions.map((item) => cleanText(item.id, 160)).filter(Boolean),
       characterNames: companions.map((item) => cleanText(item.name, 80)).filter(Boolean),
-      sourceEventId: cleanText(row.id, 180),
       metadata: {
         filmId: cleanText(film.id, 180),
         ticketNumber: cleanText(row.ticketNumber, 120),
         seats,
+        startedAt: startAt,
+        endedAt: normalizeIso(row.endAt as string | number | undefined),
       },
     });
-    for (const companion of companions) {
-      const characterId = cleanText(companion.id, 160);
-      if (!characterId) continue;
-      recordCompanionActivity({
-        sourceApp: "cinema",
-        kind: "cinema_finished",
-        label: `一起看完了《${title}》`,
-        detail: seats.length ? `留下了 ${seats.join(" / ")} 的票根` : "电影散场后把票根收进了共同抽屉",
-        characterId,
-        characterName: cleanText(companion.name, 80) || undefined,
-        createdAt: startAt,
-        importance: "meaningful",
-        sourceEventId: `cinema-finished:${cleanText(row.id, 180)}`,
-      });
-    }
-    imported += 1;
   }
-  return imported;
+  return collectibles.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export function collectLanternCinemaTicket(ticket: LanternCinemaCollectible): SharedDrawerItem {
+  const item = addSharedDrawerItem({
+    type: "cinema_ticket",
+    sourceApp: "cinema",
+    title: ticket.title,
+    subtitle: ticket.subtitle,
+    note: ticket.note,
+    createdAt: ticket.createdAt,
+    characterIds: ticket.characterIds,
+    characterNames: ticket.characterNames,
+    sourceEventId: ticket.id,
+    metadata: ticket.metadata,
+  });
+  ticket.characterIds.forEach((characterId, index) => {
+    recordCompanionActivity({
+      sourceApp: "cinema",
+      kind: "cinema_finished",
+      label: `一起看完了《${ticket.title}》`,
+      detail: "散场后把票根收进了共同抽屉",
+      characterId,
+      characterName: ticket.characterNames[index],
+      createdAt: ticket.createdAt,
+      importance: "meaningful",
+      sourceEventId: `cinema-finished:${ticket.id}`,
+    });
+  });
+  return item;
 }

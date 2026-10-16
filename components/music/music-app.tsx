@@ -296,7 +296,7 @@ export default function MusicApp({ onClose }: Props) {
             {/* Header */}
             <div className="music-header">
                 <div className="music-header-left">
-                    <button className="music-header-action" onClick={() => {
+                    <button className="music-header-action companion-app-back" onClick={() => {
                         if (dailyView) { setDailyView(null); }
                         else if (activePlaylist) { setActivePlaylist(null); }
                         else { onClose(); }

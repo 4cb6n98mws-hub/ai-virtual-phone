@@ -72,6 +72,7 @@ import {
 } from "@/lib/xiaohongshu-memory";
 import { resolveCharacterXiaohongshuDisplayName } from "@/lib/xiaohongshu-character-profile";
 import type { ChatSharePayload } from "@/lib/chat-share";
+import { hasRoleApiRunToday, markRoleApiRunToday } from "@/lib/role-api-budget";
 import { CheckPhoneDebugErrorCard } from "@/components/checkphone/checkphone-debug-error-card";
 import {
   DEFAULT_XIAOHONGSHU_SETTINGS,
@@ -1401,24 +1402,22 @@ export function XiaohongshuApp({ onClose, onNotice, visible = true, onIdle, onBu
 
     const participants = ids
       .map(characterId => characters.find(item => item.id === characterId))
-      .filter((character): character is Character => Boolean(character));
-    let successCount = 0;
-    let firstError: unknown = null;
+      .filter((character): character is Character => Boolean(character))
+      .filter(character => !hasRoleApiRunToday("xiaohongshu-auto", character.id));
+    const character = participants[0];
+    if (!character) return current;
+    let activity: ParsedXiaohongshuCharacterActivity | null = null;
+    try {
+      activity = await generateXiaohongshuCharacterActivity(character.id, current.notes.slice(0, 30), activeSettings);
+    } catch (err) {
+      console.warn("[Xiaohongshu] Character activity failed:", character.name, err);
+      throw err instanceof Error ? err : new Error(String(err));
+    }
+    if (!activity) return current;
+    markRoleApiRunToday("xiaohongshu-auto", character.id);
 
-    for (const character of participants) {
-      let activity: ParsedXiaohongshuCharacterActivity | null = null;
-      try {
-        activity = await generateXiaohongshuCharacterActivity(character.id, current.notes.slice(0, 30), activeSettings);
-      } catch (err) {
-        firstError ??= err;
-        console.warn("[Xiaohongshu] Character activity failed:", character.name, err);
-        continue;
-      }
-      if (!activity) continue;
-      successCount += 1;
-
-      const collectedNotifications: XiaohongshuState["notifications"] = [];
-      const updatedNotes = current.notes.map((note) => {
+    const collectedNotifications: XiaohongshuState["notifications"] = [];
+    const updatedNotes = current.notes.map((note) => {
         const related = activity.comments.filter(comment => comment.noteId === note.id);
         if (related.length === 0) return note;
         let nextNote = note;
@@ -1446,9 +1445,9 @@ export function XiaohongshuApp({ onClose, onNotice, visible = true, onIdle, onBu
           touchCharacterMemory(character);
         }
         return nextNote;
-      });
-      const characterPost = createCharacterPost(character, activity);
-      if (characterPost) {
+    });
+    const characterPost = createCharacterPost(character, activity);
+    if (characterPost) {
         recordXiaohongshuPostEvent({
           characterId: character.id,
           characterName: character.name,
@@ -1456,20 +1455,15 @@ export function XiaohongshuApp({ onClose, onNotice, visible = true, onIdle, onBu
         });
         recordCharacterThreadCommentEvents(character, characterPost, characterPost, characterPost.comments);
         touchCharacterMemory(character);
-      }
-      current = saveXiaohongshuState({
+    }
+    current = saveXiaohongshuState({
         ...current,
         notes: characterPost ? [characterPost, ...updatedNotes] : updatedNotes,
         notifications: collectedNotifications.length > 0
           ? [...collectedNotifications, ...current.notifications]
           : current.notifications,
-      });
-      setState(current);
-    }
-
-    if (successCount === 0 && firstError) {
-      throw firstError instanceof Error ? firstError : new Error(String(firstError));
-    }
+    });
+    setState(current);
     return current;
   }
 
@@ -3483,7 +3477,7 @@ export function XiaohongshuApp({ onClose, onNotice, visible = true, onIdle, onBu
             </header>
             <p>
               {pendingFeedAction === "refresh"
-                ? "将生成一批新的首页与视频内容，已有内容会保留，旧内容不会回传给本次生成链路。"
+                ? "将新增一批普通内容并保留已有内容；若今天还有未参与过的绑定角色，本次最多只会调用 1 位角色生成 1 次。"
                 : "将清空首页推荐、附近和视频页当前可见内容；消息、私信、用户主页和互动记录会保留。"}
             </p>
             <div className="xhs-confirm-actions">

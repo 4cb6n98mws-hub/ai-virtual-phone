@@ -2051,7 +2051,7 @@ export function BlackMarketApp({ onClose, autoOpenLocalId }: BlackMarketAppProps
       <div className="cp-black-market-scanlines" />
 
       <header className="cp-black-market-header">
-        <button type="button" aria-label="返回购物" onClick={onClose}>
+        <button type="button" className="companion-app-back" aria-label="返回购物" onClick={onClose}>
           <ChevronLeft size={22} strokeWidth={2.5} />
         </button>
         <div>

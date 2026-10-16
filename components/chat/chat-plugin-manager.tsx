@@ -154,7 +154,7 @@ export function ChatPluginManager({ onBack }: { onBack: () => void }) {
     const statusColor = safeMode ? "#f59e0b" : runtimeState.started ? "var(--c-success)" : "var(--c-icon)";
 
     return (
-        <PageShell title="扩展插件" onBack={onBack} className="absolute inset-0 z-[100]">
+        <PageShell title="扩展插件" onBack={onBack} className="chat-plugin-manager-page absolute inset-0 z-[100]">
             <div className="page-menu" style={{ paddingBottom: 40 }}>
 
                 {/* 安全模式 */}

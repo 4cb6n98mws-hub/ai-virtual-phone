@@ -1533,3 +1533,12 @@
     animation: none !important;
   }
 }
+.calendar-event-archive-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.calendar-collect-btn {
+  border-color: color-mix(in srgb, var(--c-calendar-accent, #27493f) 55%, transparent) !important;
+  color: var(--c-calendar-ink) !important;
+}

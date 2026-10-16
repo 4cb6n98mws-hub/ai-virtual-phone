@@ -346,8 +346,8 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
         }
       `}</style>
 
-      <div className="p-4 flex flex-col gap-4 pb-24">
-        <section className="rounded-2xl p-5 overflow-hidden relative min-h-[156px] flex flex-col justify-between" style={{ background: "#eaf5ff", boxShadow: "0 8px 24px rgba(0,0,0,0.025)", border: "1px solid rgba(255,255,255,0.72)", color: "#172033" }}>
+      <div className="wallet-page-content p-4 flex flex-col gap-4 pb-24">
+        <section className="wallet-balance-summary rounded-2xl p-5 overflow-hidden relative min-h-[156px] flex flex-col justify-between" style={{ background: "#eaf5ff", boxShadow: "0 8px 24px rgba(0,0,0,0.025)", border: "1px solid rgba(255,255,255,0.72)", color: "#172033" }}>
           <div className="relative flex items-start justify-between gap-4">
             <div>
               <div className="ts-11 font-semibold opacity-70 tracking-[0.18em] uppercase">Real Balance</div>
@@ -374,7 +374,7 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
         <section className="flex flex-col gap-3">
           <div className="flex items-center justify-between px-1">
             <h2 className="ts-15 font-bold text-[var(--c-text-title)]">银行卡</h2>
-            <button type="button" onClick={() => setAddOpen(true)} className="min-h-[36px] px-3 rounded-full flex items-center gap-1.5 ts-12 font-semibold" style={{ background: "var(--c-icon-active)", color: "#fff" }}>
+            <button type="button" onClick={() => setAddOpen(true)} className="wallet-add-card min-h-[36px] px-3 rounded-full flex items-center gap-1.5 ts-12 font-semibold" style={{ background: "var(--c-icon-active)", color: "#fff" }}>
               <Plus size={15} />
               新增卡
             </button>
@@ -392,7 +392,7 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
         </section>
 
         {activeCard ? (
-          <section className="rounded-2xl bg-[var(--c-card)] p-4 flex flex-col gap-4" style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.025)" }}>
+          <section className="wallet-account-panel rounded-2xl bg-[var(--c-card)] p-4 flex flex-col gap-4" style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.025)" }}>
             <div className="min-w-0">
               <div className="ts-11 text-[var(--c-text)] opacity-60">当前银行卡余额</div>
               <div className="ts-26 font-bold text-[var(--c-text-title)] mt-1">{formatWalletAmount(activeCard.balance)}</div>
@@ -433,7 +433,7 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
           </section>
         ) : null}
 
-        <section className="rounded-2xl bg-[var(--c-card)] px-4 py-2 flex flex-col" style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.025)" }}>
+        <section className="wallet-ledger-panel rounded-2xl bg-[var(--c-card)] px-4 py-2 flex flex-col" style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.025)" }}>
           <div className="py-3 flex items-center justify-between">
             <h2 className="ts-15 font-bold text-[var(--c-text-title)]">流水</h2>
             <span className="ts-11 text-[var(--c-text)] opacity-55">余额、银行卡与购物付款实时同步</span>
@@ -449,8 +449,8 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
                   ? ArrowUpFromLine
                   : ArrowDownToLine;
               return (
-                <div key={transaction.id} className="py-3 flex items-center gap-3 border-t border-[color-mix(in_srgb,var(--c-card-border)_22%,transparent)]">
-                  <div className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0" style={{ background: outgoing ? "color-mix(in srgb, var(--c-danger) 12%, var(--c-card))" : "color-mix(in srgb, var(--c-success) 12%, var(--c-card))", color: outgoing ? "var(--c-danger)" : "var(--c-success)" }}>
+                <div key={transaction.id} className="wallet-ledger-row py-3 flex items-center gap-3 border-t border-[color-mix(in_srgb,var(--c-card-border)_22%,transparent)]">
+                  <div className={`wallet-ledger-icon ${outgoing ? "is-outgoing" : "is-incoming"} w-10 h-10 rounded-2xl flex items-center justify-center shrink-0`} style={{ background: outgoing ? "color-mix(in srgb, var(--c-danger) 12%, var(--c-card))" : "color-mix(in srgb, var(--c-success) 12%, var(--c-card))", color: outgoing ? "var(--c-danger)" : "var(--c-success)" }}>
                     <TransactionIcon size={18} />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -472,7 +472,7 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
 
       {balanceTransferMode && selectedTransferCard ? (
         <div className="absolute inset-0 z-[80] flex items-end" style={{ background: "rgba(0,0,0,0.35)" }} role="presentation" onClick={closeBalanceTransfer}>
-          <div className="w-full rounded-t-[24px] bg-[var(--c-page-body-bg)] p-4 flex flex-col gap-4" style={{ paddingBottom: "calc(18px + env(safe-area-inset-bottom, 0px))" }} role="dialog" aria-modal="true" aria-label={transferTitle} onClick={event => event.stopPropagation()}>
+          <div className="wallet-sheet w-full rounded-t-[24px] bg-[var(--c-page-body-bg)] p-4 flex flex-col gap-4" style={{ paddingBottom: "calc(18px + env(safe-area-inset-bottom, 0px))" }} role="dialog" aria-modal="true" aria-label={transferTitle} onClick={event => event.stopPropagation()}>
             <div className="flex items-center justify-between">
               <strong className="ts-16 text-[var(--c-text-title)]">{transferTitle}</strong>
               <span className="ts-12 text-[var(--c-text)] opacity-60">
@@ -480,7 +480,7 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
               </span>
             </div>
             {transferCardLocked ? (
-              <div className="min-h-[58px] rounded-2xl px-3 flex items-center gap-3 text-left border border-[var(--c-card-border)] bg-[var(--c-card)]">
+              <div className="wallet-sheet-card min-h-[58px] rounded-2xl px-3 flex items-center gap-3 text-left border border-[var(--c-card-border)] bg-[var(--c-card)]">
                 <WalletCards size={18} className="text-[var(--c-icon)]" />
                 <span className="flex-1 min-w-0">
                   <span className="block ts-12 text-[var(--c-text)] opacity-60">当前银行卡</span>
@@ -499,7 +499,7 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
                         key={card.id}
                         type="button"
                         onClick={() => setTransferCardId(card.id)}
-                        className="min-h-[54px] rounded-2xl px-3 flex items-center gap-3 text-left"
+                        className={`wallet-sheet-card ${active ? "is-active" : ""} min-h-[54px] rounded-2xl px-3 flex items-center gap-3 text-left`}
                         style={{ border: active ? "1px solid var(--c-icon-active)" : "1px solid var(--c-card-border)", background: active ? "color-mix(in srgb, var(--c-icon-active) 8%, var(--c-card))" : "var(--c-card)" }}
                       >
                         <WalletCards size={18} className="text-[var(--c-icon)]" />
@@ -518,14 +518,14 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
               <input className="ui-input" type="number" min={0.01} max={transferLimit} step={0.01} value={transferAmount} onChange={event => setTransferAmount(event.target.value)} />
             </label>
             {error ? <div className="ts-12 text-[var(--c-danger)]">{error}</div> : null}
-            <button type="button" onClick={handleBalanceTransfer} className="h-12 rounded-2xl text-white ts-14 font-bold" style={{ background: "var(--c-icon-active)" }}>{transferConfirmLabel}</button>
+            <button type="button" onClick={handleBalanceTransfer} className="wallet-sheet-primary h-12 rounded-2xl text-white ts-14 font-bold" style={{ background: "var(--c-icon-active)" }}>{transferConfirmLabel}</button>
           </div>
         </div>
       ) : null}
 
       {addOpen ? (
         <div className="absolute inset-0 z-[80] flex items-end" style={{ background: "rgba(0,0,0,0.35)" }} role="presentation" onClick={() => setAddOpen(false)}>
-          <div className="w-full rounded-t-[24px] bg-[var(--c-page-body-bg)] p-4 flex flex-col gap-4" style={{ paddingBottom: "calc(18px + env(safe-area-inset-bottom, 0px))" }} role="dialog" aria-modal="true" aria-label="新增银行卡" onClick={event => event.stopPropagation()}>
+          <div className="wallet-sheet w-full rounded-t-[24px] bg-[var(--c-page-body-bg)] p-4 flex flex-col gap-4" style={{ paddingBottom: "calc(18px + env(safe-area-inset-bottom, 0px))" }} role="dialog" aria-modal="true" aria-label="新增银行卡" onClick={event => event.stopPropagation()}>
             <div className="flex items-center justify-between">
               <strong className="ts-16 text-[var(--c-text-title)]">新增银行卡</strong>
               <span className="ts-12 text-[var(--c-text)] opacity-60">余额不能为负</span>
@@ -546,12 +546,12 @@ export function WalletPanel({ onBack }: WalletPanelProps) {
             </div>
             <div className="grid grid-cols-3 gap-2">
               {WALLET_STYLE_OPTIONS.map(option => (
-                <button key={option.id} type="button" onClick={() => setNewCardStyle(option.id)} className="h-10 rounded-2xl ts-12 font-semibold" style={{ border: newCardStyle === option.id ? "none" : "1px solid var(--c-card-border)", background: newCardStyle === option.id ? "var(--c-icon-active)" : "var(--c-card)", color: newCardStyle === option.id ? "#fff" : "var(--c-text-title)" }}>
+                <button key={option.id} type="button" onClick={() => setNewCardStyle(option.id)} className={`wallet-style-option ${newCardStyle === option.id ? "is-active" : ""} h-10 rounded-2xl ts-12 font-semibold`} style={{ border: newCardStyle === option.id ? "none" : "1px solid var(--c-card-border)", background: newCardStyle === option.id ? "var(--c-icon-active)" : "var(--c-card)", color: newCardStyle === option.id ? "#fff" : "var(--c-text-title)" }}>
                   {option.label}
                 </button>
               ))}
             </div>
-            <button type="button" onClick={handleAddCard} className="h-12 rounded-2xl text-white ts-14 font-bold" style={{ background: "var(--c-icon-active)" }}>添加银行卡</button>
+            <button type="button" onClick={handleAddCard} className="wallet-sheet-primary h-12 rounded-2xl text-white ts-14 font-bold" style={{ background: "var(--c-icon-active)" }}>添加银行卡</button>
           </div>
         </div>
       ) : null}

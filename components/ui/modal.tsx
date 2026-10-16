@@ -52,6 +52,8 @@ export type ContentDialogProps = {
   title: string;
   confirmLabel?: string;
   cancelLabel?: string;
+  overlayClassName?: string;
+  dialogClassName?: string;
   onConfirm: () => void;
   onCancel: () => void;
   children: ReactNode;
@@ -61,13 +63,15 @@ export function ContentDialog({
   title,
   confirmLabel = "\u4FDD\u5B58",
   cancelLabel = "\u53D6\u6D88",
+  overlayClassName,
+  dialogClassName,
   onConfirm,
   onCancel,
   children,
 }: ContentDialogProps) {
   return (
-    <div className="modal-overlay" data-ui="modal" onClick={onCancel}>
-      <div className="modal-dialog" data-ui="modal-dialog" onClick={(e) => e.stopPropagation()}>
+    <div className={`modal-overlay ${overlayClassName ?? ""}`} data-ui="modal" onClick={onCancel}>
+      <div className={`modal-dialog ${dialogClassName ?? ""}`} data-ui="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header" data-ui="modal-header">
           <h3 className="modal-title">{title}</h3>
         </div>

@@ -57,7 +57,7 @@ import { displayOrderPrompts } from "@/lib/preset-entry-import";
 import type { Prompt, PresetConfig } from "@/lib/settings-types";
 // 标题栏图标用 lucide 矢量图：⚙/⟳ 这些字符在 iOS 上会被当彩色 emoji 画、
 // 或者字形本身偏小，各设备长相不一；矢量图标则处处一致且小尺寸清晰。
-import { RotateCw, Settings, X } from "lucide-react";
+import { ChevronLeft, RotateCw, Settings, X } from "lucide-react";
 import { deleteShareEntry } from "@/lib/resource-hub-review";
 import { MediaPreviewOverlay } from "@/components/chat/media-preview-overlay";
 import { fetchFlowerCounts, hasSentFlowerToday, sendFlower, type FlowerCounts } from "@/lib/resource-hub-flowers";
@@ -769,7 +769,7 @@ export function ResourceHubApp({ onClose, onNotice }: { onClose: () => void; onN
             {/* 窗口标题栏 */}
             <div className="rh-window">
                 <div className="rh-titlebar">
-                    <span className="rh-titlebar-icon">🗂️</span>
+                    <button className="rh-titlebar-back companion-app-back" onClick={handleBack} aria-label="返回"><ChevronLeft size={20} /></button>
                     <span className="rh-titlebar-text"><RichText text={title} mode="sticker" /> - 资源集市</span>
                     <span className="rh-titlebar-controls">
                         <button className="rh-tb-btn" aria-label="资源仓库设置" onClick={() => { setSourceDraft(source); setShowSourceEditor(true); }}><Settings size={15} strokeWidth={2.25} /></button>
@@ -782,7 +782,6 @@ export function ResourceHubApp({ onClose, onNotice }: { onClose: () => void; onN
 
                 {/* 工具条（返回/地址） */}
                 <div className="rh-toolbar">
-                    <button className="rh-btn" onClick={handleBack}>← 返回</button>
                     <span className="rh-address">
                         地址：C:\资源集市{viewMode === "mine" ? "\\我的货摊" : viewMode === "build" ? "\\共同建设" : ""}{activeFolder ? `\\${activeFolder}` : ""}{activeEntry ? `\\${activeEntry.name}` : ""}
                     </span>

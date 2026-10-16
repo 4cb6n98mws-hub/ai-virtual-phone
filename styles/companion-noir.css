@@ -1,59 +1,63 @@
-/* Personal black-and-pink theme, scoped to the virtual phone. */
+/*
+ * Companion release theme
+ * Outside: keep the user's square black-and-pink phone case.
+ * Inside: a mature Long Island field-terminal palette — midnight navy,
+ * bottle green, tobacco leather, old paper and restrained oxblood.
+ */
 .desk-stage .phone-shell-wrap {
   --phone-screen-radius: 0px;
   --phone-frame-radius: 0px;
   --phone-case-radius: 0px;
-  --c-header-bg: #151519;
-  --c-page-body-bg: #111115;
-  --c-card: #202026;
-  --c-card-border: #36343d;
-  --c-polaroid: #1c1c22;
-  --c-polaroid-back: #17171d;
-  --c-panel: #1a1a20;
-  --c-panel-border: #38343e;
-  --c-text-title: #f3edf1;
-  --c-text: #bbb1bc;
-  --c-icon-active: #ee91b8;
-  --c-action-blue: #a94370;
-  --c-icon: #a99eac;
-  --c-input: #24232b;
-  --c-input-border: #48404c;
-  --c-bubble-self: #442739;
-  --c-bubble-other: #24232b;
-  --c-overlay: #00000099;
-  --c-success: #85d5ac;
-  --c-desktop-icon: #eee7ed;
-  --c-desktop-icon-bg: #d789ad;
-  --c-desktop-icon-box: #222129;
-  --c-home-label: #d9ceda;
-  --c-home-text: #f3edf1;
-  --c-home-sub: #bcb1be;
-  --c-home-card: #202026;
-  --c-home-glass: #1b1a22eb;
-  --c-home-border: #4b3b48;
-  --c-home-pink: #ee91b8;
-  --c-icon-blue: #b99ebc;
-  --c-icon-green: #b99ebc;
-  --c-icon-violet: #c8a7c5;
-  --c-icon-amber: #b99ebc;
-  --c-icon-rose: #ee91b8;
-  --c-icon-coral: #d8a0b8;
-  --c-icon-teal: #b99ebc;
-  --c-icon-slate: #b99ebc;
-  --c-icon-lilac: #c8a7c5;
-  --ui-radius: 8px;
-  --ui-radius-card: 10px;
-  --dock-radius: 12px;
-  --dock-border: 1px solid #4b3b48;
+  --c-header-bg: #10191d;
+  --c-page-body-bg: #172126;
+  --c-card: #202d2f;
+  --c-card-border: #405052;
+  --c-polaroid: #eee4cf;
+  --c-polaroid-back: #d7c8aa;
+  --c-panel: #1a2729;
+  --c-panel-border: #465759;
+  --c-text-title: #f1e9d8;
+  --c-text: #c7c0af;
+  --c-icon-active: #c67467;
+  --c-action-blue: #7f9f94;
+  --c-icon: #b9b4a6;
+  --c-input: #132024;
+  --c-input-border: #566260;
+  --c-bubble-self: #723d3a;
+  --c-bubble-other: #eee4cf;
+  --c-overlay: #071012b8;
+  --c-success: #8dbca2;
+  --c-desktop-icon: #f0e7d4;
+  --c-desktop-icon-bg: #80524a;
+  --c-desktop-icon-box: #1e2a2d;
+  --c-home-label: #eee4d1;
+  --c-home-text: #f5eddd;
+  --c-home-sub: #c4bcaa;
+  --c-home-card: #1d292c;
+  --c-home-glass: #172226e8;
+  --c-home-border: #52605d;
+  --c-home-pink: #c67467;
+  --c-icon-blue: #78939b;
+  --c-icon-green: #668779;
+  --c-icon-violet: #827888;
+  --c-icon-amber: #b58655;
+  --c-icon-rose: #a75d59;
+  --c-icon-coral: #b66e5e;
+  --c-icon-teal: #648e89;
+  --c-icon-slate: #7d898a;
+  --c-icon-lilac: #918598;
+  --ui-radius: 7px;
+  --ui-radius-card: 9px;
+  --dock-radius: 10px;
+  --dock-border: 1px solid #5c5359;
   color-scheme: dark;
-  accent-color: #ee91b8;
+  accent-color: #bb6f68;
 }
 
+/* The physical object stays black/pink and square. */
 .desk-stage .phone-case,
 .desk-stage .phone-frame,
-.desk-stage .phone-shell {
-  border-radius: 0;
-}
+.desk-stage .phone-shell { border-radius: 0; }
 
 .desk-stage .phone-case {
   background: linear-gradient(135deg, #56515b, #242329 45%, #4b424c);
@@ -62,211 +66,395 @@
 
 .desk-stage .phone-shell,
 .desk-stage .splash-phone-screen {
-  background: #111115;
+  background: #10191d;
   color: var(--c-text-title);
 }
 
-/* The default home wallpaper is otherwise an inline white background. */
+/* Home screen: the agreed Long Island desk — a fixed, lightweight local asset. */
 .desk-stage .phone-shell > .phone-wallpaper {
-  background: radial-gradient(ellipse at 95% 0%, #432336 0%, transparent 52%), #111115 !important;
+  background:
+    linear-gradient(180deg, rgba(13,18,20,.04) 0%, rgba(13,18,20,.16) 48%, rgba(8,12,13,.34) 100%),
+    url("/companion/long-island-home.webp") center / cover no-repeat !important;
   filter: none !important;
 }
 
-.desk-stage .icon-glyph-box,
-.desk-stage .dock-glyph-box {
-  border-radius: 10px;
-  border: 1px solid #51404e;
-  background: #222129;
-  box-shadow: none;
-}
-
-.desk-stage .dock {
-  box-shadow: none;
+.desk-stage .phone-shell:not(.app-open-shell)::before {
+  background:
+    linear-gradient(180deg, rgba(9,12,13,.03) 0%, rgba(9,12,13,.02) 34%, rgba(7,10,11,.18) 100%),
+    repeating-linear-gradient(90deg, transparent 0 3px, rgba(255,244,218,.008) 3px 4px);
 }
 
 .desk-stage .phone-shell .page-header,
 .desk-stage .phone-shell .chat-input-bar {
-  background: #151519ed;
   color: var(--c-text-title);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent),
+    rgba(14,24,28,.96);
+  backdrop-filter: blur(14px);
 }
 
-.desk-stage .phone-shell .page-header {
-  border-bottom: 1px solid #342b36;
-}
+.desk-stage .phone-shell .page-header { border-bottom: 1px solid #3d4c4d; }
+.desk-stage .phone-shell .chat-input-bar { border-top: 1px solid #3d4c4d; }
+.desk-stage .phone-shell .chat-room-layer { background: #172126; }
 
-.desk-stage .phone-shell .chat-input-bar {
-  border-top: 1px solid #342b36;
-}
-
-.desk-stage .phone-shell .chat-room-layer {
-  background: var(--c-page-body-bg);
+/* A thin old-paper grain keeps large dark surfaces from feeling flat. */
+.desk-stage .phone-shell .page-body,
+.desk-stage .phone-shell .chat-room-main-pane,
+.desk-stage .phone-shell .modal-sheet {
+  background-image: repeating-linear-gradient(0deg, rgba(238,228,207,.018) 0 1px, transparent 1px 5px);
 }
 
 .desk-stage .phone-shell .chat-bubble-role-user:not(.chat-bubble-html-preview):not(.chat-bubble-media) {
-  background: var(--c-bubble-self);
-  color: #fff1f7;
-  border: 1px solid #85506e;
-  border-radius: 9px;
+  color: #fff4e3;
+  background: linear-gradient(145deg, #7c4741, #653633);
+  border: 1px solid #a56a5f;
+  border-radius: 9px 9px 3px 9px;
+  box-shadow: 0 4px 12px rgba(6,12,14,.18), inset 0 1px rgba(255,255,255,.08);
 }
 
 .desk-stage .phone-shell .chat-bubble-role-assistant:not(.chat-bubble-html-preview):not(.chat-bubble-media) {
-  background: var(--c-bubble-other);
-  color: var(--c-text-title);
-  border: 1px solid #413846;
-  border-radius: 9px;
+  color: #2a302d;
+  background:
+    repeating-linear-gradient(0deg, rgba(86,62,38,.025) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #f3ead8, #dfd2b8);
+  border: 1px solid #bcae92;
+  border-radius: 9px 9px 9px 3px;
+  box-shadow: 0 4px 12px rgba(6,12,14,.16), inset 0 1px rgba(255,255,255,.48);
 }
 
 .desk-stage .phone-shell .modal-sheet {
-  border-radius: 12px 12px 0 0;
-  border-top: 1px solid #654457;
+  border-radius: 10px 10px 0 0;
+  border-top: 1px solid #80635a;
+  background-color: #1d292c;
 }
 
-/* Legacy utility colors in the built-in pages do not use theme variables. */
+/* Older pages still use hard-coded utility colors. Pull them into the palette. */
 .desk-stage .phone-shell .text-black,
 .desk-stage .phone-shell .text-gray-800,
-.desk-stage .phone-shell .text-gray-700 {
-  color: var(--c-text-title) !important;
-}
+.desk-stage .phone-shell .text-gray-700 { color: var(--c-text-title) !important; }
 
 .desk-stage .phone-shell .text-gray-500,
-.desk-stage .phone-shell .text-gray-600 {
-  color: var(--c-text) !important;
-}
+.desk-stage .phone-shell .text-gray-600 { color: var(--c-text) !important; }
 
 .desk-stage .phone-shell .bg-white,
 .desk-stage .phone-shell .bg-gray-50,
 .desk-stage .phone-shell .bg-gray-100 {
+  color: var(--c-text-title) !important;
   background-color: var(--c-card) !important;
 }
 
 .desk-stage .phone-shell input,
 .desk-stage .phone-shell textarea,
 .desk-stage .phone-shell select {
-  color: var(--c-text-title);
-  caret-color: var(--c-icon-active);
+  color: #f5edde;
+  caret-color: #d48778;
+  background-color: #132024;
+  border-color: #53615f;
 }
 
 .desk-stage .phone-shell input::placeholder,
-.desk-stage .phone-shell textarea::placeholder {
-  color: #a99eac;
-}
+.desk-stage .phone-shell textarea::placeholder { color: #aaa493; opacity: 1; }
 
 .desk-stage .phone-shell :focus-visible {
-  outline: 2px solid #ee91b8;
+  outline: 2px solid #c77a6c;
   outline-offset: 2px;
 }
 
-/* Session themes may override inherited colors; keep navigation legible locally. */
+/* Chat chrome must stay readable even when an old per-session theme is active. */
 .desk-stage .phone-shell .chat-room-main-pane.page-header,
 .desk-stage .phone-shell .chat-room-main-pane.chat-input-bar {
-  --c-text-title: #f3edf1;
-  --c-text: #d5c6d3;
-  --c-icon: #d5c6d3;
-  --c-icon-active: #efa3c5;
-  color: #f3edf1 !important;
-  background: #19171fed !important;
+  --c-text-title: #f3ead9;
+  --c-text: #d2c9b7;
+  --c-icon: #cbc2b0;
+  --c-icon-active: #d08578;
+  color: #f3ead9 !important;
+  background: rgba(14,24,28,.97) !important;
 }
 
 .desk-stage .phone-shell .page-header .page-title,
-.desk-stage .phone-shell .page-header .page-back-btn {
-  color: #f3edf1 !important;
-}
-
-.desk-stage .phone-shell .chat-input-actions button {
-  color: #efa3c5 !important;
-}
+.desk-stage .phone-shell .page-header .page-back-btn { color: #f3ead9 !important; }
+.desk-stage .phone-shell .chat-input-actions button { color: #d08578 !important; }
 
 .desk-stage .phone-shell .chat-input-bar .chat-input-textarea {
-  background: #2b2631 !important;
-  color: #fff2fa !important;
-  border: 1px solid #82657b !important;
+  color: #f7efe0 !important;
+  background: #172528 !important;
+  border: 1px solid #6f625b !important;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.25) !important;
 }
 
-.desk-stage .phone-shell .chat-input-bar .chat-input-textarea::placeholder {
-  color: #cbbbc9 !important;
-}
+.desk-stage .phone-shell .chat-input-bar .chat-input-textarea::placeholder { color: #b9b09f !important; }
 
-/* Lighter paper inside the dark archive keeps its printed ink readable. */
+/* Character archive and default-world papers: real paper, dark readable ink. */
 .desk-stage .phone-shell .char-paper-grid,
 .desk-stage .phone-shell .char-paper-a4,
 .desk-stage .phone-shell .char-paper-scrap,
 .desk-stage .phone-shell .char-paper-torn {
-  --c-text-title: #29232b;
-  --c-text: #49404a;
-  --c-input-border: #746674;
-  background-color: #c9bec7;
-  color: #29232b;
-  border-color: #978895;
+  --c-text-title: #282b28;
+  --c-text: #4f5149;
+  --c-input-border: #887b68;
+  color: #282b28;
+  background-color: #e6dcc8;
+  border-color: #a99b82;
+  box-shadow: 0 8px 22px rgba(10,15,16,.22);
 }
 
-.desk-stage .phone-shell .char-paper-grid { background-color: #d5c9d2; }
-.desk-stage .phone-shell .char-paper-a4 { background-color: #bfb3bd; }
-.desk-stage .phone-shell .char-paper-torn {
-  background-image: linear-gradient(#8f808e55 1px, transparent 1px);
+.desk-stage .phone-shell .char-paper-grid {
+  background-color: #ece3d2;
+  background-image:
+    linear-gradient(#9b8c7455 1px, transparent 1px),
+    linear-gradient(90deg, #9b8c7428 1px, transparent 1px);
 }
-.desk-stage .phone-shell .char-handwriting { color: #714263; }
-.desk-stage .phone-shell .char-handwriting.red-ink { color: #853c59; }
+.desk-stage .phone-shell .char-paper-a4 { background-color: #e3d7c0; }
+.desk-stage .phone-shell .char-paper-torn { background-image: linear-gradient(#99886e4d 1px, transparent 1px); }
+.desk-stage .phone-shell .char-handwriting { color: #345b50; }
+.desk-stage .phone-shell .char-handwriting.red-ink { color: #803f3a; }
+
+.desk-stage .phone-shell .char-paper-grid input,
+.desk-stage .phone-shell .char-paper-grid textarea,
+.desk-stage .phone-shell .char-paper-a4 input,
+.desk-stage .phone-shell .char-paper-a4 textarea,
+.desk-stage .phone-shell .char-paper-scrap input,
+.desk-stage .phone-shell .char-paper-scrap textarea {
+  color: #282b28 !important;
+  background: rgba(255,252,243,.48) !important;
+  caret-color: #803f3a !important;
+}
+
+.desk-stage .phone-shell .char-paper-grid input::placeholder,
+.desk-stage .phone-shell .char-paper-grid textarea::placeholder,
+.desk-stage .phone-shell .char-paper-a4 input::placeholder,
+.desk-stage .phone-shell .char-paper-a4 textarea::placeholder { color: #756e61 !important; }
+
 .desk-stage .phone-shell .char-archive-view {
-  --c-text-title: #f3edf1;
-  --c-text: #d2c3d0;
-  --c-icon: #c6afc3;
-  --c-panel: #2a252e;
-  --c-input: #342c39;
-  background: #201c25;
+  --c-text-title: #f2e9d7;
+  --c-text: #cec5b4;
+  --c-icon: #b8b6a9;
+  --c-panel: #233033;
+  --c-input: #18262a;
+  background: #172226;
 }
 
-/* Function-first icons: graphite tiles, silver glyphs, a small cat-paw accent. */
+/* Home desktop: aged paper, bottle-green cloth, worn leather and brass. */
+.desk-stage .icon-glyph-box,
+.desk-stage .dock-glyph-box { border-radius: 5px; }
+
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin),
 .desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) {
+  position: relative;
   overflow: hidden;
-  border: 1px solid #776b78;
-  border-radius: 13px;
-  background: linear-gradient(145deg, #56515d 0%, #302c37 28%, #1c1921 68%, #322732 100%);
-  box-shadow: inset 0 1px 1px #ffffff55, inset 0 -2px 3px #00000088, 0 4px 8px #00000055;
+  border: 1px solid #4e3d2c;
+  border-radius: 5px;
+  background:
+    repeating-linear-gradient(92deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #ebe0c8, #c7b38e);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.42),
+    inset 0 -2px 3px rgba(65,42,23,.25),
+    0 3px 6px rgba(23,14,8,.42);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-}
-
-.desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin)::before,
-.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(160deg, #ffffff22, transparent 48%);
-  mix-blend-mode: normal;
-  opacity: 1;
-  pointer-events: none;
-  z-index: 0;
 }
 
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin)::after,
 .desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::after {
   content: "";
   position: absolute;
-  inset: auto 4px 4px auto;
-  width: 12px;
-  height: 12px;
-  padding: 0;
-  background: url("/images/y2k-paw-accent.svg") center / contain no-repeat;
-  mask: none;
-  -webkit-mask: none;
-  mix-blend-mode: normal;
+  left: 4px;
+  top: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ead095 0 18%, #9f7440 42%, #47301d 100%);
+  box-shadow:
+    calc(var(--slot-icon-width, 62px) - 12px) 0 #9f7440,
+    0 calc(var(--slot-icon-height, 62px) - 12px) #8d6538,
+    calc(var(--slot-icon-width, 62px) - 12px) calc(var(--slot-icon-height, 62px) - 12px) #8d6538;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 .desk-stage .icon-grid .icon-glyph-box:not(.folder-glyph-box):not(.icon-glyph-box-skin) > .icon-glyph,
 .desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) > .icon-glyph {
   position: relative;
   inset: auto;
-  width: 31px;
-  height: 31px;
+  width: 30px;
+  height: 30px;
   padding: 0;
-  color: #eee6f0 !important;
+  color: #f4e6c9 !important;
   background: none;
   border: none;
   border-radius: 0;
-  filter: drop-shadow(0 1px 0 #ffffff44) drop-shadow(0 2px 2px #00000099);
+  filter: drop-shadow(0 1px rgba(255,255,255,.18)) drop-shadow(0 2px 2px rgba(0,0,0,.58));
   z-index: 1;
+}
+
+.desk-stage .icon-grid .icon-item:nth-child(5n+2) .icon-glyph-box:not(.icon-glyph-box-skin) {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px), linear-gradient(145deg, #40594c, #263c35);
+}
+.desk-stage .icon-grid .icon-item:nth-child(5n+3) .icon-glyph-box:not(.icon-glyph-box-skin) {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 4px), linear-gradient(145deg, #714434, #422a24);
+}
+.desk-stage .icon-grid .icon-item:nth-child(5n+4) .icon-glyph-box:not(.icon-glyph-box-skin) {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 4px), linear-gradient(145deg, #173047, #101f31);
+}
+.desk-stage .icon-grid .icon-item:nth-child(5n+5) .icon-glyph-box:not(.icon-glyph-box-skin) {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 4px), linear-gradient(145deg, #7a3931, #47251f);
+}
+
+/* Twelve painted icons from the chosen mockup. Unknown/custom apps keep their glyph. */
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph-box::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  z-index: 2;
+  background-image: url("/companion/retro-app-icons.webp");
+  background-size: 400% 300%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 1px 1px rgba(20,12,6,.34));
+}
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph { opacity: 0; }
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph-box {
+  border: 1px solid #4e3d2c;
+  border-radius: 5px;
+  background: repeating-linear-gradient(92deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px), linear-gradient(145deg, #40594c, #263c35);
+  box-shadow: inset 0 1px rgba(255,255,255,.24), inset 0 -2px 3px rgba(27,17,10,.34), 0 3px 6px rgba(23,14,8,.42);
+}
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-skin-layer { display: none; }
+.desk-stage .icon-item:is(
+  [data-icon-label="心意手作工坊"], [data-icon-label="互动衣橱"], [data-icon-label="灯塔电影院"],
+  [data-icon-id="shared_drawer"], [data-icon-id="chat"], [data-icon-id="diary"],
+  [data-icon-id="music"], [data-icon-id="calendar"], [data-icon-id="checkphone"],
+  [data-icon-id="shopping"], [data-icon-id="reading"], [data-icon-id="interview_magazine"]
+) .icon-glyph-box::after {
+  content: "";
+  position: absolute;
+  inset: 4px auto auto 4px;
+  width: 4px;
+  height: 4px;
+  padding: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ead095 0 18%, #9f7440 42%, #47301d 100%);
+  -webkit-mask: none;
+  mask: none;
+  box-shadow:
+    calc(var(--slot-icon-width, 62px) - 12px) 0 #9f7440,
+    0 calc(var(--slot-icon-height, 62px) - 12px) #8d6538,
+    calc(var(--slot-icon-width, 62px) - 12px) calc(var(--slot-icon-height, 62px) - 12px) #8d6538;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.desk-stage .icon-item[data-icon-label="心意手作工坊"] .icon-glyph-box::before { background-position: 0 0; }
+.desk-stage .icon-item[data-icon-label="互动衣橱"] .icon-glyph-box::before { background-position: 33.333% 0; }
+.desk-stage .icon-item[data-icon-label="灯塔电影院"] .icon-glyph-box::before { background-position: 66.666% 0; }
+.desk-stage .icon-item[data-icon-id="shared_drawer"] .icon-glyph-box::before { background-position: 100% 0; }
+.desk-stage .icon-item[data-icon-id="chat"] .icon-glyph-box::before { background-position: 0 50%; }
+.desk-stage .icon-item[data-icon-id="diary"] .icon-glyph-box::before { background-position: 33.333% 50%; }
+.desk-stage .icon-item[data-icon-id="music"] .icon-glyph-box::before { background-position: 66.666% 50%; }
+.desk-stage .icon-item[data-icon-id="calendar"] .icon-glyph-box::before { background-position: 100% 50%; }
+.desk-stage .icon-item[data-icon-id="checkphone"] .icon-glyph-box::before { background-position: 0 100%; }
+.desk-stage .icon-item[data-icon-id="shopping"] .icon-glyph-box::before { background-position: 33.333% 100%; }
+.desk-stage .icon-item[data-icon-id="reading"] .icon-glyph-box::before { background-position: 66.666% 100%; }
+.desk-stage .icon-item[data-icon-id="interview_magazine"] .icon-glyph-box::before { background-position: 100% 100%; }
+
+.desk-stage .icon-label {
+  color: #f5ead2;
+  font-family: Georgia, "Noto Serif SC", serif;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-shadow: 0 1px 2px #140d08, 0 0 5px rgba(15,9,5,.75);
+}
+
+.desk-stage .wg-large-time {
+  align-items: flex-start;
+  padding-left: 28px;
+  filter: drop-shadow(0 2px 2px rgba(19,10,5,.7));
+}
+.desk-stage .wg-lt-date {
+  color: #f4e5c8;
+  font-family: Georgia, "Noto Serif SC", serif;
+  font-size: calc(17px*var(--app-text-scale,1));
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+.desk-stage .wg-lt-time {
+  color: #f7e8c9;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(91px*var(--app-text-scale,1));
+  font-weight: 800;
+  letter-spacing: -.035em;
+}
+
+.desk-stage .wg-mood-bubble,
+.desk-stage .phone-shell[data-widget-effect="glass"] .wg-mood-bubble {
+  color: #1c2b29;
+  background:
+    repeating-linear-gradient(0deg, rgba(83,61,36,.03) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, rgba(239,226,198,.96), rgba(204,184,145,.96));
+  border: 1px solid #614631;
+  border-radius: 4px;
+  box-shadow: inset 0 1px rgba(255,255,255,.5), 0 3px 9px rgba(29,17,9,.4);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  font-family: Georgia, "Noto Serif SC", serif;
+  font-weight: 700;
+}
+.desk-stage .wg-mood-bubble::before,
+.desk-stage .wg-mood-bubble::after { display: none; }
+
+.desk-stage .dock {
+  min-height: 82px;
+  border: 1px solid #715338;
+  border-radius: 5px;
+  background:
+    linear-gradient(90deg, transparent 12px, rgba(205,170,110,.32) 12px 13px, transparent 13px calc(100% - 13px), rgba(205,170,110,.32) calc(100% - 13px) calc(100% - 12px), transparent calc(100% - 12px)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, rgba(17,31,42,.97), rgba(8,19,28,.97));
+  box-shadow: inset 0 0 0 3px rgba(176,134,78,.16), inset 0 1px rgba(255,255,255,.08), 0 8px 18px rgba(17,9,5,.42);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin) {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.desk-stage .dock .icon-glyph-box:not(.icon-glyph-box-skin)::after { display: none; }
+.desk-stage .dock .icon-label { display: none; }
+.desk-stage .dock .icon-glyph {
+  color: #f1dfbd !important;
+  width: 31px !important;
+  height: 31px !important;
+}
+
+.desk-stage .page-controls .dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(226,205,168,.38);
+  border: 1px solid rgba(75,48,28,.5);
+}
+.desk-stage .page-controls .dot.active {
+  background: #d8b777;
+  box-shadow: 0 0 0 1px #3d2b20, 0 1px 3px rgba(0,0,0,.45);
 }

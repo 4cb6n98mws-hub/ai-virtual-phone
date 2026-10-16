@@ -852,7 +852,7 @@ function HomeScreen({
   return (
     <>
       <header className="interview-header">
-        <button className="interview-icon-btn" onClick={onClose} aria-label="返回桌面">
+        <button className="interview-icon-btn companion-app-back" onClick={onClose} aria-label="返回桌面">
           <ChevronLeft size={20} />
         </button>
         <SmallCaps className="text-white/70 tracking-widest">The Interview</SmallCaps>
@@ -862,16 +862,16 @@ function HomeScreen({
       </header>
 
       <main className="interview-scroll px-6 pb-32">
-        <section className="text-center py-10 fade-in">
-          <div className="flex items-center justify-center gap-4 text-white/40 mb-4">
+        <section className="interview-cover text-center py-10 fade-in">
+          <div className="interview-issue-label flex items-center justify-center gap-4 text-white/40 mb-4">
             <span className="w-10 h-px bg-white/20"></span>
             <SmallCaps>ISSUE NO.{String(nextIssueNumber).padStart(2, "0")}</SmallCaps>
             <span className="w-10 h-px bg-white/20"></span>
           </div>
-          <h1 className="font-display text-5xl font-black text-white tracking-wider my-4 drop-shadow-md">
+          <h1 className="interview-cover-title font-display text-5xl font-black text-white tracking-wider my-4 drop-shadow-md">
             PRESENCE
           </h1>
-          <p className="font-cn text-white/60 tracking-[0.4em] ml-[0.4em] font-light">
+          <p className="interview-cover-subtitle font-cn text-white/60 tracking-[0.4em] ml-[0.4em] font-light">
             在场 · 人物特写
           </p>
         </section>
@@ -921,13 +921,13 @@ function HomeScreen({
         )}
 
         <section className="mt-4 mb-10 fade-in" style={{ animationDelay: '0.1s' }}>
-          <div className="flex items-center justify-between mb-4 px-2">
+          <div className="interview-archive-heading flex items-center justify-between mb-4 px-2">
             <SmallCaps className="text-white/50">ARCHIVES // 往期专栏</SmallCaps>
             <span className="text-white/40 text-xs font-serif">{issues.length} 期</span>
           </div>
 
           {issues.length === 0 ? (
-            <div className="interview-glass-panel flex flex-col items-center justify-center p-8 text-center min-h-[140px]">
+            <div className="interview-glass-panel interview-empty-card flex flex-col items-center justify-center p-8 text-center min-h-[140px]">
               <Mic2 size={24} className="text-white/30 mb-3" strokeWidth={1.5} />
               <p className="font-serif italic text-white/40 text-sm">Waiting for the first interview.</p>
             </div>
@@ -1081,7 +1081,7 @@ function SetupScreen({
   return (
     <>
       <header className="interview-header">
-        <button className="interview-icon-btn" onClick={onBack}>
+        <button className="interview-icon-btn companion-app-back" onClick={onBack} aria-label="返回">
           <ChevronLeft size={20} />
         </button>
         <div className="text-center">
@@ -1265,7 +1265,7 @@ function InterviewScreen({
   return (
     <>
       <header className="interview-header backdrop-blur-md bg-black/20">
-        <button className="interview-icon-btn" onClick={onAbort}>
+        <button className="interview-icon-btn companion-app-back" onClick={onAbort} aria-label="返回">
           <X size={20} />
         </button>
         <div className="flex flex-col items-center">
@@ -1460,7 +1460,7 @@ function ArticleScreen({
   return (
     <div className="absolute inset-0 bg-[#0a0a0a] z-40 overflow-hidden flex flex-col">
       <header className="interview-header bg-black/50 backdrop-blur-md absolute top-0 left-0 right-0 z-10">
-        <button className="w-10 h-10 flex items-center justify-center text-white/60 hover:text-white transition-colors" onClick={onBack}>
+        <button className="companion-app-back w-10 h-10 flex items-center justify-center text-white/60 hover:text-white transition-colors" onClick={onBack} aria-label="返回">
           <ChevronLeft size={22} />
         </button>
         <SmallCaps className="text-white/40 tracking-widest">ISSUE NO.{String(issue.issueNumber).padStart(2, "0")}</SmallCaps>

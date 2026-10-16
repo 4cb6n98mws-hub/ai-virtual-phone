@@ -452,7 +452,7 @@ export function VnSelect({ onClose, onSelect, vnTheme, onThemeChange, onOpenAsse
 
       {/* ── Top Bar ── */}
       <div className="vns-topbar">
-        <button className="vns-back" onClick={onClose}>
+        <button className="vns-back companion-app-back" onClick={onClose} aria-label="返回桌面">
           <ArrowLeft size={20} />
         </button>
         <div style={{ textAlign: "center" }}>

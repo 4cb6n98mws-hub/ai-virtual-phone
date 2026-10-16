@@ -381,7 +381,7 @@ export function PhoneSettingsApp({ onClose, onNotice }: SettingsPageProps) {
 
     return (
         <SettingsContext.Provider value={{ setSubpageTitle, setOverrideBack, setSubpageRightAction }}>
-            <PageShell title={title} onBack={handleBack} rightAction={currentPage !== "main" ? subpageRightActions[currentPage] : undefined} bodyRef={pageBodyRef}>
+            <PageShell className="settings-page-shell" title={title} onBack={handleBack} rightAction={currentPage !== "main" ? subpageRightActions[currentPage] : undefined} bodyRef={pageBodyRef}>
                 {currentPage === "main" && (
                     <div className="page-menu settings-main-menu">
                         {!selfHostedMode && (

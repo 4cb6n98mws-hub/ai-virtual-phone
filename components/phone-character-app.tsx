@@ -1064,14 +1064,14 @@ function CharListView({
         title={<strong style={{ fontWeight: 900, fontFamily: 'Impact, "Arial Black", sans-serif', fontSize: '1.15em', letterSpacing: '0.04em' }}>TARGET ARCHIVES</strong>}
         leftAction={
           <button
-            className="flex items-center justify-center w-[34px] h-[34px] rounded-full bg-black/5 text-[#666] hover:bg-black/10 transition-colors"
+            className="companion-app-back flex items-center justify-center w-[34px] h-[34px] rounded-full bg-black/5 text-[#666] hover:bg-black/10 transition-colors"
             onClick={onClose}
             aria-label="返回桌面"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
         }
-        className="[&_.page-body]:pb-0"
+        className="characters-page-shell [&_.page-body]:pb-0"
         rightAction={
           <div className="flex items-center gap-2">
             {isEditing && (

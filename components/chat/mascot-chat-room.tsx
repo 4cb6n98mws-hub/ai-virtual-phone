@@ -178,7 +178,7 @@ function MascotInfoPanel({
     };
 
     return (
-        <PageShell title="AI助手信息" onBack={onClose} className="absolute inset-0 z-[100]">
+        <PageShell title="AI助手信息" onBack={onClose} className="companion-chat-info-page absolute inset-0 z-[100]">
             <div className="page-menu chat-info-menu">
                 <div className="menu-group">
                     <label className="menu-item">
@@ -887,7 +887,7 @@ export function MascotChatRoom({ onBack, onDeleted }: MascotChatRoomProps) {
     return (
         <div
             ref={wrapperRef}
-            className="mascot-chat-session chat-room-wrapper page-shell inset-0 flex flex-col z-20"
+            className="mascot-chat-session chat-room-wrapper vintage-chat-room page-shell inset-0 flex flex-col z-20"
             style={chatRoomBackgroundStyle}
             {...(backgroundUrl ? { "data-has-bg-image": "" } : {})}
             {...(showInfo ? { "data-settings-open": "" } : {})}
@@ -992,7 +992,7 @@ export function MascotChatRoom({ onBack, onDeleted }: MascotChatRoomProps) {
             <header className="page-header chat-room-main-pane" data-ui="header">
                 <div className="page-header-safe-area" />
                 <div className="page-header-content">
-                    <button className="page-back-btn" type="button" onClick={onBack} aria-label="返回">
+                    <button className="page-back-btn companion-app-back" type="button" onClick={onBack} aria-label="返回">
                         <ChevronLeft size={24} strokeWidth={1.5} />
                     </button>
                     <span className="page-title" style={{ position: "relative" }}>
@@ -1013,7 +1013,7 @@ export function MascotChatRoom({ onBack, onDeleted }: MascotChatRoomProps) {
 
             <div
                 ref={scrollRef}
-                className="page-body chat-room-main-pane flex flex-col gap-4 chat-scroll-anchored"
+                className="page-body vintage-chat-paper chat-room-main-pane flex flex-col gap-4 chat-scroll-anchored"
                 onScroll={updateMascotStickToBottom}
                 onPointerDown={() => {
                     if (showEmojiPanel) setShowEmojiPanel(false);

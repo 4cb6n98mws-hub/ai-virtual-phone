@@ -967,7 +967,7 @@ export function VnPlayer({ characterId, chapterIndex, onClose, onChapterEnd, vnT
       <div className="vn-topbar" onClick={(e) => e.stopPropagation()}>
         <div className="vn-topbar-safe-area" />
         <div className="vn-topbar-content">
-        <button className="vn-topbar-btn" onClick={onClose}>
+        <button className="vn-topbar-btn companion-app-back" onClick={onClose} aria-label="返回">
           <ArrowLeft size={20} />
         </button>
         <div className="vn-topbar-right">

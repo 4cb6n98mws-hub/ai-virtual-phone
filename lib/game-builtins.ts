@@ -1,9 +1,33 @@
 import { DOUDIZHU_GAME_HTML, TRUTH_OR_DARE_GAME_HTML } from "./game-builtin-html";
 import type { GameTemplate } from "./game-types";
+import NIGHT_GOMOKU_DRAFT from "../artifacts/night-gomoku-v1.2.json";
 
 const now = "2026-06-06T00:00:00.000Z";
 
 const EMPTY_PICKER_HTML = "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head><body></body></html>";
+
+const NIGHT_GOMOKU_GAME_HTML = NIGHT_GOMOKU_DRAFT.draft.gameHtml.replace(
+  "          state.recorded = true;",
+  `          if (host.saveKeepsake) {
+            await host.saveKeepsake({
+              id: state.matchId,
+              title: "夜局五子棋",
+              subtitle: resultText(),
+              content: {
+                result: resultText(),
+                moves: state.history.length,
+                difficulty: state.difficulty,
+                player: player.name,
+                opponent: role.name,
+                score: state.scores,
+                finishedAt: new Date().toISOString()
+              },
+              characterIds: [role.id],
+              metadata: { gameId: "builtin_game_night_gomoku", matchId: state.matchId }
+            });
+          }
+          state.recorded = true;`,
+);
 
 function template(input: Omit<GameTemplate, "playNote" | "authorId" | "authorName" | "authorAvatar" | "source" | "version" | "purchaseCount" | "rating" | "likeCount" | "favoriteCount" | "commentCount" | "createdAt" | "updatedAt"> & Partial<Pick<GameTemplate, "playNote" | "version">>): GameTemplate {
   return {
@@ -25,6 +49,20 @@ function template(input: Omit<GameTemplate, "playNote" | "authorId" | "authorNam
 }
 
 export const GAME_BUILTIN_TEMPLATES: GameTemplate[] = [
+  template({
+    id: "builtin_game_night_gomoku",
+    title: "夜局五子棋",
+    codeName: "NIGHT GOMOKU",
+    subtitle: "和一个人安静地下完一局",
+    synopsis: "十五路双人五子棋。你执黑先行，选择一名角色坐在棋盘对面；棋力、对局和存档全部在本地运行。",
+    playNote: "下棋本身零 API。散局后只有主动点击“把这局留下”才会写入游戏记忆和共同抽屉；点击“让对手说一句”才调用一次角色 API。",
+    coverImage: "/game-covers/night-gomoku.svg",
+    tags: ["棋类", "双人", "陪伴", "离线"],
+    roleSlots: [],
+    pickerHtml: EMPTY_PICKER_HTML,
+    gameHtml: NIGHT_GOMOKU_GAME_HTML,
+    allowExternalControl: true,
+  }),
   template({
     id: "builtin_game_doudizhu",
     title: "欢乐斗地主",

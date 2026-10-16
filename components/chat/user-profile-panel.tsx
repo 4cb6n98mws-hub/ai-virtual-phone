@@ -320,13 +320,13 @@ export function UserProfilePanel({ onClose, className }: UserProfilePanelProps) 
                 }
             `}</style>
             <PageShell title="" onBack={onClose} className={`user-profile-page-root ${className || ""}`}>
-                <div className="relative z-[1] w-full max-w-2xl mx-auto flex flex-col pb-8">
+                <div className="companion-profile-content relative z-[1] w-full max-w-2xl mx-auto flex flex-col pb-8">
                     
                     {/* User Info & Stats Block */}
-                    <div className="flex items-center gap-5 px-6 pt-2 pb-4">
+                    <div className="companion-profile-identity flex items-center gap-5 px-6 pt-2 pb-4">
                         {/* Avatar */}
                         <div className="relative shrink-0">
-                            <div className="w-[84px] h-[84px] rounded-full overflow-hidden bg-[var(--c-card)] border-2 border-white/50 shadow-sm flex items-center justify-center relative"
+                            <div className="companion-profile-avatar w-[84px] h-[84px] rounded-full overflow-hidden bg-[var(--c-card)] border-2 border-white/50 shadow-sm flex items-center justify-center relative"
                                  style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}>
                                 {identity?.avatarUrl ? (
                                     <img src={identity.avatarUrl} alt="User Avatar" className="w-full h-full object-cover" />
@@ -362,7 +362,7 @@ export function UserProfilePanel({ onClose, className }: UserProfilePanelProps) 
 
                     <button
                         type="button"
-                        className="mx-4 mb-4 rounded-2xl overflow-hidden text-left relative min-h-[132px] p-5 flex flex-col justify-between"
+                        className="companion-profile-card companion-profile-wallet mx-4 mb-4 rounded-2xl overflow-hidden text-left relative min-h-[132px] p-5 flex flex-col justify-between"
                         onClick={() => { window.dispatchEvent(new CustomEvent("chat-hide-tabbar", { detail: true })); setShowWalletPanel(true); }}
                         style={{ background: "#eaf5ff", boxShadow: "0 8px 24px rgba(0,0,0,0.025)", border: "1px solid rgba(255,255,255,0.72)", color: "#172033" }}
                     >
@@ -383,7 +383,7 @@ export function UserProfilePanel({ onClose, className }: UserProfilePanelProps) 
                     </button>
 
                     {/* Quick Features Row */}
-                    <div className="mx-4 mb-4 bg-[var(--c-card)] rounded-2xl flex items-center justify-between p-4 px-6"
+                    <div className="companion-profile-card companion-profile-quick mx-4 mb-4 bg-[var(--c-card)] rounded-2xl flex items-center justify-between p-4 px-6"
                          style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.025)" }}>
                         <button className="flex flex-col items-center gap-2 flex-1" onClick={() => { window.dispatchEvent(new CustomEvent("chat-hide-tabbar", { detail: true })); setShowMomentsSettings(true); }}>
                             <div className="w-[42px] h-[42px] rounded-[14px] bg-[color-mix(in_srgb,var(--c-warning)_15%,transparent)] text-[var(--c-warning)] flex items-center justify-center">
@@ -406,7 +406,7 @@ export function UserProfilePanel({ onClose, className }: UserProfilePanelProps) 
                     </div>
 
                     {/* 主动消息 */}
-                    <div className="mx-4 mb-4 bg-[var(--c-card)] rounded-2xl px-4 py-1 flex flex-col"
+                    <div className="companion-profile-card companion-profile-list mx-4 mb-4 bg-[var(--c-card)] rounded-2xl px-4 py-1 flex flex-col"
                          style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.025)" }}>
                         <button className="flex items-center gap-3 py-3.5 w-full" onClick={() => { window.dispatchEvent(new CustomEvent("chat-hide-tabbar", { detail: true })); setShowFollowUpEditor(true); }}>
                             <Send size={18} className="text-[var(--c-icon)] opacity-70" strokeWidth={1.25}/>
@@ -427,7 +427,7 @@ export function UserProfilePanel({ onClose, className }: UserProfilePanelProps) 
                     </div>
 
                     {/* 输入与提醒 */}
-                    <div className="mx-4 mb-4 bg-[var(--c-card)] rounded-2xl px-4 py-1 flex flex-col"
+                    <div className="companion-profile-card companion-profile-list mx-4 mb-4 bg-[var(--c-card)] rounded-2xl px-4 py-1 flex flex-col"
                          style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.025)" }}>
                         <div className="flex items-center gap-3 py-3 w-full border-b border-[color-mix(in_srgb,var(--c-card-border)_20%,transparent)]">
                             <Keyboard size={18} className="text-[var(--c-icon)] opacity-70" strokeWidth={1.25}/>
@@ -458,7 +458,7 @@ export function UserProfilePanel({ onClose, className }: UserProfilePanelProps) 
                     </div>
 
                     {/* 高级工具 */}
-                    <div className="mx-4 bg-[var(--c-card)] rounded-2xl px-4 py-1 flex flex-col"
+                    <div className="companion-profile-card companion-profile-list mx-4 bg-[var(--c-card)] rounded-2xl px-4 py-1 flex flex-col"
                          style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.025)" }}>
                         <button className="flex items-center gap-3 py-3.5 w-full border-b border-[color-mix(in_srgb,var(--c-card-border)_20%,transparent)]" onClick={() => { window.dispatchEvent(new CustomEvent("chat-hide-tabbar", { detail: true })); setShowPluginManager(true); }}>
                             <Puzzle size={18} className="text-[var(--c-icon)] opacity-70" strokeWidth={1.25}/>

@@ -20,6 +20,7 @@ import {
 } from "@/lib/notewall-client";
 import { generateNoteWallCharacterNote, generateNoteWallCharacterReplies } from "@/lib/notewall-engine";
 import { getNoteWallLocalUserId, loadNoteWallTimerSettings, saveNoteWallTimerSettings } from "@/lib/notewall-local";
+import { hasRoleApiRunToday, markRoleApiRunToday } from "@/lib/role-api-budget";
 import { recordNoteWallCommentEvent, recordNoteWallNoteEvent } from "@/lib/notewall-memory";
 import {
   DEFAULT_NOTE_WALL_BOARD,
@@ -913,31 +914,40 @@ export function NoteWallApp({ onBack, onNotice }: NoteWallAppProps) {
   }, [handleReplyForCharacters]);
 
   const checkDueTimers = useCallback(async () => {
-    const scheduledCharacters = characters.length > 0 ? characters : loadCharacters();
-    const characterIds = scheduledCharacters.map(character => character.id).filter(Boolean);
-    if (timerRunningRef.current || characterIds.length === 0) return;
+    const availableCharacters = characters.length > 0 ? characters : loadCharacters();
+    const scheduledCharacters = timerSettings.characterIds.length > 0
+      ? timerSettings.characterIds
+          .map(characterId => availableCharacters.find(character => character.id === characterId))
+          .filter(Boolean) as Character[]
+      : availableCharacters;
+    if (timerRunningRef.current || scheduledCharacters.length === 0) return;
     if (!timerSettings.enabled) return;
+    if (hasRoleApiRunToday("note-wall-timer", "all")) return;
     timerRunningRef.current = true;
     try {
       const now = Date.now();
-      for (const characterId of characterIds) {
-        const last = timerSettings.lastRunAtByCharacter[characterId];
-        const lastTime = last ? new Date(last).getTime() : 0;
-        const due = !lastTime || now - lastTime >= timerSettings.intervalMinutes * 60 * 1000;
-        if (due) {
-          await handleGenerateForCharacter(characterId, "timer");
-          await handleReplyForCharacter(characterId);
-          const stamp = new Date().toISOString();
-          setTimerSettings(prev => ({
-            ...prev,
-            lastRunAtByCharacter: { ...prev.lastRunAtByCharacter, [characterId]: stamp },
-          }));
-        }
-      }
+      const dueCharacter = scheduledCharacters
+        .map(character => ({
+          character,
+          lastTime: timerSettings.lastRunAtByCharacter[character.id]
+            ? new Date(timerSettings.lastRunAtByCharacter[character.id]).getTime()
+            : 0,
+        }))
+        .filter(item => !item.lastTime || now - item.lastTime >= timerSettings.intervalMinutes * 60 * 1000)
+        .sort((a, b) => a.lastTime - b.lastTime)[0]?.character;
+      if (!dueCharacter) return;
+
+      markRoleApiRunToday("note-wall-timer", "all");
+      await handleGenerateForCharacter(dueCharacter.id, "timer");
+      const stamp = new Date().toISOString();
+      setTimerSettings(prev => ({
+        ...prev,
+        lastRunAtByCharacter: { ...prev.lastRunAtByCharacter, [dueCharacter.id]: stamp },
+      }));
     } finally {
       timerRunningRef.current = false;
     }
-  }, [characters, handleGenerateForCharacter, handleReplyForCharacter, timerSettings]);
+  }, [characters, handleGenerateForCharacter, timerSettings]);
 
   useEffect(() => {
     const timer = window.setInterval(checkDueTimers, 60000);
@@ -948,7 +958,7 @@ export function NoteWallApp({ onBack, onNotice }: NoteWallAppProps) {
   return (
     <section className={`note-wall-app ${noteDrag ? "is-note-dragging" : ""}`}>
       <header className="note-wall-header">
-        <button type="button" className="page-back-btn" onClick={onBack} aria-label="返回">
+        <button type="button" className="page-back-btn companion-app-back" onClick={onBack} aria-label="返回">
           <ChevronLeft size={24} strokeWidth={1.5} />
         </button>
         <div className="note-wall-title">
@@ -1665,7 +1675,7 @@ function TimerSettingsPanel({ characters, settings, generatingCharacterIds, repl
         <header>
           <div>
             <h2>角色便签设置</h2>
-            <p>开启后，角色会按同一间隔写便签并回复便签。</p>
+            <p>开启后每天最多自动让一名到期角色写一张便签，角色轮换；评论仍由你手动触发。</p>
           </div>
           <button type="button" className="diary-icon-btn" onClick={onClose} aria-label="关闭">
             <X size={18} />
@@ -1695,7 +1705,7 @@ function TimerSettingsPanel({ characters, settings, generatingCharacterIds, repl
               />
             </label>
           </div>
-          <p className="nw-timer-hint">到点后会先写便签，再查看候选便签并选择 5 条回复。</p>
+          <p className="nw-timer-hint">省量保护：所有角色合计每天最多自动调用一次；手动发帖和评论不受影响。</p>
         </div>
         <div className="nw-character-action-panel">
           <div className="nw-character-action-buttons">

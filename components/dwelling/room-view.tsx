@@ -65,59 +65,14 @@ export function RoomView({
     }, [tip]);
 
     const stageRef = useRef<HTMLDivElement | null>(null);
-    const [stageSize, setStageSize] = useState<{ w: number; h: number } | null>(null);
-
-    useEffect(() => {
-        if (viewMode !== "stage") return;
-        const el = stageRef.current;
-        if (!el) return;
-        const update = () => setStageSize({ w: el.clientWidth, h: el.clientHeight });
-        update();
-        const ro = new ResizeObserver(update);
-        ro.observe(el);
-        return () => ro.disconnect();
-    }, [viewMode]);
 
     const markers = useMemo(() => {
-        const base = (room.furniture || []).map(f => {
-            const m = resolveFurnitureMarker(f);
-            return {
-                f, m,
-                h: m.x <= 0.55 ? "right" as const : "left" as const,
-                len: 38,
-            };
-        });
-        if (!stageSize) return base;
-        // 标签避让：引线始终是水平直线，冲突时先换方向、再加长引线错开
-        const placed: Array<{ x1: number; x2: number; y: number }> = [];
-        const rectFor = (mk: typeof base[number], h: "left" | "right", len: number) => {
-            const px = mk.m.x * stageSize.w;
-            const labelW = mk.f.label.length * 17 + 40;
-            const x1 = h === "right" ? px + 20 + len : px - 20 - len - labelW;
-            return { x1, x2: x1 + labelW };
-        };
-        const sorted = [...base].sort((a, b) => a.m.y - b.m.y);
-        for (const mk of sorted) {
-            const py = mk.m.y * stageSize.h;
-            const flip = mk.h === "right" ? "left" as const : "right" as const;
-            const attempts: Array<{ h: "left" | "right"; len: number }> = [
-                { h: mk.h, len: 38 }, { h: flip, len: 38 },
-                { h: mk.h, len: 104 }, { h: flip, len: 104 },
-            ];
-            let done = false;
-            for (const at of attempts) {
-                const { x1, x2 } = rectFor(mk, at.h, at.len);
-                if (x1 < 8 || x2 > stageSize.w - 8) continue;
-                if (placed.some(p => !(x2 < p.x1 || x1 > p.x2) && Math.abs(py - p.y) < 36)) continue;
-                mk.h = at.h; mk.len = at.len;
-                placed.push({ x1, x2, y: py });
-                done = true;
-                break;
-            }
-            if (!done) placed.push({ ...rectFor(mk, mk.h, mk.len), y: py });
-        }
-        return base;
-    }, [room, stageSize]);
+        return (room.furniture || []).map((f, index) => ({
+            f,
+            m: resolveFurnitureMarker(f),
+            index,
+        }));
+    }, [room]);
 
     // ── 长按拖动标注点 ──
     const [drag, setDrag] = useState<{ id: string; x: number; y: number } | null>(null);
@@ -300,31 +255,37 @@ export function RoomView({
             {imageStatus === "ambient" && !imageUrl && <div className="dw2-badge" data-kind="amb">AMBIENT</div>}
 
             {/* 家具标注（长按可拖动微调位置） */}
-            {markers.map(({ f, m, h, len }) => {
+            {markers.map(({ f, m, index }) => {
                 const isDragging = drag?.id === f.id;
                 const x = isDragging ? drag.x : m.x;
                 const y = isDragging ? drag.y : m.y;
                 return (
-                    <div key={f.id} className="dw2-mk" data-h={h} data-drag={isDragging ? "true" : undefined}
-                        style={{ left: `${x * 100}%`, top: `${y * 100}%`, "--mklen": `${len}px` } as React.CSSProperties}>
+                    <div key={f.id} className="dw2-mk" data-drag={isDragging ? "true" : undefined}
+                        style={{ left: `${x * 100}%`, top: `${y * 100}%` }}>
                         <button className="dw2-pt" aria-label={f.label}
                             onClick={() => handleMarkerTap(f.id)}
                             onPointerDown={e => handlePtDown(f.id, e)}
                             onPointerMove={handlePtMove}
                             onPointerUp={handlePtUp}
                             onPointerCancel={handlePtCancel}
-                            onContextMenu={e => e.preventDefault()} />
-                        <span className="dw2-hln" />
-                        <span className="dw2-lbl" onClick={() => handleMarkerTap(f.id)}>
-                            <span className="dw2-zh">{f.label}<i>{String(f.items.length).padStart(2, "0")}</i></span>
-                            {f.en && <span className="dw2-en">{f.en}</span>}
-                        </span>
+                            onContextMenu={e => e.preventDefault()}>
+                            <span>{String(index + 1).padStart(2, "0")}</span>
+                        </button>
                     </div>
                 );
             })}
 
             {/* 底部：氛围引言 + 元信息 */}
             <div className="dw2-bottom">
+                <div className="dw2-furniture-dock" aria-label="房间家具">
+                    {markers.map(({ f, index }) => (
+                        <button key={f.id} type="button" className="dw2-dock-item" onClick={() => handleMarkerTap(f.id)}>
+                            <span className="dw2-dock-no">{String(index + 1).padStart(2, "0")}</span>
+                            <span className="dw2-dock-name">{f.label}</span>
+                            <span className="dw2-dock-count">{f.items.length}</span>
+                        </button>
+                    ))}
+                </div>
                 <div className="dw2-qline">
                     <span className="dw2-qbar" />
                     <p className="dw2-quote">{room.description}</p>
@@ -332,6 +293,7 @@ export function RoomView({
                 <div className="dw2-meta">
                     <span className="dw2-time">{formatStageTime()}</span>
                     <span className="dw2-ops">
+                        <button className="dw2-op" onClick={() => setViewMode("list")} title="查看物品清单" aria-label="查看物品清单">≡</button>
                         {imageEnabled && imageConfigured && imageStatus === "ready" && (
                             <button className="dw2-op" onClick={() => setConfirmAction("regen")} title="重新生成房间图">↻</button>
                         )}

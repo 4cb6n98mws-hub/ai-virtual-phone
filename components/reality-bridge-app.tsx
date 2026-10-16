@@ -873,7 +873,7 @@ export function RealityBridgeApp({ onClose, onNotice }: {
     <div className="reality-bridge-app-shell">
       <div className="reality-bridge-app">
         <header className={`rb-header${closing ? " closing" : ""}`}>
-          <button type="button" className="rb-back" onClick={handleClose} aria-label="返回桌面">{RB_ICON_CHEVRON}</button>
+          <button type="button" className="rb-back companion-app-back" onClick={handleClose} aria-label="返回桌面">{RB_ICON_CHEVRON}</button>
           {tab === "history" ? (
             <div className="rb-header-actions">
               {histSec === "feed" && feed.length > 0 ? (

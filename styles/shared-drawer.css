@@ -148,15 +148,40 @@
 .shared-drawer-card[data-type="music"] .shared-drawer-card-icon,
 .shared-drawer-card[data-type="game_art"] .shared-drawer-card-icon { color: var(--drawer-blue); }
 .shared-drawer-card-copy { display: flex; flex-direction: column; min-width: 0; }
-.shared-drawer-card-meta { font-size: 8px; color: var(--drawer-rust); }
-.shared-drawer-card-copy strong { margin-top: 4px; font-size: calc(15px*var(--app-text-scale,1)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.shared-drawer-card-copy em { margin-top: 3px; color: rgba(36,48,44,.78); font: normal calc(11px*var(--app-text-scale,1))/1.5 var(--app-font-family); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.shared-drawer-card-copy small { margin-top: 5px; color: rgba(36,48,44,.68); font: 10px/1.3 "JetBrains Mono", monospace; }
+.shared-drawer-card-copy strong { font-size: calc(15px*var(--app-text-scale,1)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .shared-drawer-pin { color: var(--drawer-rust); transform: rotate(20deg); }
 
 .shared-drawer-empty { min-height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: rgba(36,48,44,.7); }
 .shared-drawer-empty strong { color: var(--drawer-ink); margin-top: 14px; font-size: calc(16px*var(--app-text-scale,1)); }
 .shared-drawer-empty p { max-width: 240px; margin: 8px 0 0; font: calc(12px*var(--app-text-scale,1))/1.7 var(--app-font-family); }
+
+.shared-drawer-candidates {
+  display: grid;
+  gap: 9px;
+  margin-top: 16px;
+  padding: 13px;
+  border: 1px dashed rgba(36,48,44,.32);
+  background: rgba(222,211,189,.28);
+}
+.shared-drawer-candidate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(36,48,44,.14);
+}
+.shared-drawer-candidate > div { min-width: 0; display: grid; gap: 3px; }
+.shared-drawer-candidate strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: calc(13px*var(--app-text-scale,1)); }
+.shared-drawer-candidate span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: rgba(36,48,44,.7); font-size: calc(10px*var(--app-text-scale,1)); }
+.shared-drawer-candidate button {
+  flex: none;
+  border: 1px solid var(--drawer-green);
+  background: var(--drawer-green);
+  color: #f5efe2;
+  padding: 7px 10px;
+  font: 650 calc(10px*var(--app-text-scale,1))/1 var(--app-font-family);
+}
 
 .shared-drawer-overlay { position: absolute; inset: 0; z-index: 20; display: flex; align-items: flex-end; background: rgba(24,22,18,.52); backdrop-filter: blur(2px); }
 .shared-drawer-detail {

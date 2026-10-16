@@ -280,7 +280,7 @@ export function PhoneThemeApp({
   const title = section === "menu" ? "\u5916\u89C2" : SECTION_TITLES[section];
 
   return (
-    <PageShell title={title} onBack={handleBack}>
+    <PageShell className="theme-page-shell" title={title} onBack={handleBack}>
         {section === "menu" ? (
           <div className="page-menu appearance-main-menu">
             {/* Section 1: 外观定制 — 2x2 card grid */}
@@ -314,7 +314,7 @@ export function PhoneThemeApp({
             {/* Section 2: 系统设置 — Glass list group (has toggle) */}
             <div>
               <h3 className="appearance-menu-section-title">System Settings</h3>
-              <div className="menu-group mt-2.5">
+              <div className="menu-group appearance-system-menu mt-2.5">
                 {/* 状态栏开关 + 位置调节 */}
                 {(() => {
                   const caseItem = MENU_ITEMS.find(i => i.section === "case")!;
@@ -513,6 +513,8 @@ export function PhoneThemeApp({
       {showStatusBarAdjust && createPortal(
         <ContentDialog
           title={"状态栏"}
+          overlayClassName="companion-theme-dialog-overlay"
+          dialogClassName="companion-theme-dialog companion-status-dialog"
           confirmLabel={"确定"}
           cancelLabel={"重置"}
           onConfirm={() => setShowStatusBarAdjust(false)}
@@ -617,6 +619,8 @@ export function PhoneThemeApp({
       {showTextAdjust && createPortal(
         <ContentDialog
           title={"文字"}
+          overlayClassName="companion-theme-dialog-overlay"
+          dialogClassName="companion-theme-dialog companion-text-dialog"
           confirmLabel={"确定"}
           cancelLabel={undefined}
           onConfirm={() => setShowTextAdjust(false)}

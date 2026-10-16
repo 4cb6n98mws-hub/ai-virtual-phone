@@ -1067,7 +1067,7 @@ export function PhoneQaApp({ onClose, onNotice }: PhoneQaAppProps) {
       <div className="qa-ambient" aria-hidden />
       <header className="qa-header">
         <div className="qa-header-left">
-          <button type="button" className="qa-icon-btn" onClick={onClose} aria-label="返回">
+          <button type="button" className="qa-icon-btn companion-app-back" onClick={onClose} aria-label="返回">
             <ChevronLeft size={22} strokeWidth={1.75} />
           </button>
         </div>
