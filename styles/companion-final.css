@@ -2996,3 +2996,339 @@
   color: #665d4e !important;
   opacity: 1 !important;
 }
+
+/* ── Screenshot follow-up: five remaining low-contrast destinations ───────
+ * These rules are deliberately page-scoped.  The approved visual language is
+ * worn navy leather, restrained brass, cream copy and green action hardware.
+ * Xiaohongshu is intentionally outside every selector below. */
+
+/* Presence / Interview: the atlas resolves to a dark navy surface on device,
+ * so the old ink-colour cover copy disappeared into it. */
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-cover {
+  padding-top: 34px !important;
+  padding-bottom: 30px !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-issue-label,
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-issue-label * {
+  color: #d8c49f !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .96) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-issue-label > span {
+  background: rgba(216, 196, 159, .72) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-cover-title {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 2px 0 #3d2818, 0 5px 12px rgba(3, 9, 12, .82) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-cover-subtitle {
+  color: #e4c987 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .96) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-archive-heading,
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-archive-heading * {
+  color: #ead5ad !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .96) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-empty-card {
+  min-height: 146px !important;
+  color: #f6e5c4 !important;
+  border-color: #a67a43 !important;
+  background-color: #294f43 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-green) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-empty-card :is(p, svg) {
+  color: #f6e5c4 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .92) !important;
+}
+
+/* Diary entries: preserve the writing feature, but make its empty state,
+ * typography key and modal readable on the common navy/leather shell. */
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-app {
+  color: #f5e4c3 !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-header :is(h1, p),
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-header-actions :is(button, span, svg) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .94) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-font-upload-btn,
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-header-actions .note-wall-menu-btn {
+  border-color: #a67a43 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-empty {
+  min-height: 68% !important;
+  margin: 12px 0 !important;
+  padding: 26px 20px !important;
+  color: #f2dfb8 !important;
+  border: 1px solid #987044 !important;
+  border-radius: 5px !important;
+  background: rgba(8, 29, 37, .76) !important;
+  box-shadow: inset 0 0 0 2px rgba(213, 163, 91, .09) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-empty :is(svg, h2) {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .94) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-empty p {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .94) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-empty button {
+  min-width: 132px !important;
+  color: #fff0cf !important;
+  border: 1px solid #bd8d50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 3px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .nw-modal-backdrop {
+  background: rgba(3, 10, 13, .76) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-settings {
+  color: #f6e7ca !important;
+  border: 1px solid #a67a43 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213, 163, 91, .12), 0 14px 32px rgba(3, 8, 10, .58) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-settings :is(h2, strong, label) {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .95) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-settings :is(p, em, .diary-entry-empty-line) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .95) !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-settings .diary-icon-btn {
+  color: #f8e8c8 !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #244b40 !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-character-grid button {
+  color: #f3dfb7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-character-grid button > span {
+  color: #f3dfb7 !important;
+  border-color: #9f7645 !important;
+  background: #17343d !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-character-grid button.is-selected > span {
+  color: #fff0cf !important;
+  border-color: #d0a15c !important;
+  background: #315746 !important;
+}
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-confirm-btn {
+  color: #fff0cf !important;
+  border: 1px solid #bd8d50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+  box-shadow: 0 3px 0 #152f29 !important;
+}
+
+/* Chat plugin manager: remove the remaining white settings cards and keep all
+ * section labels, rows and help copy above the minimum contrast fence. */
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page,
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page > .page-body,
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .page-menu {
+  --c-page-body-bg: #102a34;
+  --c-card: #17343d;
+  --c-card-border: #9a7345;
+  --c-text: #dbc8a7;
+  --c-text-title: #f7e8ca;
+  --c-icon: #e1bd77;
+  color: #f6e7ca !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .page-title {
+  color: #f7e8ca !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .settings-menu-section-title {
+  color: #ead5ad !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .94) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .menu-group {
+  overflow: hidden !important;
+  color: #f6e7ca !important;
+  border: 1px solid #9a7345 !important;
+  border-radius: 5px !important;
+  background-color: #17343d !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213, 163, 91, .09), 0 4px 0 rgba(63, 39, 22, .72) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .menu-item {
+  color: #f6e7ca !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .menu-item:not(:last-child)::after {
+  background: rgba(190, 151, 92, .34) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page :is(.menu-label, .menu-right, .menu-right svg) {
+  color: #f7e8ca !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .94) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .menu-desc {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .94) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .ui-empty {
+  min-height: 170px !important;
+  color: #dbc8a7 !important;
+  background: rgba(8, 29, 37, .54) !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .ui-empty :is(div, svg) {
+  color: #f3dfb7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page :is(.ui-btn, .ui-textarea, .ui-input, select) {
+  color: #f7e8ca !important;
+  border-color: #9a7345 !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page .ui-btn-primary {
+  background: #294f43 !important;
+}
+
+/* VN assets: replace the oversized grey glass slab with a stitched leather
+ * workbench while retaining its two-tab information architecture. */
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page,
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page > .page-body,
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-page {
+  color: #f6e7ca !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-page {
+  padding: 16px 18px 32px !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-studio {
+  color: #f6e7ca !important;
+  border: 1px solid #9a7345 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image: var(--li-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: var(--li-navy) !important;
+  box-shadow: inset 0 0 0 2px rgba(213, 163, 91, .1), 0 5px 0 rgba(63, 39, 22, .76) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-studio-header {
+  gap: 12px !important;
+  padding: 15px !important;
+  border-bottom: 1px solid #8d673e !important;
+  background: rgba(8, 29, 37, .72) !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-tabs {
+  padding: 3px !important;
+  border: 1px solid #86623d !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  box-shadow: inset 0 1px 3px rgba(3, 9, 12, .45) !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-tab {
+  color: #cfbea0 !important;
+  border-radius: 3px !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-tab[data-active="true"] {
+  color: #fff0cf !important;
+  background: #315746 !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 2px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-add-bar {
+  padding: 8px !important;
+  border: 1px solid #86623d !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  box-shadow: none !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-add-btn {
+  color: #fff0cf !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+  box-shadow: 0 2px 0 #152f29 !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-char-select {
+  color: #23363b !important;
+  border: 1px solid #a78250 !important;
+  border-radius: 4px !important;
+  background: #ead8b7 !important;
+  box-shadow: inset 0 2px 4px rgba(72, 46, 24, .15) !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-select-shell::after {
+  border-color: #5f4c34 !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-assets-body {
+  padding: 16px !important;
+  background: rgba(8, 29, 37, .42) !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page :is(.vna-assets-title, .vna-assets-subtitle) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3, 9, 12, .94) !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-assets-subtitle {
+  color: #dbc8a7 !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-count {
+  color: #fff0cf !important;
+  border: 1px solid #9f7645 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-empty {
+  min-height: 150px !important;
+  color: #f5e4c3 !important;
+  border: 1px solid #8f6b42 !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-empty-hint {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page .vna-card {
+  border-color: #9f7645 !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  box-shadow: 0 4px 0 rgba(63, 39, 22, .72) !important;
+}
