@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   ArrowUpRight,
   ChevronLeft,
+  ChevronRight,
   Clock3,
   Film,
   Flower2,
@@ -202,8 +203,12 @@ export function SharedDrawerApp({ onClose, onOpenSource }: SharedDrawerAppProps)
                   <span className="shared-drawer-card-icon"><ItemIcon type={item.type} /></span>
                   <span className="shared-drawer-card-copy">
                     <strong>{item.title}</strong>
+                    <small>{sourceLabel(item)} · {formatSharedDrawerDate(item.createdAt)}</small>
                   </span>
-                  {item.pinned ? <Pin className="shared-drawer-pin" size={14} fill="currentColor" /> : null}
+                  <span className="shared-drawer-card-end">
+                    {item.pinned ? <Pin className="shared-drawer-pin" size={12} fill="currentColor" /> : null}
+                    <ChevronRight className="shared-drawer-chevron" size={16} aria-hidden="true" />
+                  </span>
                 </button>
               </article>
             ))}
