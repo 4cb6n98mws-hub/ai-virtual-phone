@@ -233,10 +233,11 @@ export function addSharedDrawerItem(input: AddDrawerItemInput): SharedDrawerItem
     metadata: input.metadata,
   };
   const current = loadSharedDrawerItems();
-  const dedupe = item.sourceEventId
-    ? current.filter((entry) => !(entry.sourceApp === item.sourceApp && entry.sourceEventId === item.sourceEventId))
-    : current.filter((entry) => entry.id !== item.id);
-  const next = [item, ...dedupe]
+  const existing = item.sourceEventId
+    ? current.find((entry) => entry.sourceApp === item.sourceApp && entry.sourceEventId === item.sourceEventId)
+    : current.find((entry) => entry.id === item.id);
+  if (existing) return existing;
+  const next = [item, ...current]
     .sort((a, b) => Number(b.pinned) - Number(a.pinned) || b.createdAt.localeCompare(a.createdAt))
     .slice(0, MAX_ITEMS);
   kvSet(SHARED_DRAWER_ITEMS_KEY, JSON.stringify(next));

@@ -71,8 +71,15 @@ export function RoomView({
             f,
             m: resolveFurnitureMarker(f),
             index,
+            explored: f.items.filter(item => Boolean(itemHtmlCache[ikey(room.id, item.id)])).length,
         }));
-    }, [room]);
+    }, [itemHtmlCache, room]);
+
+    const roomVisual = room.name.includes("厨")
+        ? "kitchen"
+        : room.name.includes("卧") || room.name.includes("寝")
+            ? "bedroom"
+            : "living";
 
     // ── 长按拖动标注点 ──
     const [drag, setDrag] = useState<{ id: string; x: number; y: number } | null>(null);
@@ -210,23 +217,11 @@ export function RoomView({
     // ── 舞台视图 ──
     return (
         <div className="dw2-stage" ref={stageRef}>
+            <div className="dw2-library-bg" data-room={roomVisual} aria-hidden="true" />
             {/* 氛围底图（生图未就绪时可见） */}
             <div className="dw2-ambient">
                 <div className="dw2-l1" /><div className="dw2-l2" /><div className="dw2-l3" />
                 <div className="dw2-grain" />
-                {!imageUrl && markers.length > 1 && (
-                    <svg className="dw2-cst" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        {markers.slice(0, -1).map((mk, i) => {
-                            const next = markers[i + 1];
-                            return (
-                                <line key={mk.f.id}
-                                    x1={mk.m.x * 100} y1={mk.m.y * 100}
-                                    x2={next.m.x * 100} y2={next.m.y * 100}
-                                    vectorEffect="non-scaling-stroke" />
-                            );
-                        })}
-                    </svg>
-                )}
             </div>
 
             {/* 生成图 */}
@@ -236,8 +231,6 @@ export function RoomView({
 
             <div className="dw2-scrim-top" />
             <div className="dw2-scrim-bottom" />
-            <div className="dw2-wall">DWELLING</div>
-
             {/* 生成中悬浮条（每个房间独立） */}
             {imageStatus === "generating" && (
                 <div className="dw2-genbar">
@@ -252,10 +245,10 @@ export function RoomView({
                     {imageError === DWELLING_IMAGE_CANCELED_ERROR ? "已停止 · 点击生成" : "生成失败 · 重试"}
                 </button>
             )}
-            {imageStatus === "ambient" && !imageUrl && <div className="dw2-badge" data-kind="amb">AMBIENT</div>}
+            {imageStatus === "ambient" && !imageUrl && <div className="dw2-badge" data-kind="amb">房间实景</div>}
 
             {/* 家具标注（长按可拖动微调位置） */}
-            {markers.map(({ f, m, index }) => {
+            {markers.map(({ f, m, explored }) => {
                 const isDragging = drag?.id === f.id;
                 const x = isDragging ? drag.x : m.x;
                 const y = isDragging ? drag.y : m.y;
@@ -269,7 +262,8 @@ export function RoomView({
                             onPointerUp={handlePtUp}
                             onPointerCancel={handlePtCancel}
                             onContextMenu={e => e.preventDefault()}>
-                            <span>{String(index + 1).padStart(2, "0")}</span>
+                            <span className="dw2-pt-name">{f.label}</span>
+                            <span className="dw2-pt-progress">{explored}/{f.items.length}</span>
                         </button>
                     </div>
                 );
@@ -278,11 +272,10 @@ export function RoomView({
             {/* 底部：氛围引言 + 元信息 */}
             <div className="dw2-bottom">
                 <div className="dw2-furniture-dock" aria-label="房间家具">
-                    {markers.map(({ f, index }) => (
+                    {markers.map(({ f, explored }) => (
                         <button key={f.id} type="button" className="dw2-dock-item" onClick={() => handleMarkerTap(f.id)}>
-                            <span className="dw2-dock-no">{String(index + 1).padStart(2, "0")}</span>
                             <span className="dw2-dock-name">{f.label}</span>
-                            <span className="dw2-dock-count">{f.items.length}</span>
+                            <span className="dw2-dock-count">{explored}/{f.items.length}</span>
                         </button>
                     ))}
                 </div>

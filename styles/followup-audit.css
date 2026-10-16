@@ -1,0 +1,853 @@
+/*
+ * Follow-up visual audit — scoped overrides for the companion preview.
+ * Keep this file last in the import order. Xiaohongshu is intentionally untouched.
+ */
+:root {
+  --audit-denim: #102c3b;
+  --audit-denim-2: #173847;
+  --audit-denim-3: #214858;
+  --audit-ink: #f4ead6;
+  --audit-muted: #c8bda8;
+  --audit-brass: #b78b52;
+  --audit-red: #6f2f31;
+  --audit-line: rgba(201, 171, 118, .34);
+  --audit-shadow: 0 12px 28px rgba(3, 10, 14, .28);
+  --audit-texture:
+    linear-gradient(115deg, rgba(255,255,255,.035), transparent 34%, rgba(5,14,19,.18) 70%),
+    repeating-linear-gradient(97deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, var(--audit-denim-2), var(--audit-denim));
+}
+
+.companion-atlas-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  overflow: hidden;
+  background-image: url("/images/companion-icon-atlas-v1.webp");
+  background-repeat: no-repeat;
+  background-size: 500% 400%;
+  background-color: transparent;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+
+/* Global interactive states inside the phone, excluding the separate Xiaohongshu app. */
+.phone-screen :where(button, [role="button"]):not(.xhs-app *):focus-visible {
+  outline: 2px solid rgba(240, 216, 164, .72);
+  outline-offset: 2px;
+}
+.phone-screen :where(button, [role="button"]):not(.xhs-app *):active {
+  filter: brightness(1.08);
+}
+.phone-screen :where(button, [role="button"]):not(.xhs-app *):disabled {
+  opacity: .46;
+  filter: saturate(.45);
+}
+.companion-app-back {
+  color: var(--audit-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Shared drawer — compact labelled rows with a quiet arrow. */
+.shared-drawer-app {
+  --drawer-ink: var(--audit-ink);
+  --drawer-paper: var(--audit-denim);
+  --drawer-paper-deep: #0c2532;
+  --drawer-green: #2b5b55;
+  --drawer-rust: #d5a96d;
+  --drawer-blue: #6e9aa2;
+  color: var(--audit-ink);
+  background: var(--audit-texture);
+}
+.shared-drawer-header {
+  background: var(--audit-texture);
+  border-bottom-color: var(--audit-line);
+  box-shadow: 0 6px 18px rgba(2,10,14,.22);
+}
+.shared-drawer-title span,
+.shared-drawer-count,
+.shared-drawer-intro p,
+.shared-drawer-section-heading small,
+.shared-drawer-today-list time {
+  color: var(--audit-muted);
+}
+.shared-drawer-main {
+  padding: 15px 16px 28px;
+  background: linear-gradient(rgba(2,12,17,.08), rgba(2,12,17,.2));
+}
+.shared-drawer-intro {
+  border-bottom: 1px solid rgba(103, 151, 148, .45);
+}
+.shared-drawer-intro h2 { color: var(--audit-ink); }
+.shared-drawer-filters button {
+  border: 1px solid rgba(183,139,82,.34);
+  border-radius: 7px;
+  background: rgba(8,29,39,.58);
+  color: var(--audit-muted);
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+}
+.shared-drawer-filters button[data-active="true"] {
+  color: var(--audit-ink);
+  background: linear-gradient(145deg, #315b52, #1b3e3a);
+  border-color: rgba(118,169,154,.55);
+}
+.shared-drawer-today,
+.shared-drawer-candidates {
+  background: rgba(7,25,34,.54);
+  border-color: var(--audit-line);
+}
+.shared-drawer-grid { gap: 7px; }
+.shared-drawer-card {
+  min-height: 0;
+  border: 1px solid rgba(155, 178, 173, .22);
+  border-radius: 8px;
+  background: var(--audit-texture);
+  box-shadow: 0 5px 14px rgba(1,9,13,.2), inset 0 1px rgba(255,255,255,.025);
+  transform: none;
+}
+.shared-drawer-card-main {
+  grid-template-columns: 34px minmax(0,1fr) auto;
+  gap: 10px;
+  min-height: 52px;
+  padding: 7px 10px;
+}
+.shared-drawer-card-icon {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 7px;
+  color: #d6b878;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255,255,255,.1), transparent 38%),
+    linear-gradient(145deg, #234757, #102b38);
+  box-shadow: inset 0 0 0 1px rgba(189, 164, 117, .2);
+}
+.shared-drawer-card-copy { gap: 2px; }
+.shared-drawer-card-copy strong {
+  color: var(--audit-ink);
+  font-size: calc(13px*var(--app-text-scale,1));
+}
+.shared-drawer-card-copy small {
+  overflow: hidden;
+  color: rgba(218,209,190,.6);
+  font-size: calc(9px*var(--app-text-scale,1));
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.shared-drawer-card-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(232,220,195,.58);
+}
+.shared-drawer-chevron { transition: transform .18s ease; }
+.shared-drawer-card-main:active .shared-drawer-chevron { transform: translateX(2px); }
+.shared-drawer-empty { color: var(--audit-muted); }
+.shared-drawer-empty strong { color: var(--audit-ink); }
+.shared-drawer-candidate { border-top-color: rgba(189,169,128,.18); }
+.shared-drawer-candidate span { color: var(--audit-muted); }
+.shared-drawer-candidate button,
+.shared-drawer-detail-actions button.is-source {
+  background: linear-gradient(145deg, #315b52, #1b3e3a);
+  border-color: rgba(118,169,154,.55);
+}
+.shared-drawer-detail {
+  color: var(--audit-ink);
+  background: var(--audit-texture);
+  border-top: 1px solid var(--audit-line);
+}
+.shared-drawer-detail-subtitle,
+.shared-drawer-detail time { color: var(--audit-muted); }
+.shared-drawer-detail-actions button {
+  color: var(--audit-ink);
+  background: rgba(10,31,41,.72);
+  border-color: rgba(190,166,117,.28);
+}
+.shared-drawer-detail-actions button.is-danger {
+  color: #f4d5d0;
+  background:
+    repeating-linear-gradient(100deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #713638, #4d2326);
+  border-color: rgba(209,126,119,.42);
+}
+
+/* Chat list and + menu: no white selected row or white icon tiles. */
+.chat-app .chat-list-item,
+.chat-app .chat-session-item,
+.chat-app .mascot-session-item {
+  color: var(--audit-ink);
+  border-radius: 10px;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+.chat-app .chat-list-item:is(:active,[data-active="true"]),
+.chat-app .chat-session-item:is(:active,[data-active="true"]),
+.chat-app .mascot-session-item:is(:active,[data-active="true"]),
+.chat-app .minimal-list-item:is(:active,.chat-pinned,[data-active="true"]) {
+  color: var(--audit-ink) !important;
+  background:
+    linear-gradient(90deg, rgba(89,145,142,.18), transparent 78%),
+    var(--audit-texture) !important;
+  box-shadow: inset 3px 0 #78aaa3;
+}
+.chat-app .chat-list-item *,
+.chat-app .chat-session-item *,
+.chat-app .mascot-session-item * { text-shadow: none; }
+.chat-app .minimal-list-item:is(:active,.chat-pinned,[data-active="true"]) :where(span,p,strong) {
+  color: var(--audit-ink) !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.52) !important;
+}
+.chat-app .minimal-list-item:is(:active,.chat-pinned,[data-active="true"]) :where(.ts-12,.ts-13) {
+  color: rgba(230,219,198,.74) !important;
+}
+.chat-app .companion-chat-plus-menu,
+.chat-app .g-dropdown.companion-chat-plus-menu {
+  overflow: hidden;
+  padding: 6px !important;
+  border: 1px solid rgba(194,170,121,.34);
+  border-radius: 12px;
+  color: var(--audit-ink);
+  background: var(--audit-texture);
+  box-shadow: var(--audit-shadow);
+}
+.chat-app .companion-chat-plus-menu button {
+  min-height: 40px;
+  border-radius: 8px;
+  color: var(--audit-ink);
+  background: transparent !important;
+}
+.chat-app .companion-chat-plus-menu button:hover,
+.chat-app .companion-chat-plus-menu button:active {
+  background: rgba(104,153,147,.14) !important;
+}
+.chat-app .companion-chat-plus-menu svg {
+  color: #d8ba7a;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
+}
+.chat-app .chat-list-tab {
+  color: rgba(238,229,211,.68) !important;
+  background: rgba(9,29,38,.56) !important;
+  border-color: rgba(183,139,82,.24) !important;
+}
+.chat-app .chat-list-tab.active {
+  color: var(--audit-ink) !important;
+  background: linear-gradient(145deg, #234858, #102c3b) !important;
+  box-shadow: inset 0 0 0 1px rgba(111,166,159,.32);
+}
+.chat-app .chat-search-bar {
+  color: var(--audit-ink);
+  background: rgba(239,228,201,.92);
+  box-shadow: inset 0 0 0 1px rgba(104,78,44,.2);
+}
+
+/* Plan / relationship strip: contain the old-paper accent so it cannot overflow. */
+.chat-app :where(.chat-plan-bar,.chat-plan-strip,.relationship-plan-bar,.relationship-strip) {
+  overflow: hidden;
+  margin-inline: 12px;
+  border-radius: 10px;
+  background:
+    linear-gradient(90deg, rgba(229,217,187,.94), rgba(236,227,205,.88));
+  box-shadow: inset 0 0 0 1px rgba(101,78,45,.2);
+}
+
+/* Data management: remove beige rivers between sections. */
+.data-management-menu {
+  --c-page-body-bg: transparent;
+  color: var(--audit-ink);
+  padding-bottom: 24px !important;
+  background: var(--audit-texture);
+}
+.data-management-menu .data-section {
+  margin: 0;
+  padding: 13px 12px 4px;
+  background: transparent;
+}
+.data-management-menu .settings-menu-section-title {
+  margin: 0 0 8px;
+  color: rgba(231,215,183,.62);
+  letter-spacing: .15em;
+}
+.data-management-menu .menu-group,
+.data-management-menu .data-chip-panel,
+.data-management-menu .data-cloud-form,
+.data-management-menu .data-cloud-options {
+  overflow: hidden;
+  color: var(--audit-ink);
+  background: var(--audit-texture) !important;
+  border: 1px solid rgba(180,155,107,.28) !important;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(2,10,14,.18);
+}
+.data-management-menu .menu-item {
+  color: var(--audit-ink) !important;
+  background: transparent !important;
+  border-color: rgba(180,155,107,.2) !important;
+}
+.data-management-menu .menu-label { color: var(--audit-ink) !important; }
+.data-management-menu .menu-desc,
+.data-management-menu .data-pie-detail,
+.data-management-menu .data-pie-value { color: rgba(230,220,201,.68) !important; }
+.data-management-menu .data-pie-name { color: var(--audit-ink) !important; }
+.data-management-menu .data-pie-track { stroke: rgba(232,220,196,.14); }
+.data-management-menu .data-pie-center span { color: var(--audit-ink); }
+.data-management-menu .data-pie-center small { color: var(--audit-muted); }
+.data-management-menu .data-module-chip {
+  color: var(--audit-muted);
+  background: rgba(9,28,37,.66);
+  border-color: rgba(181,157,109,.22);
+}
+.data-management-menu .data-module-chip[data-selected] {
+  color: var(--audit-ink);
+  background: linear-gradient(145deg, #2e564f, #183b39);
+  border-color: rgba(110,169,153,.55);
+}
+.data-management-menu .ui-btn {
+  color: var(--audit-ink);
+  background: rgba(12,34,44,.78);
+  border-color: rgba(185,160,112,.34);
+}
+.data-management-menu .ui-btn-primary {
+  background: linear-gradient(145deg, #315b52, #1b3e3a);
+  border-color: rgba(119,169,154,.55);
+}
+.data-management-menu :where(input,select,textarea) {
+  color: #283331;
+  background: rgba(239,228,202,.94);
+  border-color: rgba(107,82,47,.32);
+}
+
+/* Settings and binding sub-pages: readable overlays and material cards. */
+.settings-app :where(.menu-group,.settings-card,.binding-card,.api-card,.preset-card,.memory-card),
+.settings-page :where(.menu-group,.settings-card,.binding-card,.api-card,.preset-card,.memory-card) {
+  color: var(--audit-ink);
+  background: var(--audit-texture);
+  border-color: rgba(184,159,111,.3);
+}
+.settings-app :where(.menu-label,h2,h3,strong),
+.settings-page :where(.menu-label,h2,h3,strong) { color: var(--audit-ink); }
+.settings-app :where(.menu-desc,p,small,label),
+.settings-page :where(.menu-desc,p,small,label) { color: rgba(232,221,201,.68); }
+.settings-app :where(.modal-sheet,[role="dialog"]),
+.settings-page :where(.modal-sheet,[role="dialog"]) {
+  color: var(--audit-ink);
+  background: var(--audit-texture);
+  border: 1px solid rgba(189,164,116,.34);
+}
+.settings-app :where(input,select,textarea),
+.settings-page :where(input,select,textarea) {
+  color: #27312f;
+  background: rgba(240,229,204,.95);
+  border-color: rgba(101,77,43,.32);
+}
+.settings-app :where(input,select,textarea)::placeholder,
+.settings-page :where(input,select,textarea)::placeholder { color: rgba(48,55,52,.5); }
+
+/* Diary / story readability. */
+.diary-app,
+.diary-entries-app,
+.story-app,
+.story-app-shell {
+  color: var(--audit-ink);
+  background: var(--audit-texture);
+}
+.diary-app-header,
+.diary-entries-header,
+.story-app header,
+.story-header {
+  background: var(--audit-texture) !important;
+  border-bottom-color: var(--audit-line) !important;
+}
+.diary-app .diary-feature-icon,
+.diary-entries-app .diary-feature-icon {
+  color: #d7b877;
+  background: linear-gradient(145deg, #244958, #102b38) !important;
+  border-color: rgba(188,163,115,.28) !important;
+}
+.diary-entries-app :where(.diary-entry,.diary-card,.diary-entry-card) {
+  min-width: 0;
+  color: var(--audit-ink);
+  background: var(--audit-texture) !important;
+  border-color: rgba(188,163,115,.3) !important;
+}
+.diary-entries-app :where(h2,h3,strong,p,span,time) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.story-app :where(.story-feed,.story-content,.story-panel,.story-message,.story-card) {
+  color: var(--audit-ink);
+  background: var(--audit-texture) !important;
+  border-color: rgba(187,162,113,.28) !important;
+}
+.story-app :where(.story-content,.story-message,p) {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.story-app :where(input,textarea) {
+  color: #283331;
+  background: rgba(239,228,202,.94);
+}
+
+/* Check-phone character cards — replace flat green with terminal denim. */
+.checkphone-app :where(.character-card,.checkphone-character-card,.access-character-card),
+.checkphone-page :where(.character-card,.checkphone-character-card,.access-character-card) {
+  color: var(--audit-ink) !important;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(81,137,132,.2), transparent 38%),
+    var(--audit-texture) !important;
+  border: 1px solid rgba(184,159,111,.32) !important;
+  box-shadow: 0 12px 26px rgba(2,9,13,.24);
+}
+.checkphone-app :where(.character-card,.checkphone-character-card,.access-character-card) :where(strong,h2,h3) {
+  color: var(--audit-ink) !important;
+}
+.checkphone-app :where(.character-card,.checkphone-character-card,.access-character-card) :where(small,span,p) {
+  color: rgba(230,219,198,.68);
+}
+
+/* Balance and destructive controls. */
+.balance-app :where(.is-danger,.danger-btn,.delete-btn),
+.wallet-panel :where(.is-danger,.danger-btn,.delete-btn) {
+  color: #f5d7d0 !important;
+  background:
+    repeating-linear-gradient(98deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #73373a, #4b2225) !important;
+  border-color: rgba(211,129,121,.42) !important;
+}
+.balance-app :where(.transaction-icon,.wallet-entry-icon) {
+  color: #f0d4c8;
+  background:
+    repeating-linear-gradient(98deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+    linear-gradient(145deg, #6a3437, #482226) !important;
+}
+
+/* Game hall readability and missing-cover fallback. */
+.game-app,
+.game-hub-app {
+  color: var(--audit-ink);
+}
+.game-app :where(.game-bottom-nav,.game-tabs,.game-top-tabs) button,
+.game-hub-app :where(.game-bottom-nav,.game-tabs,.game-top-tabs) button {
+  color: rgba(232,221,201,.72) !important;
+}
+.game-app :where(.game-bottom-nav,.game-tabs,.game-top-tabs) button:is(.active,[data-active="true"]),
+.game-hub-app :where(.game-bottom-nav,.game-tabs,.game-top-tabs) button:is(.active,[data-active="true"]) {
+  color: #8ed0c8 !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,.55);
+}
+.game-app :where(.game-bottom-tabs,.game-tabs,.game-top-tabs) button.is-active,
+.game-hub-app :where(.game-bottom-tabs,.game-tabs,.game-top-tabs) button.is-active {
+  color: #8ed0c8 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,.55);
+}
+.game-app :where(.game-bottom-tabs,.game-tabs,.game-top-tabs) button:not(.is-active),
+.game-hub-app :where(.game-bottom-tabs,.game-tabs,.game-top-tabs) button:not(.is-active) {
+  color: rgba(232,221,201,.72) !important;
+  opacity: 1 !important;
+}
+.night-gomoku-cover-art {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #f4ead6;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(226,176,94,.26), transparent 34%),
+    linear-gradient(145deg, #183747, #071a25);
+}
+.night-gomoku-cover-board {
+  position: relative;
+  width: 66%;
+  aspect-ratio: 1;
+  border: 5px solid #70452b;
+  border-radius: 7px;
+  background-color: #b9844c;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 12%, rgba(54,31,17,.6) 12% 13%),
+    repeating-linear-gradient(90deg, transparent 0 12%, rgba(54,31,17,.6) 12% 13%);
+  box-shadow: 0 10px 24px rgba(0,0,0,.38), inset 0 1px rgba(255,255,255,.24);
+  transform: rotate(-2deg);
+}
+.night-gomoku-cover-board i {
+  position: absolute;
+  width: 13%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 2px 5px rgba(0,0,0,.42);
+}
+.night-gomoku-cover-board i.is-black { background: radial-gradient(circle at 35% 28%, #59646a, #11171b 45%, #030607); }
+.night-gomoku-cover-board i.is-white { background: radial-gradient(circle at 35% 28%, #fff, #e7e2d6 50%, #aaa59c); }
+.night-gomoku-cover-art b {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  font: 600 calc(12px*var(--app-text-scale,1))/1.2 var(--app-font-family);
+  letter-spacing: .12em;
+  text-shadow: 0 2px 6px rgba(0,0,0,.7);
+}
+.night-gomoku-cover-art.is-compact .night-gomoku-cover-board { width: 72%; border-width: 3px; }
+.game-runtime-card--game,
+.game-runtime-card--picker,
+.game-hub-frame { background: #071923 !important; }
+.game-app :where(.game-card,.game-detail-card,.game-library-card),
+.game-hub-app :where(.game-card,.game-detail-card,.game-library-card) {
+  color: var(--audit-ink);
+  background: var(--audit-texture) !important;
+  border-color: rgba(185,160,112,.3) !important;
+}
+.game-app :where(.game-card-cover,.game-detail-cover):empty::after,
+.game-hub-app :where(.game-card-cover,.game-detail-cover):empty::after {
+  content: "●  ○  ●\A  夜 局 五 子 棋\A ○  ●  ○";
+  white-space: pre;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: rgba(240,226,196,.8);
+  text-align: center;
+  line-height: 1.65;
+  background:
+    linear-gradient(rgba(10,32,42,.12), rgba(10,32,42,.48)),
+    repeating-linear-gradient(0deg, rgba(204,184,143,.18) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(204,184,143,.18) 0 1px, transparent 1px 28px),
+    var(--audit-texture);
+}
+
+/* Desktop widgets and dock: denim material, no gold outlines. */
+.desktop-shell :where(.desktop-widget,.widget-card,.desktop-dock,.dock-button,.desktop-app-tile),
+.desktop-customizer :where(.desktop-widget,.widget-card,.desktop-dock,.dock-button) {
+  border-color: rgba(136,163,161,.24) !important;
+  background: var(--audit-texture) !important;
+  box-shadow: 0 9px 22px rgba(2,9,13,.2) !important;
+}
+.desktop-shell :where(.desktop-widget,.widget-card,.desktop-dock,.dock-button)::before,
+.desktop-customizer :where(.desktop-widget,.widget-card,.desktop-dock,.dock-button)::before {
+  border-color: transparent !important;
+}
+.desktop-shell :where(.desktop-dock,.dock-button) {
+  outline: 0 !important;
+}
+
+/* Dwelling layer: image-friendly stage, clear touch targets and furniture drawer. */
+.dwelling-app {
+  --dw-bg: #081820;
+  --dw-panel: rgba(7, 21, 28, .88);
+}
+.dwelling-header,
+.dwelling-room-tabs,
+.dwelling-char-picker,
+.dwelling-life-strip {
+  background: linear-gradient(rgba(7,21,28,.94), rgba(7,21,28,.72));
+}
+.dwelling-room-tab[data-active="true"],
+.dwelling-char-chip[data-active="true"] {
+  color: var(--audit-ink);
+  background: rgba(79,133,130,.2);
+}
+.dwelling-app :where(.dw-hotspot,.dwelling-hotspot,.room-hotspot) {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 50%;
+  color: transparent;
+  background: radial-gradient(circle, rgba(246,222,161,.75) 0 3px, rgba(246,222,161,.24) 4px 9px, transparent 10px);
+  box-shadow: 0 0 18px rgba(244,210,130,.28);
+}
+.dwelling-app :where(.dw-object-list,.dwelling-object-list,.room-object-list) {
+  color: var(--audit-ink);
+  background: linear-gradient(rgba(7,21,28,.84), rgba(7,21,28,.96));
+  border-top: 1px solid rgba(186,160,111,.28);
+}
+.dwelling-app :where(.dw-object-item,.dwelling-object-item,.room-object-item) {
+  min-height: 44px;
+  color: var(--audit-ink);
+  background: rgba(18,48,59,.54);
+  border-color: rgba(149,177,171,.2);
+}
+.dw2-library-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("/images/dwelling-room-atlas-v1.webp");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: left center;
+  filter: saturate(.82) brightness(.68) contrast(1.04);
+  transform: scale(1.015);
+}
+.dw2-library-bg[data-room="kitchen"] { background-position: center center; }
+.dw2-library-bg[data-room="bedroom"] { background-position: right center; }
+.dw2-ambient {
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(3,13,18,.28), rgba(3,12,17,.05) 38%, rgba(3,10,14,.52)) !important;
+  pointer-events: none;
+}
+.dw2-img { z-index: 2; }
+.dw2-scrim-top,
+.dw2-scrim-bottom { z-index: 3; }
+.dw2-wall,
+.dw2-cst { display: none !important; }
+.dw2-mk { z-index: 20; }
+.dw2-pt {
+  left: -44px;
+  top: -19px;
+  width: auto;
+  min-width: 88px;
+  height: 38px;
+  padding: 4px 8px 4px 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid rgba(231,220,194,.58);
+  border-radius: 999px;
+  color: var(--audit-ink);
+  background: linear-gradient(145deg, rgba(18,51,63,.94), rgba(7,26,35,.92));
+  box-shadow: 0 5px 18px rgba(1,8,12,.42), inset 0 1px rgba(255,255,255,.06);
+  font-family: var(--app-font-family);
+  letter-spacing: .04em;
+}
+.dw2-pt::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #edd397;
+  box-shadow: 0 0 0 4px rgba(237,211,151,.12), 0 0 12px rgba(237,211,151,.42);
+}
+.dw2-pt > span { transform: none; }
+.dw2-pt-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  font-size: calc(11px*var(--app-text-scale,1));
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.dw2-pt-progress {
+  color: rgba(231,220,198,.62);
+  font-size: calc(9px*var(--app-text-scale,1));
+  letter-spacing: 0;
+}
+.dw2-mk[data-drag="true"] .dw2-pt {
+  border-color: rgba(245,232,202,.9);
+  box-shadow: 0 0 0 5px rgba(238,212,151,.1), 0 0 22px rgba(238,212,151,.28);
+}
+.dw2-bottom {
+  background: linear-gradient(180deg, transparent, rgba(3,12,17,.9) 25%, rgba(3,12,17,.97));
+  padding-top: 32px;
+}
+.dw2-furniture-dock { gap: 6px; }
+.dw2-dock-item {
+  min-height: 31px;
+  border-color: rgba(147,177,171,.25);
+  background: rgba(9,34,43,.82);
+}
+.dw2-dock-count { min-width: 27px; }
+
+/* Final guard against iOS blue/white tap flashes in companion pages. */
+.shared-drawer-app *,
+.diary-app *,
+.diary-entries-app *,
+.story-app *,
+.dwelling-app *,
+.game-app *,
+.checkphone-app *,
+.data-management-menu *,
+.settings-app *,
+.chat-app * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Final selector-specific pass for shared shells that are not wrapped in a
+   settings-app class. */
+.phone-shell.app-open-shell > .phone-status-bar {
+  background: var(--audit-texture);
+  box-shadow: 0 1px 0 rgba(177,157,118,.18);
+}
+.binding-choice-card,
+.binding-aux-select,
+.binding-detail-card,
+.binding-app-card {
+  color: var(--audit-ink) !important;
+  background: var(--audit-texture) !important;
+  border: 1px solid rgba(154,181,174,.22) !important;
+  box-shadow: var(--audit-shadow), inset 0 1px rgba(255,255,255,.035) !important;
+}
+.binding-choice-label,
+.binding-app-label,
+.binding-picker-title,
+.binding-sheet-option-text { color: var(--audit-ink) !important; }
+.binding-choice-desc,
+.binding-choice-value,
+.binding-choice-value.is-empty,
+.binding-choice-chevron { color: rgba(226,216,197,.66) !important; }
+.binding-choice-icon,
+.binding-app-icon {
+  background: rgba(9,33,43,.82) !important;
+  box-shadow: inset 0 0 0 1px rgba(147,178,170,.2);
+}
+.binding-picker-dialog,
+.binding-picker-body,
+.binding-sheet-list {
+  color: var(--audit-ink) !important;
+  background: var(--audit-texture) !important;
+}
+.binding-sheet-option {
+  color: var(--audit-ink) !important;
+  background: rgba(8,29,38,.66) !important;
+  border-color: rgba(146,176,169,.2) !important;
+}
+.binding-sheet-option[data-selected="true"] {
+  background: linear-gradient(145deg, #315b52, #1b3e3a) !important;
+}
+.memory-settings-menu {
+  color: var(--audit-ink);
+  background: var(--audit-texture) !important;
+}
+.memory-settings-menu .menu-group,
+.memory-settings-menu .menu-item {
+  color: var(--audit-ink);
+  background: rgba(8,29,39,.7) !important;
+  border-color: rgba(147,177,170,.2) !important;
+}
+.memory-settings-menu :where(.menu-label,.menu-label-group strong) { color: var(--audit-ink) !important; }
+.memory-settings-menu :where(.menu-desc,.menu-group-desc) { color: rgba(226,216,197,.66) !important; }
+.memory-settings-menu :where(textarea,input) {
+  color: #293432 !important;
+  background: rgba(239,229,207,.95) !important;
+  border: 1px solid rgba(83,70,49,.28) !important;
+}
+.diary-entry-card {
+  color: #253435 !important;
+  background: rgba(239,227,198,.96) !important;
+  border-color: rgba(72,87,82,.28) !important;
+}
+.diary-entry-card :where(.diary-entry-card-kicker,.diary-entry-card-text,.diary-entry-card-meta,.diary-entry-marker) {
+  color: #2b3a39 !important;
+  opacity: 1 !important;
+}
+.diary-entry-detail-paper {
+  color: #273534 !important;
+  background: rgba(241,231,207,.98) !important;
+}
+.diary-entry-detail-paper :where(p,blockquote,li,time,strong,span) {
+  color: #273534;
+  line-height: 1.85;
+}
+.data-management-menu,
+.data-management-menu .data-section { background-color: transparent !important; }
+.data-management-menu :where(.settings-menu-section-title,.data-section-title) {
+  color: rgba(228,217,197,.62) !important;
+  background: transparent !important;
+}
+.data-management-menu .menu-group,
+.data-management-menu .data-chip-panel {
+  border-color: rgba(148,177,170,.2) !important;
+}
+
+/* Wallet / balance — override legacy inline pastel fills with the same tactile
+   material language. */
+.wallet-page-root,
+.wallet-page-root .page-body,
+.wallet-page-content { background: var(--audit-texture) !important; }
+.wallet-balance-summary,
+.wallet-account-panel,
+.wallet-ledger-panel,
+.wallet-sheet,
+.wallet-sheet-card {
+  color: var(--audit-ink) !important;
+  background: var(--audit-texture) !important;
+  border: 1px solid rgba(148,177,170,.22) !important;
+  box-shadow: var(--audit-shadow) !important;
+}
+.wallet-page-root :where(h2,strong,.text-\[var\(--c-text-title\)\]) { color: var(--audit-ink) !important; }
+.wallet-page-root :where(.wallet-balance-action,.wallet-bank-action,.wallet-add-card,.wallet-sheet-primary) {
+  color: var(--audit-ink) !important;
+  background: rgba(10,35,45,.86) !important;
+  border: 1px solid rgba(148,177,170,.25) !important;
+  border-radius: 9px !important;
+}
+.wallet-page-root .wallet-bank-action.text-\[var\(--c-danger\)\] {
+  color: #f5d7d0 !important;
+  background: linear-gradient(145deg, #713638, #4d2326) !important;
+  border-color: rgba(209,126,119,.42) !important;
+}
+.wallet-ledger-icon {
+  color: var(--audit-ink) !important;
+  background: rgba(10,35,45,.86) !important;
+  border: 1px solid rgba(148,177,170,.22);
+  border-radius: 9px !important;
+}
+
+/* Desktop request: retain the illustrated material, remove gold frames and
+   decorative corner studs from app tiles, widgets and the four-item dock. */
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .dock,
+.desk-stage .phone-shell:not(.app-open-shell) .dock .dock-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass > div {
+  border-color: rgba(119,151,151,.24) !important;
+  outline: 0 !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .icon-item .icon-glyph-box::after,
+.desk-stage .phone-shell:not(.app-open-shell) .dock .dock-glyph-box::after {
+  display: none !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .dock {
+  box-shadow: 0 10px 24px rgba(3,10,14,.35), inset 0 1px rgba(255,255,255,.035) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-bubble,
+.desk-stage .phone-shell:not(.app-open-shell)[data-widget-effect="glass"] .wg-mood-bubble {
+  color: #243432 !important;
+  border: 1px solid rgba(85,111,107,.3) !important;
+  background: linear-gradient(145deg, rgba(242,232,210,.98), rgba(218,204,174,.96)) !important;
+  box-shadow: 0 7px 18px rgba(18,12,7,.32) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-bubble::before,
+.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-bubble::after { display: none !important; }
+
+/* Story uses theme variables heavily; bind them to the material palette so
+   the long reading card and message cards cannot fall back to flat teal. */
+.story-app-shell {
+  --c-story-bg-top: #0b2431;
+  --c-story-bg-mid: #102f3d;
+  --c-story-bg-bottom: #081b26;
+  --c-story-bubble-bg: #102d3a;
+  --c-story-meta-bg: #102d3a;
+  --c-story-input-bar: #0c2734;
+  --c-story-input-bar-focus: #123b48;
+  --c-story-text: #f1e6d1;
+  --c-story-text-light: rgba(237,225,204,.78);
+  --c-story-heading: #f5ead6;
+  --c-story-sub: rgba(223,211,190,.64);
+  --c-story-accent-light: rgba(193,160,101,.44);
+}
+.story-stage-inner,
+.story-bubble,
+.story-composer,
+.story-drawer {
+  background: var(--audit-texture) !important;
+  border-color: rgba(148,177,170,.2) !important;
+}
+.story-bubble { box-shadow: 0 8px 20px rgba(2,10,14,.2) !important; }
+.story-meta-cover { border: 1px solid rgba(148,177,170,.22) !important; }
+.story-composer textarea { color: var(--audit-ink) !important; }
+
+/* Check-phone roster cards previously fell back to a flat green rectangle. */
+.cp-roster-card {
+  color: var(--audit-ink) !important;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(83,139,133,.2), transparent 36%),
+    var(--audit-texture) !important;
+  border: 1px solid rgba(148,177,170,.24) !important;
+  box-shadow: 0 10px 24px rgba(2,10,14,.24), inset 0 1px rgba(255,255,255,.035) !important;
+}
+.cp-roster-card:active { background: linear-gradient(145deg, #244a55, #102b38) !important; }
+.cp-card-metadata { border-top-color: rgba(148,177,170,.18) !important; }
+.cp-card-meta-row,
+.cp-card-meta-val { color: rgba(229,218,198,.68) !important; }

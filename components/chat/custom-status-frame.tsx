@@ -17,7 +17,13 @@ function buildSrcDoc(html: string, raw: string, frameId: string): string {
     const base = /<html[\s>]/i.test(withRaw)
         ? withRaw
         : `<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/></head><body>${withRaw}</body></html>`;
-    const inject = `<script>window.STATUS_RAW=${JSON.stringify(raw)};</` + `script>`;
+    const guardStyles = `<style id="companion-status-frame-guard">
+html,body{margin:0!important;padding:0!important;width:100%!important;max-width:100%!important;overflow-x:hidden!important;background:transparent!important;color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box;max-width:100%;}
+img,svg,video,canvas{max-width:100%!important;height:auto;}
+body>*{margin-left:0!important;margin-right:0!important;}
+</style>`;
+    const inject = `${guardStyles}<script>window.STATUS_RAW=${JSON.stringify(raw)};</` + `script>`;
     return /<head[\s>]/i.test(base)
         ? base.replace(/<head([^>]*)>/i, `<head$1>${inject}`)
         : inject + base;
