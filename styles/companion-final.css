@@ -3939,3 +3939,135 @@
   color: #4b3d43 !important;
   opacity: 1 !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY CONTRAST FENCE
+   The interview used highly specific ink-on-paper rules before the phone was
+   moved onto the navy atlas.  Those selectors outranked the first screenshot
+   follow-up and kept cover/meta copy dark on the physical device.  Keep the
+   editorial hierarchy, but make every route readable on its actual surface.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Presence / Interview — all screens: cover, setup, recording, archive,
+ * composing and published article.  Low-priority copy is warm gold; primary
+ * headings stay cream.  Red error/destructive states are intentionally left
+ * alone. */
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content :is(
+  [class*="text-white/20"], [class*="text-white/30"],
+  [class*="text-white/40"], [class*="text-white/50"],
+  [class*="text-white/60"], [class*="text-white/70"]
+) {
+  color: #dbc8a7 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.94) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content :is(
+  h1, h2, h3, strong, [class*="font-bold"], [class*="font-black"]
+)[class~="text-white"],
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-cover-title.text-white {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 2px 0 #3d2818, 0 5px 12px rgba(3,9,12,.82) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-scroll .interview-issue-label,
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-scroll .interview-issue-label *,
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-scroll .interview-cover-subtitle,
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-scroll .interview-archive-heading,
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-scroll .interview-archive-heading * {
+  color: #e4c987 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.96) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-scroll .interview-cover-title.text-white {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 2px 0 #3d2818, 0 5px 12px rgba(3,9,12,.82) !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-empty-card :is(p, svg),
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .interview-glass-panel :is(h1, h2, h3, strong) {
+  color: #f6e5c4 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-content .text-white.opacity-50 {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+
+/* The remaining low-opacity semantic copy found by the full app scan.  These
+ * are deliberately named selectors, not a blanket opacity reset, so disabled
+ * controls and media layers keep their intended state. */
+.desk-stage .phone-shell[data-active-app="diary"] :is(
+  .diary-app-header p, .note-wall-header p, .diary-entry-empty-line,
+  .diary-book-label em
+) {
+  color: #665d4e !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="reading"] .reading-header--immersive .reading-header-title {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 3px rgba(3,9,12,.96) !important;
+}
+.desk-stage .phone-shell[data-active-app="cocreate"] :is(
+  .cocreate-archive-body aside .cocreate-markdown,
+  .cocreate-archive-note-popover > button,
+  .cocreate-archive-note-popover > span,
+  .cocreate-chapter-card .cocreate-markdown,
+  .cocreate-intel-note span,
+  .cocreate-intel-note p,
+  .cocreate-section-title span,
+  .cocreate-settings-note
+) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="game"] .game-studio-list-copy time {
+  color: #5d5246 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="music"] .music-week-note,
+.desk-stage .phone-shell[data-active-app="chat"] .mem-tl-card-count {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+
+/* Check Phone keeps each simulated app's own visual language.  Only the copy
+ * that was below a practical reading threshold is raised; cp-xhs remains
+ * completely untouched. */
+.desk-stage .phone-shell[data-active-app="checkphone"] :is(
+  .cp-card-metadata,
+  .cp-assets-account-summary-top em,
+  .cp-assets-account-summary p,
+  .cp-assets-hint,
+  .cp-assets-hero-kicker,
+  .cp-assets-hero-delta,
+  .cp-steam-header-subtitle,
+  .cp-steam-hint
+) {
+  color: rgba(242, 230, 207, .86) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] :is(
+  .cp-fullscreen-inner.is-empty .cp-float-back,
+  .cp-fullscreen-inner.is-empty .cp-float-refresh,
+  .cp-fullscreen-inner.is-empty .cp-float-clear,
+  .cp-fullscreen-inner.is-empty .cp-float-settings
+) {
+  color: rgba(255,255,255,.88) !important;
+  border-color: rgba(216,196,159,.58) !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] :is(
+  .cp-bilibili-hint,
+  .cp-empty-copy span
+) {
+  color: #45576a !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] :is(
+  .cp-messages-module,
+  .cp-phone-module,
+  .cp-music-module,
+  .cp-assets-module,
+  .cp-steam-module
+) .cp-empty-copy span {
+  color: rgba(242,230,207,.82) !important;
+}
