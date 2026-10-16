@@ -3715,3 +3715,227 @@
   color: #6d6252 !important;
   opacity: 1 !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EMPTY / MUTED COPY CONTRAST FENCE
+   Late, explicit safeguards for "none yet", disabled-adjacent help and other
+   copy that used old light-theme variables on the dark companion materials.
+   Custom apps and Xiaohongshu stay outside this pass.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Shared primitives used by settings, chat panels, contacts and overlays. */
+.desk-stage .phone-shell[data-active-app]:not([data-active-app="xiaohongshu"]):not([data-active-app^="custom_app:"]) :is(.ui-empty, .ui-empty-compact) {
+  color: #dbc8a7 !important;
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background: rgba(19, 52, 61, .96) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.05), 0 3px 0 rgba(66,41,24,.58) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app]:not([data-active-app="xiaohongshu"]):not([data-active-app^="custom_app:"]) :is(.ui-empty, .ui-empty-compact) :is(.menu-label, h1, h2, h3, strong) {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.9) !important;
+}
+.desk-stage .phone-shell[data-active-app]:not([data-active-app="xiaohongshu"]):not([data-active-app^="custom_app:"]) :is(.ui-empty, .ui-empty-compact) :is(.menu-desc, p, small) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.9) !important;
+}
+.desk-stage .phone-shell[data-active-app]:not([data-active-app="xiaohongshu"]):not([data-active-app^="custom_app:"]) :is(.ui-empty, .ui-empty-compact) .ui-icon-circle {
+  color: #e5c681 !important;
+  border: 1px solid #9f7645 !important;
+  background: #294f43 !important;
+  opacity: 1 !important;
+}
+
+/* Settings variables were still supplying dark menu-label/menu-desc colours. */
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell {
+  --c-text-title: #fff0cf;
+  --c-text: #dbc8a7;
+  --c-icon: #d7bd8b;
+  --c-icon-active: #e5c681;
+  --c-card: #17343d;
+  --c-card-border: #8d673e;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(.ui-empty, .ui-empty-compact) .menu-label {
+  color: #fff0cf !important;
+  font-weight: 700 !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(.ui-empty, .ui-empty-compact) .menu-desc {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+
+/* App Market empty pages sit on the navy phone canvas, not on white cards. */
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-empty {
+  color: #dbc8a7 !important;
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-empty p {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.92) !important;
+}
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-empty svg {
+  color: #e5c681 !important;
+  border: 1px solid #9f7645 !important;
+  background: #294f43 !important;
+  opacity: 1 !important;
+}
+
+/* Music, dwelling and assistant empty states previously relied on opacity. */
+.desk-stage .phone-shell[data-active-app="music"] .music-empty {
+  color: #dbc8a7 !important;
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background: rgba(19,52,61,.92) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="music"] .music-empty :is(.music-empty-text, .music-empty-icon) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="dwelling"] .dwelling-empty {
+  color: #f5e4c3 !important;
+  text-shadow: 0 1px 3px rgba(3,9,12,.98), 0 0 10px rgba(3,9,12,.82) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="qa"] .qa-drawer-empty {
+  color: #dbc8a7 !important;
+  border: 1px solid #7e5d39 !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  opacity: 1 !important;
+}
+
+/* Co-create has several independent editors and readers, each with an empty. */
+.desk-stage .phone-shell[data-active-app="cocreate"] :is(
+  .cocreate-work-empty, .cocreate-empty-state, .cocreate-empty,
+  .cocreate-reader-empty, .cocreate-backend-empty
+) {
+  color: #dbc8a7 !important;
+  border: 1px solid #7e5d39 !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="cocreate"] :is(
+  .cocreate-work-empty, .cocreate-empty-state, .cocreate-reader-empty
+) :is(strong, span) {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="cocreate"] :is(
+  .cocreate-work-empty, .cocreate-empty-state, .cocreate-reader-empty
+) p {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="cocreate"] .cocreate-reader-masthead [contenteditable="true"]:empty::before,
+.desk-stage .phone-shell[data-active-app="cocreate"] .cocreate-reader-body[contenteditable="true"]:empty::before,
+.desk-stage .phone-shell[data-active-app="cocreate"] .cocreate-reader-sticky[contenteditable="true"]:empty::before {
+  color: #bfae91 !important;
+  opacity: 1 !important;
+}
+
+/* Game, mixology and story-side notices. */
+.desk-stage .phone-shell[data-active-app="game"] :is(.game-empty, .game-collection-empty, .game-comments-empty) {
+  color: #f5e4c3 !important;
+  border: 1px solid #7e5d39 !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="mixology"] :is(.mix-empty, .mix-slot-empty-text, .mix-comment-empty, .mix-var-empty) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="mixology"] .mix-empty svg {
+  color: #e5c681 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="story"] :is(.story-empty-title, .story-stage-empty strong) {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="story"] :is(.story-empty-desc, .story-stage-empty p) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+
+/* Calendar, appearance, VN, memory and common auxiliary panels. */
+.desk-stage .phone-shell[data-active-app="calendar"] .calendar-menstrual-empty {
+  color: #5f5547 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="theme"] :is(.wp-empty, .is-empty-hint) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.9) !important;
+}
+.desk-stage .phone-shell:is([data-active-app="vnmode"], [data-active-app="vnplay"], [data-active-app="vnchapters"]) .vn-scene-picker-empty {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] :is(
+  .mem-empty-card, .feed-empty-state, .chat-offline-empty,
+  .chat-generated-image-prompt-empty-hint
+) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .mem-empty-card {
+  border-color: #8d673e !important;
+  border-radius: 4px !important;
+  background: #17343d !important;
+}
+.desk-stage .phone-shell[data-active-app="chat"] .mem-empty-add-btn {
+  color: #fff0cf !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background: #294f43 !important;
+}
+.desk-stage .phone-shell[data-active-app]:not([data-active-app="xiaohongshu"]):not([data-active-app^="custom_app:"]) :is(
+  .quick-action-empty, .binding-sheet-empty, .binding-choice-value.is-empty,
+  .pv-empty
+) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+
+/* Reality Bridge and resource detail descriptions use their own variables. */
+.desk-stage .phone-shell[data-active-app="realitybridge"] .rb-empty > b {
+  color: #fff0cf !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="realitybridge"] .rb-empty > p {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="resource_hub"] .rh-detail2-desc-empty {
+  color: #5c5243 !important;
+  opacity: 1 !important;
+}
+
+/* Check-phone sub-apps retain their native visual identity. Only raise text
+ * contrast; explicit cp-xhs selectors remain untouched. */
+.desk-stage .phone-shell[data-active-app="checkphone"] :is(.cp-screen-empty p, .cp-history-empty) {
+  color: rgba(255,255,255,.88) !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] .cp-empty-circle::after {
+  color: rgba(255,255,255,.9) !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] :is(.cp-browser-empty-list, .cp-weibo-mini-empty, .cp-douyin-comment-empty, .cp-reddit-empty-title) {
+  color: #23363b !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell[data-active-app="checkphone"] .cp-chat-mini-empty {
+  color: #4b3d43 !important;
+  opacity: 1 !important;
+}
