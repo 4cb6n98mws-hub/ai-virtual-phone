@@ -4240,6 +4240,7 @@
   .mix-chip[data-active="true"], .mix-nav-btn[data-active="true"],
   .mix-scope-toggle button[data-active="true"], .mix-brew-btn
 ) {
+  color: #f5e4c3 !important;
   border-color: #b78a50 !important;
   border-radius: 4px !important;
   background-color: #294f43 !important;
@@ -4252,6 +4253,190 @@
   box-shadow: inset 0 0 0 1px rgba(226,188,119,.1), 0 2px 0 #173229 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NAVY MATERIAL COMPLETION FENCE
+   Close the last fallback paths found in the full-screen iPad audit.  These
+   selectors only affect presentation: desktop widgets/dock, common dialogs,
+   Story's empty canvas, and Settings menu surfaces.  Form fields stay paper,
+   destructive controls stay red, and Xiaohongshu/custom apps remain excluded.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Boot mark: the cat head belongs on the same navy/brass physical key as the
+ * rest of the startup lockup, rather than on the old pink glass ring. */
+.splash-boot-ring {
+  color: #f7e7c7 !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.13)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 0% 0% !important;
+  background-repeat: no-repeat !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(226,188,119,.1),
+    0 4px 0 #172b35,
+    0 10px 22px rgba(3,9,12,.4) !important;
+}
+.splash-boot-mark {
+  color: #f7e7c7 !important;
+  filter: drop-shadow(0 2px 2px rgba(3,9,12,.82)) !important;
+}
+
+/* Desktop: the selected mood/Cut widget and every dock key use the navy atlas.
+ * The icon artwork remains a separate child layer and is not recoloured. */
+.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-bubble,
+.desk-stage .phone-shell:not(.app-open-shell)[data-widget-effect="glass"] .wg-mood-bubble {
+  color: #f5e4c3 !important;
+  border-color: #a67a43 !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.12)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.92) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-presence-line {
+  background: rgba(226,188,119,.62) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-presence-paw {
+  color: #e3c27f !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .dock .dock-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .dock .icon-glyph-box,
+.desk-stage .phone-shell:not(.app-open-shell) .dock .icon-glyph-box:not(.icon-glyph-box-skin) {
+  overflow: hidden !important;
+  border: 1px solid #a67a43 !important;
+  border-radius: 4px !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.02), rgba(7,24,31,.12)),
+    var(--li-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, var(--li-navy) !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 1px rgba(226,188,119,.1), 0 2px 0 #172b35 !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) .dock .vintage-app-art-dock {
+  z-index: 1;
+}
+
+/* Common dialogs can also be opened directly from the desktop, where the
+ * app-open-shell selector does not exist. */
+.desk-stage .phone-shell:not(.app-open-shell) :is(.modal-dialog, [data-ui="modal-dialog"]) {
+  color: #f5e4c3 !important;
+  border: 1px solid #a67a43 !important;
+  border-radius: 5px !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.14)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 0% 0% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 2px rgba(226,188,119,.1), 0 12px 30px rgba(3,9,12,.56) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) :is(.modal-header, [data-ui="modal-header"]) {
+  color: #fff0cf !important;
+  border-color: rgba(183,138,80,.7) !important;
+  background: rgba(8,27,35,.7) !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) :is(.modal-title, .modal-body, .modal-body label) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) :is(.modal-dialog, [data-ui="modal-dialog"]) .ui-btn:not(.ui-btn-danger):not(.ui-btn-soft-danger) {
+  color: #f5e4c3 !important;
+  border: 1px solid #b78a50 !important;
+  border-radius: 4px !important;
+  background-color: #102a34 !important;
+  background-image: var(--companion-material-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: 0% 0% !important;
+  box-shadow: inset 0 0 0 1px rgba(226,188,119,.08), 0 2px 0 #172b35 !important;
+}
+.desk-stage .phone-shell:not(.app-open-shell) :is(.modal-dialog, [data-ui="modal-dialog"]) :is(input, textarea, select, .ui-input) {
+  color: #23363b !important;
+  border: 1px solid #a78250 !important;
+  background: #ead8b7 !important;
+  text-shadow: none !important;
+}
+
+/* Story: the long empty-state canvas was still painted with a flat theme
+ * variable and hid the textured shell underneath. */
+.desk-stage .phone-shell[data-active-app="story"] .story-stage-empty .story-stage-inner {
+  border: 1px solid #8d673e !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.13)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 0% 0% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 2px rgba(226,188,119,.08) !important;
+}
+
+/* Settings: several nested pages place menu groups inside an extra section or
+ * flex wrapper, so the earlier direct-child rule never reached them. */
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell .menu-group {
+  color: #f5e4c3 !important;
+  border: 1px solid #8d673e !important;
+  border-radius: 4px !important;
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.13)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 0% 0% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 2px rgba(226,188,119,.08), 0 4px 0 #172b35 !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell .menu-group .menu-item {
+  color: #f5e4c3 !important;
+  background: transparent !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell .menu-group .menu-item:not(:last-child)::after {
+  border-color: rgba(198,151,86,.36) !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell .menu-group :is(
+  .menu-label, .menu-right, .menu-value, .data-pie-name, .data-pie-value,
+  .data-pie-center span, strong, b
+) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.9) !important;
+}
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell .menu-group :is(
+  .menu-desc, .data-pie-detail, .data-pie-center small, .data-cloud-status,
+  small, label, .opacity-50, .opacity-60, .opacity-70
+) {
+  color: #dbc8a7 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.9) !important;
+}
+
+/* Blue material controls must never inherit the old dark paper label colour. */
+.desk-stage .phone-shell[data-active-app="shopping"] :is(
+  .cp-shopping-search-form button,
+  .cp-shopping-body button[role="tab"]:not([aria-selected="true"])
+),
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-filters button:not([data-active="true"]) {
+  color: #f5e4c3 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(3,9,12,.92) !important;
+}
+.desk-stage .phone-shell[data-active-app="shopping"] :is(
+  .cp-shopping-search-form button,
+  .cp-shopping-body button[role="tab"]
+) *,
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-filters button * {
+  color: inherit !important;
+  opacity: 1 !important;
 }
 
 /* World Builder sits outside the phone shell, so it needs the same material
@@ -4449,6 +4634,7 @@
   .wb-array-toggle, .wb-array-apply, .wb-modal-btn, .wb-modal-tabs button,
   .wb-modal-cat, .wb-scene-btn
 ) {
+  color: #f5e4c3 !important;
   border-color: #b78a50 !important;
   border-radius: 4px !important;
   background-color: #102a34 !important;
