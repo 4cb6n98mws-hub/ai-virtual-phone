@@ -4131,14 +4131,14 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    DESKTOP WIDGET + SETTINGS SURFACE CORRECTION
    The home widget catalogue and several real widgets were still painted by
-   the legacy glass/paper engine.  Make every built-in widget a navy/brass
-   object while leaving user-authored freestyle widgets and photo content
-   intact.  The cloud deployment page and Diary header keys share the same
-   physical material so no parchment or green fallback leaks through.
+   the legacy glass/paper engine.  Make the built-in widgets navy/brass while
+   preserving the intentionally paper-built Companion-at-home plaque, user
+   freestyle widgets and photo content.  The cloud deployment page and Diary
+   header keys share the same physical material.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* Built-in desktop widgets, including their catalogue previews. */
-.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle) {
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="moodPill"]) {
   overflow: hidden !important;
   color: #f5e4c3 !important;
   border: 1px solid #a67a43 !important;
@@ -4158,7 +4158,7 @@
   -webkit-backdrop-filter: none !important;
 }
 
-.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]) > div {
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]):not([data-widget-type="moodPill"]) > div {
   color: #f5e4c3 !important;
   border-radius: 3px !important;
   background-color: #102a34 !important;
@@ -4173,8 +4173,8 @@
   -webkit-backdrop-filter: none !important;
 }
 
-.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]) > div::before,
-.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]) > div::after {
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]):not([data-widget-type="moodPill"]) > div::before,
+.desk-stage .phone-shell:not(.app-open-shell) .widget-glass:not(.widget-freestyle):not([data-widget-type="photo"]):not([data-widget-type="photoViewer"]):not([data-widget-type="moodPill"]) > div::after {
   content: none !important;
   display: none !important;
 }
@@ -4471,27 +4471,8 @@
   filter: drop-shadow(0 2px 2px rgba(3,9,12,.82)) !important;
 }
 
-/* Desktop: the selected mood/Cut widget and every dock key use the navy atlas.
- * The icon artwork remains a separate child layer and is not recoloured. */
-.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-bubble,
-.desk-stage .phone-shell:not(.app-open-shell)[data-widget-effect="glass"] .wg-mood-bubble {
-  color: #f5e4c3 !important;
-  border-color: #a67a43 !important;
-  background-color: #102a34 !important;
-  background-image:
-    linear-gradient(rgba(7,24,31,.03), rgba(7,24,31,.12)),
-    var(--li-atlas) !important;
-  background-size: 100% 100%, 200% 200% !important;
-  background-position: center, var(--li-navy) !important;
-  background-repeat: no-repeat !important;
-  text-shadow: 0 1px 2px rgba(3,9,12,.92) !important;
-}
-.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-presence-line {
-  background: rgba(226,188,119,.62) !important;
-}
-.desk-stage .phone-shell:not(.app-open-shell) .wg-mood-presence-paw {
-  color: #e3c27f !important;
-}
+/* The Companion-at-home plaque intentionally keeps its original paper face;
+ * only the dock keys below use the navy atlas. */
 .desk-stage .phone-shell:not(.app-open-shell) .dock .dock-glyph-box,
 .desk-stage .phone-shell:not(.app-open-shell) .dock .icon-glyph-box,
 .desk-stage .phone-shell:not(.app-open-shell) .dock .icon-glyph-box:not(.icon-glyph-box-skin) {
