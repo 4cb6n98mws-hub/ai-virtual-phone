@@ -13,6 +13,7 @@ import { UserProfilePanel } from "./user-profile-panel";
 import { PageShell } from "@/components/ui/page-shell";
 import { GroupCreateModal } from "./group-create-modal";
 import { Toggle } from "@/components/ui/form";
+import { CompanionAtlasIcon } from "@/components/ui/companion-atlas-icon";
 import { formatChatUiTime } from "@/lib/chat-time";
 import { getChatOfflineTurnPreview, getLastChatOfflineTurn } from "@/lib/chat-offline-storage";
 import {
@@ -218,7 +219,7 @@ export function ChatMessageList({ onCloseApp, activeSession, onSelectSession, on
                         {showPlusMenu && (
                             <div className="g-dropdown companion-chat-plus-menu absolute top-[40px] right-0 py-2 px-0 w-[140px] z-[100]">
                                 <MenuOption
-                                    icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>}
+                                    icon={<CompanionAtlasIcon name="chat" size={26} />}
                                     label="发起聊天"
                                     onClick={() => {
                                         setShowPlusMenu(false);
@@ -226,7 +227,7 @@ export function ChatMessageList({ onCloseApp, activeSession, onSelectSession, on
                                     }}
                                 />
                                 <MenuOption
-                                    icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>}
+                                    icon={<CompanionAtlasIcon name="group" size={26} />}
                                     label="创建群聊"
                                     onClick={() => {
                                         setShowPlusMenu(false);
@@ -234,7 +235,7 @@ export function ChatMessageList({ onCloseApp, activeSession, onSelectSession, on
                                     }}
                                 />
                                 <MenuOption
-                                    icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>}
+                                    icon={<CompanionAtlasIcon name="add-friend" size={26} />}
                                     label="添加好友"
                                     onClick={() => {
                                         setShowPlusMenu(false);

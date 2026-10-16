@@ -4,19 +4,15 @@ import { useEffect, useMemo, useState } from "react";
 import {
   ArrowUpRight,
   ChevronLeft,
+  ChevronRight,
   Clock3,
-  Film,
-  Flower2,
-  Gamepad2,
-  Gift,
   PackageOpen,
   Pin,
-  Stamp,
-  StickyNote,
   Ticket,
   Trash2,
 } from "lucide-react";
 
+import { CompanionAtlasIcon, type CompanionAtlasIconName } from "@/components/ui/companion-atlas-icon";
 import { loadCharacters } from "@/lib/character-storage";
 import {
   collectLanternCinemaTicket,
@@ -65,14 +61,18 @@ const TYPE_LABELS: Record<SharedDrawerItemType, string> = {
 };
 
 function ItemIcon({ type }: { type: SharedDrawerItemType }) {
-  if (type === "cinema_ticket") return <Ticket size={20} strokeWidth={1.55} />;
-  if (type === "cinema_missed") return <Film size={20} strokeWidth={1.55} />;
-  if (type === "note") return <StickyNote size={20} strokeWidth={1.55} />;
-  if (type === "gift") return <Gift size={20} strokeWidth={1.55} />;
-  if (type === "game_art") return <Gamepad2 size={20} strokeWidth={1.55} />;
-  if (type === "plant") return <Flower2 size={20} strokeWidth={1.55} />;
-  if (type === "stamp") return <Stamp size={20} strokeWidth={1.55} />;
-  return <PackageOpen size={20} strokeWidth={1.55} />;
+  const names: Record<SharedDrawerItemType, CompanionAtlasIconName> = {
+    cinema_ticket: "ticket",
+    cinema_missed: "film",
+    note: "note",
+    game_art: "artwork",
+    music: "music",
+    gift: "gift",
+    plant: "plant",
+    stamp: "stamp",
+    found_object: "keepsake",
+  };
+  return <CompanionAtlasIcon name={names[type]} size={28} />;
 }
 function sourceLabel(item: SharedDrawerItem): string {
   const labels: Record<SharedDrawerItem["sourceApp"], string> = {
@@ -202,8 +202,12 @@ export function SharedDrawerApp({ onClose, onOpenSource }: SharedDrawerAppProps)
                   <span className="shared-drawer-card-icon"><ItemIcon type={item.type} /></span>
                   <span className="shared-drawer-card-copy">
                     <strong>{item.title}</strong>
+                    <small>{sourceLabel(item)} · {formatSharedDrawerDate(item.createdAt)}</small>
                   </span>
-                  {item.pinned ? <Pin className="shared-drawer-pin" size={14} fill="currentColor" /> : null}
+                  <span className="shared-drawer-card-end">
+                    {item.pinned ? <Pin className="shared-drawer-pin" size={12} fill="currentColor" /> : null}
+                    <ChevronRight className="shared-drawer-chevron" size={16} aria-hidden="true" />
+                  </span>
                 </button>
               </article>
             ))}
