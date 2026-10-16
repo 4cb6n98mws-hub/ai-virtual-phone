@@ -862,16 +862,16 @@ function HomeScreen({
       </header>
 
       <main className="interview-scroll px-6 pb-32">
-        <section className="text-center py-10 fade-in">
-          <div className="flex items-center justify-center gap-4 text-white/40 mb-4">
+        <section className="interview-cover text-center py-10 fade-in">
+          <div className="interview-issue-label flex items-center justify-center gap-4 text-white/40 mb-4">
             <span className="w-10 h-px bg-white/20"></span>
             <SmallCaps>ISSUE NO.{String(nextIssueNumber).padStart(2, "0")}</SmallCaps>
             <span className="w-10 h-px bg-white/20"></span>
           </div>
-          <h1 className="font-display text-5xl font-black text-white tracking-wider my-4 drop-shadow-md">
+          <h1 className="interview-cover-title font-display text-5xl font-black text-white tracking-wider my-4 drop-shadow-md">
             PRESENCE
           </h1>
-          <p className="font-cn text-white/60 tracking-[0.4em] ml-[0.4em] font-light">
+          <p className="interview-cover-subtitle font-cn text-white/60 tracking-[0.4em] ml-[0.4em] font-light">
             在场 · 人物特写
           </p>
         </section>
@@ -921,13 +921,13 @@ function HomeScreen({
         )}
 
         <section className="mt-4 mb-10 fade-in" style={{ animationDelay: '0.1s' }}>
-          <div className="flex items-center justify-between mb-4 px-2">
+          <div className="interview-archive-heading flex items-center justify-between mb-4 px-2">
             <SmallCaps className="text-white/50">ARCHIVES // 往期专栏</SmallCaps>
             <span className="text-white/40 text-xs font-serif">{issues.length} 期</span>
           </div>
 
           {issues.length === 0 ? (
-            <div className="interview-glass-panel flex flex-col items-center justify-center p-8 text-center min-h-[140px]">
+            <div className="interview-glass-panel interview-empty-card flex flex-col items-center justify-center p-8 text-center min-h-[140px]">
               <Mic2 size={24} className="text-white/30 mb-3" strokeWidth={1.5} />
               <p className="font-serif italic text-white/40 text-sm">Waiting for the first interview.</p>
             </div>
