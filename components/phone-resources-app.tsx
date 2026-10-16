@@ -85,7 +85,7 @@ export function PhoneResourcesApp({ onClose, onNotice, initialPage }: { onClose:
         <PageShell
             title={title}
             onBack={handleBack}
-            className={currentPage === "memory" && memoryView === "detail" ? "mem-detail" : undefined}
+            className={`resources-page-shell${currentPage === "memory" && memoryView === "detail" ? " mem-detail" : ""}${currentPage === "vn_assets" ? " resources-vn-page" : ""}`}
             rightAction={showSettingsIcon ? (
                 <button
                     onClick={() => { setPrevMemoryView(memoryView); setMemoryView("settings"); }}
