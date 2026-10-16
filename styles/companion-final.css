@@ -4071,3 +4071,212 @@
 ) .cp-empty-copy span {
   color: rgba(242,230,207,.82) !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MATERIAL FRAME FENCE
+   Replace the remaining flat teal rectangles with the same physical frame as
+   Presence's "Waiting for the first interview" card: worn navy/green leather,
+   brass edge, inset highlight and a dark raised foot.  Input fields, media,
+   destructive controls, Xiaohongshu and custom apps stay outside this pass.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Boot animation: keep the timing and mark, replace the flat digital canvas
+ * and glass entry control with the approved physical material. */
+.splash-animation-stage {
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.12), rgba(7,24,31,.26)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 0% 0% !important;
+  background-repeat: no-repeat !important;
+}
+.splash-boot-lockup {
+  padding: 30px 38px 28px !important;
+  border: 1px solid #a67a43 !important;
+  border-radius: 4px !important;
+  background-color: #17343d !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.04), rgba(7,24,31,.16)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 100% 100% !important;
+  background-repeat: no-repeat !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(226,188,119,.1),
+    0 5px 0 #173229,
+    0 12px 24px rgba(3,9,12,.44) !important;
+}
+.splash-enter-button {
+  border-color: #b98a4e !important;
+  background-color: #17343d !important;
+  background-image: var(--companion-material-atlas) !important;
+  background-size: 200% 200% !important;
+  background-position: 100% 100% !important;
+  color: #f8e8c8 !important;
+  box-shadow: inset 0 0 0 2px rgba(226,188,119,.09), 0 3px 0 #173229, 0 8px 18px rgba(3,9,12,.4) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Empty states and information cards — exact Waiting-card material. */
+.desk-stage .phone-shell[data-active-app]:not([data-active-app="xiaohongshu"]):not([data-active-app^="custom_app:"]) :is(
+  .ui-empty, .ui-empty-compact,
+  .quick-action-empty, .binding-sheet-empty, .pv-empty
+),
+.desk-stage .phone-shell[data-active-app="diary"] .diary-entry-empty,
+.desk-stage .phone-shell[data-active-app="appmarket"] .app-market-empty,
+.desk-stage .phone-shell[data-active-app="music"] .music-empty,
+.desk-stage .phone-shell[data-active-app="qa"] .qa-drawer-empty,
+.desk-stage .phone-shell[data-active-app="cocreate"] :is(
+  .cocreate-work-empty, .cocreate-empty-state, .cocreate-empty,
+  .cocreate-reader-empty, .cocreate-backend-empty
+),
+.desk-stage .phone-shell[data-active-app="game"] :is(.game-empty, .game-collection-empty, .game-comments-empty),
+.desk-stage .phone-shell[data-active-app="chat"] .mem-empty-card,
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page :is(.vna-empty, .vna-card),
+.desk-stage .phone-shell[data-active-app="interview_magazine"] .interview-glass-panel,
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(
+  .ui-config-card, .ui-group-card, .ui-toggle-row, .g-card, .g-section,
+  .ui-collapsible, .ui-entry-card, .binding-choice-card,
+  .binding-detail-card, .settings-account-card
+),
+.desk-stage .phone-shell[data-active-app="theme"] .theme-page-shell :is(.g-card, .wp-sliders, .wm-cat-item, .wp-card),
+.desk-stage .phone-shell[data-active-app="theme"] .companion-diy-widget-editor,
+.desk-stage .phone-shell[data-active-app="music"] :is(
+  .music-chart-card, .music-daily-card, .music-week-card, .music-rail-card,
+  .music-playlist-card, .music-mine-cover-card, .music-mine-ep-row,
+  .music-mine-event-card, .music-mine-pl-row, .music-queue-item
+),
+.desk-stage .phone-shell[data-active-app="game"] :is(
+  .game-discover-card, .game-detail-card, .game-modal-card,
+  .game-runtime-card, .game-recent-card, .game-collection-item,
+  .game-studio-list-card, .game-profile-panel
+),
+.desk-stage .phone-shell[data-active-app="cocreate"] :is(
+  .cocreate-work-card, .cocreate-chapter-card, .cocreate-cast-card,
+  .cocreate-dossier-card, .cocreate-notebook-card, .cocreate-memory-card,
+  .cocreate-partner-card, .cocreate-index-panel, .cocreate-reader-panel,
+  .cocreate-write-panel, .cocreate-character-panel
+),
+.desk-stage .phone-shell[data-active-app="qa"] :is(
+  .qa-file-card, .qa-commit-card, .qa-tool-row, .qa-sheet,
+  .qa-preview-sheet, .qa-drawer-item, .qa-log-item
+),
+.desk-stage .phone-shell[data-active-app="realitybridge"] :is(
+  .rb-card, .rb-tile, .rb-rcard, .rb-ecard, .rb-action-body,
+  .rb-fieldset, .rb-wiz-summary, .rb-wiz-snapshot, .rb-copy-field, .rb-code
+),
+.desk-stage .phone-shell[data-active-app="chat"] :is(
+  .wallet-sheet-card, .wallet-style-option
+),
+.desk-stage .phone-shell:is([data-active-app="vnmode"], [data-active-app="vnplay"], [data-active-app="vnchapters"]) :is(
+  .vns-topbar, .vns-prompt-card, .vns-asset-entry
+),
+.desk-stage .phone-shell[data-active-app="mixology"] :is(.mix-chip, .mix-card, .mix-item, .mix-dialogue) {
+  border-color: #a67a43 !important;
+  border-radius: 4px !important;
+  background-color: #17343d !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.04), rgba(7,24,31,.14)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 100% 100% !important;
+  background-repeat: no-repeat !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(226,188,119,.1),
+    0 5px 0 #173229,
+    0 10px 18px rgba(3,9,12,.28) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Buttons, tabs and selectable options.  Keep danger/red controls red; the
+ * green and teal hardware gets the same leather grain at the smaller scale. */
+.desk-stage .phone-shell.app-open-shell:not([data-active-app="xiaohongshu"]):not([data-active-app^="custom_app:"]) :is(
+  .diary-icon-btn, .calendar-icon-btn, .calendar-pill-btn,
+  .shared-drawer-back, .reading-shelf-back, .reading-shelf-action-btn,
+  .music-header-action, .app-market-icon-btn, .interview-icon-btn,
+  .game-icon-btn, .qa-circle-btn, .cocreate-back-button,
+  .dwelling-header .dw-back,
+  .ui-btn-primary, .ui-btn-action, .ui-btn-ghost, .ui-btn-outline,
+  .modal-header-btn-action, .modal-header-btn-muted
+),
+.desk-stage .phone-shell[data-active-app="appmarket"] :is(.app-market-tab[data-active="true"], .am-create-action-icon),
+.desk-stage .phone-shell[data-active-app="shared_drawer"] .shared-drawer-filters button[data-active="true"],
+.desk-stage .phone-shell[data-active-app="chat"] :is(
+  .wallet-balance-action, .wallet-add-card, .wallet-sheet-primary,
+  .wallet-bank-action:not(:last-child), .wallet-ledger-icon:not(.is-outgoing),
+  .companion-compose-modal .compose-inline-btn, .mem-empty-add-btn
+),
+.desk-stage .phone-shell[data-active-app="realitybridge"] :is(
+  .rb-back, .rb-iconbtn, .rb-btn:not(.danger), .rb-dock button.active, .rb-chip.active
+),
+.desk-stage .phone-shell[data-active-app="resource_hub"] :is(
+  .rh-tb-btn, .rh-icon-btn, .rh-btn, .rh-tab, .rh-address
+),
+.desk-stage .phone-shell[data-active-app="diary"] :is(
+  .diary-entry-empty button, .diary-entry-settings .diary-icon-btn,
+  .diary-entry-character-grid button > span, .diary-entry-confirm-btn
+),
+.desk-stage .phone-shell[data-active-app="chat"] .chat-plugin-manager-page :is(.ui-btn, select),
+.desk-stage .phone-shell[data-active-app="resources"] .resources-vn-page :is(
+  .vna-tabs, .vna-add-bar, .vna-add-btn, .vna-count
+),
+.desk-stage .phone-shell[data-active-app="settings"] .settings-page-shell :is(
+  button[class*="bg-white"], button[class*="bg-black"], .binding-aux-select
+),
+.desk-stage .phone-shell[data-active-app="theme"] .companion-diy-widget-editor button[class*="bg-black"],
+.desk-stage .phone-shell[data-active-app="characters"] :is(
+  .wt-tab-active, .wt-bottom-pill-active, .wt-relation-item,
+  .char-timezone-option, .wt-btn, .char-timezone-sheet button, .char-punched-hole-btn
+),
+.desk-stage .phone-shell:is([data-active-app="vnmode"], [data-active-app="vnplay"], [data-active-app="vnchapters"]) :is(
+  .vns-enter, .vns-asset-entry-btn, .vns-settings-action-primary
+),
+.desk-stage .phone-shell[data-active-app="mixology"] :is(
+  .mix-chip[data-active="true"], .mix-nav-btn[data-active="true"],
+  .mix-scope-toggle button[data-active="true"], .mix-brew-btn
+) {
+  border-color: #b78a50 !important;
+  border-radius: 4px !important;
+  background-color: #294f43 !important;
+  background-image:
+    linear-gradient(rgba(34,82,67,.2), rgba(7,24,31,.08)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 100% 100% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 1px rgba(226,188,119,.1), 0 2px 0 #173229 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* World Builder sits outside the phone shell, so it needs the same material
+ * contract with global atlas variables. */
+.wb-layout {
+  background-color: #102a34 !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.12), rgba(7,24,31,.26)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 0% 0% !important;
+  background-repeat: no-repeat !important;
+}
+.wb-layout :is(
+  .wb-topbar-btn, .wb-tabs button, .wb-categories button, .wb-model-item,
+  .wb-gen-tabs button, .wb-gen-input button, .wb-upload-btn, .wb-rotate-btn,
+  .wb-array-toggle, .wb-array-apply, .wb-modal-btn, .wb-modal-tabs button,
+  .wb-modal-cat, .wb-scene-btn
+) {
+  border-color: #a67a43 !important;
+  border-radius: 4px !important;
+  background-color: #17343d !important;
+  background-image:
+    linear-gradient(rgba(7,24,31,.04), rgba(7,24,31,.14)),
+    var(--companion-material-atlas) !important;
+  background-size: 100% 100%, 200% 200% !important;
+  background-position: center, 100% 100% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 0 0 1px rgba(226,188,119,.1), 0 2px 0 #173229 !important;
+}
